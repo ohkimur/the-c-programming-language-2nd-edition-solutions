@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAXLEN 1000
 #define BUFFSIZE 1000
@@ -17,9 +18,41 @@ int main(void)
     ungetstr(line);
 
     getstr(temp, MAXLEN);
-    printf("buf: %s--", temp);
+    printf("%s", temp);
 
     return 0;
+}
+
+int getch(void);
+void ungetch(int c);
+
+int getstr(char line[], int limit)
+{
+    int i = 0, c;
+
+    while(limit - 1 > 0 && (c = getch()) != EOF && c != '\n')
+    {
+        line[i++] = c;
+    }
+
+    if(c == '\n')
+    {
+        line[i++] = c;
+    }
+
+    line[i] = '\0';
+
+    return i;
+}
+
+void ungetstr(char line[])
+{
+    int i = strlen(line);
+
+    while(i)
+    {
+        ungetch(line[--i]);
+    }
 }
 
 int bufp = 0;
@@ -42,41 +75,7 @@ void ungetch(int c)
     }
 }
 
-int getstr(char line[], int limit)
-{
-    int i = 0, c;
-
-    printf("%d\n", bufp);
-    printf("%c\n", buf[0]);
-    printf("exec\n");
-
-    while(limit - 1 > 0 && (c = getch()) != EOF && c != '\n')
-    {
-
-        printf("entered\n");
-        line[i++] = c;
-    }
-
-    if(c == '\n')
-    {
-        line[i++] = c;
-    }
-
-    line[i] = '\0';
-
-    return i;
-}
-
-void ungetstr(char line[])
-{
-    int i = 0;
-
-    while(line[i] != '\0')
-    {
-        ungetch(line[i++]);
-    }
-}
-
 // Exercise page: 93
 
-// OBS: Silence is golden.
+// OBS: The ungetstr() function doesn't need access to buf and bufp. It is enough
+// just to use the ungetch() function.
