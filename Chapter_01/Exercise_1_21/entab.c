@@ -1,21 +1,23 @@
 #include <stdio.h>
 
 #define MAXLINE 1000
-#define TABWIDTH 8
+#define TABSTOP 8
+
+typedef enum __BOOL {false, true} bool;
 
 int getln(char line[], int limit);
-void entab(char line[], char etline[]);
+void copy(char destination[], char source[]);
+void entab(char line[]);
 
 int main()
 {
     char line[MAXLINE];
-    char etline[MAXLINE];
 
     getln(line, MAXLINE);
-    
-    entab(line, etline);
+    printf("%s", line);
 
-    printf("%s", etline);
+    entab(line);
+    // printf("%s", line);
 
     return 0;
 }
@@ -39,57 +41,61 @@ int getln(char line[], int limit)
     return i;
 }
 
-void entab(char line[], char etline[])
+void copy(char destination[], char source[])
 {
-    int i = 0, j = 0;
-    int spacew = 0;
+    int i = 0;
+    while(source[i] != '\0')
+    {
+        destination[i] = source[i++];
+    }
+
+    if(source[i] == '\0')
+    {
+        destination[i] = '\0';
+    }
+}
+
+void entab(char line[])
+{
+    int i = 0, k = 0, j = 0;
+    char temp[MAXLINE];
+
+    bool tab = false;
 
     while(line[i] != '\0')
     {
-        while(line[i] == ' ' || line[i] == '\t')
+        if(line[i] != ' ')
         {
-            if(line[i] == ' ')
-            {
-                ++spacew;
-            }
-            else
-            {
-                spacew += TABWIDTH;
-            }
-            
+            temp[j++] = line[i++];
+        }
+        else
+        {
+            temp[j++] = ' ';
             ++i;
         }
 
-        int tabs = spacew / TABWIDTH;
-        int spaces = spacew % TABWIDTH;
-
-        while(tabs-- > 0)
+        if(i % TABSTOP == 0)
         {
-            etline[j++] = '-';
-            spacew -= TABWIDTH;
-        }
+            k = j - 1;
+            while(temp[k] == ' ')
+            {
+                --k;
+            }
 
-        while(spaces-- > 0)
-        {
-            etline[j++] = '+';
-            --spacew;
+            if(k < j - 1)
+            {
+                j = k + 1;
+                temp[j++] = '\t';
+            }
         }
-
-        etline[j++] = line[i++];
     }
 
-    if(line[i] == '\n')
-    {
-        etline[j++] = line[i];
-    }
+    temp[j] = '\0';
 
-    printf("spacew: %d\n", spacew);
-
-    etline[j] = '\0';
+    copy(line, temp);
 }
 
 // Exercise page: 48
 
-// OBS: This solution is simple and very obvious. Count the number of
-// spaces and that determine how many tabs and spaces can fit in that
-// number. After this just add the tabs and spaces to the new array.
+// OBS: To keep the same tab indentation for every tablength will be more
+// apropriate to use a \t every time to reach the next tab indentation.
