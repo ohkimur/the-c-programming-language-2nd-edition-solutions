@@ -31,4 +31,5 @@ void reverse(char str[])
 
 // Exercise page: 102
 
-// OBS: Silence is golden.
+// OBS: As a simple observation when recursive functions are used, static
+// variables become handy to construct some useful functionalities.

@@ -3,11 +3,6 @@
 #define MAXLEN 100
 
 void intToArray(int n, char str[]);
-typedef enum __BOOL
-{
-    false,
-    true
-} bool;
 
 int main(void)
 {
@@ -15,7 +10,7 @@ int main(void)
     char str[MAXLEN];
 
     intToArray(n, str);
-    printf("->%s<-", str);
+    printf("%s", str);
 
     return 0;
 }
