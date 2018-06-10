@@ -4,6 +4,7 @@
 #define MAXLEN 1000
 #define BUFFSIZE 100
 
+void printbuf(void);
 int getch(void);
 void ungetch(int c);
 int getint(int *pn);
@@ -13,13 +14,38 @@ int main(void)
     int number = 0;
 
     getint(&number);
-    printf("%d", number);
+    printf("%d\n", number);
+
+    printbuf();
 
     return 0;
 }
 
 int bufp = 0;
 int buf[BUFFSIZE];
+
+void printbuf(void)
+{
+    if(bufp)
+    {
+        printf("Buffer: [ ");
+    
+        int i;
+        for(i = bufp - 1; i >= 0; --i)
+        {
+            if(i)
+            {
+                printf("'%c', ", buf[i]);
+            }
+            else
+            {
+                printf("'%c' ", buf[i]);
+            }
+        }
+
+        printf("]\n");
+    }
+}
 
 int getch(void)
 {
@@ -57,6 +83,8 @@ int getint(int *pn)
         if(!isdigit(c = getch()))
         {
             ungetch(c);
+            ungetch(sign == 1 ? '+' : '-');
+            return 0;
         }
     }
 
