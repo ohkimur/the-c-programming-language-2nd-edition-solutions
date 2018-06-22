@@ -35,11 +35,11 @@ void printbuf(void)
         {
             if(i)
             {
-                printf("'%c', ", buf[i]);
+                printf("'%c', ",  buf[i] != '\n' ? buf[i] : '.');
             }
             else
             {
-                printf("'%c' ", buf[i]);
+                printf("'%c' ",  buf[i] != '\n' ? buf[i] : '.');
             }
         }
 

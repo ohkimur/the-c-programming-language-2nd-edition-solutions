@@ -1,15 +1,21 @@
 #include <stdio.h>
+#include <ctype.h>
+#include <math.h>
 
 #define MAXLEN 1000
 #define BUFFSIZE 100
 
 int getch(void);
 void ungetch(int c);
-int getfloat(int *pn);
+int getfloat(float *pn);
 
 int main(void)
 {
-    
+    float number = 0.0;
+
+    getfloat(&number);
+    printf("number: %f\n", number);
+
     return 0;
 }
 
@@ -33,7 +39,7 @@ void ungetch(int c)
     }
 }
 
-int getfloat(int *pn)
+int getfloat(float *pn)
 {
     int c, sign;
 
@@ -62,6 +68,15 @@ int getfloat(int *pn)
         *pn = 10 * *pn + (c - '0');
     }
 
+    if(c == '.')
+    {
+        int i;
+        for(i = 1; (c = getch()) && isdigit(c); ++i)
+        {
+            *pn += (c - '0')/(pow(10, i));
+        }
+    }
+
     *pn = *pn * sign;
 
     if(c != EOF)
@@ -74,4 +89,4 @@ int getfloat(int *pn)
 
 // Exercise page: 111
 
-// OBS: Silence is golden.
+// OBS: The getfloat() function should return an integer like getint(). 
