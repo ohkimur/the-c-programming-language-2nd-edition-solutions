@@ -1,10 +1,29 @@
 #include <stdio.h>
 
+// strcat: concatenate t to end of s; s must be big enough
+void strcat_ptr(char *s, char *t)
+{
+    // Find the end of s
+    while((*++s) != '\0')
+        ;
+
+    // copy t to the end of s
+    while((*s++ = *t++) != '\0')
+        ;
+}
+
 int main(void)
 {
-    int a = 2;
+    char s[100] = "This is the first string";
+    char t[] = ", this second string!";
 
-    printf("Value of a is %d \n", a);
+    strcat_ptr(s, t);
+
+    puts(s);
 
     return 0;
 }
+
+// Exercise page: 121
+
+// OBS: Silence is golden.
