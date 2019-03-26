@@ -16,7 +16,6 @@ int main(void)
     return 0;
 }
 
-
 unsigned int strlen(char *s)
 {
     int i = 0;
