@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-unsigned int strlen(char *s);
+unsigned int strlength(char *s);
 void reverse(char *s);
 void itoa(char *s, int n);
 
@@ -11,12 +11,12 @@ int main(void)
 
     itoa(s, i);
 
-    printf("itoa: %s", s);
+    printf("itoa: %s\n", s);
 
     return 0;
 }
 
-unsigned int strlen(char *s)
+unsigned int strlength(char *s)
 {
     int i = 0;
 
@@ -30,7 +30,7 @@ unsigned int strlen(char *s)
 
 void reverse(char *s)
 {
-    char *t = s + strlen(s) - 1;
+    char *t = s + strlength(s) - 1;
     char aux = 0;
 
     if(*s == '\0')
