@@ -1,4 +1,4 @@
-# The C Programming Language 2nd Edition Solutions
+# __The C Programming Language 2nd Edition - Solutions__
 
 ## Introduction
 Here are my solutions to the exercises in the book "The C Programming Language" (2nd edition) by Brian W. Kernighan and Dennis M. Ritchie. This is a very popular book and it's also referred to as K&R. I _tried_ to use the _best practices_ with the knowledge learned up to each exercise.
