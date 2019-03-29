@@ -1,21 +1,30 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
+    "version": "1.0.0",
     "tasks": [
         {
-            "label": "build",
-            "type": "shell",
+            "label": "Build (GCC)",
             "command": "gcc",
+            "type": "shell",
             "args": [
-                "-g",
-                "${file}",
+                "$(wslpath '${file}')",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}"
-                ],
+                "$(wslpath '${fileDirname}/${fileBasenameNoExtension}.out')",
+                "-g"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
+            },
+            "options": {
+                "shell": {
+                    "executable": "${env:windir}\\sysnative\\bash.exe",
+                    "args": [
+                        "-c"
+                    ]
+                }
             }
         }
     ]

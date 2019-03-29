@@ -1,21 +1,28 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
+    "version": "1.0.0",
     "configurations": [
         {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": [""],
+            "program": "${fileBasenameNoExtension}.out",
+            "args": [],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
+            "cwd": ".",
             "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe",
+            "externalConsole": true,
+            "pipeTransport": {
+                "debuggerPath": "/usr/bin/gdb",
+                "pipeProgram": "${env:windir}\\sysnative\\bash.exe",
+                "pipeArgs": [
+                    "-c"
+                ],
+                "pipeCwd": "${fileDirname}"
+            },
+            "logging": {
+                "engineLogging": true,
+                "trace": true
+            },
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -23,7 +30,12 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "build"
+            "targetArchitecture": "x64",
+            "preLaunchTask": "Build (GCC)",
+            "sourceFileMap": {
+                "/mnt/c": "c:\\",
+                "/mnt/d": "d:\\"
+            }
         }
     ]
 }
