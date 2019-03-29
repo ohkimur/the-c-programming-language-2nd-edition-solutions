@@ -2,6 +2,9 @@
 !*/
 !*.*
 
+# Unknoun files
+*.ipch
+
 # Object files
 *.o
 *.ko
