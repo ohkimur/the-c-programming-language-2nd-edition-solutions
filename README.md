@@ -9,5 +9,5 @@ The book shows a lot of useful information about the C programming language, but
 
 For the first 5 chapters I used the __gcc__ compiler from MinGW compiler collection. A contraction of _"Minimalist GNU for Windows"_. It is a minimalist development environment for native Microsoft Windows applications.
 
-Later I used the __gcc__ compiler, available in __Windows Subsystem for Linux__ (_WSL_) with the __Ubuntu 18.04__ distribution installed. This compiler has some small advantages because the __linux environement__ it's more __*Unix like*__ and this makes the development process of C programs more easy to work with.
+Later I used the __gcc__ compiler, available in __Windows Subsystem for Linux__ (_WSL_) with the __Ubuntu 18.04__ distribution installed. This compiler has some small advantages, over the __*MinGW*__ version, because the __linux environement__ it's more __*Unix like*__ and this makes the development process of C programs more easy to work with.
 
