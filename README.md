@@ -6,7 +6,7 @@ Here are my solutions to the exercises in the book "The C Programming Language" 
 The book shows a lot of useful information about the C programming language, but more than that it gives a very good grasp on what programming really mean.
 
 ## Environment
-For the programming environment, the __Visual Studio Code__ text editor, was used. On top of this the __C/C++ extension__ was added to have acces to many __useful features__ specific for the C programming language. Also for simplicity the __Code Runner__ extension was used. Were created __specific configurations_ for the environment to accommodate the c programming language needs. 
+For the programming environment, the __Visual Studio Code__ text editor, was used. On top of this the __C/C++ extension__ was added to have acces to many __useful features__ specific for the C programming language. Also for simplicity the __Code Runner__ extension was used. Were created _specific configurations_ for the environment to accommodate the c programming language needs. 
 
 ## Compilers
 
