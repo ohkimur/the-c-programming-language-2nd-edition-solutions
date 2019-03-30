@@ -1,5 +1,5 @@
 {
     "code-runner.executorMap": {
-        "c": "gcc $fullFileName -o $fileNameWithoutExt.out -g"
+        "c": "gcc $fileName -o $fileNameWithoutExt.out -g && ./$fileNameWithoutExt.out"
     }
 }
