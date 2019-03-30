@@ -16,7 +16,6 @@ int readlines(char *lineptr[], int maxlines);
 void writelines(char *lineptr[], int maxlines);
 void qsortlines(char *lineptr[], int left, int right);
 
-
 int main(int argc, char const *argv[])
 {
     int nlines;
@@ -24,10 +23,17 @@ int main(int argc, char const *argv[])
     char *lineptr[MAXLINES];
     char line[MAXLEN];
 
-    if(nlines = readlines(lineptr, 2))
+    // Memory allocation in main
+    for(size_t i = 0; i < MAXLEN; ++i)
+    {
+        lineptr[i] = (char *)malloc(MAXLEN * sizeof(char)); 
+    }
+
+    if(nlines = readlines(lineptr, 3))
     {
         qsortlines(lineptr, 0, nlines - 1);
-        writelines(lineptr, 2);
+        putchar('\n');
+        writelines(lineptr, 3);
         return 0;
     }
     else
@@ -35,8 +41,13 @@ int main(int argc, char const *argv[])
         puts("error: input too big to sort");
         return 1;
     }
-    
 
+    // Free the allocated memory
+    for(size_t i = 0; i < MAXLEN; ++i)
+    {
+        free(lineptr[i]);
+    }
+    
     return 0;
 }
 
@@ -66,11 +77,10 @@ int readlines(char *lineptr[], int maxlines)
     {
         if(line_len = get_line(line_temp, MAXLEN))
         {
-            char *line = (char *)malloc(line_len * sizeof(char));
-
+            // char *line = (char *)malloc(line_len * sizeof(char));
             line_temp[line_len] = '\0'; // Replace \n with \0
-            strcpy(line, line_temp);
-            lineptr[nlines++] = line;
+            // strcpy(line, line_temp);
+            strcpy(lineptr[nlines++], line_temp);
         }
         else
         {
