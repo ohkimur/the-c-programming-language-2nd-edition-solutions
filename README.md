@@ -14,7 +14,7 @@ For the first 5 chapters was used the __gcc__ compiler from MinGW compiler colle
 
 Also I used the __gcc__ compiler available through __Windows Subsystem for Linux__ (_WSL_) with the __Ubuntu 18.04__ distribution installed. This compiler has some small advantages, over the __*MinGW*__ version, because the __linux environment__ it's _Unix_ based and this makes the development process of C programs more easy to work with.
 
-Later I used the __clang__ compiler available through __Xcode Command Line Tools__ on the macOS. This evironment it's also _Unix_ based and has many advantages regarding C programming.
+Later I used the __clang__ compiler available through __Xcode Command Line Tools__ on the macOS. This evironment it's also _Unix_ based and has many advantages for C programming.
 
 ## Debugers
 
