@@ -8,54 +8,54 @@ int strindex(char source[], char pattern[]);
 
 int main()
 {
-    char line[MAXLEN];
-    char pattern[MAXLEN] = "example";
+  char line[MAXLEN];
+  char pattern[MAXLEN] = "example";
 
-    getln(line, MAXLEN);
-    printf("%s\n", line);
-    
-    printf("Pattern found at index %d\n", strindex(line, pattern));
+  getln(line, MAXLEN);
+  printf("%s\n", line);
+  
+  printf("Pattern found at index %d\n", strindex(line, pattern));
 
-    return 0;
+  return 0;
 }
 
 int getln(char line[], int lim)
 {
-    int i = 0, c;
+  int i = 0, c;
 
-    while(lim > 0 && (c = getchar()) != EOF && c != '\n')
-    {
-        line[i++] = c;
-        --lim;
-    }
+  while(lim > 0 && (c = getchar()) != EOF && c != '\n')
+  {
+    line[i++] = c;
+    --lim;
+  }
 
-    if(c == '\n')
-    {
-        line[i++] = c;
-    }
+  if(c == '\n')
+  {
+    line[i++] = c;
+  }
 
-    line[i] = '\0';
+  line[i] = '\0';
 
-    return i;
+  return i;
 }
 
 int strindex(char source[], char pattern[])
 {
-    int i, j, k;
+  int i, j, k;
 
-    printf("line len: %d\n", strlen(source));
+  printf("line len: %d\n", strlen(source));
 
-    for(i = strlen(source); i >= 0; --i)
+  for(i = strlen(source); i >= 0; --i)
+  {
+    for(j = i, k = 0; pattern[k] != '\0' && source[j] == pattern[k]; ++j, ++k);
+
+    if(k > 0 && pattern[k] == '\0')
     {
-        for(j = i, k = 0; pattern[k] != '\0' && source[j] == pattern[k]; ++j, ++k);
-
-        if(k > 0 && pattern[k] == '\0')
-        {
-            return i;
-        }
+      return i;
     }
+  }
 
-    return -1;
+  return -1;
 }
 
 // Exercise page: 85

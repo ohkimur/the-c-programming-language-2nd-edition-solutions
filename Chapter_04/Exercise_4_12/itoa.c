@@ -6,29 +6,29 @@ void intToArray(int n, char str[]);
 
 int main(void)
 {
-    int n = 1234;
-    char str[MAXLEN];
+  int n = 1234;
+  char str[MAXLEN];
 
-    intToArray(n, str);
-    printf("%s", str);
+  intToArray(n, str);
+  printf("%s", str);
 
-    return 0;
+  return 0;
 }
 
 void intToArray(int n, char str[])
 {
-    static int i = 0;
+  static int i = 0;
 
-    if(n)
-    {
-        int d = n % 10;
-        n /= 10;
+  if(n)
+  {
+    int d = n % 10;
+    n /= 10;
 
-        intToArray(n, str);
-        
-        str[i++] = d + '0';
-        str[i] = '\0';
-    }
+    intToArray(n, str);
+    
+    str[i++] = d + '0';
+    str[i] = '\0';
+  }
 }
 
 // Exercise page: 102

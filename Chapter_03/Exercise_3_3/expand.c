@@ -8,68 +8,68 @@ void expand(char src[], char dest[]);
 
 int main()
 {
-    char line[MAXLEN];
-    char expanded_ln[MAXLEN];
+  char line[MAXLEN];
+  char expanded_ln[MAXLEN];
 
-    getstr(line, MAXLEN);
-    printf("%s", line);
+  getstr(line, MAXLEN);
+  printf("%s", line);
 
-    expand(line, expanded_ln);
-    printf("%s", expanded_ln);
+  expand(line, expanded_ln);
+  printf("%s", expanded_ln);
 
-    return 0;
+  return 0;
 }
 
 int getstr(char line[], int limit)
 {
-    int i = 0, c;
-    while(i < limit - 1 && (c = getchar()) != EOF)
-    {
-        line[i] = c;
-        ++i;
-    }
+  int i = 0, c;
+  while(i < limit - 1 && (c = getchar()) != EOF)
+  {
+    line[i] = c;
+    ++i;
+  }
 
-    if(c == '\n')
-    {
-        line[i++] = c;
-    }
+  if(c == '\n')
+  {
+    line[i++] = c;
+  }
 
-    line[i] = '\0';
-    
-    return i;
+  line[i] = '\0';
+  
+  return i;
 }
 
 void expand(char src[], char dest[])
 {
-    int i, j = 0;
-    for(i = 0; src[i] != EOF; ++i)
+  int i, j = 0;
+  for(i = 0; src[i] != EOF; ++i)
+  {
+    if(src[i + 1] == '-' && src[i] < src[i + 2])
     {
-        if(src[i + 1] == '-' && src[i] < src[i + 2])
+      int k;
+      for(k = 0; k <= (src[i + 2] - src[i]); ++k)
+      {
+        int temp = src[i] + k;
+        if(dest[j-1] != temp && isdigit(temp) || isalpha(temp))
         {
-            int k;
-            for(k = 0; k <= (src[i + 2] - src[i]); ++k)
-            {
-                int temp = src[i] + k;
-                if(dest[j-1] != temp && isdigit(temp) || isalpha(temp))
-                {
-                    dest[j++] = src[i] + k;
-                }
-            }
+          dest[j++] = src[i] + k;
+        }
+      }
 
-            i += 2;
-        }
-        else
-        {
-            dest[j++] = src[i];
-        }
+      i += 2;
     }
-
-    if(src[i] == '\n')
+    else
     {
-        dest[j++] = src[i];
+      dest[j++] = src[i];
     }
+  }
 
-    dest[j] = '\0';
+  if(src[i] == '\n')
+  {
+    dest[j++] = src[i];
+  }
+
+  dest[j] = '\0';
 }
 
 // Exercise page: 77

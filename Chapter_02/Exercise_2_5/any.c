@@ -8,29 +8,29 @@ int any(char str1[], char str2[]);
 
 int main()
 {
-    char str1[MAXSTR] = "xxxabcabc";
-    char str2[MAXSTR] = "cbaa";
+  char str1[MAXSTR] = "xxxabcabc";
+  char str2[MAXSTR] = "cbaa";
 
-    printf("%d", any(str1, str2));
+  printf("%d", any(str1, str2));
 
-    return 0;
+  return 0;
 }
 
 int any(char str1[], char str2[])
 {
-    int i, j;
-    for( i = 0; str1[i] != '\0'; ++i)
+  int i, j;
+  for( i = 0; str1[i] != '\0'; ++i)
+  {
+    for(j = 0; str2[j] != '\0'; ++j)
     {
-        for(j = 0; str2[j] != '\0'; ++j)
-        {
-            if(str1[i] == str2[j])
-            {
-                return i;
-            }
-        }
+      if(str1[i] == str2[j])
+      {
+        return i;
+      }
     }
+  }
 
-    return -1;
+  return -1;
 }
 
 // Exercise page: 62

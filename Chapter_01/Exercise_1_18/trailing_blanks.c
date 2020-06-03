@@ -7,46 +7,47 @@ void remove_trailing_blanks(char line[], int length);
 
 int main()
 {
-    int len;
-    char line[MAXLINE];
+  int len;
+  char line[MAXLINE];
 
-    while((len = getln(line, MAXLINE)) > 0)
-    {
-        remove_trailing_blanks(line, len);
-        printf("%s", line);
-    }
+  while ((len = getln(line, MAXLINE)) > 0)
+  {
+    remove_trailing_blanks(line, len);
+    printf("%s", line);
+  }
 
-    return 0;
+  return 0;
 }
 
 int getln(char line[], int limit)
 {
-    int c, i;
+  int c, i;
 
-    for(i = 0; i < limit - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
-    {
-        line[i] = c;
-    }
+  for (i = 0; i < limit - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+  {
+    line[i] = c;
+  }
 
-    if(c == '\n')
-    {
-        line[i] = c;
-        ++i;
-    }
+  if (c == '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
 
-    line[i] = '\0';
+  line[i] = '\0';
 
-    return i;
+  return i;
 }
 
 void remove_trailing_blanks(char line[], int length)
 {
-    int i;
-    
-    for(i = length - 2; line[i] == ' ' || line[i] == '\t'; --i);
+  int i;
 
-    line[i + 1] = '\n';
-    line[i + 2] = '\0';
+  for (i = length - 2; line[i] == ' ' || line[i] == '\t'; --i)
+    ;
+
+  line[i + 1] = '\n';
+  line[i + 2] = '\0';
 }
 
 // Exercise page: 45

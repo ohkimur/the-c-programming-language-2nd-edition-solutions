@@ -15,22 +15,22 @@ unsigned int invert(int x, int p, int n);
 
 int main()
 {
-    unsigned int x = 0b11010111;
+  unsigned int x = 0b11010111;
 
-    printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(x));
-    printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(invert(x, 1, 4)));
+  printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(x));
+  printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(invert(x, 1, 4)));
 
-    return 0;
+  return 0;
 }
 
 unsigned int invert(int x, int p, int n)
 {
-    ++p; // First position is 0
-    
-    unsigned int mask1 = ~(~0 << n) << p;
-    unsigned int mask2 = ~mask1 & x;
+  ++p; // First position is 0
+  
+  unsigned int mask1 = ~(~0 << n) << p;
+  unsigned int mask2 = ~mask1 & x;
 
-    return mask2 | ~x;
+  return mask2 | ~x;
 }
 
 // Exercise page: 63

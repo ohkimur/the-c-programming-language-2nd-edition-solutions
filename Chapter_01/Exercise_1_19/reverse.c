@@ -8,66 +8,67 @@ void reverse(char line[]);
 
 int main()
 {
-    int len;
-    char line[MAXLINE];
-    char str[MAXLINE];
+  int len;
+  char line[MAXLINE];
+  char str[MAXLINE];
 
-    while((len = getln(line, MAXLINE)) > 0)
-    {
-        reverse(line);
-        printf("%s", line);
-    }
+  while ((len = getln(line, MAXLINE)) > 0)
+  {
+    reverse(line);
+    printf("%s", line);
+  }
 
-    return 0;
+  return 0;
 }
 
 int getln(char line[], int limit)
 {
-    int c, i;
+  int c, i;
 
-    i = 0;
-    while(i < limit -1 && (c = getchar()) != EOF && c != '\n')
-    {
-        line[i] = c;
-        ++i;
-    }
+  i = 0;
+  while (i < limit - 1 && (c = getchar()) != EOF && c != '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
 
-    if(c == '\n')
-    {
-        line[i] = '\n';
-        ++i;
-    }
+  if (c == '\n')
+  {
+    line[i] = '\n';
+    ++i;
+  }
 
-    line[i] = '\0';
+  line[i] = '\0';
 
-    return i;
+  return i;
 }
 
 int length(char line[])
 {
-    int i;
-    
-    for(i = 0; line[i] != '\0'; ++i);
+  int i;
 
-    return i;
+  for (i = 0; line[i] != '\0'; ++i)
+    ;
+
+  return i;
 }
 
 void reverse(char line[])
-{   
-    int i_front = 0;
-    int i_back = length(line);
-    char temp;
+{
+  int i_front = 0;
+  int i_back = length(line);
+  char temp;
 
-    i_back -= 2;
-    while(i_back > i_front)
-    {
-        temp = line[i_front];
-        line[i_front] = line[i_back];
-        line[i_back] = temp;
+  i_back -= 2;
+  while (i_back > i_front)
+  {
+    temp = line[i_front];
+    line[i_front] = line[i_back];
+    line[i_back] = temp;
 
-        ++i_front;
-        --i_back;
-    }
+    ++i_front;
+    --i_back;
+  }
 }
 
 // Exercise page: 45

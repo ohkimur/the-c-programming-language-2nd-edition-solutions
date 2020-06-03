@@ -12,94 +12,94 @@ void remove_comments(char str[], char no_com_str[]);
 
 int main()
 {
-    char str[MAXSTR];
-    char no_com_str[MAXSTR];
+  char str[MAXSTR];
+  char no_com_str[MAXSTR];
 
-    getstr(str, MAXSTR);
+  getstr(str, MAXSTR);
 
-    remove_comments(str, no_com_str);
+  remove_comments(str, no_com_str);
 
-    printf("%s", no_com_str);
+  printf("%s", no_com_str);
 
-    return 0;
+  return 0;
 }
 
 int getstr(char str[], int limit)
 {
-    int c, i = 0;
+  int c, i = 0;
 
-    while(i < limit - 1 && (c = getchar()) != EOF)
-    {
-        str[i++] = c;
-    }
+  while(i < limit - 1 && (c = getchar()) != EOF)
+  {
+    str[i++] = c;
+  }
 
-    if(c == '\n')
-    {
-        str[i++] = c;
-    }
+  if(c == '\n')
+  {
+    str[i++] = c;
+  }
 
-    str[i] = '\0';
+  str[i] = '\0';
 
-    return i;
+  return i;
 }
 
 void remove_comments(char str[], char no_com_str[])
 {
-    int in_quote = FALSE;
-    int line_comment = FALSE;
-    int block_comment = FALSE;
+  int in_quote = FALSE;
+  int line_comment = FALSE;
+  int block_comment = FALSE;
 
-    int i = 0, j = 0;
-    while(str[i] != '\0')
+  int i = 0, j = 0;
+  while(str[i] != '\0')
+  {
+    if(!in_quote && str[i] == '"')
     {
-        if(!in_quote && str[i] == '"')
-        {
-            in_quote = TRUE;
-        }
-        else if(in_quote && str[i] == '"')
-        {
-            in_quote = FALSE;
-        }
-
-        if(!in_quote)
-        {
-            if(str[i] == '/' && str[i+1] == '*' && !line_comment)
-            {
-                block_comment = TRUE;
-            }
-
-            if(str[i] == '*' && str[i+1] == '/')
-            {
-                block_comment = FALSE;
-                i += 2;
-            }
-
-            if(str[i] == '/' && str[i] == '/')
-            {
-                line_comment = TRUE;
-            }
-
-            if(str[i] == '\n')
-            {
-                line_comment = FALSE;
-            }
-
-            if(line_comment || block_comment)
-            {
-                ++i;
-            }
-            else if(!line_comment || !block_comment)
-            {
-                no_com_str[j++] = str[i++];
-            }
-        }
-        else
-        {
-            no_com_str[j++] = str[i++];
-        }
+      in_quote = TRUE;
+    }
+    else if(in_quote && str[i] == '"')
+    {
+      in_quote = FALSE;
     }
 
-    no_com_str[j] = '\0';
+    if(!in_quote)
+    {
+      if(str[i] == '/' && str[i+1] == '*' && !line_comment)
+      {
+        block_comment = TRUE;
+      }
+
+      if(str[i] == '*' && str[i+1] == '/')
+      {
+        block_comment = FALSE;
+        i += 2;
+      }
+
+      if(str[i] == '/' && str[i] == '/')
+      {
+        line_comment = TRUE;
+      }
+
+      if(str[i] == '\n')
+      {
+        line_comment = FALSE;
+      }
+
+      if(line_comment || block_comment)
+      {
+        ++i;
+      }
+      else if(!line_comment || !block_comment)
+      {
+        no_com_str[j++] = str[i++];
+      }
+    }
+    else
+    {
+      no_com_str[j++] = str[i++];
+    }
+  }
+
+  no_com_str[j] = '\0';
 }
 
 // Exercise page: 48

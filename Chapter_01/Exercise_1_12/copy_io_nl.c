@@ -5,22 +5,22 @@
 
 main()
 {
-    int state = OUT;
+  int state = OUT;
 
-    char c;
-    while((c = getchar()) != EOF)
+  char c;
+  while((c = getchar()) != EOF)
+  {
+    if(c != ' ' && c != '\t' && c != '\n')
     {
-        if(c != ' ' && c != '\t' && c != '\n')
-        {
-            state = IN;
-            putchar(c);
-        }
-        else if (state == IN)
-        {
-            state = OUT;
-            putchar('\n');
-        }
+      state = IN;
+      putchar(c);
     }
+    else if (state == IN)
+    {
+      state = OUT;
+      putchar('\n');
+    }
+  }
 }
 
 // Exercise page: 35

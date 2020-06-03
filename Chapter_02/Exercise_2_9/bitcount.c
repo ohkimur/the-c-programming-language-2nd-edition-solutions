@@ -6,40 +6,40 @@ int bitcount(unsigned int x);
 
 int main()
 {
-    unsigned int x = 0b011010;
+  unsigned int x = 0b011010;
 
-    printbits(x);
-    printf("x have %d bits of 1.\n", bitcount(x));
+  printbits(x);
+  printf("x have %d bits of 1.\n", bitcount(x));
 
-    return 0;
+  return 0;
 }
 
 void printbits(unsigned int x)
 {
-    unsigned int n = sizeof(unsigned int);
+  unsigned int n = sizeof(unsigned int);
 
-    printf("0b");
+  printf("0b");
 
-    int i;
-    for(i = n*8 - 1; i >= 0; --i)
-    {
-        (x & (unsigned int)pow(2, i)) ? putchar('1') : putchar('0');
-    }
+  int i;
+  for(i = n*8 - 1; i >= 0; --i)
+  {
+    (x & (unsigned int)pow(2, i)) ? putchar('1') : putchar('0');
+  }
 
-    putchar('\n');
+  putchar('\n');
 }
 
 int bitcount(unsigned int x)
 {
-    int b = 0;
+  int b = 0;
 
-    while(x)
-    {
-        x &= (x - 1);
-        ++b;
-    }
+  while(x)
+  {
+    x &= (x - 1);
+    ++b;
+  }
 
-    return b;
+  return b;
 }
 
 // Exercise page: 65

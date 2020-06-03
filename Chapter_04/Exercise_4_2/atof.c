@@ -8,96 +8,96 @@ double atof(char s[]);
 
 int main()
 {
-    char line[MAXLEN];
+  char line[MAXLEN];
 
-    getln(line, MAXLEN);
-    printf("%s", line);
+  getln(line, MAXLEN);
+  printf("%s", line);
 
-    printf("%f", atof(line));
+  printf("%f", atof(line));
 
-    return 0;
+  return 0;
 }
 
 int getln(char line[], int lim)
 {
-    int i = 0, c;
+  int i = 0, c;
 
-    while(i < lim - 1 && (c = getchar()) != '\n')
-    {
-        line[i] = c;
-        ++i;
-    }
+  while(i < lim - 1 && (c = getchar()) != '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
 
-    if(c == '\n')
-    {
-        line[i++] = c;
-    }
+  if(c == '\n')
+  {
+    line[i++] = c;
+  }
 
-    line[i] = '\0';
+  line[i] = '\0';
 
-    return i;
+  return i;
 }
 
 double atof(char s[])
 {
-    double val, power;
-    int i, sign, exp_sign = 1, exp_pwr = 0;
+  double val, power;
+  int i, sign, exp_sign = 1, exp_pwr = 0;
 
-    for(i = 0; isspace(s[i]); ++i);
+  for(i = 0; isspace(s[i]); ++i);
 
-    sign = (s[i] == '-') ? -1 : 1;
+  sign = (s[i] == '-') ? -1 : 1;
 
-    if(s[i] == '+' || s[i] == '-')
+  if(s[i] == '+' || s[i] == '-')
+  {
+    ++i;
+  }
+
+  for(val = 0.0; isdigit(s[i]); ++i)
+  {
+    val = 10.0 * val + (s[i] - '0');
+  }
+
+  if(s[i] == '.')
+  {
+    ++i;
+  }
+
+  for(power = 1.0; isdigit(s[i]); ++i)
+  {
+    val = 10.0 * val + (s[i] - '0');
+    power *= 10;
+  }
+
+  if(s[i] == 'e' || s[i] == 'E')
+  {
+    if(s[++i] == '-')
     {
-        ++i;
+      exp_sign = -1;
+      ++i;
+    }
+  }
+
+  while(isdigit(s[i]))
+  {
+    exp_pwr = 10 * exp_pwr + (s[i] - '0');
+    ++i;
+  }
+
+  while(exp_pwr)
+  {
+    if(exp_sign == -1)
+    {
+      power *= 10;
+    }
+    else
+    {
+      power /= 10;
     }
 
-    for(val = 0.0; isdigit(s[i]); ++i)
-    {
-        val = 10.0 * val + (s[i] - '0');
-    }
+    --exp_pwr;
+  }
 
-    if(s[i] == '.')
-    {
-        ++i;
-    }
-
-    for(power = 1.0; isdigit(s[i]); ++i)
-    {
-        val = 10.0 * val + (s[i] - '0');
-        power *= 10;
-    }
-
-    if(s[i] == 'e' || s[i] == 'E')
-    {
-        if(s[++i] == '-')
-        {
-            exp_sign = -1;
-            ++i;
-        }
-    }
-
-    while(isdigit(s[i]))
-    {
-        exp_pwr = 10 * exp_pwr + (s[i] - '0');
-        ++i;
-    }
-
-    while(exp_pwr)
-    {
-        if(exp_sign == -1)
-        {
-            power *= 10;
-        }
-        else
-        {
-            power /= 10;
-        }
-
-        --exp_pwr;
-    }
-
-    return sign * val / power;
+  return sign * val / power;
 }
 
 // Exercise page: 87

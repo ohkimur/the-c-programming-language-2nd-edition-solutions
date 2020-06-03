@@ -2,7 +2,7 @@
 
 main()
 {
-    printf("EOF: %d", EOF);
+  printf("EOF: %d", EOF);
 }
 
 // Exercise page: 31
