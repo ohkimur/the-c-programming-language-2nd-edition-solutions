@@ -2,7 +2,7 @@
 
 main()
 {
-    printf("hello, world\n");
+  printf("hello, world\n");
 }
 
 // Exercise page: 22

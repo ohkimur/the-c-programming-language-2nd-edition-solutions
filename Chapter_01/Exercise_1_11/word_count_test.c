@@ -7,36 +7,36 @@
 
 main()
 {
-    char nl;
-    char nw;
-    char nc;
+  char nl;
+  char nw;
+  char nc;
 
-    int state;
+  int state;
 
-    nl = nw = nc = 0;
-    state = OUT;
+  nl = nw = nc = 0;
+  state = OUT;
 
-    char c;
-    while((c = getchar()) != EOF)
+  char c;
+  while ((c = getchar()) != EOF)
+  {
+    ++nc;
+
+    if (c == '\n')
     {
-        ++nc;
-
-        if(c == '\n')
-        {
-            ++nl;
-        }
-        else if(c == ' ' || c == '\n' || c == '\t')
-        {
-            state = OUT;
-        }
-        else if(state == OUT)
-        {
-            state = IN;
-            ++nw;
-        }
+      ++nl;
     }
+    else if (c == ' ' || c == '\n' || c == '\t')
+    {
+      state = OUT;
+    }
+    else if (state == OUT)
+    {
+      state = IN;
+      ++nw;
+    }
+  }
 
-    printf("lines: %d\nwords: %d\ncharacters: %d\n", nl, nw, nc);
+  printf("lines: %d\nwords: %d\ncharacters: %d\n", nl, nw, nc);
 }
 
 // Exercise page: 35
@@ -45,5 +45,5 @@ main()
 // words, and of course characters in input. Also is very good to put
 // some escape sequence such as tags for example.
 // To identify problems or bugs we need to test the extreme situations
-// like no characters in input or a very long word in input or even 
+// like no characters in input or a very long word in input or even
 // a huge sequence of white spaces.

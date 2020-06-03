@@ -6,24 +6,24 @@
 
 main()
 {
-    float celsius, fahr;
-    int lower, upper, step;
+  float celsius, fahr;
+  int lower, upper, step;
 
-    lower = 0;
-    upper = 300;
-    step = 20;
+  lower = 0;
+  upper = 300;
+  step = 20;
 
-    // Printing a heading abouve the table
-    printf("Celsius\tFahr\n");
-    printf("---------------\n");
+  // Printing a heading abouve the table
+  printf("Celsius\tFahr\n");
+  printf("---------------\n");
 
-    celsius = lower;
-    while(celsius <= upper)
-    {
-        fahr = (9.0/5.0) * celsius + 32.0f;
-        printf("%3.0f\t\t%6.1f\n", celsius, fahr);
-        celsius = celsius + step;
-    }
+  celsius = lower;
+  while(celsius <= upper)
+  {
+    fahr = (9.0/5.0) * celsius + 32.0f;
+    printf("%3.0f\t\t%6.1f\n", celsius, fahr);
+    celsius = celsius + step;
+  }
 }
 
 // Exercise page: 27

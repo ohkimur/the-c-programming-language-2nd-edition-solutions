@@ -5,43 +5,43 @@ void ungetch(int c);
 
 int main(void)
 {
-    char c = getch();
-    printf("%c\n", c);
+  char c = getch();
+  printf("%c\n", c);
 
-    ungetch(c);
+  ungetch(c);
 
-    printf("%c\n", c = getch());
+  printf("%c\n", c = getch());
 
-    return 0;
+  return 0;
 }
 
 int buf = -1;
 
 int getch(void)
 {
-    char temp;
-    
-    if(buf != -1)
-    {
-        temp = buf;
-        buf = -1;
+  char temp;
+  
+  if(buf != -1)
+  {
+    temp = buf;
+    buf = -1;
 
-        return temp;
-    }
+    return temp;
+  }
 
-    return getchar();
+  return getchar();
 }
 
 void ungetch(int c)
 {
-    if(buf != -1)
-    {
-        printf("ungetch: buffer full\n");
-    }
-    else
-    {
-        buf = c;
-    }
+  if(buf != -1)
+  {
+    printf("ungetch: buffer full\n");
+  }
+  else
+  {
+    buf = c;
+  }
 }
 
 // Exercise page: 93

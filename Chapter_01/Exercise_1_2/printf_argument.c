@@ -2,7 +2,7 @@
 
 main()
 {
-    printf("hello: \c");
+  printf("hello: \c");
 }
 
 // Exercise page: 22

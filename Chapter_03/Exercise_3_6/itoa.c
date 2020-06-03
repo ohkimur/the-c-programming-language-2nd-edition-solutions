@@ -10,53 +10,53 @@ void intToArray(int n, char s[], int padding);
 
 int main()
 {
-    int n = 1995;
-    char number_str[MAXLEN];
+  int n = 1995;
+  char number_str[MAXLEN];
 
-    intToArray(n, number_str, 6);
-    printf("%s\n", number_str);
+  intToArray(n, number_str, 6);
+  printf("%s\n", number_str);
 
-    return 0;
+  return 0;
 }
 
 int ilen(int a)
 {
-    int i = 0;
+  int i = 0;
 
-    do
-    {
-        ++i;
-    }
-    while(a /= 10);
+  do
+  {
+    ++i;
+  }
+  while(a /= 10);
 
-    return i;
+  return i;
 }
 
 void intToArray(int n, char s[], int padding)
 {
-    int i = 0, sign = n;
+  int i = 0, sign = n;
 
-    do
-    {
-        s[i++] = abs(n % 10) + '0';
-    }
-    while(n /= 10);
+  do
+  {
+    s[i++] = abs(n % 10) + '0';
+  }
+  while(n /= 10);
 
-    if(sign < 0)
-    {
-        s[i++] = '-';
-    }
+  if(sign < 0)
+  {
+    s[i++] = '-';
+  }
 
-    int len = ilen(sign);
-    while(len < padding)
-    {
-        s[i++] = ' ';
-        --padding;
-    }
+  int len = ilen(sign);
+  while(len < padding)
+  {
+    s[i++] = ' ';
+    --padding;
+  }
 
-    s[i] = '\0';
+  s[i] = '\0';
 
-    strrev(s);
+  strrev(s);
 }
 
 // Exercise page: 78

@@ -4,20 +4,20 @@
 
 int main()
 {
-    char s[MAXLINE];
+  char s[MAXLINE];
 
-    int i;
-    char c;
-    for(i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF); ++i)
-    {
-        s[i] = c;
-    }
+  int i;
+  char c;
+  for(i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF); ++i)
+  {
+    s[i] = c;
+  }
 
-    s[i] = '\0';
+  s[i] = '\0';
 
-    printf("%s", s);
+  printf("%s", s);
 
-    return 0;
+  return 0;
 }
 
 // Exercise page: 56

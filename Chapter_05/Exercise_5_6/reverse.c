@@ -5,40 +5,40 @@ void reverse(char *s);
 
 int main(void)
 {
-    char s[100] = "test";
+  char s[100] = "test";
 
-    reverse(s);
-    puts(s);  
+  reverse(s);
+  puts(s);  
 
-    return 0;
+  return 0;
 }
 
 unsigned int strlen(char *s)
 {
-    int i = 0;
+  int i = 0;
 
-    while(*s++ != '\0')
-    {
-        ++i;
-    }
+  while(*s++ != '\0')
+  {
+    ++i;
+  }
 
-    return i;
+  return i;
 }
 
 void reverse(char *s)
 {
-    char *t = s + strlen(s) - 1;
-    char aux = 0;
+  char *t = s + strlen(s) - 1;
+  char aux = 0;
 
-    if(*s == '\0')
-        return;
+  if(*s == '\0')
+    return;
 
-    while(s < t)
-    {
-        aux = *t;
-        *t-- = *s;
-        *s++ = aux;
-    }
+  while(s < t)
+  {
+    aux = *t;
+    *t-- = *s;
+    *s++ = aux;
+  }
 }
 
 // Exercise page: 121

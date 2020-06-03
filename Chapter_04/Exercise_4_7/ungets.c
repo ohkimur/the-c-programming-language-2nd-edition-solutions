@@ -9,18 +9,18 @@ void ungetstr(char line[]);
 
 int main(void)
 {
-    char line[MAXLEN];
-    char temp[MAXLEN];
+  char line[MAXLEN];
+  char temp[MAXLEN];
 
-    getstr(line, MAXLEN);
-    printf("%s", line);
+  getstr(line, MAXLEN);
+  printf("%s", line);
 
-    ungetstr(line);
+  ungetstr(line);
 
-    getstr(temp, MAXLEN);
-    printf("%s", temp);
+  getstr(temp, MAXLEN);
+  printf("%s", temp);
 
-    return 0;
+  return 0;
 }
 
 int getch(void);
@@ -28,31 +28,31 @@ void ungetch(int c);
 
 int getstr(char line[], int limit)
 {
-    int i = 0, c;
+  int i = 0, c;
 
-    while(limit - 1 > 0 && (c = getch()) != EOF && c != '\n')
-    {
-        line[i++] = c;
-    }
+  while(limit - 1 > 0 && (c = getch()) != EOF && c != '\n')
+  {
+    line[i++] = c;
+  }
 
-    if(c == '\n')
-    {
-        line[i++] = c;
-    }
+  if(c == '\n')
+  {
+    line[i++] = c;
+  }
 
-    line[i] = '\0';
+  line[i] = '\0';
 
-    return i;
+  return i;
 }
 
 void ungetstr(char line[])
 {
-    int i = strlen(line);
+  int i = strlen(line);
 
-    while(i)
-    {
-        ungetch(line[--i]);
-    }
+  while(i)
+  {
+    ungetch(line[--i]);
+  }
 }
 
 int bufp = 0;
@@ -60,19 +60,19 @@ char buf[BUFFSIZE];
 
 int getch(void)
 {
-    return (bufp > 0) ? buf[--bufp] : getchar();
+  return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
 void ungetch(int c)
 {
-    if(bufp >= BUFFSIZE)
-    {
-        printf("ungetch: too many characters\n");
-    }
-    else
-    {
-        buf[bufp++] = c;
-    }
+  if(bufp >= BUFFSIZE)
+  {
+    printf("ungetch: too many characters\n");
+  }
+  else
+  {
+    buf[bufp++] = c;
+  }
 }
 
 // Exercise page: 93

@@ -2,7 +2,7 @@
 
 main()
 {
-    printf("value of expression: %d", getchar() != EOF);
+  printf("value of expression: %d", getchar() != EOF);
 }
 
 // Exercise page: 31

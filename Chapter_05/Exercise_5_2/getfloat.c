@@ -11,12 +11,12 @@ int getfloat(float *pn);
 
 int main(void)
 {
-    float number = 0.0;
+  float number = 0.0;
 
-    getfloat(&number);
-    printf("number: %f\n", number);
+  getfloat(&number);
+  printf("number: %f\n", number);
 
-    return 0;
+  return 0;
 }
 
 int bufp = 0;
@@ -24,67 +24,67 @@ int buf[BUFFSIZE];
 
 int getch(void)
 {
-    return (bufp > 0) ? buf[--bufp] : getchar();
+  return (bufp > 0) ? buf[--bufp] : getchar();
 }
 
 void ungetch(int c)
 {
-    if(bufp >= BUFFSIZE)
-    {
-        printf("ungetch: too many characters\n");
-    }
-    else
-    {
-        buf[bufp++] = c;
-    }
+  if(bufp >= BUFFSIZE)
+  {
+    printf("ungetch: too many characters\n");
+  }
+  else
+  {
+    buf[bufp++] = c;
+  }
 }
 
 int getfloat(float *pn)
 {
-    int c, sign;
+  int c, sign;
 
-    while(isspace(c = getch()));
+  while(isspace(c = getch()));
 
-    if(!isdigit(c) && c != EOF && c != '+' && c != '-')
+  if(!isdigit(c) && c != EOF && c != '+' && c != '-')
+  {
+    ungetch(c);
+    return 0;
+  }
+
+  sign = (c == '-') ? -1 : 1;
+
+  if(c == '+' || c == '-')
+  {
+    if(!isdigit(c = getch()))
     {
-        ungetch(c);
-        return 0;
+      ungetch(c);
+      ungetch(sign == 1 ? '+' : '-');
+      return 0;
     }
+  }
 
-    sign = (c == '-') ? -1 : 1;
+  for(*pn = 0; isdigit(c); c = getch())
+  {
+    *pn = 10 * *pn + (c - '0');
+  }
 
-    if(c == '+' || c == '-')
+  if(c == '.')
+  {
+    int i;
+    for(i = 1; (c = getch()) && isdigit(c); ++i)
     {
-        if(!isdigit(c = getch()))
-        {
-            ungetch(c);
-            ungetch(sign == 1 ? '+' : '-');
-            return 0;
-        }
+      *pn += (c - '0')/(pow(10, i));
     }
+  }
 
-    for(*pn = 0; isdigit(c); c = getch())
-    {
-        *pn = 10 * *pn + (c - '0');
-    }
+  *pn = *pn * sign;
 
-    if(c == '.')
-    {
-        int i;
-        for(i = 1; (c = getch()) && isdigit(c); ++i)
-        {
-            *pn += (c - '0')/(pow(10, i));
-        }
-    }
+  if(c != EOF)
+  {
+    ungetch(c);
+  }
 
-    *pn = *pn * sign;
-
-    if(c != EOF)
-    {
-        ungetch(c);
-    }
-
-    return c;
+  return c;
 }
 
 // Exercise page: 111

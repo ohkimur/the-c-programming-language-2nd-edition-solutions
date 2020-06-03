@@ -6,57 +6,57 @@ void itoa(char *s, int n);
 
 int main(void)
 {
-    int i = 1234;
-    char s[100] = "";
+  int i = 1234;
+  char s[100] = "";
 
-    itoa(s, i);
+  itoa(s, i);
 
-    printf("itoa: %s\n", s);
+  printf("itoa: %s\n", s);
 
-    return 0;
+  return 0;
 }
 
 unsigned int strlength(char *s)
 {
-    int i = 0;
+  int i = 0;
 
-    while(*s++ != '\0')
-    {
-        ++i;
-    }
+  while(*s++ != '\0')
+  {
+    ++i;
+  }
 
-    return i;
+  return i;
 }
 
 void reverse(char *s)
 {
-    char *t = s + strlength(s) - 1;
-    char aux = 0;
+  char *t = s + strlength(s) - 1;
+  char aux = 0;
 
-    if(*s == '\0')
-        return;
+  if(*s == '\0')
+    return;
 
-    while(s < t)
-    {
-        aux = *t;
-        *t-- = *s;
-        *s++ = aux;
-    }
+  while(s < t)
+  {
+    aux = *t;
+    *t-- = *s;
+    *s++ = aux;
+  }
 }
 
 void itoa(char *s, int n)
 {
-    char *t = s;
+  char *t = s;
 
-    while(n)
-    {
-        *(t++) = n % 10 + '0';
-        n /= 10;
-    }
+  while(n)
+  {
+    *(t++) = n % 10 + '0';
+    n /= 10;
+  }
 
-    *t = '\0';
+  *t = '\0';
 
-    reverse(s);
+  reverse(s);
 }
 
 // Exercise page: 121

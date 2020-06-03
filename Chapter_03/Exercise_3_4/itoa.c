@@ -9,36 +9,36 @@ void intToArray(int n, char s[]);
 
 int main()
 {
-    int n = INT_MIN;
-    char number_str[MAXLEN];
+  int n = INT_MIN;
+  char number_str[MAXLEN];
 
-    intToArray(n, number_str);
-    printf("%s\n", number_str);
+  intToArray(n, number_str);
+  printf("%s\n", number_str);
 
-    return 0;
+  return 0;
 }
 
 void intToArray(int n, char s[])
 {
-    int i, sign;
+  int i, sign;
 
-    sign = n;
+  sign = n;
 
-    i = 0;
-    do
-    {
-        s[i++] = abs(n % 10) + '0';
-    }
-    while(n /= 10);
+  i = 0;
+  do
+  {
+    s[i++] = abs(n % 10) + '0';
+  }
+  while(n /= 10);
 
-    if(sign < 0)
-    {
-        s[i++] = '-';
-    }
+  if(sign < 0)
+  {
+    s[i++] = '-';
+  }
 
-    s[i] = '\0';
+  s[i] = '\0';
 
-    strrev(s);
+  strrev(s);
 }
 
 // Exercise page: 78

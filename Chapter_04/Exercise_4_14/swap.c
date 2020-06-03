@@ -4,15 +4,15 @@
 
 int main(void)
 {
-    int x = 2, y = 3;
-    int temp;
+  int x = 2, y = 3;
+  int temp;
 
-    printf("x: %d, y: %d\n", x, y);
+  printf("x: %d, y: %d\n", x, y);
 
-    swap(int, x, y);
-    printf("x: %d, y: %d\n", x, y);
+  swap(int, x, y);
+  printf("x: %d, y: %d\n", x, y);
 
-    return 0;
+  return 0;
 }
 
 // Exercise page: 105
