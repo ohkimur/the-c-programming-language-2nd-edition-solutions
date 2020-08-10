@@ -3,6 +3,9 @@
 !*/
 !*.*
 
+# Don't ignore Makefile
+!Makefile
+
 # Unknoun files
 *.ipch
 
