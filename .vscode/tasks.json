@@ -7,7 +7,11 @@
       "command": "gcc ${file} -o ${fileBasenameNoExtension}  && ./${fileBasenameNoExtension} ",
       "presentation": {
         "reveal": "always",
-        "panel": "shared"
+        "panel": "shared",
+        "echo": true,
+        "focus": true,
+        "showReuseMessage": true,
+        "clear": false
       },
       "group": {
         "kind": "build",
