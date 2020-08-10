@@ -1,5 +1,7 @@
 # The C Programming Language 2nd Edition - Solutions
 
+![C/C++ CI](https://github.com/gleesik/the-c-programming-language-2nd-edition-solutions/workflows/C/C++%20CI/badge.svg)
+
 ## Introduction
 **The C Programming Language** is a very popular book and sometimes people refer to it as **K&R**. The authors *Brian W. Kernighan* and *Dennis M. Ritchie* have done a very good job of explaining the core concepts of programming. The focus of the book is the C programming language, however, the approach is general, so it can be extended to all programming languages.
 
