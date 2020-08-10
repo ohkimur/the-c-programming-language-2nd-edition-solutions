@@ -8,7 +8,7 @@ Each chapter of the book contains **exercises** that could be very helpful to be
 This repository contains the **solutions** to the exercises from each chapter of the book. These solutions are meant to be helpful for those who want to *learn* to program with the C language.
 
 ## Environment
-The source code is not tight up to an IDE, so any text editor can be used. However, there are useful tasks and settings available for [Visual Studio Code](https://code.visualstudio.com/). For a **better experience** using this editor, the C/C++ extension can provide some very helpful features specific to the C programming language.
+The source code is not tied up to an IDE, so any text editor can be used. However, there are useful tasks and settings available for [Visual Studio Code](https://code.visualstudio.com/). For a **better experience** using this editor, the C/C++ extension can provide some very helpful features specific to the C programming language.
 
 ### Compilers
 To be able to write programs in C, a compiler is required. There are many options available for each operating system.
@@ -41,13 +41,11 @@ $ sudo yum groupinstall "Development Tools" "Legacy Software Development"
 ```
 
 #### Windows
-
 Because Windows is not a Unix like operating system, [**Windows Subsystem for Linux**](https://docs.microsoft.com/en-us/windows/wsl/)  (a.k.a. WSL) could be a very good approach when writing C programs. It provides a full Linux system that can make the programming experience much better. The official documentation has a pretty good explanation about how to [install WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 [**MinGW Compiler Collection**](http://www.mingw.org/) is another good alternative to have access to the gcc compiler on a Windows system. The official documentation shows how it can be [installed](http://www.mingw.org/wiki/Getting_Started) step by step.
 
-## Debugers
+### Debuggers
+A debugger can be a very helpful tool when trying to find out how a program works. There are many times when the code will compile successfully because syntactically there are no problems. However, that doesn't mean there aren't logical problems. If that is the case it might be a very good idea to use a debugger.
 
-I used the __gdb__ debuger, available through __Windows Subsystem for Linux__ (_WSL_) with the __Ubuntu 18.04__. This debugger is also available through __Xcode Command Line Tools__ on macOS.
-
-For a __*simple* programming environment__ it was created a __build task__ and a __debug task__ in _VS Code_.
+A very popular option is [**gdb**](https://www.gnu.org/software/gdb/). This debugger comes along with most compilers available on each platform.
