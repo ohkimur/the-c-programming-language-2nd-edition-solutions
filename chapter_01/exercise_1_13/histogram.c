@@ -77,8 +77,8 @@ int main(void)
   // Print a vertical histogram
   printf("Vertical Histogram\n------------------\n");
 
-  int max = size;
-  for (max; max >= 0; --max)
+  int max;
+  for (max = size; max >= 0; --max)
   {
     i = 0;
     while (histogram[i] != '$')
