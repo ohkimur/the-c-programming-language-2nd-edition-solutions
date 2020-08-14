@@ -1,10 +1,11 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
   printf("EOF: %d", EOF);
+  return 0;
 }
 
 // Exercise page: 31
 
-// OBS: The value of the EOF character is -1, wich is an integer.
+// NOTE: The value of the EOF character is -1, wich is an integer.

@@ -2,7 +2,7 @@
 
 float celsius_to_fahrenheit(int celsius);
 
-int main()
+int main(void)
 {
   float celsius, fahr;
   int lower, upper, step;
@@ -16,7 +16,7 @@ int main()
   printf("----------------------\n");
 
   celsius = lower;
-  while(celsius <= upper)
+  while (celsius <= upper)
   {
     fahr = celsius_to_fahrenheit(celsius);
     printf("%3.0f\t\t%6.1f\n", celsius, fahr);
@@ -28,9 +28,9 @@ int main()
 
 float celsius_to_fahrenheit(int celsius)
 {
-  return (9.0/5.0) * celsius + 32.0f;
+  return (9.0 / 5.0) * celsius + 32.0f;
 }
 
 // Exercise page: 41
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

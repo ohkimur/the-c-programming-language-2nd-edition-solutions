@@ -1,6 +1,12 @@
 #include <stdio.h>
 
-#define swap(t, x, y) { t temp; temp = x; x = y; y = temp; };
+#define swap(t, x, y) \
+  {                   \
+    t temp;           \
+    temp = x;         \
+    x = y;            \
+    y = temp;         \
+  };
 
 int main(void)
 {
@@ -17,5 +23,5 @@ int main(void)
 
 // Exercise page: 105
 
-// OBS: A use of a block is very useful because there can be created local
+// NOTE: A use of a block is very useful because there can be created local
 // variables that don't create conflicts with already existed entities.

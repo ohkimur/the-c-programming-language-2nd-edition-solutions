@@ -5,7 +5,7 @@
 
 // Count lines, words and characters in input
 
-main()
+int main(void)
 {
   char nl;
   char nw;
@@ -35,13 +35,15 @@ main()
       ++nw;
     }
   }
-
+  
   printf("lines: %d\nwords: %d\ncharacters: %d\n", nl, nw, nc);
+
+  return 0;
 }
 
 // Exercise page: 35
 
-// OBS: To test the program it is necessary to write multiple lines,
+// NOTE: To test the program it is necessary to write multiple lines,
 // words, and of course characters in input. Also is very good to put
 // some escape sequence such as tags for example.
 // To identify problems or bugs we need to test the extreme situations

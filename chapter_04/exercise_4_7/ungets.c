@@ -30,12 +30,12 @@ int getstr(char line[], int limit)
 {
   int i = 0, c;
 
-  while(limit - 1 > 0 && (c = getch()) != EOF && c != '\n')
+  while (limit - 1 > 0 && (c = getch()) != EOF && c != '\n')
   {
     line[i++] = c;
   }
 
-  if(c == '\n')
+  if (c == '\n')
   {
     line[i++] = c;
   }
@@ -49,7 +49,7 @@ void ungetstr(char line[])
 {
   int i = strlen(line);
 
-  while(i)
+  while (i)
   {
     ungetch(line[--i]);
   }
@@ -65,7 +65,7 @@ int getch(void)
 
 void ungetch(int c)
 {
-  if(bufp >= BUFFSIZE)
+  if (bufp >= BUFFSIZE)
   {
     printf("ungetch: too many characters\n");
   }
@@ -77,5 +77,5 @@ void ungetch(int c)
 
 // Exercise page: 93
 
-// OBS: The ungetstr() function doesn't need access to buf and bufp. It is enough
+// NOTE: The ungetstr() function doesn't need access to buf and bufp. It is enough
 // just to use the ungetch() function.

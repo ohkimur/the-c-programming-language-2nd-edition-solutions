@@ -4,7 +4,7 @@ int strindex(char *s, char *t);
 
 int main(void)
 {
-  char s[] = "this is first string";  
+  char s[] = "this is first string";
   char t[] = "first";
 
   printf("%d", strindex(s, t));
@@ -18,18 +18,18 @@ int strindex(char *s, char *t)
   char *second;
   int pos = 0;
 
-  while(*s++ != '\0')
+  while (*s++ != '\0')
   {
     ++pos;
 
-    if(*s == *t)
+    if (*s == *t)
     {
       first = s;
       second = t;
 
-      while(*first++ == *second++)
+      while (*first++ == *second++)
       {
-        if(*second == '\0')
+        if (*second == '\0')
           return pos;
       }
     }
@@ -40,4 +40,4 @@ int strindex(char *s, char *t)
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

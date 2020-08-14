@@ -5,7 +5,7 @@
 
 int getln(char line[], int limit);
 
-int main()
+int main(void)
 {
   int len;
   char line[MAXLINE];
@@ -43,4 +43,4 @@ int getln(char line[], int limit)
 
 // Exercise page: 45
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

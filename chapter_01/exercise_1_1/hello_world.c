@@ -1,12 +1,9 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
   printf("hello, world\n");
+  return 0;
 }
 
 // Exercise page: 22
-
-// OBS: Character string can not be splitted into multiple
-// lines. Also the \n is the new line character, wich is
-// generally called an escape sequence.

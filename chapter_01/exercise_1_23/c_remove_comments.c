@@ -2,7 +2,7 @@
 
 #define MAXSTR 1000
 
-#define TRUE (1==1)
+#define TRUE (1 == 1)
 #define FALSE !TRUE
 
 // /*sajfj\dsaf*/
@@ -10,7 +10,7 @@
 int getstr(char str[], int limit);
 void remove_comments(char str[], char no_com_str[]);
 
-int main()
+int main(void)
 {
   char str[MAXSTR];
   char no_com_str[MAXSTR];
@@ -28,12 +28,12 @@ int getstr(char str[], int limit)
 {
   int c, i = 0;
 
-  while(i < limit - 1 && (c = getchar()) != EOF)
+  while (i < limit - 1 && (c = getchar()) != EOF)
   {
     str[i++] = c;
   }
 
-  if(c == '\n')
+  if (c == '\n')
   {
     str[i++] = c;
   }
@@ -50,45 +50,45 @@ void remove_comments(char str[], char no_com_str[])
   int block_comment = FALSE;
 
   int i = 0, j = 0;
-  while(str[i] != '\0')
+  while (str[i] != '\0')
   {
-    if(!in_quote && str[i] == '"')
+    if (!in_quote && str[i] == '"')
     {
       in_quote = TRUE;
     }
-    else if(in_quote && str[i] == '"')
+    else if (in_quote && str[i] == '"')
     {
       in_quote = FALSE;
     }
 
-    if(!in_quote)
+    if (!in_quote)
     {
-      if(str[i] == '/' && str[i+1] == '*' && !line_comment)
+      if (str[i] == '/' && str[i + 1] == '*' && !line_comment)
       {
         block_comment = TRUE;
       }
 
-      if(str[i] == '*' && str[i+1] == '/')
+      if (str[i] == '*' && str[i + 1] == '/')
       {
         block_comment = FALSE;
         i += 2;
       }
 
-      if(str[i] == '/' && str[i] == '/')
+      if (str[i] == '/' && str[i] == '/')
       {
         line_comment = TRUE;
       }
 
-      if(str[i] == '\n')
+      if (str[i] == '\n')
       {
         line_comment = FALSE;
       }
 
-      if(line_comment || block_comment)
+      if (line_comment || block_comment)
       {
         ++i;
       }
-      else if(!line_comment || !block_comment)
+      else if (!line_comment || !block_comment)
       {
         no_com_str[j++] = str[i++];
       }
@@ -104,4 +104,4 @@ void remove_comments(char str[], char no_com_str[])
 
 // Exercise page: 48
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

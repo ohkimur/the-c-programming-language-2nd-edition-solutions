@@ -20,7 +20,7 @@ void reverse(char str[])
   static int i = 0;
   static int j = 0;
 
-  if(str[i] != '\0')
+  if (str[i] != '\0')
   {
     char c = str[i++];
     reverse(str);
@@ -31,5 +31,5 @@ void reverse(char str[])
 
 // Exercise page: 102
 
-// OBS: As a simple observation when recursive functions are used, static
+// NOTE: As a simple observation when recursive functions are used, static
 // variables become handy to construct some useful functionalities.

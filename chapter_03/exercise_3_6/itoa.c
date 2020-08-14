@@ -8,7 +8,7 @@
 int ilen(int a);
 void intToArray(int n, char s[], int padding);
 
-int main()
+int main(void)
 {
   int n = 1995;
   char number_str[MAXLEN];
@@ -26,8 +26,7 @@ int ilen(int a)
   do
   {
     ++i;
-  }
-  while(a /= 10);
+  } while (a /= 10);
 
   return i;
 }
@@ -39,16 +38,15 @@ void intToArray(int n, char s[], int padding)
   do
   {
     s[i++] = abs(n % 10) + '0';
-  }
-  while(n /= 10);
+  } while (n /= 10);
 
-  if(sign < 0)
+  if (sign < 0)
   {
     s[i++] = '-';
   }
 
   int len = ilen(sign);
-  while(len < padding)
+  while (len < padding)
   {
     s[i++] = ' ';
     --padding;
@@ -61,4 +59,4 @@ void intToArray(int n, char s[], int padding)
 
 // Exercise page: 78
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

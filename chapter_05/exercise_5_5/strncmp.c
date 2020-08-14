@@ -10,15 +10,15 @@ int main(void)
 
   int is_equal = strcmp_ptr(s, t, nr_chars);
 
-  if(is_equal == 0)
+  if (is_equal == 0)
   {
     puts("String s is equal with string t.");
   }
-  else if(is_equal > 0)
+  else if (is_equal > 0)
   {
     puts("String s contains more chars than string t.");
   }
-  else if(is_equal < 0)
+  else if (is_equal < 0)
   {
     puts("String s contains less chars than string t.");
   }
@@ -29,15 +29,15 @@ int main(void)
 // Return <0 if s<t, 0 if s==t, >0 if s>t *1
 int strcmp_ptr(char *s, char *t, unsigned int n)
 {
-  while((*s == *t) != '\0' && --n)
+  while ((*s == *t) != '\0' && --n)
   {
-    if(*s == '\0')
+    if (*s == '\0')
       return 0;
 
     ++s;
     ++t;
   }
-  
+
   // If the s string contains more characters than t, than the t char will
   // become '\0' before s char. If this happen than the s char will be >0 and
   // t char will be 0, so the final result will be >0.
@@ -45,10 +45,10 @@ int strcmp_ptr(char *s, char *t, unsigned int n)
   // If the t string contains more character than s, than the s char will
   // become '\0' before t char. If this happen than the s char will be <0 and
   // t char will be 0, so the final result will be <0.
-  
-  return *s - *t;  
+
+  return *s - *t;
 }
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

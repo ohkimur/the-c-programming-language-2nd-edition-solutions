@@ -6,7 +6,7 @@
 int getstr(char line[], int limit);
 void expand(char src[], char dest[]);
 
-int main()
+int main(void)
 {
   char line[MAXLEN];
   char expanded_ln[MAXLEN];
@@ -23,34 +23,34 @@ int main()
 int getstr(char line[], int limit)
 {
   int i = 0, c;
-  while(i < limit - 1 && (c = getchar()) != EOF)
+  while (i < limit - 1 && (c = getchar()) != EOF)
   {
     line[i] = c;
     ++i;
   }
 
-  if(c == '\n')
+  if (c == '\n')
   {
     line[i++] = c;
   }
 
   line[i] = '\0';
-  
+
   return i;
 }
 
 void expand(char src[], char dest[])
 {
   int i, j = 0;
-  for(i = 0; src[i] != EOF; ++i)
+  for (i = 0; src[i] != EOF; ++i)
   {
-    if(src[i + 1] == '-' && src[i] < src[i + 2])
+    if (src[i + 1] == '-' && src[i] < src[i + 2])
     {
       int k;
-      for(k = 0; k <= (src[i + 2] - src[i]); ++k)
+      for (k = 0; k <= (src[i + 2] - src[i]); ++k)
       {
         int temp = src[i] + k;
-        if(dest[j-1] != temp && isdigit(temp) || isalpha(temp))
+        if (dest[j - 1] != temp && isdigit(temp) || isalpha(temp))
         {
           dest[j++] = src[i] + k;
         }
@@ -64,7 +64,7 @@ void expand(char src[], char dest[])
     }
   }
 
-  if(src[i] == '\n')
+  if (src[i] == '\n')
   {
     dest[j++] = src[i];
   }
@@ -74,5 +74,5 @@ void expand(char src[], char dest[])
 
 // Exercise page: 77
 
-// OBS: To simply test if a char is a digit or an alpha we can use isdigit() and
+// NOTE: To simply test if a char is a digit or an alpha we can use isdigit() and
 // isalpha() wich are located in <ctype.h>

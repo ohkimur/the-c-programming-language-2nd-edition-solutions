@@ -19,13 +19,13 @@ void intToArray(int n, char str[])
 {
   static int i = 0;
 
-  if(n)
+  if (n)
   {
     int d = n % 10;
     n /= 10;
 
     intToArray(n, str);
-    
+
     str[i++] = d + '0';
     str[i] = '\0';
   }
@@ -33,4 +33,4 @@ void intToArray(int n, char str[])
 
 // Exercise page: 102
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

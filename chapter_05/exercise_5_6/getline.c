@@ -14,7 +14,7 @@ int main(void)
 
 void getln(char *s)
 {
-  while((*s = getchar()) != EOF && (*s != '\n'))
+  while ((*s = getchar()) != EOF && (*s != '\n'))
   {
     ++s;
   }
@@ -24,4 +24,4 @@ void getln(char *s)
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

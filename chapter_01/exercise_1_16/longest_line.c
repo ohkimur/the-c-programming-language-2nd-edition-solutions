@@ -5,7 +5,7 @@
 int getln(char line[], int maxline);
 void copy(char from[], char to[]);
 
-int main()
+int main(void)
 {
   int len;
   char line[MAXLINE];
@@ -65,5 +65,5 @@ void copy(char from[], char to[])
 
 // Exercise page: 44
 
-// OBS: The getline name is a reserved word, because the getline
+// NOTE: The getline name is a reserved word, because the getline
 // function is available in stdio.h.

@@ -7,7 +7,7 @@
 
 void intToArray(int n, char s[]);
 
-int main()
+int main(void)
 {
   int n = INT_MIN;
   char number_str[MAXLEN];
@@ -28,10 +28,9 @@ void intToArray(int n, char s[])
   do
   {
     s[i++] = abs(n % 10) + '0';
-  }
-  while(n /= 10);
+  } while (n /= 10);
 
-  if(sign < 0)
+  if (sign < 0)
   {
     s[i++] = '-';
   }
@@ -43,7 +42,7 @@ void intToArray(int n, char s[])
 
 // Exercise page: 78
 
-// OBS: It does not handle the smalles negative number because it does not have 
+// NOTE: It does not handle the smalles negative number because it does not have
 // a positive equivalent. This means that just using a expression like n = -n is
 // not enough for the smallest negative number. If we take the absolute value of
 // n % 10 we get the correct value and character.

@@ -21,7 +21,7 @@ unsigned int strlen(char *s)
 {
   unsigned int str_length = 0;
 
-  while((*++s) != '\0')
+  while ((*++s) != '\0')
     ++str_length;
 
   return str_length;
@@ -37,10 +37,10 @@ void strcat_ptr(char *s, char *t, unsigned int n)
   s += s_length;
 
   // copy t to the end of s
-  while((*s++ = *t++) != '\0' && n--)
+  while ((*s++ = *t++) != '\0' && n--)
     ;
 }
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

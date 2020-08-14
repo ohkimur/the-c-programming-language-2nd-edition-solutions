@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
   char c;
   while ((c = getchar()) != EOF)
@@ -25,9 +25,11 @@ main()
       putchar(c);
     }
   }
+  
+  return 0;
 }
 
 // Exercise page: 34
 
-// OBS: To print escape to output it is necessary to put each compose
+// NOTE: To print escape to output it is necessary to put each compose
 // char from the escape sequence to output.

@@ -4,7 +4,7 @@
 // for fahr = 0, 20, ... 300
 // floating point version
 
-main()
+int main(void)
 {
   float fahr, celsius;
   int lower, upper, step;
@@ -24,11 +24,13 @@ main()
     printf("%3.0f\t\t%6.1f\n", fahr, celsius);
     fahr = fahr + step;
   }
+
+  return 0;
 }
 
 // Exercise page: 27
 
-// OBS: If all operands from an operation are integers than
+// NOTE: If all operands from an operation are integers than
 // a integer operation is performed. If at least one operand
 // is a floating point number than a floating point operation
 // will be performed.

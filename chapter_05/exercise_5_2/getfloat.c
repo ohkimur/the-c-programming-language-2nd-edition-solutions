@@ -29,7 +29,7 @@ int getch(void)
 
 void ungetch(int c)
 {
-  if(bufp >= BUFFSIZE)
+  if (bufp >= BUFFSIZE)
   {
     printf("ungetch: too many characters\n");
   }
@@ -43,9 +43,10 @@ int getfloat(float *pn)
 {
   int c, sign;
 
-  while(isspace(c = getch()));
+  while (isspace(c = getch()))
+    ;
 
-  if(!isdigit(c) && c != EOF && c != '+' && c != '-')
+  if (!isdigit(c) && c != EOF && c != '+' && c != '-')
   {
     ungetch(c);
     return 0;
@@ -53,9 +54,9 @@ int getfloat(float *pn)
 
   sign = (c == '-') ? -1 : 1;
 
-  if(c == '+' || c == '-')
+  if (c == '+' || c == '-')
   {
-    if(!isdigit(c = getch()))
+    if (!isdigit(c = getch()))
     {
       ungetch(c);
       ungetch(sign == 1 ? '+' : '-');
@@ -63,23 +64,23 @@ int getfloat(float *pn)
     }
   }
 
-  for(*pn = 0; isdigit(c); c = getch())
+  for (*pn = 0; isdigit(c); c = getch())
   {
     *pn = 10 * *pn + (c - '0');
   }
 
-  if(c == '.')
+  if (c == '.')
   {
     int i;
-    for(i = 1; (c = getch()) && isdigit(c); ++i)
+    for (i = 1; (c = getch()) && isdigit(c); ++i)
     {
-      *pn += (c - '0')/(pow(10, i));
+      *pn += (c - '0') / (pow(10, i));
     }
   }
 
   *pn = *pn * sign;
 
-  if(c != EOF)
+  if (c != EOF)
   {
     ungetch(c);
   }
@@ -89,4 +90,4 @@ int getfloat(float *pn)
 
 // Exercise page: 111
 
-// OBS: The getfloat() function should return an integer like getint(). 
+// NOTE: The getfloat() function should return an integer like getint().

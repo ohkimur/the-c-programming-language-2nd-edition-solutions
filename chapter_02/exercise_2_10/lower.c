@@ -2,10 +2,10 @@
 
 char lower(char c);
 
-int main()
+int main(void)
 {
   char a = 'A';
-  
+
   putchar(lower(a));
 
   return 0;
@@ -18,4 +18,4 @@ char lower(char c)
 
 // Exercise page: 66
 
-// OBS: The ternary operator ?: can be used direct in return.
+// NOTE: The ternary operator ?: can be used direct in return.

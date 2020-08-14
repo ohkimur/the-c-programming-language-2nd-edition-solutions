@@ -20,7 +20,7 @@ unsigned int strlength(char *s)
 {
   int i = 0;
 
-  while(*s++ != '\0')
+  while (*s++ != '\0')
   {
     ++i;
   }
@@ -33,10 +33,10 @@ void reverse(char *s)
   char *t = s + strlength(s) - 1;
   char aux = 0;
 
-  if(*s == '\0')
+  if (*s == '\0')
     return;
 
-  while(s < t)
+  while (s < t)
   {
     aux = *t;
     *t-- = *s;
@@ -48,7 +48,7 @@ void itoa(char *s, int n)
 {
   char *t = s;
 
-  while(n)
+  while (n)
   {
     *(t++) = n % 10 + '0';
     n /= 10;
@@ -61,4 +61,4 @@ void itoa(char *s, int n)
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.
