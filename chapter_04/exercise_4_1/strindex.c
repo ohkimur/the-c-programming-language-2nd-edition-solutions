@@ -6,14 +6,14 @@
 int getln(char line[], int lim);
 int strindex(char source[], char pattern[]);
 
-int main()
+int main(void)
 {
   char line[MAXLEN];
   char pattern[MAXLEN] = "example";
 
   getln(line, MAXLEN);
   printf("%s\n", line);
-  
+
   printf("Pattern found at index %d\n", strindex(line, pattern));
 
   return 0;
@@ -23,13 +23,13 @@ int getln(char line[], int lim)
 {
   int i = 0, c;
 
-  while(lim > 0 && (c = getchar()) != EOF && c != '\n')
+  while (lim > 0 && (c = getchar()) != EOF && c != '\n')
   {
     line[i++] = c;
     --lim;
   }
 
-  if(c == '\n')
+  if (c == '\n')
   {
     line[i++] = c;
   }
@@ -45,11 +45,12 @@ int strindex(char source[], char pattern[])
 
   printf("line len: %d\n", strlen(source));
 
-  for(i = strlen(source); i >= 0; --i)
+  for (i = strlen(source); i >= 0; --i)
   {
-    for(j = i, k = 0; pattern[k] != '\0' && source[j] == pattern[k]; ++j, ++k);
+    for (j = i, k = 0; pattern[k] != '\0' && source[j] == pattern[k]; ++j, ++k)
+      ;
 
-    if(k > 0 && pattern[k] == '\0')
+    if (k > 0 && pattern[k] == '\0')
     {
       return i;
     }
@@ -60,6 +61,6 @@ int strindex(char source[], char pattern[])
 
 // Exercise page: 85
 
-// OBS: It is simple to find the rightmost string pattern in the initial string
+// NOTE: It is simple to find the rightmost string pattern in the initial string
 // if we search for the pattern by iterating the initial string from the end to
 // the begining.

@@ -14,9 +14,13 @@
 #define VARNUM 26
 char var = '0';
 
-typedef enum _BOOLEAN {false, true} bool;
+typedef enum _BOOLEAN
+{
+  false,
+  true
+} bool;
 
-int getop(char []);
+int getop(char[]);
 
 void push(double f);
 double pop(void);
@@ -26,7 +30,7 @@ void duplicate(void);
 void swap(void);
 void clear(void);
 
-int main()
+int main(void)
 {
   int type;
   double op2;
@@ -35,101 +39,101 @@ int main()
   int varindex = 0;
   double var_buff[VARNUM];
 
-  while((type = getop(s)) != EOF)
+  while ((type = getop(s)) != EOF)
   {
-    switch(type)
+    switch (type)
     {
-      case NUMBER:
-        push(atof(s));
+    case NUMBER:
+      push(atof(s));
       break;
 
-      case '+':
-        push(pop() + pop());
+    case '+':
+      push(pop() + pop());
       break;
 
-      case '-':
-        op2 = pop();
-        push(pop() - op2);
+    case '-':
+      op2 = pop();
+      push(pop() - op2);
       break;
 
-      case '*':
-        push(pop() * pop());
+    case '*':
+      push(pop() * pop());
       break;
 
-      case '/':
-        op2 = pop();
+    case '/':
+      op2 = pop();
 
-        if(op2 != 0.0)
-        {
-          push(pop() / op2);
-        }
-        else
-        {
-          printf("error: zero divisor\n");
-        }
+      if (op2 != 0.0)
+      {
+        push(pop() / op2);
+      }
+      else
+      {
+        printf("error: zero divisor\n");
+      }
 
       break;
 
-      case '%':
-        op2 = pop();
+    case '%':
+      op2 = pop();
 
-        if(op2 != 0.0)
-        {
-          push((int)pop() % (int)op2);
-        }
-        else
-        {
-          printf("error: zero divisor\n");
-        }
+      if (op2 != 0.0)
+      {
+        push((int)pop() % (int)op2);
+      }
+      else
+      {
+        printf("error: zero divisor\n");
+      }
       break;
 
-      case '^':
-        op2 = pop();
-        push(pow(pop(), op2));
+    case '^':
+      op2 = pop();
+      push(pow(pop(), op2));
       break;
 
-      case '~':
-        push(sin(pop()));
+    case '~':
+      push(sin(pop()));
       break;
 
-      case 'e':
-        push(exp(pop()));
+    case 'e':
+      push(exp(pop()));
       break;
 
-      case 'h':
-        view_head();
+    case 'h':
+      view_head();
       break;
 
-      case 'd':
-        duplicate();
+    case 'd':
+      duplicate();
       break;
 
-      case 's':
-        swap();
+    case 's':
+      swap();
       break;
 
-      case 'c':
-        clear();
+    case 'c':
+      clear();
       break;
 
-      case VARSET:
-        var_buff[varindex++] = pop();
-        printf("variable %c: %.3f\n", 'a' + varindex - 1, var_buff[varindex-1]);
+    case VARSET:
+      var_buff[varindex++] = pop();
+      printf("variable %c: %.3f\n", 'a' + varindex - 1, var_buff[varindex - 1]);
       break;
 
-      case VARGET:
-        push(var_buff[var - 'a']);
+    case VARGET:
+      push(var_buff[var - 'a']);
       break;
 
-      case '\n':
-        if(!is_empty())
-        {
-          printf("result: %.8g\n", pop());
-        }
+    case '\n':
+      if (!is_empty())
+      {
+        printf("result: %.8g\n", pop());
+      }
       break;
 
-      default:
-        printf("error: unknown command %s\n", s);
+    default:
+      printf("error: unknown command %s\n", s);
       break;
     }
   }
@@ -142,7 +146,7 @@ double stack[MAXVAL];
 
 void push(double f)
 {
-  if(sp < MAXVAL)
+  if (sp < MAXVAL)
   {
     stack[sp++] = f;
   }
@@ -154,7 +158,7 @@ void push(double f)
 
 double pop(void)
 {
-  if(sp > 0)
+  if (sp > 0)
   {
     return stack[--sp];
   }
@@ -168,7 +172,7 @@ double pop(void)
 
 bool is_empty(void)
 {
-  if(sp > 0)
+  if (sp > 0)
   {
     return false;
   }
@@ -178,7 +182,7 @@ bool is_empty(void)
 
 void view_head(void)
 {
-  if(sp)
+  if (sp)
   {
     printf("stack_head: %g\n", stack[sp - 1]);
   }
@@ -209,8 +213,7 @@ void clear(void)
   do
   {
     stack[sp] = 0.0;
-  }
-  while(sp--);
+  } while (sp--);
 }
 
 int bufp = 0;
@@ -223,7 +226,7 @@ int getch(void)
 
 void ungetch(int c)
 {
-  if(bufp >= BUFFSIZE)
+  if (bufp >= BUFFSIZE)
   {
     printf("ungetch: too many characters\n");
   }
@@ -237,25 +240,26 @@ int getop(char s[])
 {
   int i = 0, c;
 
-  while((s[0] = c = getch()) == ' ' || c == '\t');
-  
+  while ((s[0] = c = getch()) == ' ' || c == '\t')
+    ;
+
   s[1] = '\0';
 
-  if(isalpha(c))
+  if (isalpha(c))
   {
     var = c;
     return VARGET;
   }
 
-  if(!isdigit(c) && c != '.' && c != '-')
+  if (!isdigit(c) && c != '.' && c != '-')
   {
     return c;
   }
-  
-  if(c == '-')
+
+  if (c == '-')
   {
     int next = getch();
-    if(!isdigit(next) && next != '.')
+    if (!isdigit(next) && next != '.')
     {
       return next;
     }
@@ -267,18 +271,20 @@ int getop(char s[])
   {
     c = getch();
   }
-  
-  if(isdigit(c))
+
+  if (isdigit(c))
   {
-    while(isdigit(s[++i] = c = getch()));
+    while (isdigit(s[++i] = c = getch()))
+      ;
   }
 
-  if(c == '.')
+  if (c == '.')
   {
-    while(isdigit(s[++i] = c = getch()));
+    while (isdigit(s[++i] = c = getch()))
+      ;
   }
 
-  if(c != EOF)
+  if (c != EOF)
   {
     ungetch(c);
   }
@@ -288,4 +294,4 @@ int getop(char s[])
 
 // Exercise page: 93
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

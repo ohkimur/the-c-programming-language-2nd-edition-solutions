@@ -30,7 +30,7 @@ int getch(void)
 
 void ungetch(int c)
 {
-  if(bufp >= BUFFSIZE)
+  if (bufp >= BUFFSIZE)
   {
     printf("ungetch: too many characters\n");
   }
@@ -42,7 +42,7 @@ void ungetch(int c)
 
 // Exercise page: 93
 
-// OBS: The getch() function can't manage correctly the EOF character because
+// NOTE: The getch() function can't manage correctly the EOF character because
 // in the original K&R version buf was a char array, which can't hold the EOF
 // because EOF is -1 and char can't hold negative number. However the gcc
 // compiler, on Windows, uses by default signed chars which can hold EOF, but

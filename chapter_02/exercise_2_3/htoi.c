@@ -8,7 +8,7 @@
 int getln(char line[], int lim);
 int htoi(char hex[]);
 
-int main()
+int main(void)
 {
   char hex[MAXLINE];
 
@@ -22,7 +22,7 @@ int main()
 int getln(char line[], int lim)
 {
   int i = 0, c;
-  while(i < lim - 1 && (c = getchar()) != EOF && c != '\n')
+  while (i < lim - 1 && (c = getchar()) != EOF && c != '\n')
   {
     line[i] = c;
 
@@ -45,26 +45,26 @@ int htoi(char hex[])
 
   int i = 0, len = strlen(hex);
 
-  while(i < len)
+  while (i < len)
   {
-    if(hex[i] == '0' && (hex[i + 1] == 'x' || hex[i + 1] == 'X'))
+    if (hex[i] == '0' && (hex[i + 1] == 'x' || hex[i + 1] == 'X'))
     {
       i += 2;
     }
 
     int temp = tolower(hex[i]);
 
-    if(isdigit(temp))
+    if (isdigit(temp))
     {
       temp -= 48;
     }
 
-    if(isalpha(temp) && temp <= 'f')
+    if (isalpha(temp) && temp <= 'f')
     {
       temp = temp - 'a' + 10;
     }
 
-    if(hex[i] >= '0' && hex[i] <= '9' || hex[i] >= 'a' && hex[i] <= 'f' || hex[i] >= 'A' && hex[i] <= 'F')
+    if (hex[i] >= '0' && hex[i] <= '9' || hex[i] >= 'a' && hex[i] <= 'f' || hex[i] >= 'A' && hex[i] <= 'F')
     {
       result += temp * (int)pow(16, len - i - 1);
     }
@@ -81,7 +81,7 @@ int htoi(char hex[])
 
 // Exercise page: 60
 
-// OBS: The conversion algorithm from hex to dec is very similar with the 
+// NOTE: The conversion algorithm from hex to dec is very similar with the
 // conversion algorithm from bin to dec, but the base is not 2 but 16.
 // The general formula is: x1*B^N + x2*B^(N - 1) + ... + xn*B^(N - N), where B
 // is the base from we convert to dec, in this case B = 16.

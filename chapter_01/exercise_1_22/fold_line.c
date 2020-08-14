@@ -7,7 +7,7 @@
 int getln(char line[], int limit);
 void fold_line(char line[], char fold_str[], int n_break);
 
-int main()
+int main(void)
 {
   char line[MAXLINE];
   char fold_str[MAXLINE];
@@ -25,12 +25,12 @@ int getln(char line[], int limit)
 {
   int c, i = 0;
 
-  while(i < limit - 1 && (c = getchar()) != EOF && c != '\n')
+  while (i < limit - 1 && (c = getchar()) != EOF && c != '\n')
   {
     line[i++] = c;
   }
 
-  if(c == '\n')
+  if (c == '\n')
   {
     line[i++] = c;
   }
@@ -46,14 +46,14 @@ void fold_line(char line[], char fold_str[], int n_break)
   int split = FALSE;
   int offset = 10;
 
-  for(i = 0, j = 0; line[i] != '\0'; ++i, ++j)
+  for (i = 0, j = 0; line[i] != '\0'; ++i, ++j)
   {
-    if(i && i % n_break == 0)
+    if (i && i % n_break == 0)
     {
       split = TRUE;
     }
 
-    if(split && (line[i] == ' ' || i > n_break + offset))
+    if (split && (line[i] == ' ' || i > n_break + offset))
     {
       fold_str[j++] = '\n';
       split = FALSE;
@@ -63,7 +63,7 @@ void fold_line(char line[], char fold_str[], int n_break)
     fold_str[j] = line[i];
   }
 
-  if(line[i] == '\n')
+  if (line[i] == '\n')
   {
     fold_str[j++] = line[i];
   }
@@ -73,4 +73,4 @@ void fold_line(char line[], char fold_str[], int n_break)
 
 // Exercise page: 48
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

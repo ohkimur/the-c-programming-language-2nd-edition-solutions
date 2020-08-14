@@ -4,7 +4,7 @@
 void printbits(unsigned int x);
 int bitcount(unsigned int x);
 
-int main()
+int main(void)
 {
   unsigned int x = 0b011010;
 
@@ -21,7 +21,7 @@ void printbits(unsigned int x)
   printf("0b");
 
   int i;
-  for(i = n*8 - 1; i >= 0; --i)
+  for (i = n * 8 - 1; i >= 0; --i)
   {
     (x & (unsigned int)pow(2, i)) ? putchar('1') : putchar('0');
   }
@@ -33,7 +33,7 @@ int bitcount(unsigned int x)
 {
   int b = 0;
 
-  while(x)
+  while (x)
   {
     x &= (x - 1);
     ++b;
@@ -44,6 +44,6 @@ int bitcount(unsigned int x)
 
 // Exercise page: 65
 
-// OBS: The expression x &= (x - 1) deletes the rightmost 1-bit of x because
+// NOTE: The expression x &= (x - 1) deletes the rightmost 1-bit of x because
 // x is decremented by 1 and masked with the initial x. If decremented x has
 // the rightmost bit 1, shifted to right by logic & operation, it is deleted.

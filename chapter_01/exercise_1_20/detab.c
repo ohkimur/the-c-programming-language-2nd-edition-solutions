@@ -6,7 +6,7 @@
 int getln(char line[], int limit);
 void detab(char line[], char tline[]);
 
-int main()
+int main(void)
 {
   char line[MAXLINE];
   char tline[MAXLINE];
@@ -76,5 +76,5 @@ void detab(char line[], char tline[])
 
 // Exercise page: 48
 
-// OBS: In my solution the n is called TABWIDTH and this can be just a
+// NOTE: In my solution the n is called TABWIDTH and this can be just a
 // constant.

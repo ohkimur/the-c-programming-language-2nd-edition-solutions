@@ -6,7 +6,7 @@
 int getln(char line[], int lim);
 double atof(char s[]);
 
-int main()
+int main(void)
 {
   char line[MAXLEN];
 
@@ -22,13 +22,13 @@ int getln(char line[], int lim)
 {
   int i = 0, c;
 
-  while(i < lim - 1 && (c = getchar()) != '\n')
+  while (i < lim - 1 && (c = getchar()) != '\n')
   {
     line[i] = c;
     ++i;
   }
 
-  if(c == '\n')
+  if (c == '\n')
   {
     line[i++] = c;
   }
@@ -43,49 +43,50 @@ double atof(char s[])
   double val, power;
   int i, sign, exp_sign = 1, exp_pwr = 0;
 
-  for(i = 0; isspace(s[i]); ++i);
+  for (i = 0; isspace(s[i]); ++i)
+    ;
 
   sign = (s[i] == '-') ? -1 : 1;
 
-  if(s[i] == '+' || s[i] == '-')
+  if (s[i] == '+' || s[i] == '-')
   {
     ++i;
   }
 
-  for(val = 0.0; isdigit(s[i]); ++i)
+  for (val = 0.0; isdigit(s[i]); ++i)
   {
     val = 10.0 * val + (s[i] - '0');
   }
 
-  if(s[i] == '.')
+  if (s[i] == '.')
   {
     ++i;
   }
 
-  for(power = 1.0; isdigit(s[i]); ++i)
+  for (power = 1.0; isdigit(s[i]); ++i)
   {
     val = 10.0 * val + (s[i] - '0');
     power *= 10;
   }
 
-  if(s[i] == 'e' || s[i] == 'E')
+  if (s[i] == 'e' || s[i] == 'E')
   {
-    if(s[++i] == '-')
+    if (s[++i] == '-')
     {
       exp_sign = -1;
       ++i;
     }
   }
 
-  while(isdigit(s[i]))
+  while (isdigit(s[i]))
   {
     exp_pwr = 10 * exp_pwr + (s[i] - '0');
     ++i;
   }
 
-  while(exp_pwr)
+  while (exp_pwr)
   {
-    if(exp_sign == -1)
+    if (exp_sign == -1)
     {
       power *= 10;
     }
@@ -102,4 +103,4 @@ double atof(char s[])
 
 // Exercise page: 87
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

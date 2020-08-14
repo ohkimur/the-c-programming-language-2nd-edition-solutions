@@ -6,7 +6,7 @@ int getln(char line[], unsigned int limit);
 void escape(char dest[], char src[]);
 void unescape(char dest[], char src[]);
 
-int main()
+int main(void)
 {
   char src[MAXLEN];
   char dest[MAXLEN];
@@ -190,4 +190,4 @@ void unescape(char dest[], char src[])
 
 // Exercise page: 74
 
-// OBS: Silence si golden.
+// NOTE: Silence si golden.

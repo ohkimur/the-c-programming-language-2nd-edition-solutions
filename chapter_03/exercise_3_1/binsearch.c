@@ -12,7 +12,7 @@ int binsearch(int x, int v[], int n);
 
 void test_binsearch(int binsearch(int x, int v[], int n), int x, int v[], int n);
 
-int main()
+int main(void)
 {
   int v[MAXLEN];
 
@@ -33,7 +33,7 @@ int main()
 void initVector(int v[], int n)
 {
   int i;
-  for(i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i)
   {
     v[i] = i;
   }
@@ -42,9 +42,9 @@ void initVector(int v[], int n)
 void printVector(int v[], int n)
 {
   int i;
-  
+
   printf("[ ");
-  for(i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i)
   {
     (i != n - 1) ? printf("%d, ", v[i]) : printf("%d ]\n", v[i]);
   }
@@ -56,15 +56,15 @@ int binsearch_kr(int x, int v[], int n)
 
   low = 0;
   high = n - 1;
-  while(low <= high)
+  while (low <= high)
   {
-    mid = (low + high)/2;
+    mid = (low + high) / 2;
 
-    if(x < v[mid])
+    if (x < v[mid])
     {
       high = mid - 1;
     }
-    else if(x > v[mid])
+    else if (x > v[mid])
     {
       low = mid + 1;
     }
@@ -83,11 +83,11 @@ int binsearch(int x, int v[], int n)
 
   low = 0;
   high = n - 1;
-  while(low <= high)
+  while (low <= high)
   {
-    mid = (low + high)/2;
+    mid = (low + high) / 2;
 
-    if(x < v[mid])
+    if (x < v[mid])
     {
       high = mid - 1;
     }
@@ -97,7 +97,7 @@ int binsearch(int x, int v[], int n)
     }
   }
 
-  if(x == v[low - 1])
+  if (x == v[low - 1])
   {
     return low - 1;
   }
@@ -111,22 +111,22 @@ void test_binsearch(int binsearch(int x, int v[], int n), int x, int v[], int n)
   long clocks = clock();
 
   int i;
-  for(i = 0; i < ITERATIONS; ++i)
+  for (i = 0; i < ITERATIONS; ++i)
   {
     binsearch(x, v, n);
   }
 
   clocks = clock() - clocks;
 
-  printf("test_%d: %lu clocks (%.4f seconds)\n", test_nr, clocks, (double)clocks/CLOCKS_PER_SEC);
+  printf("test_%d: %lu clocks (%.4f seconds)\n", test_nr, clocks, (double)clocks / CLOCKS_PER_SEC);
 
   ++test_nr;
 }
 
 // Exercise page: 72
 
-// OBS: By using a simple test in the for loop there is a chance to increase the
-// binsearch() execution speed. Just modifying an if-else statement from 3 branches 
+// NOTE: By using a simple test in the for loop there is a chance to increase the
+// binsearch() execution speed. Just modifying an if-else statement from 3 branches
 // with two condition testing to 2 branches with 1 condition testing will not
 // increase drasticaly the program performance on modern machines, but is a better
 // aproach.

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
   char c;
   char last_c;
@@ -30,8 +30,10 @@ main()
 
     last_c = c;
   }
+
+  return 0;
 }
 
 // Exercise page: 34
 
-// OBS: Solution 3 is the most elegant, because is fast and compact.
+// NOTE: Solution 3 is the most elegant, because is fast and compact.

@@ -7,70 +7,70 @@
 #define BUFFSIZE 100
 #define NUMBER '0'
 
-int getop(char []);
+int getop(char[]);
 void push(double);
 double pop(void);
 
-int main()
+int main(void)
 {
   int type;
   double op2;
   char s[MAXOP];
 
-  while((type = getop(s)) != EOF)
+  while ((type = getop(s)) != EOF)
   {
-    switch(type)
+    switch (type)
     {
-      case NUMBER:
-        push(atof(s));
+    case NUMBER:
+      push(atof(s));
       break;
 
-      case '+':
-        push(pop() + pop());
+    case '+':
+      push(pop() + pop());
       break;
 
-      case '-':
-        op2 = pop();
-        push(pop() - op2);
+    case '-':
+      op2 = pop();
+      push(pop() - op2);
       break;
 
-      case '*':
-        push(pop() * pop());
+    case '*':
+      push(pop() * pop());
       break;
 
-      case '/':
-        op2 = pop();
+    case '/':
+      op2 = pop();
 
-        if(op2 != 0.0)
-        {
-          push(pop() / op2);
-        }
-        else
-        {
-          printf("error: zero divisor\n");
-        }
+      if (op2 != 0.0)
+      {
+        push(pop() / op2);
+      }
+      else
+      {
+        printf("error: zero divisor\n");
+      }
 
       break;
 
-      case '%':
-        op2 = pop();
+    case '%':
+      op2 = pop();
 
-        if(op2 != 0.0)
-        {
-          push((int)pop() % (int)op2);
-        }
-        else
-        {
-          printf("error: zero divisor\n");
-        }
+      if (op2 != 0.0)
+      {
+        push((int)pop() % (int)op2);
+      }
+      else
+      {
+        printf("error: zero divisor\n");
+      }
       break;
 
-      case '\n':
-        printf("result: %.8g\n", pop());
+    case '\n':
+      printf("result: %.8g\n", pop());
       break;
 
-      default:
-        printf("error: unknown command %s\n", s);
+    default:
+      printf("error: unknown command %s\n", s);
       break;
     }
   }
@@ -83,7 +83,7 @@ double val[MAXVAL];
 
 void push(double f)
 {
-  if(sp < MAXVAL)
+  if (sp < MAXVAL)
   {
     val[sp++] = f;
   }
@@ -95,7 +95,7 @@ void push(double f)
 
 double pop(void)
 {
-  if(sp > 0)
+  if (sp > 0)
   {
     return val[--sp];
   }
@@ -111,19 +111,20 @@ int getop(char s[])
   int i = 0, c;
   static int buf = EOF;
 
-  while((s[0] = c = getchar()) == ' ' || c == '\t');
-  
+  while ((s[0] = c = getchar()) == ' ' || c == '\t')
+    ;
+
   s[1] = '\0';
 
-  if(!isdigit(c) && c != '.' && c != '-')
+  if (!isdigit(c) && c != '.' && c != '-')
   {
     return c;
   }
-  
-  if(c == '-')
+
+  if (c == '-')
   {
     int next = getchar();
-    if(!isdigit(next) && next != '.')
+    if (!isdigit(next) && next != '.')
     {
       return next;
     }
@@ -135,18 +136,20 @@ int getop(char s[])
   {
     c = getchar();
   }
-  
-  if(isdigit(c))
+
+  if (isdigit(c))
   {
-    while(isdigit(s[++i] = c = getchar()));
+    while (isdigit(s[++i] = c = getchar()))
+      ;
   }
 
-  if(c == '.')
+  if (c == '.')
   {
-    while(isdigit(s[++i] = c = getchar()));
+    while (isdigit(s[++i] = c = getchar()))
+      ;
   }
 
-  if(c != EOF)
+  if (c != EOF)
   {
     buf = c;
   }
@@ -156,4 +159,4 @@ int getop(char s[])
 
 // Exercise page: 97
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

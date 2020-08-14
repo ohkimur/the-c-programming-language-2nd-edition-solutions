@@ -23,27 +23,30 @@ int getop(char *s)
   char c;
 
   // Skip blanks (spaces and tabs)
-  while((*s = c = getchar()) != ' ' || c != '\t');
+  while ((*s = c = getchar()) != ' ' || c != '\t')
+    ;
 
   *(s + 1) = '\0';
 
   // Not a number
-  if(!isdigit(c) && c != '.')
+  if (!isdigit(c) && c != '.')
     return c;
 
   // Collect the integer part
-  if(isdigit(c) && c != '.')
-    while(isdigit( *(++s) = c = getchar() ));
-  
+  if (isdigit(c) && c != '.')
+    while (isdigit(*(++s) = c = getchar()))
+      ;
+
   // Collect the fraction part
-  if(c == '.')
+  if (c == '.')
   {
-    while(isdigit( *(++s) = c = getchar() ));
+    while (isdigit(*(++s) = c = getchar()))
+      ;
   }
 
-  if(c != EOF)
+  if (c != EOF)
     ungetc(c, stdin);
-  
+
   *s = '\0';
 
   return NUMBER;
@@ -51,4 +54,4 @@ int getop(char *s)
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

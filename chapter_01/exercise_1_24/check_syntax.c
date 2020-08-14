@@ -5,13 +5,13 @@
 #define IN 1
 #define OUT 0
 
-#define TRUE (1==1)
+#define TRUE (1 == 1)
 #define FALSE !TRUE
 
 int getstr(char str[], int limit);
 void check_syntax(char str[]);
 
-int main()
+int main(void)
 {
   char str[MAXSTR];
 
@@ -25,12 +25,12 @@ int getstr(char str[], int limit)
 {
   int c, i = 0;
 
-  while(i < limit -1 && (c = getchar()) != EOF)
+  while (i < limit - 1 && (c = getchar()) != EOF)
   {
     str[i++] = c;
   }
 
-  if(c == '\n')
+  if (c == '\n')
   {
     str[i++] = c;
   }
@@ -55,105 +55,105 @@ void check_syntax(char str[])
   int line_comment = OUT;
 
   int i = 0;
-  while(str[i] != '\0')
+  while (str[i] != '\0')
   {
-    if(str[i] == '\n')
+    if (str[i] == '\n')
     {
       ++line_nr;
     }
 
-    if(str[i] == '(')
+    if (str[i] == '(')
     {
       ++parentheses;
     }
-    else if(str[i] == ')')
+    else if (str[i] == ')')
     {
       --parentheses;
     }
 
-    if(str[i] == '[')
+    if (str[i] == '[')
     {
       ++brackets;
     }
-    else if(str[i] == ']')
+    else if (str[i] == ']')
     {
       --brackets;
     }
 
-    if(str[i] == '{')
+    if (str[i] == '{')
     {
       ++braces;
     }
-    else if(str[i] == '}')
+    else if (str[i] == '}')
     {
       --braces;
     }
 
-    if(str[i] == '\'' && str[i - 1] != '\\' && !single_quotes && !double_quotes)
+    if (str[i] == '\'' && str[i - 1] != '\\' && !single_quotes && !double_quotes)
     {
       single_quotes = IN;
     }
-    else if(str[i] == '\'' && str[i - 1] != '\\')
+    else if (str[i] == '\'' && str[i - 1] != '\\')
     {
       single_quotes = OUT;
     }
 
-    if(str[i] == '"' && str[i - 1] != '\\' && !double_quotes && !single_quotes)
+    if (str[i] == '"' && str[i - 1] != '\\' && !double_quotes && !single_quotes)
     {
       double_quotes = IN;
     }
-    else if(str[i] == '"' && str[i - 1] != '\\')
+    else if (str[i] == '"' && str[i - 1] != '\\')
     {
       double_quotes = OUT;
     }
 
-    if(str[i] == '/' && str[i + 1] == '*' && !block_comment)
+    if (str[i] == '/' && str[i + 1] == '*' && !block_comment)
     {
       block_comment = IN;
     }
-    else if(str[i] == '*' && str[i + 1] == '/')
+    else if (str[i] == '*' && str[i + 1] == '/')
     {
       block_comment = OUT;
     }
 
-    if(str[i] == '/' && str[i + 1] == '/' && !line_comment)
+    if (str[i] == '/' && str[i + 1] == '/' && !line_comment)
     {
       line_comment = IN;
     }
-    else if(str[i] == '\n')
+    else if (str[i] == '\n')
     {
       line_comment = OUT;
     }
-      
+
     ++i;
   }
 
-  if(parentheses)
+  if (parentheses)
   {
     printf("Error: unbalanced parentheses.\n");
   }
 
-  if(brackets)
+  if (brackets)
   {
     printf("Error: unbalanced brackets.\n");
   }
 
-  if(braces)
+  if (braces)
   {
     printf("Error: unbalanced braces.\n");
   }
 
-  if(single_quotes)
+  if (single_quotes)
   {
     printf("Error: unbalanced single quotes.\n");
   }
 
-  if(double_quotes)
+  if (double_quotes)
   {
     printf("Error: unbalanced double quotes.\n");
   }
 
-  if(block_comment)
+  if (block_comment)
   {
     printf("Error: block comment not closed.\n");
   }
@@ -161,4 +161,4 @@ void check_syntax(char str[])
 
 // Exercise page: 48
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

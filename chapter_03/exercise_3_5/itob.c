@@ -7,7 +7,7 @@
 char itoc(int a);
 void itob(int n, char s[], int b);
 
-int main()
+int main(void)
 {
   char s[MAXLEN];
 
@@ -22,7 +22,7 @@ int main()
 
 char itoc(int a)
 {
-  if(a <= 9)
+  if (a <= 9)
   {
     return a + '0';
   }
@@ -38,23 +38,22 @@ void itob(int n, char s[], int b)
   {
     s[i++] = itoc(abs(n) % b);
     n /= b;
-  }
-  while(n /= b);
+  } while (n /= b);
 
-  switch(b)
+  switch (b)
   {
-    case 2:
-      s[i++] = 'b';
-      s[i++] = '0';
+  case 2:
+    s[i++] = 'b';
+    s[i++] = '0';
     break;
 
-    case 16:
-      s[i++] = 'x';
-      s[i++] = '0';
+  case 16:
+    s[i++] = 'x';
+    s[i++] = '0';
     break;
   }
 
-  if(sign < 0)
+  if (sign < 0)
   {
     s[i++] = '-';
   }
@@ -66,6 +65,6 @@ void itob(int n, char s[], int b)
 
 // Exercise page: 78
 
-// OBS: It is simple to convert an integer variable to any base just by taking
+// NOTE: It is simple to convert an integer variable to any base just by taking
 // the remainder of the number divided by base and than dividing the initial
 // number by base. The result need to be reversed to be correct.

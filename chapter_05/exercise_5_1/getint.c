@@ -26,20 +26,20 @@ int buf[BUFFSIZE];
 
 void printbuf(void)
 {
-  if(bufp)
+  if (bufp)
   {
     printf("Buffer: [ ");
-  
+
     int i;
-    for(i = bufp - 1; i >= 0; --i)
+    for (i = bufp - 1; i >= 0; --i)
     {
-      if(i)
+      if (i)
       {
-        printf("'%c', ",  buf[i] != '\n' ? buf[i] : '.');
+        printf("'%c', ", buf[i] != '\n' ? buf[i] : '.');
       }
       else
       {
-        printf("'%c' ",  buf[i] != '\n' ? buf[i] : '.');
+        printf("'%c' ", buf[i] != '\n' ? buf[i] : '.');
       }
     }
 
@@ -54,7 +54,7 @@ int getch(void)
 
 void ungetch(int c)
 {
-  if(bufp >= BUFFSIZE)
+  if (bufp >= BUFFSIZE)
   {
     printf("ungetch: too many characters\n");
   }
@@ -68,9 +68,10 @@ int getint(int *pn)
 {
   int c, sign;
 
-  while(isspace(c = getch()));
+  while (isspace(c = getch()))
+    ;
 
-  if(!isdigit(c) && c != EOF && c != '+' && c != '-')
+  if (!isdigit(c) && c != EOF && c != '+' && c != '-')
   {
     ungetch(c);
     return 0;
@@ -78,9 +79,9 @@ int getint(int *pn)
 
   sign = (c == '-') ? -1 : 1;
 
-  if(c == '+' || c == '-')
+  if (c == '+' || c == '-')
   {
-    if(!isdigit(c = getch()))
+    if (!isdigit(c = getch()))
     {
       ungetch(c);
       ungetch(sign == 1 ? '+' : '-');
@@ -88,14 +89,14 @@ int getint(int *pn)
     }
   }
 
-  for(*pn = 0; isdigit(c); c = getch())
+  for (*pn = 0; isdigit(c); c = getch())
   {
     *pn = 10 * *pn + (c - '0');
   }
 
   *pn = *pn * sign;
 
-  if(c != EOF)
+  if (c != EOF)
   {
     ungetch(c);
   }
@@ -105,4 +106,4 @@ int getint(int *pn)
 
 // Exercise page: 111
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

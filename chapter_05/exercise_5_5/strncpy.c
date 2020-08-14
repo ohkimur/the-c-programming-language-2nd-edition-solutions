@@ -17,10 +17,11 @@ int main(void)
 
 void strcpy_ptr(char *s, char *t, unsigned int n)
 {
-  while((*s++ = *t++) && --n);
+  while ((*s++ = *t++) && --n)
     ;
+  ;
 }
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

@@ -18,7 +18,7 @@ int atoi(const char *s)
 {
   int i = 0;
 
-  while(*s != '\0' && *s > '0' && *s < '9')
+  while (*s != '\0' && *s > '0' && *s < '9')
   {
     i = i * 10 + *s - '0';
     ++s;
@@ -29,4 +29,4 @@ int atoi(const char *s)
 
 // Exercise page: 121
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

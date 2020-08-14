@@ -13,7 +13,7 @@ int getln(char line[], int limit);
 void copy(char destination[], char source[]);
 void entab(char line[]);
 
-int main()
+int main(void)
 {
   char line[MAXLINE];
 
@@ -101,5 +101,5 @@ void entab(char line[])
 
 // Exercise page: 48
 
-// OBS: To keep the same tab indentation for every tablength will be more
+// NOTE: To keep the same tab indentation for every tablength will be more
 // apropriate to use a \t every time to reach the next tab indentation.

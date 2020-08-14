@@ -4,7 +4,7 @@
 // for celsius = 0, 20, ... 300
 // floating point version
 
-main()
+int main(void)
 {
   float celsius, fahr;
   int lower, upper, step;
@@ -18,14 +18,16 @@ main()
   printf("---------------\n");
 
   celsius = lower;
-  while(celsius <= upper)
+  while (celsius <= upper)
   {
-    fahr = (9.0/5.0) * celsius + 32.0f;
+    fahr = (9.0 / 5.0) * celsius + 32.0f;
     printf("%3.0f\t\t%6.1f\n", celsius, fahr);
     celsius = celsius + step;
   }
+
+  return 0;
 }
 
 // Exercise page: 27
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

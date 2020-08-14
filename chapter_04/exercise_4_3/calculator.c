@@ -7,70 +7,70 @@
 #define BUFFSIZE 100
 #define NUMBER '0'
 
-int getop(char []);
+int getop(char[]);
 void push(double);
 double pop(void);
 
-int main()
+int main(void)
 {
   int type;
   double op2;
   char s[MAXOP];
 
-  while((type = getop(s)) != EOF)
+  while ((type = getop(s)) != EOF)
   {
-    switch(type)
+    switch (type)
     {
-      case NUMBER:
-        push(atof(s));
+    case NUMBER:
+      push(atof(s));
       break;
 
-      case '+':
-        push(pop() + pop());
+    case '+':
+      push(pop() + pop());
       break;
 
-      case '-':
-        op2 = pop();
-        push(pop() - op2);
+    case '-':
+      op2 = pop();
+      push(pop() - op2);
       break;
 
-      case '*':
-        push(pop() * pop());
+    case '*':
+      push(pop() * pop());
       break;
 
-      case '/':
-        op2 = pop();
+    case '/':
+      op2 = pop();
 
-        if(op2 != 0.0)
-        {
-          push(pop() / op2);
-        }
-        else
-        {
-          printf("error: zero divisor\n");
-        }
+      if (op2 != 0.0)
+      {
+        push(pop() / op2);
+      }
+      else
+      {
+        printf("error: zero divisor\n");
+      }
 
       break;
 
-      case '%':
-        op2 = pop();
+    case '%':
+      op2 = pop();
 
-        if(op2 != 0.0)
-        {
-          push((int)pop() % (int)op2);
-        }
-        else
-        {
-          printf("error: zero divisor\n");
-        }
+      if (op2 != 0.0)
+      {
+        push((int)pop() % (int)op2);
+      }
+      else
+      {
+        printf("error: zero divisor\n");
+      }
       break;
 
-      case '\n':
-        printf("result: %.8g\n", pop());
+    case '\n':
+      printf("result: %.8g\n", pop());
       break;
 
-      default:
-        printf("error: unknown command %s\n", s);
+    default:
+      printf("error: unknown command %s\n", s);
       break;
     }
   }
@@ -83,7 +83,7 @@ double val[MAXVAL];
 
 void push(double f)
 {
-  if(sp < MAXVAL)
+  if (sp < MAXVAL)
   {
     val[sp++] = f;
   }
@@ -95,7 +95,7 @@ void push(double f)
 
 double pop(void)
 {
-  if(sp > 0)
+  if (sp > 0)
   {
     return val[--sp];
   }
@@ -116,7 +116,7 @@ int getch(void)
 
 void ungetch(int c)
 {
-  if(bufp >= BUFFSIZE)
+  if (bufp >= BUFFSIZE)
   {
     printf("ungetch: too many characters\n");
   }
@@ -130,19 +130,20 @@ int getop(char s[])
 {
   int i = 0, c;
 
-  while((s[0] = c = getch()) == ' ' || c == '\t');
-  
+  while ((s[0] = c = getch()) == ' ' || c == '\t')
+    ;
+
   s[1] = '\0';
 
-  if(!isdigit(c) && c != '.' && c != '-')
+  if (!isdigit(c) && c != '.' && c != '-')
   {
     return c;
   }
-  
-  if(c == '-')
+
+  if (c == '-')
   {
     int next = getch();
-    if(!isdigit(next) && next != '.')
+    if (!isdigit(next) && next != '.')
     {
       return next;
     }
@@ -154,18 +155,20 @@ int getop(char s[])
   {
     c = getch();
   }
-  
-  if(isdigit(c))
+
+  if (isdigit(c))
   {
-    while(isdigit(s[++i] = c = getch()));
+    while (isdigit(s[++i] = c = getch()))
+      ;
   }
 
-  if(c == '.')
+  if (c == '.')
   {
-    while(isdigit(s[++i] = c = getch()));
+    while (isdigit(s[++i] = c = getch()))
+      ;
   }
 
-  if(c != EOF)
+  if (c != EOF)
   {
     ungetch(c);
   }
@@ -175,7 +178,7 @@ int getop(char s[])
 
 // Exercise page: 93
 
-// OBS: The getch() function check if there are characters in a buffer. If there
+// NOTE: The getch() function check if there are characters in a buffer. If there
 // are characters the function will return the last character from the
 // buffer, else getchar() function is called. The ungetch() function will push
 // the last character in the buffer.

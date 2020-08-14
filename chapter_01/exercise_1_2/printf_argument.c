@@ -1,11 +1,12 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
   printf("hello: \c");
+  return 0;
 }
 
 // Exercise page: 22
 
-// OBS: The compiler doesn't recognize the '\o' as an escape
+// NOTE: The compiler doesn't recognize the '\o' as an escape
 // sequence and throws a warning to let us know that.

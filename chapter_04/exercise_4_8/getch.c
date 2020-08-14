@@ -20,8 +20,8 @@ int buf = -1;
 int getch(void)
 {
   char temp;
-  
-  if(buf != -1)
+
+  if (buf != -1)
   {
     temp = buf;
     buf = -1;
@@ -34,7 +34,7 @@ int getch(void)
 
 void ungetch(int c)
 {
-  if(buf != -1)
+  if (buf != -1)
   {
     printf("ungetch: buffer full\n");
   }
@@ -46,4 +46,4 @@ void ungetch(int c)
 
 // Exercise page: 93
 
-// OBS: Silence is golden.
+// NOTE: Silence is golden.

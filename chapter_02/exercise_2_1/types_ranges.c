@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-int main()
+int main(void)
 {
   printf("#################### CHAR #####################\n");
   printf("bits: %d\n", CHAR_BIT);
@@ -39,5 +39,5 @@ int main()
 
 // Exercise page: 50
 
-// OBS: The limits.h header contains all the necessary constants machine 
+// NOTE: The limits.h header contains all the necessary constants machine
 // dependent for types sizes.

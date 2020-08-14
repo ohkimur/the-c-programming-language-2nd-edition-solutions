@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-main()
+int main(void)
 {
   char c;
-  while((c = getchar()) != EOF)
+  while ((c = getchar()) != EOF)
   {
-    if(c != ' ' && c != '\t' && c != '\n')
+    if (c != ' ' && c != '\t' && c != '\n')
     {
       putchar(c);
     }
@@ -14,6 +14,8 @@ main()
       putchar('\n');
     }
   }
+  
+  return 0;
 }
 
 // Exercise page: 35

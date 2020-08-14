@@ -4,7 +4,7 @@
 // for celsius = 0, 20, ... 300
 // floating point version with for loop
 
-main()
+int main(void)
 {
   float celsius, fahr;
   int lower, upper, step;
@@ -22,11 +22,13 @@ main()
     fahr = (9.0 / 5.0) * celsius + 32.0f;
     printf("%3.0f\t\t%6.1f\n", celsius, fahr);
   }
+
+  return 0;
 }
 
 // Exercise page: 28
 
-// OBS: Sometimes the for loop can be more explicit and more
+// NOTE: Sometimes the for loop can be more explicit and more
 // readable than while because is more compact. The initialization
 // and the incrementation of a counter variable is done in header
 // of the for loop. While loop can be, sometimes, more customizable
