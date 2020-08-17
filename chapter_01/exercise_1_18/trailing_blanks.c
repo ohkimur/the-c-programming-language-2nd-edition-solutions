@@ -52,7 +52,7 @@ void remove_trailing_blanks(char line[], int length)
 
 // Exercise page: 45
 
-// NOTE: A very simple idea is to create a simple no body for loop that
-// actually iterate backwards trough char array and remove trailing
-// blanks, in this case spaces and tabs. It is very important to add
-// to the end the newline and end of string special characters.
+// NOTE: A very simple idea is to create a simple no body for loop that actually
+// iterate backwards trough char array and remove trailing blanks, in this case
+// spaces and tabs. It is very important to add at the end the newline and the
+// end of string special characters.

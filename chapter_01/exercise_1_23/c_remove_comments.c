@@ -103,5 +103,3 @@ void remove_comments(char str[], char no_com_str[])
 }
 
 // Exercise page: 48
-
-// NOTE: Silence is golden.

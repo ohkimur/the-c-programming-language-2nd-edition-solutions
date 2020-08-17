@@ -72,5 +72,3 @@ void fold_line(char line[], char fold_str[], int n_break)
 }
 
 // Exercise page: 48
-
-// NOTE: Silence is golden.

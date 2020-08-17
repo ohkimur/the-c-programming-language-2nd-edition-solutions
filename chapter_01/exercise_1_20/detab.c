@@ -75,6 +75,3 @@ void detab(char line[], char tline[])
 }
 
 // Exercise page: 48
-
-// NOTE: In my solution the n is called TABWIDTH and this can be just a
-// constant.

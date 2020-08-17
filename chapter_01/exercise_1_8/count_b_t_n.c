@@ -30,6 +30,3 @@ int main(void)
 }
 
 // Exercise page: 33
-
-// NOTE: As I mentioned in Exercise_1_6 on Windows OS the EOF is
-// accessible with CTRL+Z command.

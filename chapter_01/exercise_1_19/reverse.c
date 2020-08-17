@@ -73,8 +73,7 @@ void reverse(char line[])
 
 // Exercise page: 45
 
-// NOTE: It is more optimized to not use a temporary copy of the entire
-// char array. The reverse function need to have just one parameter,
-// so there is necessary to write a function that determine de length
-// of the string. In this case that function is reverse().
-// I used a simple swap algorithm for the reverse function.
+// NOTE: It is more optimized to not use a temporary copy of the entire char
+// array. The reverse function needs just one parameter, so there is necessary
+// to write a function that determine de length of the string. In this case that
+// function is reverse().

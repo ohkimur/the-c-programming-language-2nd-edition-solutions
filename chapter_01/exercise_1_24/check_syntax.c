@@ -160,5 +160,3 @@ void check_syntax(char str[])
 }
 
 // Exercise page: 48
-
-// NOTE: Silence is golden.

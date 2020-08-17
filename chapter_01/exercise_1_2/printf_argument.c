@@ -8,5 +8,5 @@ int main(void)
 
 // Exercise page: 22
 
-// NOTE: The compiler doesn't recognize the '\o' as an escape
-// sequence and throws a warning to let us know that.
+// NOTE: The compiler doesn't recognize the '\c' as an escape sequence and throws
+// a warning to let us know that.

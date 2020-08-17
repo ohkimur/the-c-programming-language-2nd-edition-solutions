@@ -65,5 +65,4 @@ void copy(char from[], char to[])
 
 // Exercise page: 44
 
-// NOTE: The getline name is a reserved word, because the getline
-// function is available in stdio.h.
+// NOTE: The getline name is a reserved word, because it's available in stdio.h.

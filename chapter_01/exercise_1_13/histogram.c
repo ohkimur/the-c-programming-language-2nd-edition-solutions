@@ -107,10 +107,7 @@ int main(void)
 
 // Exercise page: 38
 
-// NOTE: An array is a fixed memory space so we can't realloc memory.
-// A fixed buffer will be a solution.
-// Printing a horizontal histogram is easy, but a vertical histogram
-// needs some special mechanism to print in vertical columns. I used
-// the max value from the histogram, and than I iterate multiple times
-// trought histogram array decrementing the max value and I checked
-// if the histogram[i] >= lastMax to print the "## " chars.
+// NOTE: An array is a fixed memory space so we can't realloc it. A fixed
+// buffer could be a solution. Printing a horizontal histogram is easy, but a
+// vertical histogram needs some special mechanism to print in the vertical
+// columns.

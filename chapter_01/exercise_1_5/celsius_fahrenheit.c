@@ -28,8 +28,7 @@ int main(void)
 
 // Exercise page: 28
 
-// NOTE: Sometimes the for loop can be more explicit and more
-// readable than while because is more compact. The initialization
-// and the incrementation of a counter variable is done in header
-// of the for loop. While loop can be, sometimes, more customizable
-// in some ways.
+// NOTE: Sometimes the for loop can be more explicit and more readable than while
+// because is more compact. The initialization and the incrementation of the
+// counter variable is done in header of the for loop. However, the while loop
+// can be, sometimes, more customizable.
