@@ -29,5 +29,3 @@ int main(void)
 }
 
 // Exercise page: 27
-
-// NOTE: Silence is golden.

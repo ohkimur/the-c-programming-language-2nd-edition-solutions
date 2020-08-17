@@ -30,6 +30,3 @@ int main(void)
 }
 
 // Exercise page: 34
-
-// NOTE: To print escape to output it is necessary to put each compose
-// char from the escape sequence to output.

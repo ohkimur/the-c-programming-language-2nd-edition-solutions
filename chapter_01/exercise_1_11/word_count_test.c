@@ -43,9 +43,8 @@ int main(void)
 
 // Exercise page: 35
 
-// NOTE: To test the program it is necessary to write multiple lines,
-// words, and of course characters in input. Also is very good to put
-// some escape sequence such as tags for example.
-// To identify problems or bugs we need to test the extreme situations
-// like no characters in input or a very long word in input or even
-// a huge sequence of white spaces.
+// NOTE: To test the program it is necessary to write multiple lines, words, and
+// of course characters in input. Also it's very nice to use some escape sequence
+// such as tabs for example. To identify problems or bugs it's necessary to test
+// the isolated contexts like no characters in input or a very long word in input
+// or even a huge sequence of white spaces.

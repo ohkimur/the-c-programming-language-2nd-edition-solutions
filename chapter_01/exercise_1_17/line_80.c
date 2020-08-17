@@ -42,5 +42,3 @@ int getln(char line[], int limit)
 }
 
 // Exercise page: 45
-
-// NOTE: Silence is golden.

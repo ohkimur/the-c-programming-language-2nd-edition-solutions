@@ -101,5 +101,5 @@ void entab(char line[])
 
 // Exercise page: 48
 
-// NOTE: To keep the same tab indentation for every tablength will be more
+// NOTE: To keep the same tab indentation for every tablength would be more
 // apropriate to use a \t every time to reach the next tab indentation.

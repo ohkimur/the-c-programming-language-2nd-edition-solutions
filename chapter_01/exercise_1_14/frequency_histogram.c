@@ -53,9 +53,3 @@ int main(void)
 }
 
 // Exercise page: 38
-
-// NOTE: An array has a fixed memory size, but if we know how many
-// locations we need, than we can establish from the begining how much
-// memory we need to allocate.
-// For this program I used 26 + 10 locations to store alpha and
-// numeric values.

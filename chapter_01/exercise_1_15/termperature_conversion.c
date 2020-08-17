@@ -32,5 +32,3 @@ float celsius_to_fahrenheit(int celsius)
 }
 
 // Exercise page: 41
-
-// NOTE: Silence is golden.
