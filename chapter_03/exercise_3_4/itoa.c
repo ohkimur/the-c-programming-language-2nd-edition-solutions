@@ -5,20 +5,21 @@
 
 #define MAXLEN 1000
 
-void intToArray(int n, char s[]);
+void int_to_array(int n, char s[]);
+void str_reverse(char str1[], int index, int size);
 
 int main(void)
 {
-  int n = INT_MIN;
+  int n = 785;
   char number_str[MAXLEN];
 
-  intToArray(n, number_str);
+  int_to_array(n, number_str);
   printf("%s\n", number_str);
 
   return 0;
 }
 
-void intToArray(int n, char s[])
+void int_to_array(int n, char s[])
 {
   int i, sign;
 
@@ -37,7 +38,24 @@ void intToArray(int n, char s[])
 
   s[i] = '\0';
 
-  strrev(s);
+  int s_len = strlen(s);
+  str_reverse(s, 0, s_len - 1);
+}
+
+void str_reverse(char str1[], int index, int size)
+{
+  char temp;
+
+  temp = str1[index];
+  str1[index] = str1[size - index];
+  str1[size - index] = temp;
+
+  if (index == size / 2)
+  {
+    return;
+  }
+
+  str_reverse(str1, index + 1, size);
 }
 
 // Exercise page: 78
