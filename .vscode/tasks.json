@@ -4,7 +4,7 @@
     {
       "label": "Compile and run C",
       "type": "shell",
-      "command": "gcc ${file} -o ${fileBasenameNoExtension}  && ./${fileBasenameNoExtension} ",
+      "command": "gcc ${relativeFile} -o ${fileDirname}/${fileBasenameNoExtension}  && ${fileDirname}/${fileBasenameNoExtension} ",
       "presentation": {
         "reveal": "always",
         "panel": "shared",
