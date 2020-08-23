@@ -2,7 +2,8 @@ rwildcard=$(foreach d, $(wildcard $(1:=/*)), $(call rwildcard, $d, $2) $(filter 
 
 SOURCES = $(call rwildcard, ., *.c *.h)
 EXECS = $(SOURCES:%.c=%)
-CFLAGS = -lm
+LDLIBS = -lm
+CFLAGS = -Wall
 
 all: $(EXECS)
 clean:
