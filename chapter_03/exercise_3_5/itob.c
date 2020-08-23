@@ -6,6 +6,7 @@
 
 char itoc(int a);
 void itob(int n, char s[], int b);
+void str_reverse(char str1[], int index, int size);
 
 int main(void)
 {
@@ -60,7 +61,24 @@ void itob(int n, char s[], int b)
 
   s[i] = '\0';
 
-  strrev(s);
+  int s_len = strlen(s);
+  str_reverse(s, 0, s_len - 1);
+}
+
+void str_reverse(char str1[], int index, int size)
+{
+  char temp;
+
+  temp = str1[index];
+  str1[index] = str1[size - index];
+  str1[size - index] = temp;
+
+  if (index == size / 2)
+  {
+    return;
+  }
+
+  str_reverse(str1, index + 1, size);
 }
 
 // Exercise page: 78
