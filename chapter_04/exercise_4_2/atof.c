@@ -102,5 +102,3 @@ double atof(char s[])
 }
 
 // Exercise page: 87
-
-// NOTE: Silence is golden.

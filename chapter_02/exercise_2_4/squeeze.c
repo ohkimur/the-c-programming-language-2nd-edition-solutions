@@ -34,5 +34,3 @@ void squeeze(char str1[], char str2[])
 }
 
 // Exercise page: 62
-
-// NOTE: Silence is golden.

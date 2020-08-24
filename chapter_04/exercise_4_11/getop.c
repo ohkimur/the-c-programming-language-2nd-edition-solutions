@@ -158,5 +158,3 @@ int getop(char s[])
 }
 
 // Exercise page: 97
-
-// NOTE: Silence is golden.

@@ -60,5 +60,3 @@ void itoa(char *s, int n)
 }
 
 // Exercise page: 121
-
-// NOTE: Silence is golden.

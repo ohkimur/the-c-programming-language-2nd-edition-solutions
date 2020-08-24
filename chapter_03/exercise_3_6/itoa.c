@@ -76,5 +76,3 @@ void str_reverse(char str1[], int index, int size)
 }
 
 // Exercise page: 78
-
-// NOTE: Silence is golden.

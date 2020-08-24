@@ -42,5 +42,3 @@ void strcat_ptr(char *s, char *t, unsigned int n)
 }
 
 // Exercise page: 121
-
-// NOTE: Silence is golden.
