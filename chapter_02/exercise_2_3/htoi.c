@@ -21,18 +21,12 @@ int main(void)
 
 int getln(char line[], int lim)
 {
-  int i = 0, c;
+  char c;
+  int i = 0;
   while (i < lim - 1 && (c = getchar()) != EOF && c != '\n')
   {
-    line[i] = c;
-
-    ++i;
+    line[i++] = c;
   }
-
-  // if(c == '\n')
-  // {
-  //   line[i++] = c;
-  // }
 
   line[i] = '\0';
 
@@ -64,7 +58,7 @@ int htoi(char hex[])
       temp = temp - 'a' + 10;
     }
 
-    if (hex[i] >= '0' && hex[i] <= '9' || hex[i] >= 'a' && hex[i] <= 'f' || hex[i] >= 'A' && hex[i] <= 'F')
+    if ((hex[i] >= '0' && hex[i] <= '9') || (hex[i] >= 'a' && hex[i] <= 'f') || (hex[i] >= 'A' && hex[i] <= 'F'))
     {
       result += temp * (int)pow(16, len - i - 1);
     }
