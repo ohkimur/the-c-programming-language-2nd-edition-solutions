@@ -10,7 +10,6 @@ int main(void)
 {
   int len;
   char line[MAXLINE];
-  char str[MAXLINE];
 
   while ((len = getln(line, MAXLINE)) > 0)
   {
