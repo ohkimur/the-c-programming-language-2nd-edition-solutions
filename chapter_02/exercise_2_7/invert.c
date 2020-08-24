@@ -34,5 +34,3 @@ unsigned int invert(int x, int p, int n)
 }
 
 // Exercise page: 63
-
-// NOTE: Silence is golden.

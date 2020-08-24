@@ -139,5 +139,3 @@ void qsortlines(char *lineptr[], int left, int right)
 }
 
 // Exercise page: 124
-
-// NOTE: Silence is golden.

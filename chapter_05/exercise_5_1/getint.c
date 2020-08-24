@@ -105,5 +105,3 @@ int getint(int *pn)
 }
 
 // Exercise page: 111
-
-// NOTE: Silence is golden.

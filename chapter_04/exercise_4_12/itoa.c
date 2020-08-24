@@ -32,5 +32,3 @@ void int_to_array(int n, char str[])
 }
 
 // Exercise page: 102
-
-// NOTE: Silence is golden.

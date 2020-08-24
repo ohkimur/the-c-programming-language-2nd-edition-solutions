@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include <string.h>
 
-unsigned int strlen(char *s);
 void reverse(char *s);
 
 int main(void)
@@ -11,18 +11,6 @@ int main(void)
   puts(s);
 
   return 0;
-}
-
-unsigned int strlen(char *s)
-{
-  int i = 0;
-
-  while (*s++ != '\0')
-  {
-    ++i;
-  }
-
-  return i;
 }
 
 void reverse(char *s)
@@ -42,5 +30,3 @@ void reverse(char *s)
 }
 
 // Exercise page: 121
-
-// NOTE: Silence is golden.

@@ -27,5 +27,3 @@ void strcat_ptr(char *s, char *t)
 }
 
 // Exercise page: 121
-
-// NOTE: Silence is golden.

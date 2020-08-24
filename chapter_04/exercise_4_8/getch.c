@@ -45,5 +45,3 @@ void ungetch(int c)
 }
 
 // Exercise page: 93
-
-// NOTE: Silence is golden.

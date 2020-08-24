@@ -39,5 +39,3 @@ int strindex(char *s, char *t)
 }
 
 // Exercise page: 121
-
-// NOTE: Silence is golden.
