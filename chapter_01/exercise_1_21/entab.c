@@ -3,12 +3,6 @@
 #define MAXLINE 1000
 #define TABSTOP 8
 
-typedef enum __BOOL
-{
-  false,
-  true
-} bool;
-
 int getln(char line[], int limit);
 void copy(char destination[], char source[]);
 void entab(char line[]);
@@ -64,8 +58,6 @@ void entab(char line[])
 {
   int i = 0, k = 0, j = 0;
   char temp[MAXLINE];
-
-  bool tab = false;
 
   while (line[i] != '\0')
   {
