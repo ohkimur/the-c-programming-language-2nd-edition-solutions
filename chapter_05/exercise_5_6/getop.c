@@ -19,7 +19,6 @@ int main(void)
 
 int getop(char *s)
 {
-  int i = 0;
   char c;
 
   // Skip blanks (spaces and tabs)

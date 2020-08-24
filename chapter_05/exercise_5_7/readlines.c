@@ -21,7 +21,6 @@ int main(int argc, char const *argv[])
   int nlines;
 
   char *lineptr[MAXLINES];
-  char line[MAXLEN];
 
   // Memory allocation in main
   for (size_t i = 0; i < MAXLEN; ++i)
@@ -29,7 +28,7 @@ int main(int argc, char const *argv[])
     lineptr[i] = (char *)malloc(MAXLEN * sizeof(char));
   }
 
-  if (nlines = readlines(lineptr, 3))
+  if ((nlines = readlines(lineptr, 3)))
   {
     qsortlines(lineptr, 0, nlines - 1);
     putchar('\n');
@@ -75,7 +74,7 @@ int readlines(char *lineptr[], int maxlines)
   nlines = 0;
   while (nlines < maxlines)
   {
-    if (line_len = get_line(line_temp, MAXLEN))
+    if ((line_len = get_line(line_temp, MAXLEN)))
     {
       // char *line = (char *)malloc(line_len * sizeof(char));
       line_temp[line_len] = '\0'; // Replace \n with \0
