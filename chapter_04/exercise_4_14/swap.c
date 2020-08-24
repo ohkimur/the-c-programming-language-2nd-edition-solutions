@@ -11,7 +11,6 @@
 int main(void)
 {
   int x = 2, y = 3;
-  int temp;
 
   printf("x: %d, y: %d\n", x, y);
 

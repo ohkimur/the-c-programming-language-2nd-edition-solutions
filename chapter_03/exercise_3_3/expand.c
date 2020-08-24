@@ -23,7 +23,7 @@ int main(void)
 int getstr(char line[], int limit)
 {
   int i = 0, c;
-  while (i < limit - 1 && (c = getchar()) != EOF)
+  while ((i < limit - 1) && (c = getchar()) != EOF)
   {
     line[i] = c;
     ++i;
@@ -50,7 +50,7 @@ void expand(char src[], char dest[])
       for (k = 0; k <= (src[i + 2] - src[i]); ++k)
       {
         int temp = src[i] + k;
-        if (dest[j - 1] != temp && isdigit(temp) || isalpha(temp))
+        if ((dest[j - 1] != temp && isdigit(temp)) || isalpha(temp))
         {
           dest[j++] = src[i] + k;
         }
