@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include <string.h>
 
-unsigned int strlen(char *s);
 void strcat_ptr(char *s, char *t, unsigned int n);
 
 int main(void)
@@ -14,17 +14,6 @@ int main(void)
   puts(s);
 
   return 0;
-}
-
-// Returns the length of the string.
-unsigned int strlen(char *s)
-{
-  unsigned int str_length = 0;
-
-  while ((*++s) != '\0')
-    ++str_length;
-
-  return str_length;
 }
 
 // Concatenate t to end of s; s must be big enough.

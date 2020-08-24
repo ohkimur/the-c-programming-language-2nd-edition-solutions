@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include <string.h>
 
-unsigned int strlen(char *s);
 int strend(char *s, char *t);
 
 int main(void)
@@ -22,17 +22,6 @@ int main(void)
     puts("The string t2 doesn't orrur at the end of the string s.");
 
   return 0;
-}
-
-// Returns the length of the string.
-unsigned int strlen(char *s)
-{
-  unsigned int str_length = 0;
-
-  while ((*++s) != '\0')
-    ++str_length;
-
-  return str_length;
 }
 
 //  Returns 1 if the string t occurs at the end of the string s, and zero otherwise.
