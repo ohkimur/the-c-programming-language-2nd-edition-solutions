@@ -43,7 +43,7 @@ int strindex(char source[], char pattern[])
 {
   int i, j, k;
 
-  printf("line len: %d\n", strlen(source));
+  printf("line len: %lu\n", strlen(source));
 
   for (i = strlen(source); i >= 0; --i)
   {
