@@ -6,11 +6,33 @@ int main(void)
 {
   char s[MAXLINE];
 
-  int i;
-  char c;
-  for (i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF); ++i)
+  // int i;
+  // int c;
+  // for (i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF); ++i)
+  // {
+  //   s[i] = c;
+  // }
+
+  int i = 0;
+  int loop = 1;
+  while (loop)
   {
-    s[i] = c;
+    char c = getchar();
+
+    if (i >= (MAXLINE - 1))
+    {
+      loop = 0;
+    }
+    else if (c == '\n')
+    {
+      loop = 0;
+    }
+    else if (c == EOF)
+    {
+      loop = 0;
+    }
+
+    s[i++] = c;
   }
 
   s[i] = '\0';
@@ -22,6 +44,9 @@ int main(void)
 
 // Exercise page: 56
 
-// NOTE: The multiplication operation can work in this case because each
+// NOTE: The multiplication operation could work in this case because each
 // expression is evaluated as a 1 or 0 (true or false), and a multiplication
 // between expressions can have the value 1 only if all the expressions are true.
+// However, the order of multiplication is not guaranteed to be sequenced as with
+// logical operations. So, this is could cause serious problems depending on how
+// the compiler deals with multiplication.
