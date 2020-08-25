@@ -8,7 +8,6 @@
 int main(void)
 {
   int histogram[BUFFER];
-  int in = FALSE;
   int newWord = FALSE;
   int i = 0;
 
@@ -27,8 +26,6 @@ int main(void)
   {
     if (c == ' ' || c == '\t' || c == '\n')
     {
-      in = FALSE;
-
       if (!newWord)
       {
         newWord = TRUE;
@@ -44,7 +41,6 @@ int main(void)
     }
     else
     {
-      in = TRUE;
       newWord = FALSE;
       ++i;
     }
