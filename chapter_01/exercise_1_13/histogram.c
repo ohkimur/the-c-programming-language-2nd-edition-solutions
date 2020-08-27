@@ -9,11 +9,12 @@ int main(void)
 {
   int histogram[BUFFER];
   int histogram_length = 0;
+
   int new_word = FALSE;
   int max_word_count = 0;
-  int i;
 
   // Initialize the histogram array with 0
+  int i;
   for (i = 0; i <= BUFFER; ++i)
   {
     histogram[i] = 0;
@@ -21,8 +22,8 @@ int main(void)
 
   // Count the words length and store in histogram array at the
   // specific index
-  i = 0;
   char c;
+  int word_count_index = 0;
   while ((c = getchar()) != EOF)
   {
     if (c == ' ' || c == '\t' || c == '\n')
@@ -30,25 +31,25 @@ int main(void)
       if (!new_word)
       {
         new_word = TRUE;
-        ++histogram[i - 1];
+        ++histogram[word_count_index - 1];
 
-        if (histogram[i - 1] > max_word_count)
+        if (histogram[word_count_index - 1] > max_word_count)
         {
-          max_word_count = histogram[i - 1];
+          max_word_count = histogram[word_count_index - 1];
         }
 
-        if (histogram_length < i - 1)
+        if (histogram_length < word_count_index - 1)
         {
-          histogram_length = i - 1;
+          histogram_length = word_count_index - 1;
         }
 
-        i = 0;
+        word_count_index = 0;
       }
     }
     else
     {
       new_word = FALSE;
-      ++i;
+      ++word_count_index;
     }
   }
 
