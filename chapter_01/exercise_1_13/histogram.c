@@ -8,8 +8,10 @@
 int main(void)
 {
   int histogram[BUFFER];
-  int newWord = FALSE;
-  int i = 0;
+  int histogram_length = 0;
+  int new_word = FALSE;
+  int max_word_count = 0;
+  int i;
 
   // Initialize the histogram array with 0
   for (i = 0; i <= BUFFER; ++i)
@@ -20,20 +22,24 @@ int main(void)
   // Count the words length and store in histogram array at the
   // specific index
   i = 0;
-  int size = 0;
   char c;
   while ((c = getchar()) != EOF)
   {
     if (c == ' ' || c == '\t' || c == '\n')
     {
-      if (!newWord)
+      if (!new_word)
       {
-        newWord = TRUE;
+        new_word = TRUE;
         ++histogram[i - 1];
 
-        if (size < i - 1)
+        if (histogram[i - 1] > max_word_count)
         {
-          size = i - 1;
+          max_word_count = histogram[i - 1];
+        }
+
+        if (histogram_length < i - 1)
+        {
+          histogram_length = i - 1;
         }
 
         i = 0;
@@ -41,31 +47,34 @@ int main(void)
     }
     else
     {
-      newWord = FALSE;
+      new_word = FALSE;
       ++i;
     }
   }
 
   // Add in the histogram array a end of useful data char
-  histogram[size + 1] = '$';
+  histogram[histogram_length + 1] = '$';
+
+  putchar('\n');
+
+  int column_index = 0;
+  int line_index = 0;
 
   // Print horizontal histogram
   printf("Horizontal Histogram\n--------------------\n");
 
-  i = 0;
-  while (histogram[i] != '$')
+  while (histogram[column_index] != '$')
   {
-    printf("%3d: \t", i + 1);
+    printf("%3d: \t", column_index + 1);
 
-    int j;
-    for (j = 0; j < histogram[i]; ++j)
+    for (line_index = 0; line_index < histogram[column_index]; ++line_index)
     {
       putchar('#');
     }
 
     putchar('\n');
 
-    ++i;
+    ++column_index;
   }
 
   putchar('\n');
@@ -73,17 +82,16 @@ int main(void)
   // Print a vertical histogram
   printf("Vertical Histogram\n------------------\n");
 
-  int max;
-  for (max = size; max >= 0; --max)
+  for (line_index = max_word_count; line_index >= 0; --line_index)
   {
-    i = 0;
-    while (histogram[i] != '$')
+    column_index = 0;
+    while (histogram[column_index] != '$')
     {
-      if (max == 0)
+      if (line_index == 0)
       {
-        printf("%2d ", i + 1);
+        printf("%2d ", column_index + 1);
       }
-      else if (histogram[i] >= max)
+      else if (histogram[column_index] >= line_index)
       {
         printf("## ");
       }
@@ -92,7 +100,7 @@ int main(void)
         printf("   ");
       }
 
-      ++i;
+      ++column_index;
     }
 
     putchar('\n');
