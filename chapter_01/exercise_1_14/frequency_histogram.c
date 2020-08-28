@@ -5,8 +5,8 @@
 
 int main(void)
 {
-  char chars_freq[ALPHA_NR + NUM_NR];
   int i;
+  char chars_freq[ALPHA_NR + NUM_NR];
 
   // Initialize the chars_freq array with 0
   for (i = 0; i < (ALPHA_NR + NUM_NR); ++i)
