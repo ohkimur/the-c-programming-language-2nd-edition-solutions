@@ -59,7 +59,6 @@ int strindex(char source[], char pattern[])
   return -1;
 }
 
-// Exercise page: 85
 
 // NOTE: It is simple to find the rightmost string pattern in the initial string
 // if we search for the pattern by iterating the initial string from the end to

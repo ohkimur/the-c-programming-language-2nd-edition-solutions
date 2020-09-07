@@ -45,5 +45,3 @@ int strend(char *s, char *t)
 
   return 1;
 }
-
-// Exercise page: 121

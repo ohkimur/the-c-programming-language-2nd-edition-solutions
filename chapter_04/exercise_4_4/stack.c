@@ -233,5 +233,3 @@ int getop(char s[])
 
   return NUMBER;
 }
-
-// Exercise page: 93

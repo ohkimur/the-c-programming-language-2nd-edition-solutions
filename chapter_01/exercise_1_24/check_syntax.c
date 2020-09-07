@@ -158,5 +158,3 @@ void check_syntax(char str[])
     printf("Error: block comment not closed.\n");
   }
 }
-
-// Exercise page: 48

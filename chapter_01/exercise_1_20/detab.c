@@ -74,4 +74,3 @@ void detab(char line[], char tline[])
   tline[j] = '\0';
 }
 
-// Exercise page: 48

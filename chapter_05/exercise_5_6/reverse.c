@@ -28,5 +28,3 @@ void reverse(char *s)
     *s++ = aux;
   }
 }
-
-// Exercise page: 121

@@ -41,4 +41,3 @@ int getln(char line[], int limit)
   return i;
 }
 
-// Exercise page: 45

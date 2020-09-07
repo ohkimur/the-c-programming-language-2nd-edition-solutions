@@ -42,8 +42,6 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 56
-
 // NOTE: The multiplication operation could work in this case because each
 // expression is evaluated as a 1 or 0 (true or false), and a multiplication
 // between expressions can have the value 1 only if all the expressions are true.

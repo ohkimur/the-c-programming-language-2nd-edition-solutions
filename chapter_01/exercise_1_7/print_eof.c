@@ -6,6 +6,5 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 31
 
 // NOTE: The value of the EOF character is -1, which is an integer.

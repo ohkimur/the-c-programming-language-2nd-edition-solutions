@@ -30,5 +30,3 @@ void int_to_array(int n, char str[])
     str[i] = '\0';
   }
 }
-
-// Exercise page: 102

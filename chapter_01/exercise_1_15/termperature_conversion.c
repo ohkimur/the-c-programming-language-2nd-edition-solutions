@@ -31,4 +31,3 @@ float celsius_to_fahrenheit(int celsius)
   return (9.0 / 5.0) * celsius + 32.0f;
 }
 
-// Exercise page: 41

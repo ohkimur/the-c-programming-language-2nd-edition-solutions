@@ -176,7 +176,6 @@ int getop(char s[])
   return NUMBER;
 }
 
-// Exercise page: 93
 
 // NOTE: The getch() function check if there are characters in a buffer. If there
 // are characters the function will return the last character from the

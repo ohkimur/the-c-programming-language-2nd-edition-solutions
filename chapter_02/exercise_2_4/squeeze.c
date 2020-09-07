@@ -32,5 +32,3 @@ void squeeze(char str1[], char str2[])
     str1[j] = '\0';
   }
 }
-
-// Exercise page: 62

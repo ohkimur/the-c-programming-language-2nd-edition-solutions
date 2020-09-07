@@ -40,8 +40,6 @@ void ungetch(int c)
   }
 }
 
-// Exercise page: 93
-
 // NOTE: The getch() function can't manage correctly the EOF character because
 // in the original K&R version buf was a char array, which can't hold the EOF
 // because EOF is -1 and char can't hold negative number. However the gcc
