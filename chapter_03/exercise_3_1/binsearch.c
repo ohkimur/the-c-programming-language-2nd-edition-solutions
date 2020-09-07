@@ -123,7 +123,6 @@ void test_binsearch(int binsearch(int x, int v[], int n), int x, int v[], int n)
   ++test_nr;
 }
 
-// Exercise page: 72
 
 // NOTE: By using a simple test in the for loop there is a chance to increase the
 // binsearch() execution speed. Just modifying an if-else statement from 3 branches

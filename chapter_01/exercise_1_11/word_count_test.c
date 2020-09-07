@@ -41,8 +41,6 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 35
-
 // NOTE: To test the program it is necessary to write multiple lines, words, and
 // of course characters in input. Also it's very nice to use some escape sequence
 // such as tabs for example. To identify problems or bugs it's necessary to test

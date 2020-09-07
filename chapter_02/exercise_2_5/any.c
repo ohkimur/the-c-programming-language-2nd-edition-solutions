@@ -33,7 +33,6 @@ int any(char str1[], char str2[])
   return -1;
 }
 
-// Exercise page: 62
 
 // NOTE: The standard library (string.h), cotains the function strpbrk which
 // returns a pointer to the location of the char from the first string.

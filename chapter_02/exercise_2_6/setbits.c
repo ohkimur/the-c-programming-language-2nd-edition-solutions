@@ -34,7 +34,5 @@ unsigned int setbits(int x, int p, int n, int y)
   return mask1 | mask2;
 }
 
-// Exercise page: 63
-
 // NOTE: Masking is a very good technique to work with bits. We can think about
 // logic AND as a multiply and for OR as an addition.

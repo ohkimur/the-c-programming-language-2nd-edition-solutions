@@ -37,7 +37,6 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 50
 
 // NOTE: The limits.h header contains all the necessary constants machine
 // dependent for types sizes.

@@ -22,4 +22,3 @@ void getln(char *s)
   *s = '\0';
 }
 
-// Exercise page: 121

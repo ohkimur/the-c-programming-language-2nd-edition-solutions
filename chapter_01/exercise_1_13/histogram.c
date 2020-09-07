@@ -110,7 +110,6 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 38
 
 // NOTE: An array is a fixed memory space so we can't realloc it. A fixed
 // buffer could be a solution. Printing a horizontal histogram is easy, but a

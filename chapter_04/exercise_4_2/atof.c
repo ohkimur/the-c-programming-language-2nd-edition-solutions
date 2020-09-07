@@ -100,5 +100,3 @@ double atof(char s[])
 
   return sign * val / power;
 }
-
-// Exercise page: 87
