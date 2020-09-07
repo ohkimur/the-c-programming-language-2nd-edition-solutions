@@ -81,7 +81,6 @@ void str_reverse(char str1[], int index, int size)
   str_reverse(str1, index + 1, size);
 }
 
-// Exercise page: 78
 
 // NOTE: It is simple to convert an integer variable to any base just by taking
 // the remainder of the number divided by base and than dividing the initial

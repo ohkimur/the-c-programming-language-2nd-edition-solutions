@@ -70,7 +70,6 @@ void reverse(char line[])
   }
 }
 
-// Exercise page: 45
 
 // NOTE: It is more optimized to not use a temporary copy of the entire char
 // array. The reverse function needs just one parameter, so there is necessary

@@ -136,5 +136,3 @@ void qsortlines(char *lineptr[], int left, int right)
   qsortlines(lineptr, left, last - 1);
   qsortlines(lineptr, left + 1, last);
 }
-
-// Exercise page: 124

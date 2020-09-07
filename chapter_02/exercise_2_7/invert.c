@@ -33,4 +33,3 @@ unsigned int invert(int x, int p, int n)
   return mask2 | ~x;
 }
 
-// Exercise page: 63

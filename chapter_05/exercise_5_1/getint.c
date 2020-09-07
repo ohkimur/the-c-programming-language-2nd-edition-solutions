@@ -104,4 +104,3 @@ int getint(int *pn)
   return c;
 }
 
-// Exercise page: 111

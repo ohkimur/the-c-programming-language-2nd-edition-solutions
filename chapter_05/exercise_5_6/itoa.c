@@ -47,4 +47,3 @@ void itoa(char *s, int n)
   reverse(s);
 }
 
-// Exercise page: 121

@@ -16,6 +16,5 @@ char lower(char c)
   return (c >= 'A' && c <= 'Z') ? c += 'a' - 'A' : c;
 }
 
-// Exercise page: 66
 
 // NOTE: The ternary operator ?: can be used direct in return.

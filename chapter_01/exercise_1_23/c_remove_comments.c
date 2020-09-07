@@ -102,4 +102,3 @@ void remove_comments(char str[], char no_com_str[])
   no_com_str[j] = '\0';
 }
 
-// Exercise page: 48

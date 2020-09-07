@@ -18,4 +18,3 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 35

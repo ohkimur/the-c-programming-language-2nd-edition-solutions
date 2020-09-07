@@ -6,7 +6,6 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 31
 
 // NOTE: The expression getchar() != EOF is equal with 1 only if input char
 // is != with EOF. An interesting thing is that on Windows the console EOF is

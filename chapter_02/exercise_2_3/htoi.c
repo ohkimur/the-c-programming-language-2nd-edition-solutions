@@ -73,7 +73,6 @@ int htoi(char hex[])
   return result;
 }
 
-// Exercise page: 60
 
 // NOTE: The conversion algorithm from hex to dec is very similar with the
 // conversion algorithm from bin to dec, but the base is not 2 but 16.

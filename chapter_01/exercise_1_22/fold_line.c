@@ -70,5 +70,3 @@ void fold_line(char line[], char fold_str[], int n_break)
 
   fold_str[j] = '\0';
 }
-
-// Exercise page: 48
