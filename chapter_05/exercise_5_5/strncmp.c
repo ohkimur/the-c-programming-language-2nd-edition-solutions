@@ -48,5 +48,3 @@ int strcmp_ptr(char *s, char *t, unsigned int n)
 
   return *s - *t;
 }
-
-// Exercise page: 121

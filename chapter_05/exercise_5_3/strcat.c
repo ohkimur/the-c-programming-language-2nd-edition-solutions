@@ -25,5 +25,3 @@ void strcat_ptr(char *s, char *t)
   while ((*s++ = *t++) != '\0')
     ;
 }
-
-// Exercise page: 121

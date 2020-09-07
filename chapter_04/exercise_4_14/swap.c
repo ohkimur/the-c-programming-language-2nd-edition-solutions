@@ -20,7 +20,6 @@ int main(void)
   return 0;
 }
 
-// Exercise page: 105
 
 // NOTE: A use of a block is very useful because there can be created local
 // variables that don't create conflicts with already existed entities.

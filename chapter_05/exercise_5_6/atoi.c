@@ -26,5 +26,3 @@ int atoi(const char *s)
 
   return i;
 }
-
-// Exercise page: 121
