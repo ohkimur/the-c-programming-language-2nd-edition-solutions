@@ -4,12 +4,13 @@
 
 #define MAXLINES 5000 // max # of lines to be sorted
 #define MAXLEN 1000
+#define MAXSTORE 10000 // max # of chars from all lines to be stored
 
 char *lineptr[MAXLINES]; // pointers to text lines
 
 int getln(char line[], int maxline);
 
-int readlines(char *lineptr[], int nlines);
+int readlines(char *lineptr[], int nlines, char *stored_lines);
 void writelines(char *lineptr[], int nlines);
 
 void swap(char *v[], int i, int j);
@@ -17,11 +18,13 @@ void quick_sort(char *lineptr[], int left, int right);
 
 int main()
 {
-  int nlines; // # of input lines read
+  int nlines;                  // # of input lines read
+  char stored_lines[MAXSTORE]; // # of chars to be stored for all lines
 
-  if ((nlines = readlines(lineptr, MAXLINES)) >= 0)
+  if ((nlines = readlines(lineptr, MAXLINES, stored_lines)) >= 0)
   {
     quick_sort(lineptr, 0, nlines - 1);
+    printf("-----\n");
     writelines(lineptr, nlines);
     return 0;
   }
@@ -32,26 +35,29 @@ int main()
   }
 }
 
-int readlines(char *lineptr[], int maxlines)
+int readlines(char *lineptr[], int maxlines, char *stored_lines)
 {
   int len;
   int nlines;
 
-  char *p;
+  char *p = stored_lines + strlen(stored_lines); // Init p with the first empty position from stored_lines
   char line[MAXLEN];
 
   nlines = 0;
   while ((len = getln(line, MAXLEN)) > 0)
   {
-    if (nlines >= maxlines || (p = malloc(sizeof(char) * len)) == NULL)
+    // Checking if the current # of lines exceeds the max # of lines that can be stored
+    // Also checking if the max # of chars from the stored_lines buffer is not exceeded
+    if (nlines >= maxlines || (strlen(stored_lines) + len) > MAXSTORE)
     {
       return -1;
     }
     else
     {
-      line[len - 1] = '\0'; // delete newline
+      line[len - 1] = '\0'; // Delete newline
       strcpy(p, line);
       lineptr[nlines++] = p;
+      p += len; // Move p to the next empty position
     }
   }
 
