@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXNLINES 5000 // max # of lines to be sorted
+#define MAXLINES 5000 // max # of lines to be sorted
 #define MAXLEN 1000
 
-char *lineptr[MAXNLINES]; // pointers to text lines
+char *lineptr[MAXLINES]; // pointers to text lines
 
 int getln(char line[], int maxline);
 
@@ -18,7 +18,7 @@ int main()
 {
   int nlines; // # of input lines read
 
-  if ((nlines = readlines(lineptr, MAXNLINES)) >= 0)
+  if ((nlines = readlines(lineptr, MAXLINES)) >= 0)
   {
     // qsort(lineptr, 0, nlines - 1);
     writelines(lineptr, nlines);
