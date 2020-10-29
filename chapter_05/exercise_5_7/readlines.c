@@ -12,7 +12,8 @@ int getln(char line[], int maxline);
 int readlines(char *lineptr[], int nlines);
 void writelines(char *lineptr[], int nlines);
 
-// void qsort(char *lineptr[], int left, int right);
+void swap(char *v[], int i, int j);
+void quick_sort(char *lineptr[], int left, int right);
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
 
   if ((nlines = readlines(lineptr, MAXLINES)) >= 0)
   {
-    // qsort(lineptr, 0, nlines - 1);
+    quick_sort(lineptr, 0, nlines - 1);
     writelines(lineptr, nlines);
     return 0;
   }
@@ -83,4 +84,40 @@ int getln(char line[], int maxline)
   line[i] = '\0';
 
   return i;
+}
+
+void quick_sort(char *v[], int left, int right)
+{
+  int i;
+  int last;
+
+  // Do nothing if the array contains less than 2 elements
+  if (left >= right)
+  {
+    return;
+  }
+
+  swap(v, left, (left + right) / 2);
+  last = left;
+
+  for (i = left + 1; i <= right; ++i)
+  {
+    if (strcmp(v[i], v[left]) < 0)
+    {
+      swap(v, ++last, i);
+    }
+  }
+
+  swap(v, left, last);
+  quick_sort(v, left, last - 1);
+  quick_sort(v, last + 1, right);
+}
+
+void swap(char *v[], int i, int j)
+{
+  char *temp;
+
+  temp = v[i];
+  v[i] = v[j];
+  v[j] = temp;
 }
