@@ -59,11 +59,9 @@ int readlines(char *lineptr[], int maxlines)
 
 void writelines(char *lineptr[], int nlines)
 {
-  int i;
-
-  for (i = 0; i < nlines; ++i)
+  while (nlines-- > 0)
   {
-    printf("%s\n", lineptr[i]);
+    printf("%s\n", *lineptr++);
   }
 }
 
