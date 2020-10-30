@@ -16,12 +16,38 @@ int main(void)
   month_day(2020, 304, &month, &day_month);
   printf("month: %d, day: %d\n", month, day_month);
 
+  int month_invalid = day_of_year(2020, 13, 1);
+  if (month_invalid == -1)
+  {
+    printf("Invalid month detected.\n");
+  }
+
+  int day_invalid = day_of_year(202, 12, 32);
+  if (day_invalid == -2)
+  {
+    printf("Invalid day detected.\n");
+  }
+
   return 0;
 }
 
 int day_of_year(int year, int month, int day)
 {
   int leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+
+  // Additional checks for month
+  if (month > 12)
+  {
+    printf("ERROR: A year has 12 months, so please choose a number betweeen 1 and 12.\n");
+    return -1;
+  }
+
+  // Additional checks for day
+  if (day > daytab[leap][month])
+  {
+    printf("ERROR: The %d month has a maximum of %d days.\n", month, daytab[leap][month]);
+    return -2;
+  }
 
   int i;
   for (i = 1; i < month; i++)
