@@ -42,14 +42,14 @@ int day_of_year(int year, int month, int day)
 {
   int leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 
-  // Additional checks for month
+  // Additional checks for month.
   if (month > 12)
   {
     printf("ERROR: A year has 12 months, so please choose a number betweeen 1 and 12.\n");
     return -1;
   }
 
-  // Additional checks for day
+  // Additional checks for day.
   if (day > daytab[leap][month])
   {
     printf("ERROR: The %d month has a maximum of %d days.\n", month, daytab[leap][month]);
@@ -69,7 +69,7 @@ void month_day(int year, int yearday, int *pmonth, int *pda)
 {
   int leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 
-  // Additional check for yearday
+  // Additional check for yearday.
   if ((!leap && yearday > 365) || (leap && yearday > 366))
   {
     // Reset the provided month and day.
