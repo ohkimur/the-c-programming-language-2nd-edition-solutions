@@ -19,7 +19,7 @@ To be able to write programs in C, a compiler is required. There are many option
 The [**clang**](https://clang.llvm.org/get_started.html) compiler is a very nice choice when using macOS. It is available with **Xcode Command Line Tools**, which can be easily installed using the following command:
 
 ```shell
-$ xcode-select --install
+xcode-select --install
 ```
 
 #### Linux
@@ -27,19 +27,19 @@ The [**gcc**](https://gcc.gnu.org/) compiler is a very popular way to build C pr
 
 ##### Ubuntu / Debian / Debian derivatives
 ```shell
-$ sudo apt-get update
-$ sudo apt-get install build-essential
+sudo apt-get update
+sudo apt-get install build-essential
 ```
 
 ##### Arch Linux
 ```shell
-$ sudo pacman -Sy base-devel
+sudo pacman -Sy base-devel
 ```
 
 ##### Fedora
 ```shell
-$ sudo yum update
-$ sudo yum groupinstall "Development Tools" "Legacy Software Development"
+sudo yum update
+sudo yum groupinstall "Development Tools" "Legacy Software Development"
 ```
 
 #### Windows
