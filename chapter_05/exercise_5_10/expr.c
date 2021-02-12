@@ -81,10 +81,23 @@ int main(int argc, char *argv[])
 
 float pop(void)
 {
-  return stack[stack_pointer--];
+  if (stack_pointer > 0)
+  {
+    return stack[stack_pointer--];
+  }
+
+  printf("ERROR: The stack is empty.\n");
+  return 0;
 }
 
 void push(float element)
 {
-  stack[++stack_pointer] = element;
+  if (stack_pointer < STACK_SIZE)
+  {
+    stack[++stack_pointer] = element;
+  }
+  else
+  {
+    printf("ERROR: The stack is full.\n");
+  }
 }
