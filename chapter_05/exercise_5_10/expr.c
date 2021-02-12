@@ -26,49 +26,76 @@ int main(int argc, char *argv[])
     }
     else if (strlen(argv[i]) == 1)
     {
-      float number2 = pop();
-      float number1 = pop();
-
-      char op = *argv[i];
-      switch (op)
+      if (stack_pointer >= 2)
       {
-      case '+':
-        push(number1 + number2);
-        break;
+        float number2 = pop();
+        float number1 = pop();
 
-      case '-':
-        push(number1 - number2);
-        break;
-
-      case '*': // This char might require to be escaped when passed as an argument.
-        push(number1 * number2);
-        break;
-
-      case '/':
-        if (number2 < 0)
+        char op = *argv[i];
+        switch (op)
         {
-          error++;
-        }
-        else
-        {
-          push(number1 / number2);
-        }
-        break;
+        case '+':
+          push(number1 + number2);
+          break;
 
-      default:
-        error++;
-        break;
+        case '-':
+          push(number1 - number2);
+          break;
+
+        case '*': // This char might require to be escaped when passed as an argument.
+          push(number1 * number2);
+          break;
+
+        case '/':
+          if (number2 == 0)
+          {
+            error = 4;
+          }
+          else
+          {
+            push(number1 / number2);
+          }
+          break;
+
+        default:
+          error = 3;
+          break;
+        }
+      }
+      else
+      {
+        error = 2;
       }
     }
     else
     {
-      error++;
+      error = 1;
     }
   }
 
   if (error)
   {
-    printf("ERROR: Arguments should be numbers or one of the following mathematical operations: '+', '-', '*', '/'\n");
+    switch (error)
+    {
+    case 1:
+      printf("ERROR: Arguments should be numbers or one of the following mathematical operations: '+', '-', '*', '/'\n");
+      break;
+
+    case 2:
+      printf("ERROR: Not enough arguments.\n");
+      break;
+
+    case 3:
+      printf("ERROR: Invalid operation. Use one of the following mathematical operations: '+', '-', '*', '/'\n");
+      break;
+
+    case 4:
+      printf("ERROR: Division by zero (NaN).\n");
+      break;
+
+    default:
+      break;
+    }
   }
   else
   {
