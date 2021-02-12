@@ -20,8 +20,7 @@ int main(int argc, char *argv[])
   {
     float number = atof(argv[i]);
 
-    // TODO: Check for 0 vs "0" cornercase.
-    if (number)
+    if (number || strcmp(argv[i], "0") == 0)
     {
       push(number);
     }
