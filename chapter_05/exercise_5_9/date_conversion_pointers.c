@@ -1,23 +1,25 @@
 #include <stdio.h>
 
-static char daytab[2][13] = {{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
-                             {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
+static char year_month_days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+static char leap_year_month_days[] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+static char *daytab[2] = {year_month_days, leap_year_month_days};
 
 int day_of_year(int year, int month, int day);
 void month_day(int year, int yearday, int *pmonth, int *pda);
 
 int main(void)
 {
-  int day = day_of_year(2020, 10, 30);
+  int day = day_of_year(2021, 2, 12);
   printf("day of the year: %d\n", day);
 
-  int month_invalid = day_of_year(2020, 13, 1);
+  int month_invalid = day_of_year(2021, 13, 1);
   if (month_invalid == -1)
   {
     printf("WARNING: Invalid month detected.\n");
   }
 
-  int day_invalid = day_of_year(202, 12, 32);
+  int day_invalid = day_of_year(2021, 12, 32);
   if (day_invalid == -2)
   {
     printf("WARNING: Invalid day detected.\n");
@@ -26,13 +28,13 @@ int main(void)
   int month;
   int day_month;
 
-  month_day(2020, 304, &month, &day_month);
+  month_day(2021, 43, &month, &day_month);
   printf("month: %d, day: %d\n", month, day_month);
 
-  month_day(2020, 366, &month, &day_month);
+  month_day(2021, 365, &month, &day_month);
   printf("month: %d, day: %d\n", month, day_month);
 
-  month_day(2020, 367, &month, &day_month);
+  month_day(2021, 366, &month, &day_month);
   printf("month: %d, day: %d\n", month, day_month);
 
   return 0;
