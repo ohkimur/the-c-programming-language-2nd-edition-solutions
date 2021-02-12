@@ -6,10 +6,10 @@
 #define STACK_SIZE 15
 
 unsigned char stack_pointer = 0;
-int stack[STACK_SIZE];
+float stack[STACK_SIZE];
 
-int pop(void);
-void push(int element);
+float pop(void);
+void push(float element);
 
 int main(int argc, char *argv[])
 {
@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   unsigned int i = 1;
   for (i = 1; i < argc; ++i)
   {
-    int number = atoi(argv[i]);
+    float number = atof(argv[i]);
 
     // TODO: Check for 0 vs "0" cornercase.
     if (number)
@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
     }
     else if (strlen(argv[i]) == 1)
     {
-      int number2 = pop();
-      int number1 = pop();
+      float number2 = pop();
+      float number1 = pop();
 
       char op = *argv[i];
       switch (op)
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         push(number1 - number2);
         break;
 
-      case '*':
+      case '*': // This char might require to be escaped when passed as an argument.
         push(number1 * number2);
         break;
 
@@ -73,18 +73,18 @@ int main(int argc, char *argv[])
   }
   else
   {
-    printf("result: %d", pop());
+    printf("result: %.3f", pop());
   }
 
   return 0;
 }
 
-int pop(void)
+float pop(void)
 {
   return stack[stack_pointer--];
 }
 
-void push(int element)
+void push(float element)
 {
   stack[++stack_pointer] = element;
 }
