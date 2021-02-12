@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     }
     else if (strlen(argv[i]) == 1)
     {
-      if (stack_pointer >= 2)
+      if (stack_pointer >= 2 && stack_pointer < STACK_SIZE)
       {
         float number2 = pop();
         float number1 = pop();
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
       break;
 
     case 2:
-      printf("ERROR: Not enough arguments.\n");
+      printf("ERROR: Too many or too few arguments.\n");
       break;
 
     case 3:
