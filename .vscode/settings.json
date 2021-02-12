@@ -6,6 +6,9 @@
   },
   "files.associations": {
     "algorithm": "c",
-    "locale": "c"
+    "locale": "c",
+    "__locale": "c",
+    "cctype": "c",
+    "cstring": "cpp"
   }
 }
