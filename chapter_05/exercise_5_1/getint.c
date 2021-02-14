@@ -103,4 +103,3 @@ int getint(int *pn)
 
   return c;
 }
-
