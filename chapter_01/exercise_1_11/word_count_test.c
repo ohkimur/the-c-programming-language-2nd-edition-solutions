@@ -35,7 +35,7 @@ int main(void)
       ++nw;
     }
   }
-  
+
   printf("lines: %d\nwords: %d\ncharacters: %d\n", nl, nw, nc);
 
   return 0;

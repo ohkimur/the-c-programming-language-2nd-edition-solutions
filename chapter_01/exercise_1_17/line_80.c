@@ -40,4 +40,3 @@ int getln(char line[], int limit)
 
   return i;
 }
-

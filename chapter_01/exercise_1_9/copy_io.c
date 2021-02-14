@@ -34,5 +34,4 @@ int main(void)
   return 0;
 }
 
-
 // NOTE: Solution 3 is the most elegant, because is fast and compact.

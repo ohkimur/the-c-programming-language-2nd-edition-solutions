@@ -188,5 +188,4 @@ void unescape(char dest[], char src[])
   }
 }
 
-
 // NOTE: Silence si golden.

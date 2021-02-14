@@ -49,7 +49,6 @@ unsigned int rightrot(unsigned int x, unsigned int n)
   return x;
 }
 
-
 // NOTE: The rightrot function rotate the entire unsigned int var and if we print
 // just a byte we can't see all bits. In order to print all the bits from an
 // unsigned int we need to determine the size of an unsigned int, wich is

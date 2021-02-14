@@ -37,6 +37,5 @@ int main(void)
   return 0;
 }
 
-
 // NOTE: The limits.h header contains all the necessary constants machine
 // dependent for types sizes.
