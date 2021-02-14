@@ -42,7 +42,6 @@ int bitcount(unsigned int x)
   return b;
 }
 
-
 // NOTE: The expression x &= (x - 1) deletes the rightmost 1-bit of x because
 // x is decremented by 1 and masked with the initial x. If decremented x has
 // the rightmost bit 1, shifted to right by logic & operation, it is deleted.

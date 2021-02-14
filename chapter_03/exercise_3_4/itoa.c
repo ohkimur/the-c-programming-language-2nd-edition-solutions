@@ -58,7 +58,6 @@ void str_reverse(char str1[], int index, int size)
   str_reverse(str1, index + 1, size);
 }
 
-
 // NOTE: It does not handle the smalles negative number because it does not have
 // a positive equivalent. This means that just using a expression like n = -n is
 // not enough for the smallest negative number. If we take the absolute value of

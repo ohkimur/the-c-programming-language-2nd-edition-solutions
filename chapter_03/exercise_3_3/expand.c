@@ -72,6 +72,5 @@ void expand(char src[], char dest[])
   dest[j] = '\0';
 }
 
-
 // NOTE: To simply test if a char is a digit or an alpha we can use isdigit() and
 // isalpha() wich are located in <ctype.h>
