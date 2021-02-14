@@ -88,5 +88,4 @@ int getfloat(float *pn)
   return c;
 }
 
-
 // NOTE: The getfloat() function should return an integer like getint().

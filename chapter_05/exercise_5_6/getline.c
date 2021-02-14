@@ -21,4 +21,3 @@ void getln(char *s)
 
   *s = '\0';
 }
-

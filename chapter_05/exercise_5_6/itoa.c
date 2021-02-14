@@ -46,4 +46,3 @@ void itoa(char *s, int n)
 
   reverse(s);
 }
-
