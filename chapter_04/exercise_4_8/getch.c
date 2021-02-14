@@ -43,4 +43,3 @@ void ungetch(int c)
     buf = c;
   }
 }
-
