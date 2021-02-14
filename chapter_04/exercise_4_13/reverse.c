@@ -29,6 +29,5 @@ void reverse(char str[])
   }
 }
 
-
 // NOTE: As a simple observation when recursive functions are used, static
 // variables become handy to construct some useful functionalities.

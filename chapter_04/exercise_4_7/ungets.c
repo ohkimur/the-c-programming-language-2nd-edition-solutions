@@ -75,6 +75,5 @@ void ungetch(int c)
   }
 }
 
-
 // NOTE: The ungetstr() function doesn't need access to buf and bufp. It is enough
 // just to use the ungetch() function.
