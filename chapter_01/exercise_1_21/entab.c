@@ -61,15 +61,7 @@ void entab(char line[])
 
   while (line[i] != '\0')
   {
-    if (line[i] != ' ')
-    {
-      temp[j++] = line[i++];
-    }
-    else
-    {
-      temp[j++] = ' ';
-      ++i;
-    }
+    temp[j++] = line[i++];
 
     if (i % TABSTOP == 0)
     {
