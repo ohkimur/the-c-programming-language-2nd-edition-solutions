@@ -12,9 +12,7 @@ int main(void)
   char tline[MAXLINE];
 
   getln(line, MAXLINE);
-
   detab(line, tline);
-
   printf("%s", tline);
 
   return 0;
