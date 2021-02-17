@@ -15,7 +15,7 @@ int main(void)
   printf("%s", line);
 
   entab(line);
-  // printf("%s", line);
+  printf("%s", line);
 
   return 0;
 }
