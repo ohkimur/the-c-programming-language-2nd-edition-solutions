@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "clang++ - Build and debug active file",
+      "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
@@ -16,6 +16,14 @@
       "externalConsole": false,
       "MIMode": "lldb",
       "preLaunchTask": "C/C++: clang build active file"
+    },
+    {
+      "name": "(lldb) Attach",
+      "type": "cppdbg",
+      "request": "attach",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "processId": "${command:pickProcess}",
+      "MIMode": "lldb"
     }
   ]
 }
