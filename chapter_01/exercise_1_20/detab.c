@@ -13,7 +13,6 @@ int main(void)
     if (c == '\t')
     {
       nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
-      line_pos += nr_of_spaces;
 
       while (nr_of_spaces)
       {
