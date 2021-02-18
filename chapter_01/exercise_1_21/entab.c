@@ -16,32 +16,27 @@ int main(void)
     if (c == ' ')
     {
       ++nr_of_spaces;
+
+      if (line_pos % TAB_WIDTH == 0 && nr_of_spaces > 1)
+      {
+        putchar('\t');
+        nr_of_spaces = 0;
+      }
     }
     else
     {
-      if (nr_of_spaces == 1)
+      while (nr_of_spaces)
       {
         putchar(' ');
+        --nr_of_spaces;
       }
-      else if (nr_of_spaces > 1)
-      {
-        nr_of_tabs = line_pos / TAB_WIDTH - (line_pos - nr_of_spaces) / TAB_WIDTH;
-
-        while (nr_of_tabs)
-        {
-          putchar('\t');
-          --nr_of_tabs;
-        }
-      }
-
-      putchar(c);
 
       if (c == '\n')
       {
         line_pos = 0;
       }
 
-      nr_of_spaces = 0;
+      putchar(c);
     }
   }
 
