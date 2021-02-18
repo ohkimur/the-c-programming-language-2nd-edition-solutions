@@ -17,21 +17,23 @@ int main(int argc, char *argv[])
   int arg_pos = 0;
   int nr_of_tab_stops = argc - 1;
 
+  int i;
+  for (i = 2; i < argc; ++i)
+  {
+    if (!is_str_uint(argv[i]))
+    {
+      printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
+      return EXIT_FAILURE;
+    }
+  }
+
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
       if (nr_of_tab_stops)
       {
-        if (is_str_uint(argv[++arg_pos]))
-        {
-          tab_width = atoi(argv[arg_pos]);
-        }
-        else
-        {
-          printf("ERROR: The %s argument is not a valid tab stop length.", argv[arg_pos]);
-        }
-
+        tab_width = atoi(argv[++arg_pos]);
         --nr_of_tab_stops;
       }
       else if (argc > 1)
@@ -64,7 +66,7 @@ int main(int argc, char *argv[])
     }
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 int is_str_uint(const char *str)
