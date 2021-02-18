@@ -82,3 +82,6 @@ int is_str_uint(const char *str)
 
   return 1;
 }
+
+// NOTE: You can provide a number of tab stops as command arguments like this:
+// ./detab 2 8 4 < file_tabs.txt > file_spaces.txt
