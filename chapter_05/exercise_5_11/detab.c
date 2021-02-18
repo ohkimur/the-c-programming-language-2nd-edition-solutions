@@ -1,18 +1,19 @@
 #include <stdio.h>
 
-#define TAB_WIDTH 8
+#define DEFAULT_TAB_WIDTH 8
 
 int main(int argc, char *argv[])
 {
   int c;
   int line_pos = 0;
   char nr_of_spaces;
+  char tab_width = DEFAULT_TAB_WIDTH;
 
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
+      nr_of_spaces = tab_width - line_pos % tab_width;
       line_pos += nr_of_spaces;
 
       while (nr_of_spaces)

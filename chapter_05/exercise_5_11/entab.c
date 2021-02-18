@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define TAB_WIDTH 8
+#define DEFAULT_TAB_WIDTH 8
 
 int main(void)
 {
@@ -8,6 +8,7 @@ int main(void)
   int line_pos = 0;
   int nr_of_tabs;
   int nr_of_spaces = 0;
+  char tab_width = DEFAULT_TAB_WIDTH;
 
   while ((c = getchar()) != EOF)
   {
@@ -17,7 +18,7 @@ int main(void)
     {
       ++nr_of_spaces;
 
-      if (line_pos % TAB_WIDTH == 0 && nr_of_spaces > 1)
+      if (line_pos % tab_width == 0 && nr_of_spaces > 1)
       {
         putchar('\t');
         nr_of_spaces = 0;
