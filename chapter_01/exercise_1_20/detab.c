@@ -5,20 +5,20 @@
 int main(void)
 {
   int c;
-  int col = 0;
-  char spaces;
+  int line_pos = 0;
+  char nr_of_spaces;
 
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      spaces = TAB_WIDTH - col % TAB_WIDTH;
-      col += spaces;
+      nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
+      line_pos += nr_of_spaces;
 
-      while (spaces)
+      while (nr_of_spaces)
       {
         putchar(' ');
-        --spaces;
+        --nr_of_spaces;
       }
     }
     else
@@ -27,11 +27,11 @@ int main(void)
 
       if (c == '\n')
       {
-        col = 0;
+        line_pos = 0;
       }
       else
       {
-        ++col;
+        ++line_pos;
       }
     }
   }
