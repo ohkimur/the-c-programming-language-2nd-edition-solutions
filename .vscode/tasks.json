@@ -2,21 +2,24 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Compile and run C",
-      "type": "shell",
-      "command": "gcc ${relativeFile} -o ${fileDirname}/${fileBasenameNoExtension}  && ${fileDirname}/${fileBasenameNoExtension} ",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "echo": true,
-        "focus": true,
-        "showReuseMessage": true,
-        "clear": false
+      "type": "cppbuild",
+      "label": "C/C++: clang build active file",
+      "command": "/usr/bin/clang",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
       },
+      "problemMatcher": ["$gcc"],
       "group": {
         "kind": "build",
         "isDefault": true
-      }
+      },
+      "detail": "compiler: /usr/bin/clang"
     }
   ]
 }
