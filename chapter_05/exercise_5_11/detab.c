@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
 
 #define DEFAULT_TAB_WIDTH 8
+
+int is_str_uint(const char *str);
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +23,15 @@ int main(int argc, char *argv[])
     {
       if (nr_of_tab_stops)
       {
-        tab_width = atoi(argv[++arg_pos]);
+        if (is_str_uint(argv[++arg_pos]))
+        {
+          tab_width = atoi(argv[arg_pos]);
+        }
+        else
+        {
+          printf("ERROR: The %s argument is not a valid tab stop length.", argv[arg_pos]);
+        }
+
         --nr_of_tab_stops;
       }
       else if (argc > 1)
@@ -54,4 +65,18 @@ int main(int argc, char *argv[])
   }
 
   return 0;
+}
+
+int is_str_uint(const char *str)
+{
+  int i;
+  for (i = 0; i < strlen(str); i++)
+  {
+    if (!isdigit(str[i]))
+    {
+      return 0;
+    }
+  }
+
+  return 1;
 }
