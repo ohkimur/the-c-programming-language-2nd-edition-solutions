@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   int nr_of_tab_stops = argc - 1;
 
   int i;
-  for (i = 2; i < argc; ++i)
+  for (i = 1; i < argc; ++i)
   {
     if (!is_str_uint(argv[i]))
     {
