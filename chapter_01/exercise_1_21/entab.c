@@ -6,7 +6,6 @@ int main(void)
 {
   int c;
   int line_pos = 0;
-  int nr_of_tabs;
   int nr_of_spaces = 0;
 
   while ((c = getchar()) != EOF)
