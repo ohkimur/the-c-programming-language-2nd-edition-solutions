@@ -17,7 +17,7 @@ int main(void)
 
       while (spaces)
       {
-        putchar('#');
+        putchar(' ');
         --spaces;
       }
     }
