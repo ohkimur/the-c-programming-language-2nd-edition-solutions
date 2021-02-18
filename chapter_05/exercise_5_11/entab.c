@@ -14,6 +14,9 @@ int main(int argc, char *argv[])
   int nr_of_spaces = 0;
   char tab_width = DEFAULT_TAB_WIDTH;
 
+  int arg_pos = 1;
+  int nr_of_tab_stops = argc;
+
   int i;
   for (i = 1; i < argc; ++i)
   {
@@ -32,8 +35,27 @@ int main(int argc, char *argv[])
     {
       ++nr_of_spaces;
 
-      if (line_pos % tab_width == 0 && nr_of_spaces > 1)
+      if (nr_of_tab_stops)
       {
+        tab_width = atoi(argv[arg_pos]);
+        // --nr_of_tab_stops;
+      }
+      else if (argc > 1)
+      {
+        tab_width = 0;
+        nr_of_spaces = 0;
+      }
+
+      if (tab_width && line_pos % tab_width == 0 && nr_of_spaces > 1)
+      {
+        printf("%s", argv[arg_pos]);
+
+        if (nr_of_tab_stops)
+        {
+          ++arg_pos;
+          --nr_of_tab_stops;
+        }
+
         putchar('\t');
         nr_of_spaces = 0;
       }
@@ -49,6 +71,8 @@ int main(int argc, char *argv[])
       if (c == '\n')
       {
         line_pos = 0;
+        arg_pos = 1;
+        nr_of_tab_stops = argc - 1;
       }
 
       putchar(c);
