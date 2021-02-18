@@ -1,88 +1,49 @@
 #include <stdio.h>
 
-#define MAXLINE 1000
-#define TABSTOP 8
-
-int getln(char line[], int limit);
-void copy(char destination[], char source[]);
-void entab(char line[]);
+#define TAB_WIDTH 8
 
 int main(void)
 {
-  char line[MAXLINE];
+  int c;
+  int line_pos = 0;
+  int nr_of_tabs;
+  int nr_of_spaces = 0;
 
-  getln(line, MAXLINE);
-  printf("%s", line);
-
-  entab(line);
-  printf("%s", line);
-
-  return 0;
-}
-
-int getln(char line[], int limit)
-{
-  int c, i = 0;
-
-  while (i < limit - 1 && (c = getchar()) != EOF && c != '\n')
+  while ((c = getchar()) != EOF)
   {
-    line[i++] = c;
-  }
+    ++line_pos;
 
-  if (c == '\n')
-  {
-    line[i++] = c;
-  }
-
-  line[i] = '\0';
-
-  return i;
-}
-
-void copy(char destination[], char source[])
-{
-  int i = 0;
-  while (source[i] != '\0')
-  {
-    destination[i] = source[i];
-    ++i;
-  }
-
-  if (source[i] == '\0')
-  {
-    destination[i] = '\0';
-  }
-}
-
-void entab(char line[])
-{
-  int i = 0, k = 0, j = 0;
-  char temp[MAXLINE];
-
-  while (line[i] != '\0')
-  {
-    temp[j++] = line[i++];
-
-    if (i % TABSTOP == 0)
+    if (c == ' ')
     {
-      k = j - 1;
-      while (temp[k] == ' ')
+      ++nr_of_spaces;
+    }
+    else
+    {
+      if (nr_of_spaces == 1)
       {
-        --k;
+        putchar(' ');
+      }
+      else if (nr_of_spaces > 1)
+      {
+        nr_of_tabs = line_pos / TAB_WIDTH - (line_pos - nr_of_spaces) / TAB_WIDTH;
+
+        while (nr_of_tabs)
+        {
+          putchar('\t');
+          --nr_of_tabs;
+        }
       }
 
-      if (k < j - 1)
+      putchar(c);
+
+      if (c == '\n')
       {
-        j = k + 1;
-        temp[j++] = '\t';
+        line_pos = 0;
       }
+
+      nr_of_spaces = 0;
     }
   }
 
-  temp[j] = '\0';
-
-  copy(line, temp);
+  return 0;
 }
-
-// NOTE: To keep the same tab indentation for every tablength would be more
-// apropriate to use a \t every time to reach the next tab indentation.
