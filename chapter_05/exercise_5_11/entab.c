@@ -6,7 +6,6 @@ int main(void)
 {
   int c;
   int line_pos = 0;
-  int nr_of_tabs;
   int nr_of_spaces = 0;
   char tab_width = DEFAULT_TAB_WIDTH;
 
