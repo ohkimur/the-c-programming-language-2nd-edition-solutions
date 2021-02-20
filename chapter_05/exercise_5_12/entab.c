@@ -55,6 +55,8 @@ int main(int argc, char *argv[])
 
       if (tab_width && line_pos > line_start_pos && line_pos % tab_width == 0 && nr_of_spaces > 1)
       {
+        // TODO: Make sure you add a new tab only when the number of spaces is larger than a tab length.
+        // run this to see the problem: ./entab  +8 -6 < file_spaces.txt > file_tabs.txt
         ++nr_of_tabs;
         nr_of_spaces = line_start_pos;
       }
