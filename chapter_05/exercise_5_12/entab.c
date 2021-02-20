@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 {
   int c;
   int line_pos = 0;
+  int nr_of_tabs = 0;
   int nr_of_spaces = 0;
   int line_start_pos = 0;
   char tab_width = DEFAULT_TAB_WIDTH;
@@ -30,6 +31,18 @@ int main(int argc, char *argv[])
         tab_width = atoi(argv[i] + 1);
       }
     }
+    else if (argv[i][0] == '-')
+    {
+      if (!is_str_uint(argv[i] + 1))
+      {
+        printf("ERROR: The %s argument is not a valid column position. It should be a positive number.", argv[i]);
+        return EXIT_FAILURE;
+      }
+      else
+      {
+        line_start_pos = atoi(argv[i] + 1);
+      }
+    }
   }
 
   while ((c = getchar()) != EOF)
@@ -40,10 +53,10 @@ int main(int argc, char *argv[])
     {
       ++nr_of_spaces;
 
-      if (tab_width && line_pos % tab_width == 0 && nr_of_spaces > 1)
+      if (tab_width && line_pos > line_start_pos && line_pos % tab_width == 0 && nr_of_spaces > 1)
       {
-        putchar('\t');
-        nr_of_spaces = 0;
+        ++nr_of_tabs;
+        nr_of_spaces = line_start_pos;
       }
     }
     else
@@ -54,9 +67,15 @@ int main(int argc, char *argv[])
         --nr_of_spaces;
       }
 
+      while (nr_of_tabs)
+      {
+        putchar('\t');
+        --nr_of_tabs;
+      }
+
       if (c == '\n')
       {
-        line_pos = line_start_pos;
+        line_pos = 0;
       }
 
       putchar(c);
