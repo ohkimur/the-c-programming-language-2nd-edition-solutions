@@ -17,13 +17,27 @@ int main(int argc, char *argv[])
   int arg_pos = 0;
   int nr_of_tab_stops = argc - 1;
 
-  int i;
-  for (i = 1; i < argc; ++i)
+  if (argc <= 1)
   {
-    if (!is_str_uint(argv[i]))
+    // TODO: Handle the no arguments case.
+  }
+  else if (argc == 3)
+  {
+    // TODO: Handle the -m +n case.
+    // -m represents the custom starting column
+    // +n represents the custom tab length
+  }
+  else
+  {
+    // TODO: Handle the custom tabs case.
+    int i;
+    for (i = 1; i < argc; ++i)
     {
-      printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
-      return EXIT_FAILURE;
+      if (!is_str_uint(argv[i]))
+      {
+        printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
+        return EXIT_FAILURE;
+      }
     }
   }
 
