@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         tab_len = DEFAULT_TAB_LENGTH;
       }
 
-      nr_of_spaces = tab_len ? tab_len - line_pos % tab_len : 0;
+      nr_of_spaces = tab_len;
 
       while (nr_of_spaces)
       {
@@ -55,13 +55,8 @@ int main(int argc, char *argv[])
 
       if (c == '\n')
       {
-        line_pos = 0;
         arg_pos = 0;
         nr_of_custom_tab_stops = argc - 1;
-      }
-      else
-      {
-        ++line_pos;
       }
     }
   }
