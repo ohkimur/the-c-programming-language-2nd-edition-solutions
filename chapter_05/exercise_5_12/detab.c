@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#define DEFAULT_TAB_WIDTH 8
+#define DEFAULT_TAB_LENGTH 8
 
 int is_str_uint(const char *str);
 
@@ -12,70 +12,52 @@ int main(int argc, char *argv[])
   int c;
   int line_pos = 0;
   char nr_of_spaces;
-  char tab_width = DEFAULT_TAB_WIDTH;
+  char tab_len = DEFAULT_TAB_LENGTH;
 
-  int arg_pos = 1;
-  int custom_tab_width;
-  int custom_start_line_pos = 0;
-  int nr_of_custom_tab_stops;
-  int initial_nr_of_custom_tab_stops = argc - 1;
+  int arg_pos = 0;
+  int nr_of_cusom_tab_stops = argc - 1;
+  int nr_of_cusom_tab_stops = argc - 1;
+
+  int custom_tab_len;
+  int custom_line_offset;
 
   int i;
   for (i = 1; i < argc; ++i)
   {
     if (argv[i][0] == '-')
     {
-      // -m represents the custom starting column
-      custom_start_line_pos = atoi(argv[i] + 1);
-      --initial_nr_of_custom_tab_stops;
+      custom_line_offset = atoi(argv[i] + 1);
     }
     else if (argv[i][0] == '+')
     {
-      custom_tab_width = atoi(argv[i] + 1);
-      --initial_nr_of_custom_tab_stops;
+      custom_tab_len = atoi(argv[i] + 1);
     }
-    else if (!is_str_uint(argv[i]))
+    if (!is_str_uint(argv[i]))
     {
       printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
       return EXIT_FAILURE;
     }
   }
 
-  nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
-
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      if (nr_of_custom_tab_stops)
+      if (nr_of_cusom_tab_stops)
       {
-        while (argv[arg_pos][0] == '-' || argv[arg_pos][0] == '+')
-        {
-          ++arg_pos;
-        }
+        tab_len = atoi(argv[++arg_pos]);
+        --nr_of_cusom_tab_stops;
+      }
+      else if (argc > 1)
+      {
+        tab_len = DEFAULT_TAB_LENGTH;
+      }
 
-        tab_width = atoi(argv[arg_pos++]);
-        nr_of_spaces = tab_width;
-        --nr_of_custom_tab_stops;
-      }
-      else if (custom_tab_width && line_pos >= custom_start_line_pos)
-      {
-        tab_width = custom_tab_width;
-        // printf("%d", line_pos);
-        // printf("%d", custom_start_line_pos);
-        // nr_of_spaces = tab_width - custom_start_line_pos % tab_width;
-        nr_of_spaces = tab_width;
-      }
-      else
-      {
-        tab_width = 0;
-        nr_of_spaces = 0;
-      }
+      nr_of_spaces = tab_len ? tab_len - line_pos % tab_len : 0;
 
       while (nr_of_spaces)
       {
         putchar(' ');
-        ++line_pos;
         --nr_of_spaces;
       }
     }
@@ -86,8 +68,8 @@ int main(int argc, char *argv[])
       if (c == '\n')
       {
         line_pos = 0;
-        arg_pos = 1;
-        nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
+        arg_pos = 0;
+        nr_of_cusom_tab_stops = argc - 1;
       }
       else
       {

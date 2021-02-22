@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
   char tab_len = DEFAULT_TAB_LENGTH;
 
   int arg_pos = 0;
-  int nr_of_tab_stops = argc - 1;
+  int nr_of_custom_tab_stops = argc - 1;
 
   int i;
   for (i = 1; i < argc; ++i)
@@ -31,10 +31,10 @@ int main(int argc, char *argv[])
   {
     if (c == '\t')
     {
-      if (nr_of_tab_stops)
+      if (nr_of_custom_tab_stops)
       {
         tab_len = atoi(argv[++arg_pos]);
-        --nr_of_tab_stops;
+        --nr_of_custom_tab_stops;
       }
       else if (argc > 1)
       {
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
       {
         line_pos = 0;
         arg_pos = 0;
-        nr_of_tab_stops = argc - 1;
+        nr_of_custom_tab_stops = argc - 1;
       }
       else
       {
