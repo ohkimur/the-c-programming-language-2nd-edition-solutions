@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#define DEFAULT_TAB_WIDTH 8
+#define DEFAULT_TAB_LENGTH 8
 
 int is_str_uint(const char *str);
 
@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
   int c;
   int line_pos = 0;
   char nr_of_spaces;
-  char tab_width = DEFAULT_TAB_WIDTH;
+  char tab_len = DEFAULT_TAB_LENGTH;
 
   int arg_pos = 0;
   int nr_of_tab_stops = argc - 1;
@@ -33,15 +33,15 @@ int main(int argc, char *argv[])
     {
       if (nr_of_tab_stops)
       {
-        tab_width = atoi(argv[++arg_pos]);
+        tab_len = atoi(argv[++arg_pos]);
         --nr_of_tab_stops;
       }
       else if (argc > 1)
       {
-        tab_width = DEFAULT_TAB_WIDTH;
+        tab_len = DEFAULT_TAB_LENGTH;
       }
 
-      nr_of_spaces = tab_width ? tab_width - line_pos % tab_width : 0;
+      nr_of_spaces = tab_len ? tab_len - line_pos % tab_len : 0;
 
       while (nr_of_spaces)
       {
