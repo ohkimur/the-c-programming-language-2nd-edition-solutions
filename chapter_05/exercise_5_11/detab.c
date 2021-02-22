@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   char nr_of_spaces;
   char tab_len = DEFAULT_TAB_LENGTH;
 
-  int arg_pos = 0;
+  int arg_pos = 1;
   int nr_of_custom_tab_stops = argc - 1;
 
   int i;
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     {
       if (nr_of_custom_tab_stops)
       {
-        tab_len = atoi(argv[++arg_pos]);
+        tab_len = atoi(argv[arg_pos++]);
         --nr_of_custom_tab_stops;
       }
       else if (argc > 1)
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
       if (c == '\n')
       {
-        arg_pos = 0;
+        arg_pos = 1;
         nr_of_custom_tab_stops = argc - 1;
       }
     }
