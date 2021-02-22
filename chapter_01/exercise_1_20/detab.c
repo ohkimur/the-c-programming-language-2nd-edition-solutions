@@ -5,7 +5,6 @@
 int main(void)
 {
   int c;
-  int line_pos = 0;
   char nr_of_spaces;
 
   while ((c = getchar()) != EOF)
