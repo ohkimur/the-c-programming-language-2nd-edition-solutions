@@ -10,7 +10,6 @@ int is_str_uint(const char *str);
 int main(int argc, char *argv[])
 {
   int c;
-  int line_pos = 0;
   char nr_of_spaces;
   char tab_len = DEFAULT_TAB_LENGTH;
 
