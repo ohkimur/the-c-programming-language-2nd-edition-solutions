@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
       }
       else if (argc > 1)
       {
-        tab_width = 0;
+        tab_width = DEFAULT_TAB_WIDTH;
       }
 
       nr_of_spaces = tab_width ? tab_width - line_pos % tab_width : 0;
