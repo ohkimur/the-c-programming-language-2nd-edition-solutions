@@ -10,30 +10,30 @@ int main(void)
 
   while ((c = getchar()) != EOF)
   {
-          if (c == '\t')
-          {
-              nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
-              line_pos += nr_of_spaces;
+    if (c == '\t')
+    {
+      nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
+      line_pos += nr_of_spaces;
 
-              while (nr_of_spaces)
-              {
-              putchar(' ');
-              --nr_of_spaces;
-              }
-          }
-          else
-          {
-              putchar(c);
+      while (nr_of_spaces)
+      {
+      putchar(' ');
+      --nr_of_spaces;
+      }
+    }
+    else
+    {
+      putchar(c);
 
-              if (c == '\n')
-              {
-              line_pos = 0;
-              }
-              else
-              {
-              ++line_pos;
-              }
-          }
+      if (c == '\n')
+      {
+      line_pos = 0;
+      }
+      else
+      {
+      ++line_pos;
+      }
+    }
   }
 
   return 0;
