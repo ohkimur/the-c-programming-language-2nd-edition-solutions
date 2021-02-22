@@ -12,7 +12,7 @@ int main(void)
   {
     if (c == '\t')
     {
-      nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
+      nr_of_spaces = TAB_WIDTH;
 
       while (nr_of_spaces)
       {
@@ -23,15 +23,6 @@ int main(void)
     else
     {
       putchar(c);
-
-      if (c == '\n')
-      {
-        line_pos = 0;
-      }
-      else
-      {
-        ++line_pos;
-      }
     }
   }
 
