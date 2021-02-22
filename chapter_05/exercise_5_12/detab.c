@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
   char tab_len = DEFAULT_TAB_LENGTH;
 
   int arg_pos = 1;
-  int nr_of_cusom_tab_stops;
-  int initial_nr_of_cusom_tab_stops = argc - 1;
+  int nr_of_custom_tab_stops;
+  int initial_nr_of_custom_tab_stops = argc - 1;
 
   int custom_tab_len;
   int custom_line_offset;
@@ -27,12 +27,12 @@ int main(int argc, char *argv[])
     if (argv[i][0] == '-')
     {
       custom_line_offset = atoi(argv[i] + 1);
-      --initial_nr_of_cusom_tab_stops;
+      --initial_nr_of_custom_tab_stops;
     }
     else if (argv[i][0] == '+')
     {
       custom_tab_len = atoi(argv[i] + 1);
-      --initial_nr_of_cusom_tab_stops;
+      --initial_nr_of_custom_tab_stops;
     }
     else if (!is_str_uint(argv[i]))
     {
@@ -41,13 +41,13 @@ int main(int argc, char *argv[])
     }
   }
 
-  nr_of_cusom_tab_stops = initial_nr_of_cusom_tab_stops;
+  nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
 
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      if (nr_of_cusom_tab_stops)
+      if (nr_of_custom_tab_stops)
       {
         while (argv[arg_pos][0] == '-' || argv[arg_pos][0] == '+')
         {
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         }
 
         tab_len = atoi(argv[arg_pos++]);
-        --nr_of_cusom_tab_stops;
+        --nr_of_custom_tab_stops;
       }
       else if (custom_tab_len && line_pos >= custom_line_offset)
       {
@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
       {
         arg_pos = 1;
         line_pos = 0;
-        nr_of_cusom_tab_stops = initial_nr_of_cusom_tab_stops;
+        nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
       }
     }
   }
