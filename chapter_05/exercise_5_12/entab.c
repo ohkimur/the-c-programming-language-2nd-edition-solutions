@@ -42,7 +42,6 @@ int main(int argc, char *argv[])
   }
 
   nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
-  int tab_sum = 0;
 
   while ((c = getchar()) != EOF)
   {
@@ -75,7 +74,6 @@ int main(int argc, char *argv[])
       // TODO: Figure out the relationship between dynamic tab length and line pos.
       if (tab_len && line_pos % tab_len == 0 && nr_of_spaces > 1)
       {
-        tab_sum += tab_len;
         printf("%d ", tab_len);
         if (nr_of_custom_tab_stops)
         {
@@ -102,7 +100,6 @@ int main(int argc, char *argv[])
       {
         line_pos = 0;
         arg_pos = 1;
-        tab_sum = 0;
         nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
       }
     }
