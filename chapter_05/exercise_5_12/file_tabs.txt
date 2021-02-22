@@ -17,8 +17,8 @@ int main(void)
 
 			while (nr_of_spaces)
 			{
-			putchar(' ');
-			--nr_of_spaces;
+				putchar(' ');
+				--nr_of_spaces;
 			}
 		}
 		else
@@ -27,11 +27,11 @@ int main(void)
 
 			if (c == '\n')
 			{
-			line_pos = 0;
+				line_pos = 0;
 			}
 			else
 			{
-			++line_pos;
+				++line_pos;
 			}
 		}
 	}

@@ -4,37 +4,37 @@
 
 int main(void)
 {
-  int c;
-  int line_pos = 0;
-  char nr_of_spaces;
+0  int c;
+0  int line_pos = 0;
+0  char nr_of_spaces;
 
-  while ((c = getchar()) != EOF)
-  {
-    if (c == '\t')
-    {
-      nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
-      line_pos += nr_of_spaces;
+0  while ((c = getchar()) != EOF)
+0  {
+0  2      if (c == '\t')
+0  2      {
+0  2      8 nr_of_spaces = TAB_WIDTH - line_pos % TAB_WIDTH;
+0  2      8 line_pos += nr_of_spaces;
 
-      while (nr_of_spaces)
-      {
-      putchar(' ');
-      --nr_of_spaces;
-      }
-    }
-    else
-    {
-      putchar(c);
+0  2      8 while (nr_of_spaces)
+0  2      8 {
+0  2      8 9   putchar(' ');
+0  2      8 9   --nr_of_spaces;
+0  2      8 }
+0  2      }
+0  2      else
+0  2      {
+0  2      8 putchar(c);
 
-      if (c == '\n')
-      {
-      line_pos = 0;
-      }
-      else
-      {
-      ++line_pos;
-      }
-    }
-  }
+0  2      8 if (c == '\n')
+0  2      8 {
+0  2      8 9   line_pos = 0;
+0  2      8 }
+0  2      8 else
+0  2      8 {
+0  2      8 9   ++line_pos;
+0  2      8 }
+0  2      }
+0  }
 
-  return 0;
+0  return 0;
 }
