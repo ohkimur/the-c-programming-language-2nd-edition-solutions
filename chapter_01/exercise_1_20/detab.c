@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define TAB_WIDTH 8
+#define TAB_LENGTH 8
 
 int main(void)
 {
@@ -11,7 +11,7 @@ int main(void)
   {
     if (c == '\t')
     {
-      nr_of_spaces = TAB_WIDTH;
+      nr_of_spaces = TAB_LENGTH;
 
       while (nr_of_spaces)
       {

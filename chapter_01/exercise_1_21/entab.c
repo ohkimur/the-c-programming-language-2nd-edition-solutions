@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define TAB_WIDTH 8
+#define TAB_LENGTH 8
 
 int main(void)
 {
@@ -16,7 +16,7 @@ int main(void)
     {
       ++nr_of_spaces;
 
-      if (line_pos % TAB_WIDTH == 0 && nr_of_spaces > 1)
+      if (line_pos % TAB_LENGTH == 0 && nr_of_spaces > 1)
       {
         putchar('\t');
         nr_of_spaces = 0;
