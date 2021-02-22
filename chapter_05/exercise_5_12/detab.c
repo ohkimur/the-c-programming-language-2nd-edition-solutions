@@ -10,6 +10,7 @@ int is_str_uint(const char *str);
 int main(int argc, char *argv[])
 {
   int c;
+  int line_pos = 0;
   char nr_of_spaces;
   char tab_len = DEFAULT_TAB_LENGTH;
 
@@ -48,10 +49,15 @@ int main(int argc, char *argv[])
     {
       if (nr_of_cusom_tab_stops)
       {
+        while (argv[arg_pos][0] == '-' || argv[arg_pos][0] == '+')
+        {
+          ++arg_pos;
+        }
+
         tab_len = atoi(argv[arg_pos++]);
         --nr_of_cusom_tab_stops;
       }
-      else if (custom_tab_len)
+      else if (custom_tab_len && line_pos >= custom_line_offset)
       {
         tab_len = custom_tab_len;
       }
@@ -65,16 +71,19 @@ int main(int argc, char *argv[])
       while (nr_of_spaces)
       {
         putchar(' ');
+        ++line_pos;
         --nr_of_spaces;
       }
     }
     else
     {
       putchar(c);
+      ++line_pos;
 
       if (c == '\n')
       {
         arg_pos = 1;
+        line_pos = 0;
         nr_of_cusom_tab_stops = initial_nr_of_cusom_tab_stops;
       }
     }
