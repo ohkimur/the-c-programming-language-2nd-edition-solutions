@@ -17,15 +17,21 @@ int main(int argc, char *argv[])
   int arg_pos = 0;
   int nr_of_tab_stops = argc - 1;
 
-  if (argc <= 1)
+  if (argc <= 3)
   {
-    // TODO: Handle the no arguments case.
-  }
-  else if (argc == 3)
-  {
-    // TODO: Handle the -m +n case.
-    // -m represents the custom starting column
-    // +n represents the custom tab length
+    int i;
+    for (i = 1; i < argc; ++i)
+    {
+      if (argv[i][0] == '-')
+      {
+        // TODO: Handle this case.
+        // -m represents the custom starting column
+      }
+      else if (argv[i][0] == '+')
+      {
+        tab_width = atoi(argv[i] + 1);
+      }
+    }
   }
   else
   {
