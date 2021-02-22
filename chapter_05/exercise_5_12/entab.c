@@ -15,17 +15,34 @@ int main(int argc, char *argv[])
   char tab_len = DEFAULT_TAB_LENGTH;
 
   int arg_pos = 1;
-  int nr_of_custom_tab_stops = argc - 1;
+  int nr_of_custom_tab_stops;
+  int initial_nr_of_custom_tab_stops = argc - 1;
+
+  int custom_tab_len;
+  int custom_line_offset;
 
   int i;
   for (i = 1; i < argc; ++i)
   {
-    if (!is_str_uint(argv[i]))
+    if (argv[i][0] == '-')
+    {
+      custom_line_offset = atoi(argv[i] + 1);
+      --initial_nr_of_custom_tab_stops;
+    }
+    else if (argv[i][0] == '+')
+    {
+      custom_tab_len = atoi(argv[i] + 1);
+      --initial_nr_of_custom_tab_stops;
+    }
+    else if (!is_str_uint(argv[i]))
     {
       printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
       return EXIT_FAILURE;
     }
   }
+
+  nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
+  int tab_sum = 0;
 
   while ((c = getchar()) != EOF)
   {
@@ -37,16 +54,29 @@ int main(int argc, char *argv[])
 
       if (nr_of_custom_tab_stops)
       {
+        while (argv[arg_pos][0] == '-' || argv[arg_pos][0] == '+')
+        {
+          ++arg_pos;
+        }
+
         tab_len = atoi(argv[arg_pos]);
       }
-      else if (argc > 1)
+      else if (custom_tab_len && line_pos >= custom_line_offset)
+      {
+        tab_len = custom_tab_len;
+      }
+      else
       {
         tab_len = DEFAULT_TAB_LENGTH;
       }
 
+      // printf("%d ", line_pos);
+
       // TODO: Figure out the relationship between dynamic tab length and line pos.
       if (tab_len && line_pos % tab_len == 0 && nr_of_spaces > 1)
       {
+        tab_sum += tab_len;
+        printf("%d ", tab_len);
         if (nr_of_custom_tab_stops)
         {
           line_pos -= tab_len;
@@ -72,7 +102,8 @@ int main(int argc, char *argv[])
       {
         line_pos = 0;
         arg_pos = 1;
-        nr_of_custom_tab_stops = argc - 1;
+        tab_sum = 0;
+        nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
       }
     }
   }
