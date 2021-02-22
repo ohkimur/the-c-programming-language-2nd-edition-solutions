@@ -14,7 +14,9 @@ int main(int argc, char *argv[])
   char nr_of_spaces;
   char tab_width = DEFAULT_TAB_WIDTH;
 
-  int arg_pos = 0;
+  int arg_pos = 1;
+  int custom_tab_width;
+  int custom_start_line_pos = 0;
   int nr_of_custom_tab_stops;
   int initial_nr_of_custom_tab_stops = argc - 1;
 
@@ -24,11 +26,12 @@ int main(int argc, char *argv[])
     if (argv[i][0] == '-')
     {
       // -m represents the custom starting column
+      // custom_start_line_pos = atoi(argv[i] + 1);
       --initial_nr_of_custom_tab_stops;
     }
     else if (argv[i][0] == '+')
     {
-      tab_width = atoi(argv[i] + 1);
+      custom_tab_width = atoi(argv[i] + 1);
       --initial_nr_of_custom_tab_stops;
     }
     else if (!is_str_uint(argv[i]))
@@ -46,10 +49,19 @@ int main(int argc, char *argv[])
     {
       if (nr_of_custom_tab_stops)
       {
-        tab_width = atoi(argv[++arg_pos]);
+        while (argv[arg_pos][0] == '-' || argv[arg_pos][0] == '+')
+        {
+          ++arg_pos;
+        }
+
+        tab_width = atoi(argv[arg_pos++]);
         --nr_of_custom_tab_stops;
       }
-      else if (initial_nr_of_custom_tab_stops)
+      else if (custom_tab_width)
+      {
+        tab_width = custom_tab_width;
+      }
+      else
       {
         tab_width = 0;
       }
@@ -60,6 +72,7 @@ int main(int argc, char *argv[])
       {
         putchar(' ');
         --nr_of_spaces;
+        ++line_pos;
       }
     }
     else
@@ -69,7 +82,7 @@ int main(int argc, char *argv[])
       if (c == '\n')
       {
         line_pos = 0;
-        arg_pos = 0;
+        arg_pos = 1;
         nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
       }
       else
