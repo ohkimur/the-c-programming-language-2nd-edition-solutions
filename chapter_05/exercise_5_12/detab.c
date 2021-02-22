@@ -15,48 +15,41 @@ int main(int argc, char *argv[])
   char tab_width = DEFAULT_TAB_WIDTH;
 
   int arg_pos = 0;
-  int nr_of_tab_stops = argc - 1;
+  int nr_of_custom_tab_stops;
+  int initial_nr_of_custom_tab_stops = argc - 1;
 
-  if (argc <= 3)
+  int i;
+  for (i = 1; i < argc; ++i)
   {
-    int i;
-    for (i = 1; i < argc; ++i)
+    if (argv[i][0] == '-')
     {
-      if (argv[i][0] == '-')
-      {
-        // TODO: Handle this case.
-        // -m represents the custom starting column
-      }
-      else if (argv[i][0] == '+')
-      {
-        tab_width = atoi(argv[i] + 1);
-      }
+      // -m represents the custom starting column
+      --initial_nr_of_custom_tab_stops;
+    }
+    else if (argv[i][0] == '+')
+    {
+      tab_width = atoi(argv[i] + 1);
+      --initial_nr_of_custom_tab_stops;
+    }
+    else if (!is_str_uint(argv[i]))
+    {
+      printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
+      return EXIT_FAILURE;
     }
   }
-  else
-  {
-    // TODO: Handle the custom tabs case.
-    int i;
-    for (i = 1; i < argc; ++i)
-    {
-      if (!is_str_uint(argv[i]))
-      {
-        printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
-        return EXIT_FAILURE;
-      }
-    }
-  }
+
+  nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
 
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      if (nr_of_tab_stops)
+      if (nr_of_custom_tab_stops)
       {
         tab_width = atoi(argv[++arg_pos]);
-        --nr_of_tab_stops;
+        --nr_of_custom_tab_stops;
       }
-      else if (argc > 1)
+      else if (initial_nr_of_custom_tab_stops)
       {
         tab_width = 0;
       }
@@ -77,7 +70,7 @@ int main(int argc, char *argv[])
       {
         line_pos = 0;
         arg_pos = 0;
-        nr_of_tab_stops = argc - 1;
+        nr_of_custom_tab_stops = initial_nr_of_custom_tab_stops;
       }
       else
       {
