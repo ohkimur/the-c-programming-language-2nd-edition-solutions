@@ -1,46 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
+#include <ctype.h>
 
-#define DEFAULT_TAB_LENGTH 8
+#define TAB_LENGTH 8
 
-int is_str_uint(const char *str);
+int is_str_uint(char *str);
+int is_tab_stop_arg_list_valid(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
+  if (!is_tab_stop_arg_list_valid(argc, argv))
+  {
+    puts("ERROR: Invalid tab stop list.\n");
+    return EXIT_FAILURE;
+  }
+
   int c;
   char nr_of_spaces;
-  char tab_len = DEFAULT_TAB_LENGTH;
-
-  int arg_pos = 1;
-  int nr_of_custom_tab_stops = argc - 1;
-
-  int i;
-  for (i = 1; i < argc; ++i)
-  {
-    if (!is_str_uint(argv[i]))
-    {
-      printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
-      return EXIT_FAILURE;
-    }
-  }
 
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      if (nr_of_custom_tab_stops)
-      {
-        tab_len = atoi(argv[arg_pos++]);
-        --nr_of_custom_tab_stops;
-      }
-      else if (argc > 1)
-      {
-        tab_len = DEFAULT_TAB_LENGTH;
-      }
-
-      nr_of_spaces = tab_len;
+      nr_of_spaces = TAB_LENGTH;
 
       while (nr_of_spaces)
       {
@@ -51,31 +34,32 @@ int main(int argc, char *argv[])
     else
     {
       putchar(c);
-
-      if (c == '\n')
-      {
-        arg_pos = 1;
-        nr_of_custom_tab_stops = argc - 1;
-      }
     }
   }
 
   return EXIT_SUCCESS;
 }
 
-int is_str_uint(const char *str)
+int is_str_uint(char *str)
 {
-  int i;
-  for (i = 0; i < strlen(str); i++)
+  for (unsigned int i = 0; i < strlen(str); ++i)
   {
     if (!isdigit(str[i]))
     {
       return 0;
     }
   }
-
   return 1;
 }
 
-// NOTE: You can provide a number of tab stops as command arguments like this:
-// ./detab 2 8 4 < file_tabs.txt > file_spaces.txt
+int is_tab_stop_arg_list_valid(int argc, char *argv[])
+{
+  for (unsigned int i = 1; i < argc; ++i)
+  {
+    if (!is_str_uint(argv[i]) || (i > 1 && atoi(argv[i - 1]) > atoi(argv[i])))
+    {
+      return 0;
+    }
+  }
+  return 1;
+}
