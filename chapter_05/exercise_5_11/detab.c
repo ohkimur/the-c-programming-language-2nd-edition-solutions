@@ -17,13 +17,14 @@ int main(int argc, char *argv[])
   }
 
   int c;
+  int tab_length = TAB_LENGTH;
   char nr_of_spaces;
 
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      nr_of_spaces = TAB_LENGTH;
+      nr_of_spaces = tab_length;
 
       while (nr_of_spaces)
       {
