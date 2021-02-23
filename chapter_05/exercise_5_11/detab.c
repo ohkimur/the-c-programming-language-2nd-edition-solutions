@@ -86,3 +86,6 @@ int is_tab_stop_arg_list_valid(int argc, char *argv[])
   }
   return 1;
 }
+
+// NOTE: The current program works in a similar fashion as expand.
+// run: ./detab 4 8 12 16 < file_tabs.txt > file_spaces.txt
