@@ -6,6 +6,7 @@
       "label": "C/C++: clang build active file",
       "command": "/usr/bin/clang",
       "args": [
+        "-Wall",
         "-g",
         "${file}",
         "-o",
