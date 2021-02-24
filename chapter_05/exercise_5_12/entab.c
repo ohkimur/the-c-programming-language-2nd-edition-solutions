@@ -64,9 +64,9 @@ int main(int argc, char *argv[])
         tab_stop = 1;
       }
 
-      if (!custom_line_pos_start && line_pos % tab_stop == 0 && nr_of_spaces > 1 ||
-           custom_line_pos_start && nr_of_spaces == tab_stop ||
-           line_pos <= custom_line_pos_start)
+      if ((!custom_line_pos_start && line_pos % tab_stop == 0 && nr_of_spaces > 1) ||
+          (custom_line_pos_start && nr_of_spaces == tab_stop) ||
+          line_pos <= custom_line_pos_start)
       {
         putchar('\t');
 
