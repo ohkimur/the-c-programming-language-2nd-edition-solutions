@@ -5,7 +5,7 @@
 int main(void)
 {
 	int c;
-	char nr_of_spaces;
+	unsigned int nr_of_spaces;
 
 	while ((c = getchar()) != EOF)
 	{
