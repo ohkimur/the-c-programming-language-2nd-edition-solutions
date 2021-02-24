@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
       {
         tab_stop = custom_tab_stop;
       }
-      else if (argc > 1)
+      else if (initial_nr_of_custom_tab_stops)
       {
         tab_stop = 1;
       }
