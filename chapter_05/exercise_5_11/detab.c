@@ -17,11 +17,11 @@ int main(int argc, char *argv[])
   }
 
   int c;
-  int tab_stop = DEFAULT_TAB_LENGTH;
-  int arg_pos = 1;
-  int line_pos = 0;
-  int nr_of_spaces;
-  int nr_of_tab_stops = argc - 1;
+  unsigned int arg_pos = 1;
+  unsigned int line_pos = 0;
+  unsigned int tab_stop = DEFAULT_TAB_LENGTH;
+  unsigned int nr_of_spaces;
+  unsigned int nr_of_tab_stops = argc - 1;
 
   while ((c = getchar()) != EOF)
   {
