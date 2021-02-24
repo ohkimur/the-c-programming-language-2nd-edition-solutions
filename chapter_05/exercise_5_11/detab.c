@@ -21,16 +21,16 @@ int main(int argc, char *argv[])
   unsigned int line_pos = 0;
   unsigned int tab_stop = DEFAULT_TAB_LENGTH;
   unsigned int nr_of_spaces;
-  unsigned int nr_of_tab_stops = argc - 1;
+  unsigned int nr_of_custom_tab_stops = argc - 1;
 
   while ((c = getchar()) != EOF)
   {
     if (c == '\t')
     {
-      if (nr_of_tab_stops)
+      if (nr_of_custom_tab_stops)
       {
         tab_stop = atoi(argv[arg_pos++]);
-        --nr_of_tab_stops;
+        --nr_of_custom_tab_stops;
       }
       else if (argc > 1)
       {
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
       {
         arg_pos = 1;
         line_pos = 0;
-        nr_of_tab_stops = argc - 1;
+        nr_of_custom_tab_stops = argc - 1;
       }
     }
   }
