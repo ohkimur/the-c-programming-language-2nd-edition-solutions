@@ -1,31 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
+#include <ctype.h>
 
 #define DEFAULT_TAB_LENGTH 8
 
-int is_str_uint(const char *str);
+int is_str_uint(char *str);
+int is_tab_stop_arg_list_valid(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
-  int c;
-  int line_pos = 0;
-  int nr_of_spaces = 0;
-  char tab_len = DEFAULT_TAB_LENGTH;
-
-  int arg_pos = 1;
-  int nr_of_custom_tab_stops = argc - 1;
-
-  int i;
-  for (i = 1; i < argc; ++i)
+  if (!is_tab_stop_arg_list_valid(argc, argv))
   {
-    if (!is_str_uint(argv[i]))
-    {
-      printf("ERROR: The %s argument is not a valid tab stop length. It should be a positive number.", argv[i]);
-      return EXIT_FAILURE;
-    }
+    puts("ERROR: Invalid tab stop list.\n");
+    return EXIT_FAILURE;
   }
+
+  int c;
+  unsigned int arg_pos = 1;
+  unsigned int line_pos = 0;
+  unsigned int tab_stop = DEFAULT_TAB_LENGTH;
+  unsigned int nr_of_spaces = 0;
+  unsigned int nr_of_custom_tab_stops = argc - 1;
 
   while ((c = getchar()) != EOF)
   {
@@ -37,24 +33,23 @@ int main(int argc, char *argv[])
 
       if (nr_of_custom_tab_stops)
       {
-        tab_len = atoi(argv[arg_pos]);
+        tab_stop = atoi(argv[arg_pos]);
       }
       else if (argc > 1)
       {
-        tab_len = DEFAULT_TAB_LENGTH;
+        tab_stop = 1;
       }
 
-      // TODO: Figure out the relationship between dynamic tab length and line pos.
-      if (tab_len && line_pos % tab_len == 0 && nr_of_spaces > 1)
+      if (line_pos % tab_stop == 0 && nr_of_spaces > 1)
       {
+        putchar('\t');
+
         if (nr_of_custom_tab_stops)
         {
-          line_pos -= tab_len;
           ++arg_pos;
           --nr_of_custom_tab_stops;
         }
 
-        putchar('\t');
         nr_of_spaces = 0;
       }
     }
@@ -66,33 +61,43 @@ int main(int argc, char *argv[])
         --nr_of_spaces;
       }
 
-      putchar(c);
-
       if (c == '\n')
       {
-        line_pos = 0;
         arg_pos = 1;
+        line_pos = 0;
         nr_of_custom_tab_stops = argc - 1;
       }
+
+      putchar(c);
     }
   }
 
   return EXIT_SUCCESS;
 }
 
-int is_str_uint(const char *str)
+int is_str_uint(char *str)
 {
-  int i;
-  for (i = 0; i < strlen(str); i++)
+  for (unsigned int i = 0; i < strlen(str); ++i)
   {
     if (!isdigit(str[i]))
     {
       return 0;
     }
   }
-
   return 1;
 }
 
-// NOTE: You can provide a number of tab stops as command arguments like this:
-// ./entab 2 8 4 < file_spaces.txt > file_tabs.txt
+int is_tab_stop_arg_list_valid(int argc, char *argv[])
+{
+  for (unsigned int i = 1; i < argc; ++i)
+  {
+    if (!is_str_uint(argv[i]) || (i > 1 && atoi(argv[i - 1]) > atoi(argv[i])))
+    {
+      return 0;
+    }
+  }
+  return 1;
+}
+
+// NOTE: The current program works in a similar fashion as unexpand.
+// run: ./entab 4 8 12 16 > file_tabs.txt < file_spaces.txt
