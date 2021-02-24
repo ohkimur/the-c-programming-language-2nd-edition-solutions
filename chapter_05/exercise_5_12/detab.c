@@ -6,11 +6,11 @@
 #define DEFAULT_TAB_LENGTH 8
 
 int is_str_uint(char *str);
-int is_tab_stop_arg_list_valid(int argc, char *argv[]);
+int is_arg_list_valid(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
-  if (!is_tab_stop_arg_list_valid(argc, argv))
+  if (!is_arg_list_valid(argc, argv))
   {
     puts("ERROR: Invalid arguments.\n");
     return EXIT_FAILURE;
@@ -113,7 +113,7 @@ int is_str_uint(char *str)
   return 1;
 }
 
-int is_tab_stop_arg_list_valid(int argc, char *argv[])
+int is_arg_list_valid(int argc, char *argv[])
 {
   for (unsigned int i = 1; i < argc; ++i)
   {
