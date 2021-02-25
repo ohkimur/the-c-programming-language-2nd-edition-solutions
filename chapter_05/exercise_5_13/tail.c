@@ -3,8 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#define DEFAULT_N_LINES 10
 #define MAX_LINE_LENGTH 1000
+#define DEFAULT_NR_OF_LINES_TO_PRINT 10
 
 int is_str_uint(char *str);
 int is_arg_list_valid(int argc, char *argv[]);
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  size_t nr_of_lines_to_print = DEFAULT_N_LINES;
+  size_t nr_of_lines_to_print = DEFAULT_NR_OF_LINES_TO_PRINT;
 
   if (argc == 2)
   {
