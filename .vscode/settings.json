@@ -9,6 +9,8 @@
     "locale": "c",
     "__locale": "c",
     "cctype": "c",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "string.h": "c",
+    "ctype.h": "c"
   }
 }
