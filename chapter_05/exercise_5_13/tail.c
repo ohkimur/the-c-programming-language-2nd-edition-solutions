@@ -110,4 +110,4 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines_to_print, const size
   }
 }
 
-// NOTE: run .tail -5 < file_in.txt
+// NOTE: run: ./tail -5 < file_in.txt
