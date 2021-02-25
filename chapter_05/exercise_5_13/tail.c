@@ -18,6 +18,13 @@ int main(int argc, char *argv[])
 
   unsigned int n_lines = DEFAULT_N_LINES;
 
+  if (argc == 2)
+  {
+    n_lines = atoi(argv[argc - 1] + 1);
+  }
+
+  printf("%d", n_lines);
+
   return EXIT_SUCCESS;
 }
 
