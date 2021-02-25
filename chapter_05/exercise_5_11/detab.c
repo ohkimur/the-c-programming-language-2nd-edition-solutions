@@ -17,11 +17,11 @@ int main(int argc, char *argv[])
   }
 
   int c;
-  unsigned int arg_pos = 1;
-  unsigned int line_pos = 0;
-  unsigned int tab_stop = DEFAULT_TAB_LENGTH;
-  unsigned int nr_of_spaces;
-  unsigned int nr_of_custom_tab_stops = argc - 1;
+  size_t arg_pos = 1;
+  size_t line_pos = 0;
+  size_t tab_stop = DEFAULT_TAB_LENGTH;
+  size_t nr_of_spaces;
+  size_t nr_of_custom_tab_stops = argc - 1;
 
   while ((c = getchar()) != EOF)
   {
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 int is_str_uint(char *str)
 {
-  for (unsigned int i = 0; i < strlen(str); ++i)
+  for (size_t i = 0; i < strlen(str); ++i)
   {
     if (!isdigit(str[i]))
     {
@@ -77,7 +77,7 @@ int is_str_uint(char *str)
 
 int is_tab_stop_arg_list_valid(int argc, char *argv[])
 {
-  for (unsigned int i = 1; i < argc; ++i)
+  for (size_t i = 1; i < argc; ++i)
   {
     if (!is_str_uint(argv[i]) || (i > 1 && atoi(argv[i - 1]) > atoi(argv[i])))
     {

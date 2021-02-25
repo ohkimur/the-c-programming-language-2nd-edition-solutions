@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  unsigned int nr_of_lines_to_print = DEFAULT_N_LINES;
+  size_t nr_of_lines_to_print = DEFAULT_N_LINES;
 
   if (argc == 2)
   {
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
 int is_str_uint(char *str)
 {
-  for (unsigned int i = 0; i < strlen(str); ++i)
+  for (size_t i = 0; i < strlen(str); ++i)
   {
     if (!isdigit(str[i]))
     {
