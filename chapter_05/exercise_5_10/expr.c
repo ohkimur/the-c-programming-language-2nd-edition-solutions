@@ -15,8 +15,7 @@ int main(int argc, char *argv[])
 {
   char error = 0;
 
-  unsigned int i = 1;
-  for (i = 1; i < argc; ++i)
+  for (size_t i = 1; i < argc; ++i)
   {
     float number = atof(argv[i]);
 

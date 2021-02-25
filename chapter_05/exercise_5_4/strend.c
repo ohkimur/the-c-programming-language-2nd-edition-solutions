@@ -28,8 +28,8 @@ int main(void)
 int strend(char *s, char *t)
 {
   // Determine the lengths of the strings.
-  unsigned int s_length = strlen(s);
-  unsigned int t_length = strlen(t);
+  size_t s_length = strlen(s);
+  size_t t_length = strlen(t);
 
   // Move the s & t pointer to the end of the corresponding strings.
   s += s_length;

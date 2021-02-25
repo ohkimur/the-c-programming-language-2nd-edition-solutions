@@ -17,17 +17,17 @@ int main(int argc, char *argv[])
   }
 
   int c;
-  unsigned int arg_pos = 1;
-  unsigned int line_pos = 0;
-  unsigned int tab_stop = DEFAULT_TAB_LENGTH;
-  unsigned int nr_of_spaces;
-  unsigned int nr_of_custom_tab_stops;
-  unsigned int initial_nr_of_custom_tab_stops = argc - 1;
+  size_t arg_pos = 1;
+  size_t line_pos = 0;
+  size_t tab_stop = DEFAULT_TAB_LENGTH;
+  size_t nr_of_spaces;
+  size_t nr_of_custom_tab_stops;
+  size_t initial_nr_of_custom_tab_stops = argc - 1;
 
-  unsigned int custom_tab_stop = 0;
-  unsigned int custom_line_pos_start = 0;
+  size_t custom_tab_stop = 0;
+  size_t custom_line_pos_start = 0;
 
-  for (unsigned int i = 1; i < argc; i++)
+  for (size_t i = 1; i < argc; i++)
   {
     if (argv[i][0] == '-')
     {
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 
 int is_str_uint(char *str)
 {
-  for (unsigned int i = 0; i < strlen(str); ++i)
+  for (size_t i = 0; i < strlen(str); ++i)
   {
     if (!isdigit(str[i]))
     {
@@ -115,7 +115,7 @@ int is_str_uint(char *str)
 
 int is_arg_list_valid(int argc, char *argv[])
 {
-  for (unsigned int i = 1; i < argc; ++i)
+  for (size_t i = 1; i < argc; ++i)
   {
     if (argv[i][0] == '-' || argv[i][0] == '+')
     {

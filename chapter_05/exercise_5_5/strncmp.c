@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-int strcmp_ptr(char *s, char *t, unsigned int n);
+int strcmp_ptr(char *s, char *t, size_t n);
 
 int main(void)
 {
   char s[100] = "This is the first string";
   char *t = "This is the second string";
-  unsigned int nr_chars = 13;
+  size_t nr_chars = 13;
 
   int is_equal = strcmp_ptr(s, t, nr_chars);
 
@@ -27,7 +27,7 @@ int main(void)
 }
 
 // Return <0 if s<t, 0 if s==t, >0 if s>t *1
-int strcmp_ptr(char *s, char *t, unsigned int n)
+int strcmp_ptr(char *s, char *t, size_t n)
 {
   while ((*s == *t) != '\0' && --n)
   {
