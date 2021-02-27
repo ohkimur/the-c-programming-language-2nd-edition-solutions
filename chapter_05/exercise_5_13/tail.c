@@ -9,7 +9,7 @@
 int is_str_uint(char *str);
 int is_arg_list_valid(int argc, char *argv[]);
 
-size_t read_lines(char *line_ptr[], size_t max_nr_of_lines);
+size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines_to_print, const size_t total_nr_of_lines);
 
 int main(int argc, char *argv[])
@@ -64,7 +64,7 @@ int is_arg_list_valid(int argc, char *argv[])
   return 1;
 }
 
-size_t read_lines(char *line_ptr[], size_t max_nr_of_lines)
+size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
 {
   size_t line_length;
   size_t nr_of_lines = 0;
