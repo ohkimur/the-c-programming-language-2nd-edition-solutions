@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 
   if ((nr_of_lines = read_lines(line_ptr, MAX_LINE_LENGTH)) != -1)
   {
+    // TODO: Sort the lines.
     write_lines(line_ptr, nr_of_lines);
   }
   else
