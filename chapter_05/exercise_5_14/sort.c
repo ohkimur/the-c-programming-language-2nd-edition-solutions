@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
   if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
     // TODO: Sort the lines.
-    q_sort((void **)line_ptr, 0, nr_of_lines, (int (*)(void *, void *))strcmp);
+    q_sort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))strcmp);
     write_lines(line_ptr, nr_of_lines);
   }
   else
@@ -94,15 +94,14 @@ void swap(void *v[], size_t i, size_t j)
 
 void q_sort(void *v[], size_t left, size_t right, int (*comp)(void *, void *))
 {
-  if (left >= right)
+  if (left - right >= 0)
   {
     return;
   }
 
-  size_t last;
   swap(v, left, (left + right) / 2);
-  last = left;
 
+  size_t last = left;
   for (size_t i = left + 1; i <= right; ++i)
   {
     if ((*comp)(v[i], v[left]) < 0)
