@@ -11,7 +11,7 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
 void swap(void *v[], size_t i, size_t j);
-void q_sort(void *v[], size_t left, size_t right, int (*comp)(void *, void *));
+void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
 
 int main(int argc, char *argv[])
 {
@@ -92,25 +92,25 @@ void swap(void *v[], size_t i, size_t j)
   v[j] = temp;
 }
 
-void q_sort(void *v[], size_t left, size_t right, int (*comp)(void *, void *))
+void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
 {
-  if (left >= right)
+  if (start >= end)
   {
     return;
   }
 
-  swap(v, left, (left + right) / 2);
+  swap(v, start, (start + end) / 2);
 
-  size_t last = left;
-  for (size_t i = left + 1; i <= right; ++i)
+  size_t last = start;
+  for (size_t i = start + 1; i <= end; ++i)
   {
-    if ((*comp)(v[i], v[left]) < 0)
+    if ((*comp)(v[i], v[start]) < 0)
     {
       swap(v, ++last, i);
     }
   }
 
-  swap(v, left, last);
-  q_sort(v, left, last ? last - 1 : 0, comp);
-  q_sort(v, last < sizeof(last) ? last + 1 : last, right, comp);
+  swap(v, start, last);
+  q_sort(v, start, last > 0 ? last - 1 : 0, comp);
+  q_sort(v, last < sizeof(last) ? last + 1 : last, end, comp);
 }
