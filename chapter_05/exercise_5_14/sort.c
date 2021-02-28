@@ -94,7 +94,7 @@ void swap(void *v[], size_t i, size_t j)
 
 void q_sort(void *v[], size_t left, size_t right, int (*comp)(void *, void *))
 {
-  if (left - right >= 0)
+  if (left >= right)
   {
     return;
   }
@@ -111,6 +111,6 @@ void q_sort(void *v[], size_t left, size_t right, int (*comp)(void *, void *))
   }
 
   swap(v, left, last);
-  q_sort(v, left, last - 1, comp);
-  q_sort(v, last + 1, right, comp);
+  q_sort(v, left, last ? last - 1 : 0, comp);
+  q_sort(v, last < sizeof(last) ? last + 1 : last, right, comp);
 }
