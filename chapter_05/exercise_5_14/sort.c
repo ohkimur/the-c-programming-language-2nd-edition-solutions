@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
   if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
-    // TODO: Sort the lines.
+    // TODO: Add different types of sort based on the provided flags.
     q_sort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))strcmp);
     write_lines(line_ptr, nr_of_lines);
   }
