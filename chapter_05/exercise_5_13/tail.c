@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define MAX_LINE_LENGTH 1000
+#define MAX_NR_OF_LINES 5000
 #define DEFAULT_NR_OF_LINES_TO_PRINT 10
 
 int is_str_uint(char *str);
@@ -28,9 +28,9 @@ int main(int argc, char *argv[])
   }
 
   size_t total_nr_of_lines;
-  char *line_ptr[MAX_LINE_LENGTH];
+  char *line_ptr[MAX_NR_OF_LINES];
 
-  if ((total_nr_of_lines = read_lines(line_ptr, MAX_LINE_LENGTH)) != -1)
+  if ((total_nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
     write_lines(line_ptr, nr_of_lines_to_print, total_nr_of_lines);
   }
@@ -68,7 +68,7 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
 {
   size_t line_length;
   size_t nr_of_lines = 0;
-  size_t bufsize = MAX_LINE_LENGTH;
+  size_t bufsize = max_nr_of_lines;
 
   char *current_line = NULL;
   char *current_line_copy = NULL;
