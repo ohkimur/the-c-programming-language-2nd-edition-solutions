@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         break;
 
       case 'f':
-        comp = (int (*)(void *, void *))strncasecmp;
+        comp = (int (*)(void *, void *))strcasecmp;
         break;
 
       case 'r':
