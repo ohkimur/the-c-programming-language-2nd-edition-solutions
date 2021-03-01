@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
   int order = 1;
   int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
-  // TODO: Create a custom strcmp to handle -f and -d at the same time.
   for (int i = 1; i < argc; ++i)
   {
     for (int j = 1; j < argv[i][j]; ++j)
@@ -228,3 +227,5 @@ void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), in
   q_sort(v, start, last - 1, comp, order);
   q_sort(v, last + 1, end, comp, order);
 }
+
+// NOTE: run: ./sort -df < file_in.txt
