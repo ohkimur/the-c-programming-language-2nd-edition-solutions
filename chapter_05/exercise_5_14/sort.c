@@ -74,9 +74,6 @@ int is_arg_list_valid(int argc, char *argv[])
         switch (argv[i][j])
         {
         case 'n':
-          continue;
-          break;
-
         case 'r':
           continue;
           break;
