@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
   int order = 1;
   int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
+  // TODO: Create a custom strcmp to handle -f and -d at the same time.
   for (int i = 0; i < argc; ++i)
   {
     if (strcmp(argv[i], "-n") == 0)
