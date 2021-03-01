@@ -12,7 +12,7 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
 int numcmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
-void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
+void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order);
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
+  int order = 1;
   int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
   for (int i = 0; i < argc; ++i)
@@ -30,6 +31,10 @@ int main(int argc, char *argv[])
     {
       comp = (int (*)(void *, void *))numcmp;
     }
+    else if (strcmp(argv[i], "-r") == 0)
+    {
+      order = -1;
+    }
   }
 
   size_t nr_of_lines;
@@ -37,8 +42,7 @@ int main(int argc, char *argv[])
 
   if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
-    // TODO: Add different types of sort based on the provided flags.
-    q_sort((void **)line_ptr, 0, nr_of_lines - 1, comp);
+    q_sort((void **)line_ptr, 0, nr_of_lines - 1, comp, order);
     write_lines(line_ptr, nr_of_lines);
   }
   else
@@ -54,7 +58,7 @@ int is_arg_list_valid(int argc, char *argv[])
 {
   for (int i = 1; i < argc; ++i)
   {
-    if (strcmp(argv[i], "-n") != 0)
+    if (strcmp(argv[i], "-n") != 0 && strcmp(argv[i], "-r") != 0)
     {
       return 0;
     }
@@ -127,7 +131,7 @@ void swap(void *v[], size_t i, size_t j)
   v[j] = temp;
 }
 
-void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
+void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order)
 {
   if ((long)start >= (long)end)
   {
@@ -139,13 +143,13 @@ void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
   size_t last = start;
   for (size_t i = start + 1; i <= end; ++i)
   {
-    if ((*comp)(v[i], v[start]) < 0)
+    if (order * (*comp)(v[i], v[start]) < 0)
     {
       swap(v, ++last, i);
     }
   }
 
   swap(v, start, last);
-  q_sort(v, start, last - 1, comp);
-  q_sort(v, last + 1, end, comp);
+  q_sort(v, start, last - 1, comp, order);
+  q_sort(v, last + 1, end, comp, order);
 }
