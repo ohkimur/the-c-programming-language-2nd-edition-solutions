@@ -25,15 +25,24 @@ int main(int argc, char *argv[])
   int order = 1;
   int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
-  for (int i = 0; i < argc; ++i)
+  for (int i = 1; i < argc; ++i)
   {
-    if (strcmp(argv[i], "-n") == 0)
+    for (int j = 1; j < argv[i][j]; ++j)
     {
-      comp = (int (*)(void *, void *))numcmp;
-    }
-    else if (strcmp(argv[i], "-r") == 0)
-    {
-      order = -1;
+      switch (argv[i][j])
+      {
+      case 'n':
+        comp = (int (*)(void *, void *))numcmp;
+        break;
+
+      case 'r':
+        order = -1;
+        break;
+
+      default:
+        return 0;
+        break;
+      }
     }
   }
 
