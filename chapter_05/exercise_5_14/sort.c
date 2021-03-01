@@ -41,7 +41,14 @@ int main(int argc, char *argv[])
 
 int is_arg_list_valid(int argc, char *argv[])
 {
-  // TODO: Check if the arg list is valid.
+  for (int i = 1; i < argc; ++i)
+  {
+    if (strcmp(argv[i], "-n") != 0)
+    {
+      return 0;
+    }
+  }
+
   return 1;
 }
 
