@@ -67,9 +67,11 @@ int is_arg_list_valid(int argc, char *argv[])
 {
   for (int i = 1; i < argc; ++i)
   {
-    if (argv[i][0] == '-')
+    int arg_len = strlen(argv[i]);
+
+    if (argv[i][0] == '-' && arg_len > 1)
     {
-      for (int j = 1; j < argv[i][j]; ++j)
+      for (int j = 1; j < arg_len; ++j)
       {
         switch (argv[i][j])
         {
