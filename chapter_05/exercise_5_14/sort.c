@@ -181,3 +181,5 @@ void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), in
   q_sort(v, start, last - 1, comp, order);
   q_sort(v, last + 1, end, comp, order);
 }
+
+// NOTE: run: ./sort -nr < file_in.txt
