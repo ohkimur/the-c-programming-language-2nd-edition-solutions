@@ -25,19 +25,28 @@ int main(int argc, char *argv[])
   int order = 1;
   int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
-  for (int i = 0; i < argc; ++i)
+  for (int i = 1; i < argc; ++i)
   {
-    if (strcmp(argv[i], "-n") == 0)
+    for (int j = 1; j < argv[i][j]; ++j)
     {
-      comp = (int (*)(void *, void *))numcmp;
-    }
-    else if (strcmp(argv[i], "-f") == 0)
-    {
-      comp = (int (*)(void *, void *))strncasecmp;
-    }
-    else if (strcmp(argv[i], "-r") == 0)
-    {
-      order = -1;
+      switch (argv[i][j])
+      {
+      case 'n':
+        comp = (int (*)(void *, void *))numcmp;
+        break;
+
+      case 'f':
+        comp = (int (*)(void *, void *))strncasecmp;
+        break;
+
+      case 'r':
+        order = -1;
+        break;
+
+      default:
+        return 0;
+        break;
+      }
     }
   }
 
@@ -62,7 +71,27 @@ int is_arg_list_valid(int argc, char *argv[])
 {
   for (int i = 1; i < argc; ++i)
   {
-    if (strcmp(argv[i], "-n") != 0 && strcmp(argv[i], "-r") != 0 && strcmp(argv[i], "-f") != 0)
+    int arg_len = strlen(argv[i]);
+
+    if (argv[i][0] == '-' && arg_len > 1)
+    {
+      for (int j = 1; j < arg_len; ++j)
+      {
+        switch (argv[i][j])
+        {
+        case 'n':
+        case 'r':
+        case 'f':
+          continue;
+          break;
+
+        default:
+          return 0;
+          break;
+        }
+      }
+    }
+    else
     {
       return 0;
     }
