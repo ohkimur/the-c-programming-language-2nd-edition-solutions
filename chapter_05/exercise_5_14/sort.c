@@ -22,13 +22,13 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  int numeric = 0;
+  int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
   for (int i = 0; i < argc; ++i)
   {
     if (strcmp(argv[i], "-n") == 0)
     {
-      numeric = 1;
+      comp = (int (*)(void *, void *))numcmp;
     }
   }
 
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
   if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
     // TODO: Add different types of sort based on the provided flags.
-    q_sort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))(numeric ? numcmp : strcmp));
+    q_sort((void **)line_ptr, 0, nr_of_lines - 1, comp);
     write_lines(line_ptr, nr_of_lines);
   }
   else
