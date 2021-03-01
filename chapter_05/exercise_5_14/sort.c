@@ -10,6 +10,7 @@ int is_arg_list_valid(int argc, char *argv[]);
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
+int numcmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
 void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
 
@@ -21,13 +22,23 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
+  int numeric = 0;
+
+  for (int i = 0; i < argc; ++i)
+  {
+    if (strcmp(argv[i], "-n") == 0)
+    {
+      numeric = 1;
+    }
+  }
+
   size_t nr_of_lines;
   char *line_ptr[MAX_NR_OF_LINES];
 
   if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
     // TODO: Add different types of sort based on the provided flags.
-    q_sort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))strcmp);
+    q_sort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))(numeric ? numcmp : strcmp));
     write_lines(line_ptr, nr_of_lines);
   }
   else
@@ -91,6 +102,23 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines)
   }
 }
 
+int numcmp(const char *s1, const char *s2)
+{
+  double nr1 = atof(s1);
+  double nr2 = atof(s2);
+
+  if (nr1 < nr2)
+  {
+    return -1;
+  }
+  else if (nr1 > nr2)
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
 void swap(void *v[], size_t i, size_t j)
 {
   void *temp;
@@ -101,7 +129,7 @@ void swap(void *v[], size_t i, size_t j)
 
 void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
 {
-  if (start >= end)
+  if ((long)start >= (long)end)
   {
     return;
   }
@@ -118,6 +146,6 @@ void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
   }
 
   swap(v, start, last);
-  q_sort(v, start, last > 0 ? last - 1 : 0, comp);
-  q_sort(v, last < sizeof(last) ? last + 1 : last, end, comp);
+  q_sort(v, start, last - 1, comp);
+  q_sort(v, last + 1, end, comp);
 }
