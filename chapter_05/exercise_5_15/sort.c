@@ -31,6 +31,10 @@ int main(int argc, char *argv[])
     {
       comp = (int (*)(void *, void *))numcmp;
     }
+    else if (strcmp(argv[i], "-f") == 0)
+    {
+      comp = (int (*)(void *, void *))strncasecmp;
+    }
     else if (strcmp(argv[i], "-r") == 0)
     {
       order = -1;
@@ -58,7 +62,7 @@ int is_arg_list_valid(int argc, char *argv[])
 {
   for (int i = 1; i < argc; ++i)
   {
-    if (strcmp(argv[i], "-n") != 0 && strcmp(argv[i], "-r") != 0)
+    if (strcmp(argv[i], "-n") != 0 && strcmp(argv[i], "-r") != 0 && strcmp(argv[i], "-f") != 0)
     {
       return 0;
     }
