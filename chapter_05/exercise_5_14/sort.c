@@ -58,7 +58,27 @@ int is_arg_list_valid(int argc, char *argv[])
 {
   for (int i = 1; i < argc; ++i)
   {
-    if (strcmp(argv[i], "-n") != 0 && strcmp(argv[i], "-r") != 0)
+    if (argv[i][0] == '-')
+    {
+      for (int j = 1; j < argv[i][j]; ++j)
+      {
+        switch (argv[i][j])
+        {
+        case 'n':
+          continue;
+          break;
+
+        case 'r':
+          continue;
+          break;
+
+        default:
+          return 0;
+          break;
+        }
+      }
+    }
+    else
     {
       return 0;
     }
