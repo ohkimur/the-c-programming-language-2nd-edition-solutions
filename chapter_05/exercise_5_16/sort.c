@@ -11,8 +11,12 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
 int numcmp(const char *s1, const char *s2);
+int estrcmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
 void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order);
+
+int fold = 0;
+int directory = 0;
 
 int main(int argc, char *argv[])
 {
@@ -37,7 +41,13 @@ int main(int argc, char *argv[])
         break;
 
       case 'f':
-        comp = (int (*)(void *, void *))strncasecmp;
+        fold = 1;
+        comp = (int (*)(void *, void *))estrcmp;
+        break;
+
+      case 'd':
+        directory = 1;
+        comp = (int (*)(void *, void *))estrcmp;
         break;
 
       case 'r':
@@ -83,6 +93,7 @@ int is_arg_list_valid(int argc, char *argv[])
         case 'n':
         case 'r':
         case 'f':
+        case 'd':
           continue;
           break;
 
@@ -163,6 +174,36 @@ void swap(void *v[], size_t i, size_t j)
   temp = v[i];
   v[i] = v[j];
   v[j] = temp;
+}
+
+int estrcmp(const char *s1, const char *s2)
+{
+  while (*s1 != '\0' && *s2 != '\0')
+  {
+    if (directory)
+    {
+      while (*s1 != '\0' && !isalnum(*s1) && !isspace(*s1))
+      {
+        ++s1;
+      }
+      while (*s2 != '\0' && !isalnum(*s2) && !isspace(*s2))
+      {
+        ++s2;
+      }
+    }
+
+    if (fold ? tolower(*s1) == tolower(*s2) : *s1 == *s2)
+    {
+      ++s1;
+      ++s2;
+    }
+    else
+    {
+      break;
+    }
+  }
+
+  return *s1 - *s2;
 }
 
 void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order)
