@@ -9,6 +9,7 @@
         "-Wall",
         "-g",
         "${file}",
+        "-lm",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}"
       ],
@@ -27,6 +28,7 @@
         "-Wall",
         "-g",
         "${file}",
+        "-lm",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}"
       ],
