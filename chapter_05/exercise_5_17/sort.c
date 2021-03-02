@@ -96,6 +96,10 @@ int is_arg_list_valid(int argc, char *argv[])
           continue;
           break;
 
+        case 'k':
+          // TODO: Check if the next provided fields are valid numbers.
+          break;
+
         default:
           return 0;
           break;
