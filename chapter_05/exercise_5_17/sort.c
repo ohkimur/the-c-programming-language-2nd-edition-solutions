@@ -82,7 +82,6 @@ int is_arg_list_valid(int argc, char *argv[])
   for (int i = 1; i < argc; ++i)
   {
     size_t arg_len = strlen(argv[i]);
-
     if (arg_len > 1 && argv[i][0] == '-')
     {
       for (int j = 1; j < arg_len; ++j)
@@ -93,11 +92,8 @@ int is_arg_list_valid(int argc, char *argv[])
         case 'r':
         case 'f':
         case 'd':
-          continue;
-          break;
-
         case 'k':
-          // TODO: Check if the next provided fields are valid numbers.
+          continue;
           break;
 
         default:
@@ -106,8 +102,9 @@ int is_arg_list_valid(int argc, char *argv[])
         }
       }
     }
-    else
+    else if (!atoi(argv[i]))
     {
+      printf("%d\n", atoi(argv[i]));
       return 0;
     }
   }
