@@ -95,13 +95,13 @@ int main(int argc, char *argv[])
     default:
       break;
     }
-  }
-  else
-  {
-    printf("result: %.3f", pop());
+
+    return EXIT_FAILURE;
   }
 
-  return 0;
+  printf("result: %.3f", pop());
+
+  return EXIT_SUCCESS;
 }
 
 float pop(void)
