@@ -68,7 +68,7 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
 {
   size_t line_length;
   size_t nr_of_lines = 0;
-  size_t bufsize = max_nr_of_lines;
+  size_t bufsize = 0;
 
   char *current_line = NULL;
   char *current_line_copy = NULL;
