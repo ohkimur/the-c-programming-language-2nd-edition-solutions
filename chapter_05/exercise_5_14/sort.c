@@ -67,7 +67,7 @@ int is_arg_list_valid(int argc, char *argv[])
 {
   for (int i = 1; i < argc; ++i)
   {
-    int arg_len = strlen(argv[i]);
+    size_t arg_len = strlen(argv[i]);
 
     if (argv[i][0] == '-' && arg_len > 1)
     {
