@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    puts("ERROR: Input too large.\n");
+    puts("ERROR: Input too large.");
     return EXIT_FAILURE;
   }
 
