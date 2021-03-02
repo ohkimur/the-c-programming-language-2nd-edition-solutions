@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         break;
 
       default:
-        return 0;
+        return EXIT_FAILURE;
         break;
       }
     }
