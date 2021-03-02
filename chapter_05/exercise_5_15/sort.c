@@ -82,7 +82,6 @@ int is_arg_list_valid(int argc, char *argv[])
         case 'r':
         case 'f':
           continue;
-          break;
 
         default:
           return 0;
