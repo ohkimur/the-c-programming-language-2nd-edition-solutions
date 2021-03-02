@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define MAX_NR_OF_LINES 5000
+#define MAX_NR_OF_FIELDS 2
 
 int is_arg_list_valid(int argc, char *argv[]);
 
@@ -29,40 +30,47 @@ int main(int argc, char *argv[])
   int order = 1;
   int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
-  int max_nr_of_fields = 0;
+  int field_index = 0;
+  int fields[MAX_NR_OF_FIELDS];
   for (int i = 1; i < argc; ++i)
   {
-    for (int j = 1; j < argv[i][j]; ++j)
+    if (argv[i][0] == '-')
     {
-      switch (argv[i][j])
+      for (int j = 1; j < argv[i][j]; ++j)
       {
-      case 'n':
-        comp = (int (*)(void *, void *))numcmp;
-        break;
+        switch (argv[i][j])
+        {
+        case 'n':
+          comp = (int (*)(void *, void *))numcmp;
+          break;
 
-      case 'f':
-        fold = 1;
-        comp = (int (*)(void *, void *))estrcmp;
-        break;
+        case 'f':
+          fold = 1;
+          comp = (int (*)(void *, void *))estrcmp;
+          break;
 
-      case 'd':
-        directory = 1;
-        comp = (int (*)(void *, void *))estrcmp;
-        break;
+        case 'd':
+          directory = 1;
+          comp = (int (*)(void *, void *))estrcmp;
+          break;
 
-      case 'r':
-        order = -1;
-        break;
+        case 'r':
+          order = -1;
+          break;
 
-      case 'k':
-        max_nr_of_fields = 2;
-        comp = (int (*)(void *, void *))estrcmp;
-        break;
+        case 'k':
+          comp = (int (*)(void *, void *))estrcmp;
+          break;
 
-      default:
-        return EXIT_FAILURE;
-        break;
+        default:
+          return EXIT_FAILURE;
+          break;
+        }
       }
+    }
+    else if (field_index <= MAX_NR_OF_FIELDS)
+    {
+      fields[field_index] = atoi(argv[i]);
     }
   }
 
@@ -102,7 +110,7 @@ int is_arg_list_valid(int argc, char *argv[])
           continue;
 
         case 'k':
-          max_nr_of_fields = 2;
+          max_nr_of_fields = MAX_NR_OF_FIELDS;
           continue;
 
         default:
@@ -121,7 +129,7 @@ int is_arg_list_valid(int argc, char *argv[])
     }
   }
 
-  if (max_nr_of_fields == 2)
+  if (max_nr_of_fields >= MAX_NR_OF_FIELDS)
   {
     return 0;
   }
