@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
   int order = 1;
   int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
 
+  int max_nr_of_fields = 0;
   for (int i = 1; i < argc; ++i)
   {
     for (int j = 1; j < argv[i][j]; ++j)
@@ -51,6 +52,11 @@ int main(int argc, char *argv[])
 
       case 'r':
         order = -1;
+        break;
+
+      case 'k':
+        max_nr_of_fields = 2;
+        comp = (int (*)(void *, void *))estrcmp;
         break;
 
       default:
@@ -79,7 +85,7 @@ int main(int argc, char *argv[])
 
 int is_arg_list_valid(int argc, char *argv[])
 {
-  int max_nr_of_fields = 2;
+  int max_nr_of_fields = 0;
   for (int i = 1; i < argc; ++i)
   {
     size_t arg_len = strlen(argv[i]);
@@ -93,9 +99,11 @@ int is_arg_list_valid(int argc, char *argv[])
         case 'r':
         case 'f':
         case 'd':
-        case 'k':
           continue;
-          break;
+
+        case 'k':
+          max_nr_of_fields = 2;
+          continue;
 
         default:
           return 0;
@@ -111,6 +119,11 @@ int is_arg_list_valid(int argc, char *argv[])
     {
       return 0;
     }
+  }
+
+  if (max_nr_of_fields == 2)
+  {
+    return 0;
   }
 
   return 1;
