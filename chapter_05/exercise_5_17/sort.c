@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 {
   if (!parse_arg_list(argc, argv))
   {
-    puts("ERROR: Invalid arguments.\n");
+    puts("ERROR: Invalid arguments.");
     return EXIT_FAILURE;
   }
 
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    puts("ERROR: Input too large.\n");
+    puts("ERROR: Input too large.");
     return EXIT_FAILURE;
   }
 
