@@ -19,7 +19,7 @@ void eqsort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), in
 int order = 1; // 1 ascendent, -1 descendent
 int fold = 0;
 int directory = 0;
-int (*comp)(const char *, const char *) = strcmp;
+int (*comp)(const char *, const char *) = estrcmp;
 
 int main(int argc, char *argv[])
 {
@@ -64,12 +64,10 @@ int parse_arg_list(int argc, char *argv[])
 
         case 'f':
           fold = 1;
-          comp = estrcmp;
           break;
 
         case 'd':
           directory = 1;
-          comp = estrcmp;
           break;
 
         case 'r':
