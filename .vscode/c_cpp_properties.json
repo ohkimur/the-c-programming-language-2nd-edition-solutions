@@ -2,17 +2,22 @@
   "configurations": [
     {
       "name": "Mac",
-      "includePath": [
-        "${workspaceFolder}/**"
-      ],
+      "includePath": ["${workspaceFolder}/**"],
       "defines": [],
       "macFrameworkPath": [
         "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
       ],
       "compilerPath": "/usr/bin/clang",
       "cStandard": "c11",
-      "cppStandard": "c++17",
-      "intelliSenseMode": "clang-x64"
+      "intelliSenseMode": "macos-clang-x64"
+    },
+    {
+      "name": "Linux",
+      "includePath": ["${workspaceFolder}/**"],
+      "defines": [],
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "c11",
+      "intelliSenseMode": "linux-gcc-x64"
     }
   ],
   "version": 4
