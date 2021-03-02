@@ -5,45 +5,24 @@
 
 #define MAX_NR_OF_LINES 5000
 
-int is_arg_list_valid(int argc, char *argv[]);
+int order = 1; // 1 ascendent, -1 descendent
+int (*comp)(const char *, const char *) = strcmp;
+
+int parse_arg_list(int argc, char *argv[]);
 
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
 int numcmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
-void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order);
+void eqsort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order);
 
 int main(int argc, char *argv[])
 {
-  if (!is_arg_list_valid(argc, argv))
+  if (!parse_arg_list(argc, argv))
   {
     puts("ERROR: Invalid arguments.\n");
     return EXIT_FAILURE;
-  }
-
-  int order = 1;
-  int (*comp)(void *, void *) = (int (*)(void *, void *))strcmp;
-
-  for (int i = 1; i < argc; ++i)
-  {
-    for (int j = 1; j < argv[i][j]; ++j)
-    {
-      switch (argv[i][j])
-      {
-      case 'n':
-        comp = (int (*)(void *, void *))numcmp;
-        break;
-
-      case 'r':
-        order = -1;
-        break;
-
-      default:
-        return EXIT_FAILURE;
-        break;
-      }
-    }
   }
 
   size_t nr_of_lines;
@@ -51,7 +30,7 @@ int main(int argc, char *argv[])
 
   if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
-    q_sort((void **)line_ptr, 0, nr_of_lines - 1, comp, order);
+    eqsort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))comp, order);
     write_lines(line_ptr, nr_of_lines);
   }
   else
@@ -63,7 +42,7 @@ int main(int argc, char *argv[])
   return EXIT_SUCCESS;
 }
 
-int is_arg_list_valid(int argc, char *argv[])
+int parse_arg_list(int argc, char *argv[])
 {
   for (int i = 1; i < argc; ++i)
   {
@@ -75,8 +54,12 @@ int is_arg_list_valid(int argc, char *argv[])
         switch (argv[i][j])
         {
         case 'n':
+          comp = numcmp;
+          break;
+
         case 'r':
-          continue;
+          order = -1;
+          break;
 
         default:
           return 0;
@@ -157,7 +140,7 @@ void swap(void *v[], size_t i, size_t j)
   v[j] = temp;
 }
 
-void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order)
+void eqsort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order)
 {
   if ((long)start >= (long)end)
   {
@@ -176,8 +159,8 @@ void q_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), in
   }
 
   swap(v, start, last);
-  q_sort(v, start, last - 1, comp, order);
-  q_sort(v, last + 1, end, comp, order);
+  eqsort(v, start, last - 1, comp, order);
+  eqsort(v, last + 1, end, comp, order);
 }
 
 // NOTE: run: ./sort -nr < file_in.txt
