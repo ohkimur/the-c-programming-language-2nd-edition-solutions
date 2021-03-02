@@ -5,11 +5,6 @@
 
 #define MAX_NR_OF_LINES 5000
 
-int order = 1; // 1 ascendent, -1 descendent
-int fold = 0;
-int directory = 0;
-int (*comp)(const char *, const char *) = strcmp;
-
 int parse_arg_list(int argc, char *argv[]);
 
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
@@ -19,6 +14,11 @@ int numcmp(const char *s1, const char *s2);
 int estrcmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
 void eqsort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order);
+
+int order = 1; // 1 ascendent, -1 descendent
+int fold = 0;
+int directory = 0;
+int (*comp)(const char *, const char *) = estrcmp;
 
 int main(int argc, char *argv[])
 {
@@ -62,12 +62,10 @@ int parse_arg_list(int argc, char *argv[])
 
         case 'f':
           fold = 1;
-          comp = estrcmp;
           break;
 
         case 'd':
           directory = 1;
-          comp = estrcmp;
           break;
 
         case 'r':
