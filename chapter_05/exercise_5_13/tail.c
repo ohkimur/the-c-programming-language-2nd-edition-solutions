@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#define MAX_LINE_LENGTH 1000
 #define MAX_NR_OF_LINES 5000
 #define DEFAULT_NR_OF_LINES_TO_PRINT 10
 
@@ -73,11 +74,6 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
   char *current_line = NULL;
   char *current_line_copy = NULL;
 
-  if ((current_line = (char *)malloc(bufsize * sizeof(char))) == NULL)
-  {
-    exit(EXIT_FAILURE);
-  }
-
   while ((line_length = getline(&current_line, &bufsize, stdin)) != -1)
   {
     if (nr_of_lines >= max_nr_of_lines || (current_line_copy = (char *)malloc(line_length * sizeof(char))) == NULL)
@@ -91,6 +87,8 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
       line_ptr[nr_of_lines++] = current_line_copy;
     }
   }
+
+  free(current_line);
 
   return nr_of_lines;
 }
@@ -107,6 +105,7 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines_to_print, const size
   for (size_t i = start_pos; i < total_nr_of_lines; ++i)
   {
     puts(line_ptr[i]);
+    free(line_ptr[i]);
   }
 }
 
