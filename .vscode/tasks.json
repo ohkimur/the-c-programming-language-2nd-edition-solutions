@@ -6,7 +6,6 @@
       "label": "C/C++: clang build active file",
       "command": "/usr/bin/clang",
       "args": [
-        "-Wall",
         "-g",
         "${file}",
         "-o",
@@ -16,11 +15,25 @@
         "cwd": "${workspaceFolder}"
       },
       "problemMatcher": ["$gcc"],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
       "detail": "compiler: /usr/bin/clang"
+    },
+    {
+      "type": "cppbuild",
+      "label": "C/C++: gcc build active file",
+      "command": "/usr/bin/gcc",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "detail": "compiler: /usr/bin/gcc"
     }
   ]
 }
