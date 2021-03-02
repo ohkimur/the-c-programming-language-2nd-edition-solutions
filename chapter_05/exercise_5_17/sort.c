@@ -79,6 +79,7 @@ int main(int argc, char *argv[])
 
 int is_arg_list_valid(int argc, char *argv[])
 {
+  int max_nr_of_fields = 2;
   for (int i = 1; i < argc; ++i)
   {
     size_t arg_len = strlen(argv[i]);
@@ -102,9 +103,12 @@ int is_arg_list_valid(int argc, char *argv[])
         }
       }
     }
-    else if (!atoi(argv[i]))
+    else if (max_nr_of_fields && atoi(argv[i]))
     {
-      printf("%d\n", atoi(argv[i]));
+      --max_nr_of_fields;
+    }
+    else
+    {
       return 0;
     }
   }
