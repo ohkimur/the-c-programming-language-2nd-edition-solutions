@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#define MAX_LINE_LENGTH 1000
 #define MAX_NR_OF_LINES 5000
 #define DEFAULT_NR_OF_LINES_TO_PRINT 10
 
