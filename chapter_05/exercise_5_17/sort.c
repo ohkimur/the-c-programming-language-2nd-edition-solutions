@@ -4,7 +4,6 @@
 #include <ctype.h>
 
 #define MAX_NR_OF_LINES 5000
-#define MAX_NR_OF_FIELDS 2
 
 int parse_arg_list(int argc, char *argv[]);
 
@@ -48,7 +47,6 @@ int main(int argc, char *argv[])
 
 int parse_arg_list(int argc, char *argv[])
 {
-  int max_nr_of_fields = 0;
   for (int i = 1; i < argc; ++i)
   {
     size_t arg_len = strlen(argv[i]);
@@ -74,29 +72,16 @@ int parse_arg_list(int argc, char *argv[])
           order = -1;
           break;
 
-        case 'k':
-          max_nr_of_fields = MAX_NR_OF_FIELDS;
-          continue;
-
         default:
           return 0;
           break;
         }
       }
     }
-    else if (max_nr_of_fields && atoi(argv[i]))
-    {
-      --max_nr_of_fields;
-    }
     else
     {
       return 0;
     }
-  }
-
-  if (max_nr_of_fields >= MAX_NR_OF_FIELDS)
-  {
-    return 0;
   }
 
   return 1;
