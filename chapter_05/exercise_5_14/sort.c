@@ -50,7 +50,7 @@ int parse_arg_list(int argc, char *argv[])
     size_t arg_len = strlen(argv[i]);
     if (arg_len > 1 && argv[i][0] == '-')
     {
-      for (int j = 1; j < arg_len; ++j)
+      for (size_t j = 1; j < arg_len; ++j)
       {
         switch (argv[i][j])
         {
