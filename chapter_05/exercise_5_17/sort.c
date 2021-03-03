@@ -25,10 +25,11 @@ int fold = 0;      // 0 case sensitive, 1 case insensitive
 int directory = 0; // 0 normal, 1 directory
 int (*comp)(const char *, const char *) = estrcmp;
 
-long field_index[MAX_NR_OF_FIELDS];
-int field_order[MAX_NR_OF_FIELDS];
-int field_fold[MAX_NR_OF_FIELDS];
-int field_directory[MAX_NR_OF_FIELDS];
+long fields_index[MAX_NR_OF_FIELDS];
+int (*fields_comp[MAX_NR_OF_FIELDS])(const char *, const char *);
+int fields_order[MAX_NR_OF_FIELDS];
+int fields_fold[MAX_NR_OF_FIELDS];
+int fields_directory[MAX_NR_OF_FIELDS];
 
 int main(int argc, char *argv[])
 {
@@ -40,10 +41,10 @@ int main(int argc, char *argv[])
 
   for (size_t i = 0; i < argc - 1; i++)
   {
-    printf("%ld\n", field_index[i]);
-    printf("%d\n", field_order[i]);
-    printf("%d\n", field_fold[i]);
-    printf("%d\n", field_directory[i]);
+    printf("%ld\n", fields_index[i]);
+    printf("%d\n", fields_order[i]);
+    printf("%d\n", fields_fold[i]);
+    printf("%d\n", fields_directory[i]);
     putchar('\n');
   }
 
@@ -73,7 +74,7 @@ int parse_arg_list(int argc, char *argv[])
     {
       for (size_t j = 1; j < arg_len; ++j)
       {
-        if (isdigit(argv[i][j]) && !field_index[i - 1])
+        if (isdigit(argv[i][j]) && !fields_index[i - 1])
         {
           size_t k = 0;
           char temp[LONG_MAX_NR_OF_DIGITS];
@@ -82,7 +83,7 @@ int parse_arg_list(int argc, char *argv[])
             temp[k++] = argv[i][j++];
           }
           temp[k] = '\0';
-          field_index[i - 1] = atol(temp);
+          fields_index[i - 1] = atol(temp);
         }
         else
         {
@@ -111,12 +112,14 @@ int parse_arg_list(int argc, char *argv[])
         }
       }
 
-      field_order[i - 1] = order;
-      field_fold[i - 1] = fold;
-      field_directory[i - 1] = directory;
+      fields_comp[i - 1] = comp;
+      fields_order[i - 1] = order;
+      fields_fold[i - 1] = fold;
+      fields_directory[i - 1] = directory;
 
       if (argc > 2)
       {
+        comp = estrcmp;
         order = 1;
         fold = 0;
         directory = 0;
