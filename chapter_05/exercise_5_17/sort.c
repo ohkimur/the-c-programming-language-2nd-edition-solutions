@@ -12,6 +12,7 @@
 
 int parse_arg_list(int argc, char *argv[]);
 
+char *substr(const char *s, size_t start, size_t end);
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
@@ -132,6 +133,26 @@ int parse_arg_list(int argc, char *argv[])
   }
 
   return 1;
+}
+
+char *substr(const char *s, size_t start, size_t end)
+{
+  if (start > end)
+  {
+    return NULL;
+  }
+
+  const size_t len = end - start;
+  char *dest = (char *)malloc(sizeof(char) * (len + 1));
+
+  for (size_t i = start; i < end && (s[i] != '\n'); ++i)
+  {
+    *dest = s[i];
+    ++dest;
+  }
+  dest[len + 1] = '\0';
+
+  return dest - len;
 }
 
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
