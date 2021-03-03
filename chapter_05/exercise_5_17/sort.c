@@ -12,6 +12,7 @@
 
 int parse_arg_list(int argc, char *argv[]);
 
+size_t str_nth_blank_pos(const char *s, size_t n);
 char *substr(const char *s, size_t start, size_t end);
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines);
@@ -133,6 +134,31 @@ int parse_arg_list(int argc, char *argv[])
   }
 
   return 1;
+}
+
+size_t str_nth_blank_pos(const char *s, size_t n)
+{
+  size_t pos = 0;
+  while (n && *s != '\0')
+  {
+    if (*s == ' ')
+    {
+      do
+      {
+        ++pos;
+        ++s;
+      } while (*s == ' ');
+
+      --n;
+    }
+    else
+    {
+      ++pos;
+      ++s;
+    }
+  }
+
+  return pos;
 }
 
 char *substr(const char *s, size_t start, size_t end)
