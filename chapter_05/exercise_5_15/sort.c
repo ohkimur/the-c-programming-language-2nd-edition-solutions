@@ -11,11 +11,13 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
 void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
 int numcmp(const char *s1, const char *s2);
+int estrcmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
-void eqsort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order);
+void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
 
-int order = 1; // 1 ascendent, -1 descendent
-int (*comp)(const char *, const char *) = strcmp;
+int order = 1;          // 1 ascendent, -1 descendent
+int case_sensitive = 0; // 0 case sensitive, 1 case insensitive
+int (*comp)(const char *, const char *) = estrcmp;
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +32,7 @@ int main(int argc, char *argv[])
 
   if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1)
   {
-    eqsort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))comp, order);
+    quick_sort((void **)line_ptr, 0, nr_of_lines - 1, (int (*)(void *, void *))comp);
     write_lines(line_ptr, nr_of_lines);
   }
   else
@@ -58,7 +60,7 @@ int parse_arg_list(int argc, char *argv[])
           break;
 
         case 'f':
-          comp = strcasecmp;
+          case_sensitive = 1;
           break;
 
         case 'r':
@@ -124,14 +126,19 @@ int numcmp(const char *s1, const char *s2)
 
   if (nr1 < nr2)
   {
-    return -1;
+    return order * -1;
   }
   else if (nr1 > nr2)
   {
-    return 1;
+    return order * 1;
   }
 
   return 0;
+}
+
+int estrcmp(const char *s1, const char *s2)
+{
+  return order * (case_sensitive ? strcasecmp(s1, s2) : strcmp(s1, s2));
 }
 
 void swap(void *v[], size_t i, size_t j)
@@ -142,7 +149,7 @@ void swap(void *v[], size_t i, size_t j)
   v[j] = temp;
 }
 
-void eqsort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), int order)
+void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
 {
   if ((long)start >= (long)end)
   {
@@ -154,15 +161,15 @@ void eqsort(void *v[], size_t start, size_t end, int (*comp)(void *, void *), in
   size_t last = start;
   for (size_t i = start + 1; i <= end; ++i)
   {
-    if (order * (*comp)(v[i], v[start]) < 0)
+    if ((*comp)(v[i], v[start]) < 0)
     {
       swap(v, ++last, i);
     }
   }
 
   swap(v, start, last);
-  eqsort(v, start, last - 1, comp, order);
-  eqsort(v, last + 1, end, comp, order);
+  quick_sort(v, start, last - 1, comp);
+  quick_sort(v, last + 1, end, comp);
 }
 
 // NOTE: run: ./sort -f < file_in.txt
