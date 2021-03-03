@@ -34,10 +34,13 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  size_t i = 0;
-  while (field_index[i])
+  for (size_t i = 0; i < argc - 1; i++)
   {
-    printf("%ld\n", field_index[i++]);
+    printf("%ld\n", field_index[i]);
+    printf("%d\n", field_order[i]);
+    printf("%d\n", field_fold[i]);
+    printf("%d\n", field_directory[i]);
+    putchar('\n');
   }
 
   size_t nr_of_lines;
@@ -66,7 +69,7 @@ int parse_arg_list(int argc, char *argv[])
     {
       for (size_t j = 1; j < arg_len; ++j)
       {
-        if (!field_index[i - 1])
+        if (isdigit(argv[i][j] && !field_index[i - 1]))
         {
           size_t k = 0;
           char temp[100];
@@ -103,6 +106,14 @@ int parse_arg_list(int argc, char *argv[])
           }
         }
       }
+
+      field_order[i - 1] = order;
+      field_fold[i - 1] = fold;
+      field_directory[i - 1] = directory;
+
+      order = 1;
+      fold = 0;
+      directory = 0;
     }
     else
     {
