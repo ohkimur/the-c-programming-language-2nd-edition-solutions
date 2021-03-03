@@ -188,7 +188,7 @@ int estrcmp(const char *s1, const char *s2)
    * loop end
    */
 
-  while (*s1 != ' ' && *s2 != '\0')
+  while (*s1 != '\0' && *s2 != '\0')
   {
     if (directory)
     {
