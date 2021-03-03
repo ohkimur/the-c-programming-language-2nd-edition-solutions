@@ -180,7 +180,15 @@ int numcmp(const char *s1, const char *s2)
 
 int estrcmp(const char *s1, const char *s2)
 {
-  while (*s1 != '\0' && *s2 != '\0')
+  /**
+   * loop start
+   * 1. Increment the string pointer to the fld_idx - 1
+   * 2. Sort until the next blank (with the fld specific opts)
+   * flx_idx += 1
+   * loop end
+   */
+
+  while (*s1 != ' ' && *s2 != '\0')
   {
     if (directory)
     {
