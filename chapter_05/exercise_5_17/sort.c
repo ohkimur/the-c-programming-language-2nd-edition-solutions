@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#define MAX_NR_OF_FIELDS 100
 #define MAX_NR_OF_LINES 5000
 
 int parse_arg_list(int argc, char *argv[]);
@@ -20,12 +21,23 @@ int fold = 0;      // 0 case sensitive, 1 case insensitive
 int directory = 0; // 0 normal, 1 directory
 int (*comp)(const char *, const char *) = estrcmp;
 
+long field_index[MAX_NR_OF_FIELDS];
+int field_order[MAX_NR_OF_FIELDS];
+int field_fold[MAX_NR_OF_FIELDS];
+int field_directory[MAX_NR_OF_FIELDS];
+
 int main(int argc, char *argv[])
 {
   if (!parse_arg_list(argc, argv))
   {
     puts("ERROR: Invalid arguments.");
     return EXIT_FAILURE;
+  }
+
+  size_t i = 0;
+  while (field_index[i])
+  {
+    printf("%ld\n", field_index[i++]);
   }
 
   size_t nr_of_lines;
@@ -52,29 +64,43 @@ int parse_arg_list(int argc, char *argv[])
     size_t arg_len = strlen(argv[i]);
     if (arg_len > 1 && argv[i][0] == '-')
     {
-      for (int j = 1; j < arg_len; ++j)
+      for (size_t j = 1; j < arg_len; ++j)
       {
-        switch (argv[i][j])
+        if (!field_index[i - 1])
         {
-        case 'n':
-          comp = numcmp;
-          break;
+          size_t k = 0;
+          char temp[100];
+          while (isdigit(argv[i][j]) && j < arg_len)
+          {
+            temp[k++] = argv[i][j++];
+          }
+          temp[k] = '\0';
+          field_index[i - 1] = atol(temp);
+        }
+        else
+        {
+          switch (argv[i][j])
+          {
+          case 'n':
+            comp = numcmp;
+            break;
 
-        case 'f':
-          fold = 1;
-          break;
+          case 'f':
+            fold = 1;
+            break;
 
-        case 'd':
-          directory = 1;
-          break;
+          case 'd':
+            directory = 1;
+            break;
 
-        case 'r':
-          order = -1;
-          break;
+          case 'r':
+            order = -1;
+            break;
 
-        default:
-          return 0;
-          break;
+          default:
+            return 0;
+            break;
+          }
         }
       }
     }
