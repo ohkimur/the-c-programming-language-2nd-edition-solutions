@@ -15,8 +15,8 @@ int estrcmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
 void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
 
-int order = 1;          // 1 ascendent, -1 descendent
-int case_sensitive = 0; // 0 case sensitive, 1 case insensitive
+int order = 1; // 1 ascendent, -1 descendent
+int fold = 0;  // 0 case sensitive, 1 case insensitive
 int (*comp)(const char *, const char *) = estrcmp;
 
 int main(int argc, char *argv[])
@@ -60,7 +60,7 @@ int parse_arg_list(int argc, char *argv[])
           break;
 
         case 'f':
-          case_sensitive = 1;
+          fold = 1;
           break;
 
         case 'r':
@@ -138,7 +138,7 @@ int numcmp(const char *s1, const char *s2)
 
 int estrcmp(const char *s1, const char *s2)
 {
-  return order * (case_sensitive ? strcasecmp(s1, s2) : strcmp(s1, s2));
+  return order * (fold ? strcasecmp(s1, s2) : strcmp(s1, s2));
 }
 
 void swap(void *v[], size_t i, size_t j)
