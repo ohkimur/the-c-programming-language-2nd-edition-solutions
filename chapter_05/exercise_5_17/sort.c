@@ -2,9 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <limits.h>
+#include <math.h>
 
 #define MAX_NR_OF_FIELDS 100
 #define MAX_NR_OF_LINES 5000
+
+#define LONG_MAX_NR_OF_DIGITS (size_t)(floor(log10(labs(LONG_MAX))) + 1)
 
 int parse_arg_list(int argc, char *argv[]);
 
@@ -69,11 +73,11 @@ int parse_arg_list(int argc, char *argv[])
     {
       for (size_t j = 1; j < arg_len; ++j)
       {
-        if (isdigit(argv[i][j] && !field_index[i - 1]))
+        if (isdigit(argv[i][j]) && !field_index[i - 1])
         {
           size_t k = 0;
-          char temp[100];
-          while (isdigit(argv[i][j]) && j < arg_len)
+          char temp[LONG_MAX_NR_OF_DIGITS];
+          while (isdigit(argv[i][j]) && j < arg_len && k < LONG_MAX_NR_OF_DIGITS)
           {
             temp[k++] = argv[i][j++];
           }
