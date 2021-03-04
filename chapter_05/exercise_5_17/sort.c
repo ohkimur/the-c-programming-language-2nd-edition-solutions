@@ -119,15 +119,20 @@ int parse_arg_list(int argc, char *argv[])
       fields_fold[i - 1] = fold;
       fields_directory[i - 1] = directory;
 
-      if (argc > 2)
-      {
-        comp = estrcmp;
-        order = 1;
-        fold = 0;
-        directory = 0;
-      }
+      comp = estrcmp;
+      order = 1;
+      fold = 0;
+      directory = 0;
     }
     else
+    {
+      return 0;
+    }
+  }
+
+  for (int i = 0; argc > 2 && i < argc - 1; ++i)
+  {
+    if (!fields_index[i])
     {
       return 0;
     }
