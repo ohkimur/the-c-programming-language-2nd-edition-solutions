@@ -301,10 +301,6 @@ int fieldscmp(const char *s1, const char *s2)
 
     int comp_result = comp(field_s1, field_s2);
 
-    puts(field_s1);
-    puts(field_s2);
-    putchar('\n');
-
     free(field_s1);
     free(field_s2);
 
