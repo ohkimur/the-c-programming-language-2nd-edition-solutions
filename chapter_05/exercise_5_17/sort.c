@@ -156,13 +156,13 @@ size_t str_nth_blank_pos(const char *s, size_t n)
   size_t pos = 0;
   while (n && *s != '\0')
   {
-    if (*s == ' ')
+    if (*s == ' ' || *s == '\t')
     {
       do
       {
         ++pos;
         ++s;
-      } while (*s == ' ');
+      } while (*s == ' ' || *s == '\t');
 
       --n;
     }
