@@ -277,15 +277,38 @@ int estrcmp(const char *s1, const char *s2)
     }
   }
 
-  printf("order: %d\n", order);
-  printf("directory: %d\n", directory);
-  printf("fold: %d\n\n", fold);
   return order * (*s1 - *s2);
 }
 
 int fieldscmp(const char *s1, const char *s2)
 {
-  // printf("nr_of_fields: %d\n", nr_of_fields);
+  int i = 0;
+  while (i < nr_of_fields)
+  {
+    size_t start_s1 = str_nth_blank_pos(s1, fields_index[i] - 1);
+    size_t end_s1 = str_nth_blank_pos(s1, fields_index[i]);
+    char *field_s1 = substr(s1, start_s1, end_s1);
+
+    size_t start_s2 = str_nth_blank_pos(s2, fields_index[i] - 1);
+    size_t end_s2 = str_nth_blank_pos(s2, fields_index[i]);
+    char *field_s2 = substr(s2, start_s2, end_s2);
+
+    comp = fields_comp[i];
+    order = fields_order[i];
+    fold = fields_fold[i];
+    directory = fields_directory[i];
+
+    int comp_result = comp(field_s1, field_s2);
+    if (comp_result == 0)
+    {
+      ++i;
+    }
+    else
+    {
+      return comp_result;
+    }
+  }
+
   return 0;
 }
 
