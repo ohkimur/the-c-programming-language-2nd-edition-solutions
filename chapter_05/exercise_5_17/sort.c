@@ -266,18 +266,19 @@ int estrcmp(const char *s1, const char *s2)
       }
     }
 
-    if (fold ? tolower(*s1) == tolower(*s2) : *s1 == *s2)
+    int result = fold ? tolower(*s1) - tolower(*s2) : *s1 - *s2;
+    if (result == 0)
     {
       ++s1;
       ++s2;
     }
     else
     {
-      break;
+      return order * result;
     }
   }
 
-  return order * (*s1 - *s2);
+  return 0;
 }
 
 int fieldscmp(const char *s1, const char *s2)
@@ -299,6 +300,13 @@ int fieldscmp(const char *s1, const char *s2)
     directory = fields_directory[i];
 
     int comp_result = comp(field_s1, field_s2);
+
+    puts(field_s1);
+    puts(field_s2);
+    // free(field_s1);
+    // free(field_s2);
+    printf("%d\n", comp_result);
+
     if (comp_result == 0)
     {
       ++i;
