@@ -178,7 +178,7 @@ size_t str_nth_blank_pos(const char *s, size_t n)
 
 char *substr(const char *s, size_t start, size_t end)
 {
-  if (start > end)
+  if (start > end && end < strlen(s))
   {
     return NULL;
   }
