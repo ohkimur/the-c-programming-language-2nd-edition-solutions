@@ -185,15 +185,10 @@ char *substr(const char *s, size_t start, size_t end)
 
   const size_t len = end - start;
   char *dest = (char *)malloc(sizeof(char) * (len + 1));
-
-  for (size_t i = start; i < end && (s[i] != '\n'); ++i)
-  {
-    *dest = s[i];
-    ++dest;
-  }
+  strncpy(dest, s + start, end);
   dest[len + 1] = '\0';
 
-  return dest - len;
+  return dest;
 }
 
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
@@ -303,9 +298,9 @@ int fieldscmp(const char *s1, const char *s2)
 
     puts(field_s1);
     puts(field_s2);
-    // free(field_s1);
-    // free(field_s2);
-    printf("%d\n", comp_result);
+
+    free(field_s1);
+    free(field_s2);
 
     if (comp_result == 0)
     {
