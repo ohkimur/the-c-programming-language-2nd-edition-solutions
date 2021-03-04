@@ -19,6 +19,7 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines);
 
 int numcmp(const char *s1, const char *s2);
 int estrcmp(const char *s1, const char *s2);
+int fieldscmp(const char *s1, const char *s2);
 void swap(void *v[], size_t i, size_t j);
 void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
 
@@ -69,6 +70,7 @@ int main(int argc, char *argv[])
 
 int parse_arg_list(int argc, char *argv[])
 {
+  int nr_of_fields = 0;
   for (int i = 1; i < argc; ++i)
   {
     size_t arg_len = strlen(argv[i]);
@@ -86,6 +88,7 @@ int parse_arg_list(int argc, char *argv[])
           }
           temp[k] = '\0';
           fields_index[i - 1] = atol(temp);
+          ++nr_of_fields;
         }
         else
         {
@@ -136,6 +139,11 @@ int parse_arg_list(int argc, char *argv[])
     {
       return 0;
     }
+  }
+
+  if (nr_of_fields)
+  {
+    comp = fieldscmp;
   }
 
   return 1;
@@ -268,6 +276,12 @@ int estrcmp(const char *s1, const char *s2)
   }
 
   return order * (*s1 - *s2);
+}
+
+int fieldscmp(const char *s1, const char *s2)
+{
+  puts("I am called\n");
+  return 0;
 }
 
 void swap(void *v[], size_t i, size_t j)
