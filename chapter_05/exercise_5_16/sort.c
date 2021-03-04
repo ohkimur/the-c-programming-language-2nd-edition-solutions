@@ -157,18 +157,20 @@ int estrcmp(const char *s1, const char *s2)
       }
     }
 
-    if (fold ? tolower(*s1) == tolower(*s2) : *s1 == *s2)
+    int result = fold ? tolower(*s1) - tolower(*s2) : *s1 - *s2;
+    if (result == 0)
     {
+      printf("%d\n", fold);
       ++s1;
       ++s2;
     }
     else
     {
-      break;
+      return order * result;
     }
   }
 
-  return order * (*s1 - *s2);
+  return 0;
 }
 
 void swap(void *v[], size_t i, size_t j)
