@@ -178,17 +178,22 @@ size_t str_nth_blank_pos(const char *s, size_t n)
 
 char *substr(const char *s, size_t start, size_t end)
 {
-  if (start > end && end < strlen(s))
+  if (start > end)
   {
     return NULL;
   }
 
   const size_t len = end - start;
   char *dest = (char *)malloc(sizeof(char) * (len + 1));
-  strncpy(dest, s + start, end);
-  dest[len + 1] = '\0';
 
-  return dest;
+  for (size_t i = start; i < end && s[i] != '\0'; ++i)
+  {
+    *dest = s[i];
+    ++dest;
+  }
+  *dest = '\0';
+
+  return dest - len;
 }
 
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
@@ -298,6 +303,7 @@ int fieldscmp(const char *s1, const char *s2)
 
     puts(field_s1);
     puts(field_s2);
+    putchar('\n');
 
     free(field_s1);
     free(field_s2);
