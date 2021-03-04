@@ -43,11 +43,6 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  for (size_t i = 0; i < argc - 1; i++)
-  {
-    printf("%ld\t%d\t%d\t%d\n", fields_index[i], fields_order[i], fields_fold[i], fields_directory[i]);
-  }
-
   size_t nr_of_lines;
   char *line_ptr[MAX_NR_OF_LINES];
 
