@@ -160,7 +160,6 @@ int estrcmp(const char *s1, const char *s2)
     int result = fold ? tolower(*s1) - tolower(*s2) : *s1 - *s2;
     if (result == 0)
     {
-      printf("%d\n", fold);
       ++s1;
       ++s2;
     }
