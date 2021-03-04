@@ -143,7 +143,7 @@ int parse_arg_list(int argc, char *argv[])
   {
     comp = fieldscmp;
   }
-  else
+  else if (argc > 2)
   {
     return 0;
   }
