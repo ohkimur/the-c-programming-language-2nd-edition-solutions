@@ -28,6 +28,7 @@ int fold = 0;      // 0 case sensitive, 1 case insensitive
 int directory = 0; // 0 normal, 1 directory
 int (*comp)(const char *, const char *) = estrcmp;
 
+int nr_of_fields = 0;
 long fields_index[MAX_NR_OF_FIELDS];
 int (*fields_comp[MAX_NR_OF_FIELDS])(const char *, const char *);
 int fields_order[MAX_NR_OF_FIELDS];
@@ -44,11 +45,7 @@ int main(int argc, char *argv[])
 
   for (size_t i = 0; i < argc - 1; i++)
   {
-    printf("%ld\n", fields_index[i]);
-    printf("%d\n", fields_order[i]);
-    printf("%d\n", fields_fold[i]);
-    printf("%d\n", fields_directory[i]);
-    putchar('\n');
+    printf("%ld\t%d\t%d\t%d\n", fields_index[i], fields_order[i], fields_fold[i], fields_directory[i]);
   }
 
   size_t nr_of_lines;
@@ -70,7 +67,6 @@ int main(int argc, char *argv[])
 
 int parse_arg_list(int argc, char *argv[])
 {
-  int nr_of_fields = 0;
   for (int i = 1; i < argc; ++i)
   {
     size_t arg_len = strlen(argv[i]);
@@ -88,6 +84,8 @@ int parse_arg_list(int argc, char *argv[])
           }
           temp[k] = '\0';
           fields_index[i - 1] = atol(temp);
+
+          --j;
           ++nr_of_fields;
         }
         else
@@ -117,15 +115,23 @@ int parse_arg_list(int argc, char *argv[])
         }
       }
 
-      fields_comp[i - 1] = comp;
-      fields_order[i - 1] = order;
-      fields_fold[i - 1] = fold;
-      fields_directory[i - 1] = directory;
+      if (nr_of_fields || argc > 2)
+      {
+        if (!fields_index[i - 1])
+        {
+          return 0;
+        }
 
-      comp = estrcmp;
-      order = 1;
-      fold = 0;
-      directory = 0;
+        fields_comp[i - 1] = comp;
+        fields_order[i - 1] = order;
+        fields_fold[i - 1] = fold;
+        fields_directory[i - 1] = directory;
+
+        comp = estrcmp;
+        order = 1;
+        fold = 0;
+        directory = 0;
+      }
     }
     else
     {
@@ -133,17 +139,13 @@ int parse_arg_list(int argc, char *argv[])
     }
   }
 
-  for (int i = 0; argc > 2 && i < argc - 1; ++i)
-  {
-    if (!fields_index[i])
-    {
-      return 0;
-    }
-  }
-
-  if (nr_of_fields)
+  if (nr_of_fields && nr_of_fields == argc - 1)
   {
     comp = fieldscmp;
+  }
+  else
+  {
+    return 0;
   }
 
   return 1;
@@ -275,12 +277,15 @@ int estrcmp(const char *s1, const char *s2)
     }
   }
 
+  printf("order: %d\n", order);
+  printf("directory: %d\n", directory);
+  printf("fold: %d\n\n", fold);
   return order * (*s1 - *s2);
 }
 
 int fieldscmp(const char *s1, const char *s2)
 {
-  puts("I am called\n");
+  // printf("nr_of_fields: %d\n", nr_of_fields);
   return 0;
 }
 
