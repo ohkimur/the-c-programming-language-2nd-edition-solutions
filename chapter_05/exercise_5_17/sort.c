@@ -343,4 +343,4 @@ void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *)
   quick_sort(v, last + 1, end, comp);
 }
 
-// NOTE: run: ./sort -df < file_in.txt
+// NOTE: run: ./sort -3nr -2f < file_in.txt
