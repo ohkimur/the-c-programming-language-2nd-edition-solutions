@@ -5,10 +5,15 @@
 #include <limits.h>
 #include <math.h>
 
+#define MAX_NR_OF_LINES 5000
+
+#define FIELD_OPTION_INDEX 0
+#define FIELD_OPTION_ORDER 1
+#define FIELD_OPTION_FOLD 2
+#define FIELD_OPTION_DIRECTORY 3
+
 #define MAX_NR_OF_FIELDS 100
 #define NR_OF_FIELD_OPTIONS 4
-
-#define MAX_NR_OF_LINES 5000
 
 #define INT_MAX_NR_OF_DIGITS (size_t)(floor(log10(labs(INT_MAX))) + 1)
 
@@ -32,12 +37,6 @@ int (*comp)(const char *, const char *) = estrcmp;
 
 int nr_of_fields = 0;
 int (*fields_comp[MAX_NR_OF_FIELDS])(const char *, const char *);
-
-#define FIELD_OPTION_INDEX 0
-#define FIELD_OPTION_ORDER 1
-#define FIELD_OPTION_FOLD 2
-#define FIELD_OPTION_DIRECTORY 3
-
 int fields_options[MAX_NR_OF_FIELDS][NR_OF_FIELD_OPTIONS];
 
 int main(int argc, char *argv[])
