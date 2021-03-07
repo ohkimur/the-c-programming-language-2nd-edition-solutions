@@ -13,7 +13,6 @@ int main(void)
   upper = 300;
   step = 20;
 
-  // Printing a heading abouve the table
   printf("Celsius\tFahr\n");
   printf("---------------\n");
 
