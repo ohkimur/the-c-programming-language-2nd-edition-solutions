@@ -34,7 +34,7 @@ int main(void)
 int get_token(void)
 {
   int c;
-  char *p = token;
+  char *token_p = token;
 
   while ((c = getc(stdin)) == ' ' || c == '\t')
     ;
@@ -54,20 +54,20 @@ int get_token(void)
   }
   else if (c == '[')
   {
-    *p++ = c;
-    while ((*p++ = getc(stdin)) != ']')
+    *token_p++ = c;
+    while ((*token_p++ = getc(stdin)) != ']')
       ;
-    *p = '\0';
+    *token_p = '\0';
     return token_type = BRACKETS;
   }
   else if (isalpha(c))
   {
-    *p++ = c;
+    *token_p++ = c;
     while (isalnum(c = getc(stdin)))
     {
-      *p++ = c;
+      *token_p++ = c;
     }
-    *p = '\0';
+    *token_p = '\0';
     ungetc(c, stdin);
     return token_type = NAME;
   }
