@@ -14,17 +14,17 @@
 #define VARNUM 26
 char var = '0';
 
-typedef enum _BOOLEAN
+enum boolean
 {
-  false,
-  true
-} bool;
+  FALSE,
+  TRUE
+};
 
 int getop(char[]);
 
 void push(double f);
 double pop(void);
-bool is_empty(void);
+int is_empty(void);
 void view_head(void);
 void duplicate(void);
 void swap(void);
@@ -170,14 +170,14 @@ double pop(void)
   return 0.0;
 }
 
-bool is_empty(void)
+int is_empty(void)
 {
   if (sp > 0)
   {
-    return false;
+    return FALSE;
   }
 
-  return true;
+  return TRUE;
 }
 
 void view_head(void)
