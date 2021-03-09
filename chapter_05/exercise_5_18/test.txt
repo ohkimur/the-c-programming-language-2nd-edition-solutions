@@ -4,4 +4,4 @@ int *daytab[13]
 void *comp()
 void (*comp)()
 char (*(*x())[])()
-char (*(*x())())[5]
+char (*(*x[3])())[5]
