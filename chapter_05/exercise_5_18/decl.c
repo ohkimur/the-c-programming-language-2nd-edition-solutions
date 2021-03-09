@@ -133,6 +133,7 @@ void dir_decl(void)
   if (global_token_type == PAREN_OPEN)
   {
     decl();
+
     if (global_token_type != PAREN_CLOSE)
     {
       puts("ERROR: missing )");

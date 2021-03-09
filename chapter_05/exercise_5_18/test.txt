@@ -8,6 +8,6 @@ char (*(*x[ 3     ] ) ( ) )  [    5 ]
 char a
 int b
 int a
-sfd fasdf (
+sfd fasdf (    
 int b
 void * comp( )
