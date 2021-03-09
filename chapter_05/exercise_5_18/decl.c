@@ -46,12 +46,16 @@ int get_token(void)
 
   if (c == '(')
   {
-    if ((c = getc(stdin)) == ')')
+    while ((c = getc(stdin)) == ' ' || c == '\t')
+      ;
+
+    if (c == ')')
     {
       strcpy(token, "()");
       return token_type = PARENS;
     }
     ungetc(c, stdin);
+
     return token_type = '(';
   }
   else if (c == '[')
