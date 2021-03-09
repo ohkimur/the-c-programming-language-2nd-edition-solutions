@@ -8,7 +8,7 @@
 #define MAX_NR_OF_LINES 5000
 
 #define MAX_NR_OF_FIELDS 100
-#define NR_OF_FIELD_OPTIONS 4
+#define MAX_NR_OF_FIELD_OPTIONS 4
 
 #define INT_MAX_NR_OF_DIGITS (size_t)(floor(log10(labs(INT_MAX))) + 1)
 
@@ -40,7 +40,7 @@ enum field_option
 
 int nr_of_fields = 0;
 int (*fields_comp[MAX_NR_OF_FIELDS])(const char *, const char *);
-int fields_options[MAX_NR_OF_FIELDS][NR_OF_FIELD_OPTIONS];
+int fields_options[MAX_NR_OF_FIELDS][MAX_NR_OF_FIELD_OPTIONS];
 
 int main(int argc, char *argv[])
 {
