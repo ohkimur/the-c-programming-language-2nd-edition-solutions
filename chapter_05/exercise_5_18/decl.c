@@ -6,6 +6,8 @@
 #define MAX_TOKEN_LEN 100
 
 int get_token(void);
+void decl(void);
+void dir_decl(void);
 
 enum
 {
@@ -27,7 +29,7 @@ int main(void)
   {
     strcpy(data_type, token);
     out[0] = '\0';
-
+    decl();
     printf("%s: %s %s\n", name, out, data_type);
   }
 
@@ -49,11 +51,8 @@ int get_token(void)
       strcpy(token, "()");
       return token_type = PARENS;
     }
-    else
-    {
-      ungetc(c, stdin);
-      return token_type = c;
-    }
+    ungetc(c, stdin);
+    return token_type = '(';
   }
   else if (c == '[')
   {
@@ -76,4 +75,55 @@ int get_token(void)
   }
 
   return token_type = c;
+}
+
+void decl(void)
+{
+  int nr_of_stars = 0;
+  while (get_token() == '*')
+  {
+    ++nr_of_stars;
+  }
+
+  dir_decl();
+
+  while (nr_of_stars--)
+  {
+    strcat(out, " pointer to");
+  }
+}
+
+void dir_decl(void)
+{
+  if (token_type == '(')
+  {
+    decl();
+    if (token_type != ')')
+    {
+      puts("ERROR: missing )\n");
+    }
+  }
+  else if (token_type == NAME)
+  {
+    strcpy(name, token);
+  }
+  else
+  {
+    puts("ERROR: expected name or (decl)\n");
+  }
+
+  int type;
+  while ((type = get_token()) == PARENS || type == BRACKETS)
+  {
+    if (type == PARENS)
+    {
+      strcat(out, " function returning");
+    }
+    else if (type == BRACKETS)
+    {
+      strcat(out, " array");
+      strcat(out, token);
+      strcat(out, " of");
+    }
+  }
 }
