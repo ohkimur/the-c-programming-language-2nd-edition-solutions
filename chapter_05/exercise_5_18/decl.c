@@ -19,13 +19,17 @@ int token_type;
 char token[MAX_TOKEN_LEN];
 char name[MAX_TOKEN_LEN];
 char data_type[MAX_TOKEN_LEN];
-char out[MAX_TOKEN_LEN];
+char out[1000];
 
 int main(void)
 {
-  while (get_token() != EOF)
+  int current_token_type;
+  while ((current_token_type = get_token()) != EOF)
   {
-    printf("%s\t%s\n", token, name);
+    strcpy(data_type, token);
+    out[0] = '\0';
+
+    printf("%s: %s %s\n", name, out, data_type);
   }
 
   return EXIT_SUCCESS;
@@ -49,7 +53,7 @@ int get_token(void)
     else
     {
       ungetc(c, stdin);
-      return token_type = '(';
+      return token_type = c;
     }
   }
   else if (c == '[')
