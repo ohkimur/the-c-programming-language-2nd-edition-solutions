@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define MAX_TOKEN_LEN 100
+#define MAX_OUT_LEN 1000
 
 int get_token(void);
 void decl(void);
@@ -21,7 +22,7 @@ int token_type;
 char token[MAX_TOKEN_LEN];
 char name[MAX_TOKEN_LEN];
 char data_type[MAX_TOKEN_LEN];
-char out[1000];
+char out[MAX_OUT_LEN];
 
 int main(void)
 {
