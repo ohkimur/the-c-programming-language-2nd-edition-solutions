@@ -13,7 +13,11 @@ void dir_decl(void);
 enum
 {
   NAME,
+  PAREN_OPEN = '(',
+  PAREN_CLOSE = ')',
   PARENS,
+  BRACKET_OPEN = '[',
+  BRACKET_CLOSE = ']',
   BRACKETS
 };
 
@@ -38,7 +42,7 @@ int main(void)
       puts("ERROR: incorrect syntax.");
     }
 
-    printf("%s: %s %s\n", name, out, data_type);
+    printf("%s:\t%s %s\n", name, out, data_type);
   }
 
   return EXIT_SUCCESS;
@@ -52,24 +56,24 @@ int get_token(void)
   while ((c = getc(stdin)) == ' ' || c == '\t')
     ;
 
-  if (c == '(')
+  if (c == PAREN_OPEN)
   {
     while ((c = getc(stdin)) == ' ' || c == '\t')
       ;
 
-    if (c == ')')
+    if (c == PAREN_CLOSE)
     {
       strcpy(token, "()");
       return token_type = PARENS;
     }
     ungetc(c, stdin);
 
-    return token_type = '(';
+    return token_type = PAREN_OPEN;
   }
-  else if (c == '[')
+  else if (c == BRACKET_OPEN)
   {
     *token_p++ = c;
-    while ((*token_p++ = getc(stdin)) != ']')
+    while ((*token_p++ = getc(stdin)) != BRACKET_CLOSE)
     {
       if (*(token_p - 1) == ' ' || *(token_p - 1) == '\t')
       {
@@ -112,10 +116,10 @@ void decl(void)
 
 void dir_decl(void)
 {
-  if (token_type == '(')
+  if (token_type == PAREN_OPEN)
   {
     decl();
-    if (token_type != ')')
+    if (token_type != PAREN_CLOSE)
     {
       puts("ERROR: missing )");
     }
