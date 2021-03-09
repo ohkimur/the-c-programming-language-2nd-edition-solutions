@@ -29,7 +29,14 @@ int main(void)
   {
     strcpy(data_type, token);
     out[0] = '\0';
+
     decl();
+
+    if (token_type != '\n')
+    {
+      puts("ERROR: incorrect syntax.");
+    }
+
     printf("%s: %s %s\n", name, out, data_type);
   }
 
@@ -109,7 +116,7 @@ void dir_decl(void)
     decl();
     if (token_type != ')')
     {
-      puts("ERROR: missing )\n");
+      puts("ERROR: missing )");
     }
   }
   else if (token_type == NAME)
@@ -118,7 +125,7 @@ void dir_decl(void)
   }
   else
   {
-    puts("ERROR: expected name or (decl)\n");
+    puts("ERROR: expected name or (decl)");
   }
 
   int type;

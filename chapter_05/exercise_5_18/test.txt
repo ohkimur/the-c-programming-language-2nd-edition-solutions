@@ -3,5 +3,7 @@ int   ( * daytab ) [ 13]
 int *daytab[13]
 void * comp(  )
 void (*comp)()
-char (*(*x())[])( )
-char (*(*x[ 3     ])())[    5 ]
+char (*(*      x()     )[])( )
+char (*(*x[ 3     ] ) ( ) )  [    5 ]
+char a
+unsigned long b
