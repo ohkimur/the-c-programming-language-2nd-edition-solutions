@@ -7,11 +7,6 @@
 
 #define MAX_NR_OF_LINES 5000
 
-#define FIELD_OPTION_INDEX 0
-#define FIELD_OPTION_ORDER 1
-#define FIELD_OPTION_FOLD 2
-#define FIELD_OPTION_DIRECTORY 3
-
 #define MAX_NR_OF_FIELDS 100
 #define NR_OF_FIELD_OPTIONS 4
 
@@ -34,6 +29,14 @@ int order = 1;     // 1 ascendent, -1 descendent
 int fold = 0;      // 0 case sensitive, 1 case insensitive
 int directory = 0; // 0 normal, 1 directory
 int (*comp)(const char *, const char *) = estrcmp;
+
+enum field_option
+{
+  INDEX,
+  ORDER,
+  FOLD,
+  DIRECTORY
+};
 
 int nr_of_fields = 0;
 int (*fields_comp[MAX_NR_OF_FIELDS])(const char *, const char *);
@@ -73,7 +76,7 @@ int parse_arg_list(int argc, char *argv[])
     {
       for (size_t j = 1; j < arg_len; ++j)
       {
-        if (isdigit(argv[i][j]) && !fields_options[i - 1][FIELD_OPTION_INDEX])
+        if (isdigit(argv[i][j]) && !fields_options[i - 1][INDEX])
         {
           char field_index_str[INT_MAX_NR_OF_DIGITS];
 
@@ -84,7 +87,7 @@ int parse_arg_list(int argc, char *argv[])
           }
           field_index_str[k] = '\0';
 
-          fields_options[i - 1][FIELD_OPTION_INDEX] = atoi(field_index_str);
+          fields_options[i - 1][INDEX] = atoi(field_index_str);
 
           --j;
           ++nr_of_fields;
@@ -118,15 +121,15 @@ int parse_arg_list(int argc, char *argv[])
 
       if (nr_of_fields || argc > 2)
       {
-        if (!fields_options[i - 1][FIELD_OPTION_INDEX])
+        if (!fields_options[i - 1][INDEX])
         {
           return 0;
         }
 
         fields_comp[i - 1] = comp;
-        fields_options[i - 1][FIELD_OPTION_ORDER] = order;
-        fields_options[i - 1][FIELD_OPTION_FOLD] = fold;
-        fields_options[i - 1][FIELD_OPTION_DIRECTORY] = directory;
+        fields_options[i - 1][ORDER] = order;
+        fields_options[i - 1][FOLD] = fold;
+        fields_options[i - 1][DIRECTORY] = directory;
 
         comp = estrcmp;
         order = 1;
@@ -287,18 +290,18 @@ int fieldscmp(const char *s1, const char *s2)
   int i = 0;
   while (i < nr_of_fields)
   {
-    size_t start_s1 = str_nth_blank_pos(s1, fields_options[i][FIELD_OPTION_INDEX] - 1);
-    size_t end_s1 = str_nth_blank_pos(s1, fields_options[i][FIELD_OPTION_INDEX]);
+    size_t start_s1 = str_nth_blank_pos(s1, fields_options[i][INDEX] - 1);
+    size_t end_s1 = str_nth_blank_pos(s1, fields_options[i][INDEX]);
     char *field_s1 = substr(s1, start_s1, end_s1);
 
-    size_t start_s2 = str_nth_blank_pos(s2, fields_options[i][FIELD_OPTION_INDEX] - 1);
-    size_t end_s2 = str_nth_blank_pos(s2, fields_options[i][FIELD_OPTION_INDEX]);
+    size_t start_s2 = str_nth_blank_pos(s2, fields_options[i][INDEX] - 1);
+    size_t end_s2 = str_nth_blank_pos(s2, fields_options[i][INDEX]);
     char *field_s2 = substr(s2, start_s2, end_s2);
 
     comp = fields_comp[i];
-    order = fields_options[i][FIELD_OPTION_ORDER];
-    fold = fields_options[i][FIELD_OPTION_FOLD];
-    directory = fields_options[i][FIELD_OPTION_DIRECTORY];
+    order = fields_options[i][ORDER];
+    fold = fields_options[i][FOLD];
+    directory = fields_options[i][DIRECTORY];
 
     int comp_result = comp(field_s1, field_s2);
 
