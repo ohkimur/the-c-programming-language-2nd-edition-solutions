@@ -10,6 +10,12 @@ int get_token(void);
 void decl(void);
 void dir_decl(void);
 
+enum boolean
+{
+  FALSE,
+  TRUE
+};
+
 enum token_type
 {
   NAME,
@@ -21,6 +27,7 @@ enum token_type
   BRACKETS
 };
 
+int token_error = FALSE;
 int global_token_type;
 
 char token[MAX_TOKEN_LEN];
@@ -40,9 +47,16 @@ int main(void)
     if (global_token_type != '\n')
     {
       puts("ERROR: incorrect syntax.");
-    }
 
-    printf("%s:\t%s %s\n", name, out, data_type);
+      do
+      {
+        get_token();
+      } while (global_token_type != '\n');
+    }
+    else
+    {
+      printf("%s:\t%s %s\n", name, out, data_type);
+    }
   }
 
   return EXIT_SUCCESS;
@@ -133,14 +147,13 @@ void dir_decl(void)
     puts("ERROR: expected name or (decl)");
   }
 
-  int type;
-  while ((type = get_token()) == PARENS || type == BRACKETS)
+  while ((global_token_type = get_token()) == PARENS || global_token_type == BRACKETS)
   {
-    if (type == PARENS)
+    if (global_token_type == PARENS)
     {
       strcat(out, " function returning");
     }
-    else if (type == BRACKETS)
+    else if (global_token_type == BRACKETS)
     {
       strcat(out, " array");
       strcat(out, token);
