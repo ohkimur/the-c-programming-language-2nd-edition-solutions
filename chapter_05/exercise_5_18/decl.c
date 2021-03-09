@@ -10,7 +10,7 @@ int get_token(void);
 void decl(void);
 void dir_decl(void);
 
-enum
+enum token_type
 {
   NAME,
   PAREN_OPEN = '(',
@@ -21,7 +21,7 @@ enum
   BRACKETS
 };
 
-int token_type;
+int global_token_type;
 
 char token[MAX_TOKEN_LEN];
 char name[MAX_TOKEN_LEN];
@@ -37,7 +37,7 @@ int main(void)
 
     decl();
 
-    if (token_type != '\n')
+    if (global_token_type != '\n')
     {
       puts("ERROR: incorrect syntax.");
     }
@@ -64,11 +64,11 @@ int get_token(void)
     if (c == PAREN_CLOSE)
     {
       strcpy(token, "()");
-      return token_type = PARENS;
+      return global_token_type = PARENS;
     }
     ungetc(c, stdin);
 
-    return token_type = PAREN_OPEN;
+    return global_token_type = PAREN_OPEN;
   }
   else if (c == BRACKET_OPEN)
   {
@@ -81,7 +81,7 @@ int get_token(void)
       }
     }
     *token_p = '\0';
-    return token_type = BRACKETS;
+    return global_token_type = BRACKETS;
   }
   else if (isalpha(c))
   {
@@ -92,10 +92,10 @@ int get_token(void)
     }
     *token_p = '\0';
     ungetc(c, stdin);
-    return token_type = NAME;
+    return global_token_type = NAME;
   }
 
-  return token_type = c;
+  return global_token_type = c;
 }
 
 void decl(void)
@@ -116,15 +116,15 @@ void decl(void)
 
 void dir_decl(void)
 {
-  if (token_type == PAREN_OPEN)
+  if (global_token_type == PAREN_OPEN)
   {
     decl();
-    if (token_type != PAREN_CLOSE)
+    if (global_token_type != PAREN_CLOSE)
     {
       puts("ERROR: missing )");
     }
   }
-  else if (token_type == NAME)
+  else if (global_token_type == NAME)
   {
     strcpy(name, token);
   }
