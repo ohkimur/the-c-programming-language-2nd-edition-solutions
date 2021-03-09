@@ -6,4 +6,4 @@ void (*comp)()
 char (*(*      x()     )[])( )
 char (*(*x[ 3     ] ) ( ) )  [    5 ]
 char a
-unsigned long b
+int b
