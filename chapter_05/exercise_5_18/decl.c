@@ -58,7 +58,12 @@ int get_token(void)
   {
     *token_p++ = c;
     while ((*token_p++ = getc(stdin)) != ']')
-      ;
+    {
+      if (*(token_p - 1) == ' ' || *(token_p - 1) == '\t')
+      {
+        --token_p;
+      }
+    }
     *token_p = '\0';
     return token_type = BRACKETS;
   }
