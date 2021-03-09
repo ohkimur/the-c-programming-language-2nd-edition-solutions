@@ -23,8 +23,7 @@ char out[1000];
 
 int main(void)
 {
-  int current_token_type;
-  while ((current_token_type = get_token()) != EOF)
+  while (get_token() != EOF)
   {
     strcpy(data_type, token);
     out[0] = '\0';
