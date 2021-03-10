@@ -9,7 +9,7 @@ char a
 int b
 int a
 // This is a comment
-float testfn  () /* This is
+float testafn ( ) /* This is
 a multiline
 comment for testing */
 int b
