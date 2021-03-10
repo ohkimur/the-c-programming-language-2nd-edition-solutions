@@ -27,8 +27,7 @@ enum token_type
   BRACKETS
 };
 
-int token_error = FALSE;
-int global_token_type;
+int next_token;
 
 char token[MAX_TOKEN_LEN];
 char name[MAX_TOKEN_LEN];
@@ -44,14 +43,9 @@ int main(void)
 
     decl();
 
-    if (global_token_type != '\n')
+    if (next_token != '\n')
     {
       puts("ERROR: incorrect syntax.");
-
-      do
-      {
-        get_token();
-      } while (global_token_type != '\n');
     }
     else
     {
@@ -70,24 +64,24 @@ int get_token(void)
   while ((c = getc(stdin)) == ' ' || c == '\t')
     ;
 
-  if (c == PAREN_OPEN)
+  if (c == '(')
   {
     while ((c = getc(stdin)) == ' ' || c == '\t')
       ;
 
-    if (c == PAREN_CLOSE)
+    if (c == ')')
     {
       strcpy(token, "()");
-      return global_token_type = PARENS;
+      return next_token = PARENS;
     }
     ungetc(c, stdin);
 
-    return global_token_type = PAREN_OPEN;
+    return next_token = PAREN_OPEN;
   }
-  else if (c == BRACKET_OPEN)
+  else if (c == '[')
   {
     *token_p++ = c;
-    while ((*token_p++ = getc(stdin)) != BRACKET_CLOSE)
+    while ((*token_p++ = getc(stdin)) != ']')
     {
       if (*(token_p - 1) == ' ' || *(token_p - 1) == '\t')
       {
@@ -95,7 +89,8 @@ int get_token(void)
       }
     }
     *token_p = '\0';
-    return global_token_type = BRACKETS;
+
+    return next_token = BRACKETS;
   }
   else if (isalpha(c))
   {
@@ -106,10 +101,11 @@ int get_token(void)
     }
     *token_p = '\0';
     ungetc(c, stdin);
-    return global_token_type = NAME;
+
+    return next_token = NAME;
   }
 
-  return global_token_type = c;
+  return next_token = c;
 }
 
 void decl(void)
@@ -130,16 +126,16 @@ void decl(void)
 
 void dir_decl(void)
 {
-  if (global_token_type == PAREN_OPEN)
+  if (next_token == PAREN_OPEN)
   {
     decl();
 
-    if (global_token_type != PAREN_CLOSE)
+    if (next_token != PAREN_CLOSE)
     {
       puts("ERROR: missing )");
     }
   }
-  else if (global_token_type == NAME)
+  else if (next_token == NAME)
   {
     strcpy(name, token);
   }
@@ -148,13 +144,13 @@ void dir_decl(void)
     puts("ERROR: expected name or (decl)");
   }
 
-  while ((global_token_type = get_token()) == PARENS || global_token_type == BRACKETS)
+  while ((next_token = get_token()) == PARENS || next_token == BRACKETS)
   {
-    if (global_token_type == PARENS)
+    if (next_token == PARENS)
     {
       strcat(out, " function returning");
     }
-    else if (global_token_type == BRACKETS)
+    else if (next_token == BRACKETS)
     {
       strcat(out, " array");
       strcat(out, token);
