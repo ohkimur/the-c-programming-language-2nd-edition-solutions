@@ -54,7 +54,7 @@ int main(void)
     }
     else
     {
-      printf("%s:\t%s %s\n", name, out, data_type);
+      printf("%s:%s %s\n", name, out, data_type);
     }
   }
 
