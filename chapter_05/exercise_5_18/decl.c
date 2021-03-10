@@ -6,7 +6,7 @@
 #define MAX_TOKEN_LEN 100
 #define MAX_OUT_LEN 1000
 
-int get_token(void);
+int get_next_token(void);
 void decl(void);
 void dir_decl(void);
 
@@ -36,12 +36,14 @@ char out[MAX_OUT_LEN];
 
 int main(void)
 {
-  while (get_token() != EOF)
+  while (get_next_token() != EOF)
   {
     strcpy(data_type, token);
     out[0] = '\0';
 
     decl();
+
+    printf("%c\n", next_token);
 
     if (next_token != '\n')
     {
@@ -56,7 +58,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-int get_token(void)
+int get_next_token(void)
 {
   int c;
   char *token_p = token;
@@ -111,7 +113,7 @@ int get_token(void)
 void decl(void)
 {
   int nr_of_stars = 0;
-  while (get_token() == '*')
+  while (get_next_token() == '*')
   {
     ++nr_of_stars;
   }
@@ -144,7 +146,7 @@ void dir_decl(void)
     puts("ERROR: expected name or (decl)");
   }
 
-  while ((next_token = get_token()) == PARENS || next_token == BRACKETS)
+  while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS)
   {
     if (next_token == PARENS)
     {
