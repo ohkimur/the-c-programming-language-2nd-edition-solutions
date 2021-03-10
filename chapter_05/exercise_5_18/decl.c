@@ -69,6 +69,7 @@ int get_next_token(void)
   while ((c = getc(stdin)) == ' ' || c == '\t')
     ;
 
+  // Ignore comments.
   if (c == '/')
   {
     c = getc(stdin);
@@ -128,7 +129,7 @@ int get_next_token(void)
   else if (isalpha(c))
   {
     *token_p++ = c;
-    while (isalnum(c = getc(stdin)))
+    while (isalnum(c = getc(stdin)) || c == '_')
     {
       *token_p++ = c;
     }
