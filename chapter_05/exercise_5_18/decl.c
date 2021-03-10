@@ -47,10 +47,10 @@ int main(void)
     {
       puts("ERROR: incorrect syntax.");
 
-      do
-      {
-        get_next_token();
-      } while (next_token != '\n' && next_token != EOF);
+      // do
+      // {
+      //   get_next_token();
+      // } while (next_token != '\n' && next_token != EOF);
     }
     else
     {
@@ -68,6 +68,34 @@ int get_next_token(void)
 
   while ((c = getc(stdin)) == ' ' || c == '\t')
     ;
+
+  if (c == '/')
+  {
+    c = getc(stdin);
+
+    if (c == '/')
+    {
+      while ((c = getc(stdin)) != '\n' && c != EOF)
+        ;
+    }
+    else if (c == '*')
+    {
+      while ((c = getc(stdin)) != EOF)
+      {
+        if (c == '*')
+        {
+          c = getc(stdin);
+
+          if (c == '/')
+          {
+            break;
+          }
+        }
+      }
+    }
+
+    c = getc(stdin);
+  }
 
   if (c == '(')
   {
@@ -131,6 +159,11 @@ void decl(void)
 
 void dir_decl(void)
 {
+  if (next_token == '\n')
+  {
+    return;
+  }
+
   if (next_token == PAREN_OPEN)
   {
     decl();

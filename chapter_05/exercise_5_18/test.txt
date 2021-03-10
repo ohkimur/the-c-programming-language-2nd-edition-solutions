@@ -8,6 +8,9 @@ char (*(*x[ 3     ] ) ( ) )  [    5 ]
 char a
 int b
 int a
-sfd fasdf  (
+// This is a comment
+float testfn  () /* This is
+a multiline
+comment for testing */
 int b
 void * comp()
