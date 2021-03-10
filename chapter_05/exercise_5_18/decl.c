@@ -43,11 +43,14 @@ int main(void)
 
     decl();
 
-    printf("%c\n", next_token);
-
     if (next_token != '\n')
     {
       puts("ERROR: incorrect syntax.");
+
+      do
+      {
+        get_next_token();
+      } while (next_token != '\n' && next_token != EOF);
     }
     else
     {
