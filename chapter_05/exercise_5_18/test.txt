@@ -9,9 +9,8 @@ char a
 int b
 int a
 // This is a comment
-float fn_name_test ( ) /* This is
-a multiline
-comment for testing */
+/This is a comment
+float fn_name_test() 
 int b
 long f (   
 void * comp()
