@@ -125,13 +125,11 @@ int get_next_token(void)
   skip_blanks();
 
   int c = getc(stdin);
-  char *token_p = token;
-
   if (c == '(')
   {
     skip_blanks();
-    c = getc(stdin);
 
+    c = getc(stdin);
     if (c == ')')
     {
       strcpy(token, "()");
@@ -143,17 +141,19 @@ int get_next_token(void)
   }
   else if (c == '[')
   {
-    *token_p++ = c;
-    while ((*token_p++ = getc(stdin)) != ']')
-    {
-      if (*(token_p - 1) == ' ' || *(token_p - 1) == '\t')
-      {
-        --token_p;
-      }
-    }
-    *token_p = '\0';
+    skip_blanks();
+    get_name(token, MAX_TOKEN_LEN);
+    skip_blanks();
 
-    return next_token = BRACKETS;
+    c = getc(stdin);
+    if (c == ']')
+    {
+      strcpy(token, "[]");
+      return next_token = BRACKETS;
+    }
+    ungetc(c, stdin);
+
+    return next_token = BRACKET_OPEN;
   }
   else if (isalpha(c))
   {
