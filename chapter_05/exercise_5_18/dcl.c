@@ -6,7 +6,7 @@
 #define MAX_TOKEN_LEN 100
 #define MAX_OUT_LEN 1000
 
-int get_token(void);
+int get_next_token(void);
 void dcl(void);
 void dir_dcl(void);
 
@@ -27,7 +27,7 @@ enum token_type
   BRACKETS
 };
 
-int current_token;
+int next_token;
 
 char token[MAX_TOKEN_LEN];
 char name[MAX_TOKEN_LEN];
@@ -36,21 +36,21 @@ char out[MAX_OUT_LEN];
 
 int main(void)
 {
-  while (get_token() != EOF)
+  while (get_next_token() != EOF)
   {
     strcpy(data_type, token);
     out[0] = '\0';
 
     dcl();
 
-    if (current_token != '\n')
+    if (next_token != '\n')
     {
       puts("ERROR: incorrect syntax.");
 
       do
       {
-        get_token();
-      } while (current_token != '\n' && current_token != EOF);
+        get_next_token();
+      } while (next_token != '\n' && next_token != EOF);
     }
     else
     {
@@ -61,7 +61,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-int get_token(void)
+int get_next_token(void)
 {
   int c;
   char *token_p = token;
@@ -106,11 +106,11 @@ int get_token(void)
     if (c == ')')
     {
       strcpy(token, "()");
-      return current_token = PARENS;
+      return next_token = PARENS;
     }
     ungetc(c, stdin);
 
-    return current_token = PAREN_OPEN;
+    return next_token = PAREN_OPEN;
   }
   else if (c == '[')
   {
@@ -124,7 +124,7 @@ int get_token(void)
     }
     *token_p = '\0';
 
-    return current_token = BRACKETS;
+    return next_token = BRACKETS;
   }
   else if (isalpha(c))
   {
@@ -136,16 +136,16 @@ int get_token(void)
     *token_p = '\0';
     ungetc(c, stdin);
 
-    return current_token = NAME;
+    return next_token = NAME;
   }
 
-  return current_token = c;
+  return next_token = c;
 }
 
 void dcl(void)
 {
   int nr_of_stars = 0;
-  while (get_token() == '*')
+  while (get_next_token() == '*')
   {
     ++nr_of_stars;
   }
@@ -160,21 +160,21 @@ void dcl(void)
 
 void dir_dcl(void)
 {
-  if (current_token == '\n')
+  if (next_token == '\n')
   {
     return;
   }
 
-  if (current_token == PAREN_OPEN)
+  if (next_token == PAREN_OPEN)
   {
     dcl();
 
-    if (current_token != PAREN_CLOSE)
+    if (next_token != PAREN_CLOSE)
     {
       puts("ERROR: missing )");
     }
   }
-  else if (current_token == NAME)
+  else if (next_token == NAME)
   {
     strcpy(name, token);
   }
@@ -183,13 +183,13 @@ void dir_dcl(void)
     puts("ERROR: expected name or (dcl)");
   }
 
-  while ((current_token = get_token()) == PARENS || current_token == BRACKETS)
+  while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS)
   {
-    if (current_token == PARENS)
+    if (next_token == PARENS)
     {
       strcat(out, " function returning");
     }
-    else if (current_token == BRACKETS)
+    else if (next_token == BRACKETS)
     {
       strcat(out, " array");
       strcat(out, token);
