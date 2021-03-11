@@ -9,6 +9,8 @@
 void skip_blanks();
 void skip_comments();
 
+void get_name(char *dest, const size_t max_len);
+
 int get_next_token(void);
 void dcl(void);
 void dir_dcl(void);
@@ -104,6 +106,18 @@ void skip_comments()
   ungetc(c, stdin);
 }
 
+void get_name(char *dest, const size_t max_len)
+{
+  int c;
+  size_t i = 0;
+  while ((isalnum(c = getc(stdin)) || c == '_') && i < max_len)
+  {
+    dest[i++] = c;
+  }
+  dest[i] = '\0';
+  ungetc(c, stdin);
+}
+
 int get_next_token(void)
 {
   skip_blanks();
@@ -143,14 +157,8 @@ int get_next_token(void)
   }
   else if (isalpha(c))
   {
-    *token_p++ = c;
-    while (isalnum(c = getc(stdin)) || c == '_')
-    {
-      *token_p++ = c;
-    }
-    *token_p = '\0';
     ungetc(c, stdin);
-
+    get_name(token, MAX_TOKEN_LEN);
     return next_token = NAME;
   }
 
