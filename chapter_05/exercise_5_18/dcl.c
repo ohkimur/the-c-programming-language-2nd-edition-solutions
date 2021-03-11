@@ -43,7 +43,6 @@ int main(void)
 {
   while (get_next_token() != EOF)
   {
-    // Skip empty lines.
     if (next_token == '\n')
     {
       continue;
@@ -56,8 +55,14 @@ int main(void)
 
     if (next_token != '\n')
     {
-      puts("ERROR: incorrect syntax.");
-      printf("%c\n", next_token);
+      if (next_token == NAME)
+      {
+        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
+      }
+      else
+      {
+        printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
+      }
 
       do
       {
