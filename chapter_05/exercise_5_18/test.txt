@@ -1,18 +1,20 @@
 char **argv
 int   ( * daytab ) [ 13]
 int *daytab[13]
-long a_name[   MAX_SIZE ]
+long a_name[   MAX_SIZE ] // This is a comment
 void * comp(  )
-void (*comp)()
+void (*comp_2)()
 char (*(*      x()     )[])( )
 char (*(*x[ 3     ] ) ( ) )  [    5 ]
-char a
-int b /* This is
-a multiline
-comment */ int a
-// This is a comment
-/This is not a valid a comment
-float fn_name_test() 
+char a /* This is a comment */
 int b
-long f (   
+float A_TEST_NAME
+float fn_name_test()     
+
+int b
+
+
+
+
+long f ( ) 
 void * comp()

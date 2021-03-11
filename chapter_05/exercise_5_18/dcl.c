@@ -43,6 +43,12 @@ int main(void)
 {
   while (get_next_token() != EOF)
   {
+    // Skip empty lines.
+    if (next_token == '\n')
+    {
+      continue;
+    }
+
     strcpy(data_type, token);
     out[0] = '\0';
 
@@ -51,6 +57,7 @@ int main(void)
     if (next_token != '\n')
     {
       puts("ERROR: incorrect syntax.");
+      printf("%c\n", next_token);
 
       do
       {
@@ -85,21 +92,18 @@ void skip_comments()
     {
       while ((c = getc(stdin)) != '\n' && c != EOF)
         ;
+      ungetc('\n', stdin);
       return;
     }
     else if (c == '*')
     {
-      while ((c = getc(stdin)) != EOF)
+      while ((c = getc(stdin)) != '*' && c != EOF)
+        ;
+      c = getc(stdin);
+      if (c == '/')
       {
-        if (c == '*')
-        {
-          c = getc(stdin);
-
-          if (c == '/')
-          {
-            return;
-          }
-        }
+        ungetc('\n', stdin);
+        return;
       }
     }
   }
@@ -182,11 +186,6 @@ void dcl(void)
 
 void dir_dcl(void)
 {
-  if (next_token == '\n')
-  {
-    return;
-  }
-
   if (next_token == PAREN_OPEN)
   {
     dcl();
