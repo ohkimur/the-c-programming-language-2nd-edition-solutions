@@ -92,8 +92,6 @@ void skip_comments()
     {
       while ((c = getc(stdin)) != '\n' && c != EOF)
         ;
-      ungetc('\n', stdin);
-      return;
     }
     else if (c == '*')
     {
