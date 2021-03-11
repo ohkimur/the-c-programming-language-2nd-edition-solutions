@@ -148,7 +148,6 @@ int get_next_token(void)
     c = getc(stdin);
     if (c == ']')
     {
-      strcpy(token, "[]");
       return next_token = BRACKETS;
     }
     ungetc(c, stdin);
@@ -214,9 +213,9 @@ void dir_dcl(void)
     }
     else if (next_token == BRACKETS)
     {
-      strcat(out, " array");
+      strcat(out, " array[");
       strcat(out, token);
-      strcat(out, " of");
+      strcat(out, "] of");
     }
   }
 }
