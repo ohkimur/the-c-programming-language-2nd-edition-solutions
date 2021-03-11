@@ -6,6 +6,9 @@
 #define MAX_TOKEN_LEN 100
 #define MAX_OUT_LEN 1000
 
+int get_char_skip_blanks();
+int get_char_skip_comments();
+
 int get_next_token(void);
 void dcl(void);
 void dir_dcl(void);
@@ -61,15 +64,17 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-int get_next_token(void)
+int get_char_skip_blanks()
 {
   int c;
-  char *token_p = token;
-
   while ((c = getc(stdin)) == ' ' || c == '\t')
     ;
+  return c;
+}
 
-  // Ignore comments.
+int get_char_skip_comments()
+{
+  int c = getc(stdin);
   if (c == '/')
   {
     c = getc(stdin);
@@ -97,11 +102,20 @@ int get_next_token(void)
 
     c = getc(stdin);
   }
+  return c;
+}
+
+int get_next_token(void)
+{
+  int c = get_char_skip_blanks();
+  char *token_p = token;
+
+  ungetc(c, stdin);
+  c = get_char_skip_comments();
 
   if (c == '(')
   {
-    while ((c = getc(stdin)) == ' ' || c == '\t')
-      ;
+    c = get_char_skip_blanks();
 
     if (c == ')')
     {
