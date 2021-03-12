@@ -12,12 +12,6 @@ void skip_comments();
 void get_name(char *dest, const size_t max_len);
 int get_next_token(void);
 
-enum boolean
-{
-  FALSE,
-  TRUE
-};
-
 enum token_type
 {
   NAME,
@@ -46,16 +40,28 @@ int main(void)
     {
       if (next_token == PARENS)
       {
+        if (out[0] == '*')
+        {
+          sprintf(temp, "(%s)", out);
+          strcpy(out, temp);
+        }
+
         strcat(out, token);
       }
       else if (next_token == BRACKETS)
       {
+        if (out[0] == '*')
+        {
+          sprintf(temp, "(%s)", out);
+          strcpy(out, temp);
+        }
+        
         sprintf(temp, "[%s]", token);
         strcat(out, temp);
       }
       else if (next_token == '*')
       {
-        sprintf(temp, "(*%s)", out);
+        sprintf(temp, "*%s", out);
         strcpy(out, temp);
       }
       else if (next_token == NAME)
