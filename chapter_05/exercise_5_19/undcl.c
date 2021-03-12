@@ -12,9 +12,6 @@ void skip_comments();
 void get_name(char *dest, const size_t max_len);
 int get_next_token(void);
 
-void dcl(void);
-void dir_dcl(void);
-
 enum boolean
 {
   FALSE,
@@ -39,39 +36,34 @@ char name[MAX_TOKEN_LEN];
 char data_type[MAX_TOKEN_LEN];
 char out[MAX_OUT_LEN];
 
+char temp[MAX_OUT_LEN];
+
 int main(void)
 {
   while (get_next_token() != EOF)
   {
-    if (next_token == '\n')
+    strcpy(out, token);
+
+    while (get_next_token() != '\n')
     {
-      continue;
-    }
-
-    strcpy(data_type, token);
-    out[0] = '\0';
-
-    dcl();
-
-    if (next_token != '\n')
-    {
-      if (next_token == NAME)
+      if (next_token == PARENS || next_token == BRACKETS)
       {
-        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
+        strcat(out, token);
+      }
+      else if (next_token == '*')
+      {
+        sprintf(temp, "(*%s)", out);
+        strcpy(out, temp);
+      }
+      else if (next_token == NAME)
+      {
+        sprintf(temp, "%s %s", token, out);
+        strcpy(out, temp);
       }
       else
       {
-        printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
+        printf("ERROR: Invalid input at %s.\n", token);
       }
-
-      do
-      {
-        get_next_token();
-      } while (next_token != '\n' && next_token != EOF);
-    }
-    else
-    {
-      printf("%s:%s %s\n", name, out, data_type);
     }
   }
 
@@ -169,55 +161,4 @@ int get_next_token(void)
   }
 
   return next_token = c;
-}
-
-void dcl(void)
-{
-  int nr_of_stars = 0;
-  while (get_next_token() == '*')
-  {
-    ++nr_of_stars;
-  }
-
-  dir_dcl();
-
-  while (nr_of_stars--)
-  {
-    strcat(out, " pointer to");
-  }
-}
-
-void dir_dcl(void)
-{
-  if (next_token == PAREN_OPEN)
-  {
-    dcl();
-
-    if (next_token != PAREN_CLOSE)
-    {
-      puts("ERROR: missing )");
-    }
-  }
-  else if (next_token == NAME)
-  {
-    strcpy(name, token);
-  }
-  else
-  {
-    puts("ERROR: expected name or (dcl)");
-  }
-
-  while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS)
-  {
-    if (next_token == PARENS)
-    {
-      strcat(out, " function returning");
-    }
-    else if (next_token == BRACKETS)
-    {
-      strcat(out, " array[");
-      strcat(out, token);
-      strcat(out, "] of");
-    }
-  }
 }
