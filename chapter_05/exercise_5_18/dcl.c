@@ -215,3 +215,5 @@ void dir_dcl(void)
     }
   }
 }
+
+// NOTE: run: ./dcl < test.txt
