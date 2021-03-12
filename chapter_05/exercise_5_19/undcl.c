@@ -21,25 +21,23 @@ enum boolean
 enum token_type
 {
   NAME,
+  PARENS,
+  BRACKETS,
   PAREN_OPEN = '(',
   PAREN_CLOSE = ')',
-  PARENS,
   BRACKET_OPEN = '[',
-  BRACKET_CLOSE = ']',
-  BRACKETS
+  BRACKET_CLOSE = ']'
 };
 
 int next_token;
 
 char token[MAX_TOKEN_LEN];
-char name[MAX_TOKEN_LEN];
-char data_type[MAX_TOKEN_LEN];
 char out[MAX_OUT_LEN];
-
-char temp[MAX_OUT_LEN];
 
 int main(void)
 {
+  char temp[MAX_OUT_LEN + MAX_TOKEN_LEN];
+
   while (get_next_token() != EOF)
   {
     strcpy(out, token);
@@ -65,6 +63,7 @@ int main(void)
         printf("ERROR: Invalid input at %s.\n", token);
       }
     }
+    puts(out);
   }
 
   return EXIT_SUCCESS;
