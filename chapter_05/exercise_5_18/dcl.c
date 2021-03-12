@@ -15,12 +15,6 @@ int get_next_token(void);
 void dcl(void);
 void dir_dcl(void);
 
-enum boolean
-{
-  FALSE,
-  TRUE
-};
-
 enum token_type
 {
   NAME,
