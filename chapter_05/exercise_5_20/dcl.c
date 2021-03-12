@@ -12,8 +12,16 @@ void skip_comments();
 void get_name(char *dest, const size_t max_len);
 int get_next_token(void);
 
+int is_valid_data_type(const char *str);
+
 void dcl(void);
 void dir_dcl(void);
+
+enum boolean
+{
+  FALSE,
+  TRUE
+};
 
 enum token_type
 {
@@ -33,8 +41,25 @@ char name[MAX_TOKEN_LEN];
 char data_type[MAX_TOKEN_LEN];
 char out[MAX_OUT_LEN];
 
+char *data_types[] = {
+    "void",
+    "char",
+    "short",
+    "int",
+    "long",
+    "float",
+    "double",
+};
+
+
 int main(void)
 {
+  char *type = "float";
+  if (is_valid_data_type(type))
+  {
+    puts("yes it is!");
+  }
+
   while (get_next_token() != EOF)
   {
     if (next_token == '\n')
@@ -163,6 +188,19 @@ int get_next_token(void)
   }
 
   return next_token = c;
+}
+
+int is_valid_data_type(const char *str)
+{
+  size_t nr_of_types = sizeof(data_types) / sizeof(data_types[0]);
+  for (size_t i = 0; i < nr_of_types; ++i)
+  {
+    if (strcmp(data_types[i], str) == 0)
+    {
+      return TRUE;
+    }
+  }
+  return FALSE;
 }
 
 void dcl(void)
