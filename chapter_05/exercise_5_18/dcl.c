@@ -24,12 +24,12 @@ enum boolean
 enum token_type
 {
   NAME,
+  PARENS,
+  BRACKETS,
   PAREN_OPEN = '(',
   PAREN_CLOSE = ')',
-  PARENS,
   BRACKET_OPEN = '[',
-  BRACKET_CLOSE = ']',
-  BRACKETS
+  BRACKET_CLOSE = ']'
 };
 
 int next_token;
