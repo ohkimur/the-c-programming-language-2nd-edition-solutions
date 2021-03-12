@@ -1,0 +1,27 @@
+char **argv
+int   ( * daytab ) [ 13]
+int *daytab[13]
+long a_name[   MAX_SIZE ] // This is a comment
+void * comp(  )
+void (*comp_2)()
+char (*(*      x()     )[])( )
+char (*(*x[ 3     ] ) ( ) )  [    5 ]
+char a /* This is a comment */
+int b
+float A_TEST_NAME
+float fn_name_test()     
+
+int b
+
+
+
+
+long f ( ) 
+void * comp()
+long name_0 [  
+  int t_0
+void name_1 (  
+  int t_0
+void name_1 bad
+float m
+custom_type c_t_name
