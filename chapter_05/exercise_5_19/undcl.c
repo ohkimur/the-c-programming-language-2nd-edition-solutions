@@ -44,9 +44,14 @@ int main(void)
 
     while (get_next_token() != '\n')
     {
-      if (next_token == PARENS || next_token == BRACKETS)
+      if (next_token == PARENS)
       {
         strcat(out, token);
+      }
+      else if (next_token == BRACKETS)
+      {
+        sprintf(temp, "[%s]", token);
+        strcat(out, temp);
       }
       else if (next_token == '*')
       {
