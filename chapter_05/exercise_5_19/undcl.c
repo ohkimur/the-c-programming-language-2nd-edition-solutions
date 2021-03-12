@@ -55,7 +55,7 @@ int main(void)
           sprintf(temp, "(%s)", out);
           strcpy(out, temp);
         }
-        
+
         sprintf(temp, "[%s]", token);
         strcat(out, temp);
       }
@@ -172,3 +172,5 @@ int get_next_token(void)
 
   return next_token = c;
 }
+
+// NOTE: run: ./undcl < test.txt
