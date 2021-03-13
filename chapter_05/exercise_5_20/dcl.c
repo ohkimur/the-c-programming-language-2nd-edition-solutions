@@ -227,7 +227,7 @@ void dir_dcl(void)
 
     if (next_token != PAREN_CLOSE)
     {
-      puts("ERROR: missing ).");
+      return;
     }
   }
   else if (next_token == NAME)
@@ -236,7 +236,7 @@ void dir_dcl(void)
   }
   else
   {
-    puts("ERROR: expected name or (dcl).");
+    return;
   }
 
   while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS || next_token == PAREN_OPEN)
@@ -248,13 +248,10 @@ void dir_dcl(void)
 
       if (next_token != PAREN_CLOSE)
       {
-        // puts("ERROR: missing ).");
-        continue;
+        return;
       }
-      else
-      {
-        strcat(out, " and returning");
-      }
+
+      strcat(out, " and returning");
     }
     else if (next_token == PARENS)
     {
@@ -271,7 +268,7 @@ void dir_dcl(void)
 
 void attr_dcl(void)
 {
-  while (get_next_token() != ')' && next_token != '\n')
+  while (get_next_token() != PAREN_CLOSE && next_token != '\n')
   {
     if (next_token == ',')
     {
@@ -281,26 +278,24 @@ void attr_dcl(void)
     {
       if (is_valid_data_type(token))
       {
-        char attr_data_type[MAX_TOKEN_LEN] = "";
-        strcat(attr_data_type, " ");
-        strcat(attr_data_type, token);
+        strcat(out, " ");
+        strcat(out, token);
 
         get_next_token();
         if (next_token == NAME)
         {
-          strcat(out, attr_data_type);
           strcat(out, " ");
           strcat(out, token);
         }
       }
       else
       {
-        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
+        return;
       }
     }
     else
     {
-      printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
+      return;
     }
   }
 }
