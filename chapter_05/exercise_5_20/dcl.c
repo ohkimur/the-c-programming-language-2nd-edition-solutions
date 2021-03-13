@@ -36,6 +36,9 @@ enum token_type
   ATTR_SEPARATOR = ','
 };
 
+size_t line_nr = 0;
+enum boolean error = FALSE;
+
 int next_token;
 
 char token[MAX_TOKEN_LEN];
@@ -59,6 +62,7 @@ int main(void)
   {
     if (next_token == '\n')
     {
+      ++line_nr;
       continue;
     }
 
@@ -71,11 +75,11 @@ int main(void)
     {
       if (next_token == NAME)
       {
-        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
+        printf("ERROR: Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
       }
       else
       {
-        printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
+        printf("ERROR: Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
       }
 
       do
@@ -83,10 +87,13 @@ int main(void)
         get_next_token();
       } while (next_token != '\n' && next_token != EOF);
     }
-    else
+    else if (!error)
     {
       printf("%s:%s %s\n", name, out, data_type);
     }
+
+    error = FALSE;
+    ++line_nr;
   }
 
   return EXIT_SUCCESS;
@@ -222,7 +229,8 @@ void dir_dcl(void)
 
     if (next_token != PAREN_CLOSE)
     {
-      puts("ERROR: missing ).");
+      error = TRUE;
+      printf("ERROR: missing ')' on line %zu.\n", line_nr);
     }
   }
   else if (next_token == NAME)
@@ -231,7 +239,8 @@ void dir_dcl(void)
   }
   else
   {
-    puts("ERROR: expected name or (dcl).");
+    error = TRUE;
+    printf("ERROR: expected name or (dcl) on line %zu.\n", line_nr);
   }
 
   while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS || next_token == PAREN_OPEN)
@@ -244,7 +253,8 @@ void dir_dcl(void)
 
       if (next_token != PAREN_CLOSE)
       {
-        puts("ERROR: missing ).");
+        error = TRUE;
+        printf("ERROR: missing ')' on line %zu.\n", line_nr);
 
         if (next_token == '\n')
         {
@@ -289,12 +299,14 @@ void attr_dcl(void)
       }
       else
       {
-        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
+        error = TRUE;
+        printf("ERROR: Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
       }
     }
     else
     {
-      printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
+      error = TRUE;
+      printf("ERROR: Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
     }
   }
 }
