@@ -32,7 +32,8 @@ enum token_type
   PAREN_OPEN = '(',
   PAREN_CLOSE = ')',
   BRACKET_OPEN = '[',
-  BRACKET_CLOSE = ']'
+  BRACKET_CLOSE = ']',
+  ATTR_SEPARATOR = ','
 };
 
 int next_token;
@@ -54,12 +55,6 @@ char *data_types[] = {
 
 int main(void)
 {
-  char *type = "float";
-  if (is_valid_data_type(type))
-  {
-    puts("yes it is!");
-  }
-
   while (get_next_token() != EOF)
   {
     if (next_token == '\n')
@@ -274,7 +269,7 @@ void attr_dcl(void)
 {
   while (get_next_token() != PAREN_CLOSE && next_token != '\n')
   {
-    if (next_token == ',')
+    if (next_token == ATTR_SEPARATOR)
     {
       strcat(out, ",");
     }
