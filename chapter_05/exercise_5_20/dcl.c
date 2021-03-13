@@ -51,7 +51,6 @@ char *data_types[] = {
     "double",
 };
 
-
 int main(void)
 {
   char *type = "float";
@@ -227,7 +226,7 @@ void dir_dcl(void)
 
     if (next_token != PAREN_CLOSE)
     {
-      puts("ERROR: missing )");
+      puts("ERROR: missing ).");
     }
   }
   else if (next_token == NAME)
@@ -236,12 +235,22 @@ void dir_dcl(void)
   }
   else
   {
-    puts("ERROR: expected name or (dcl)");
+    puts("ERROR: expected name or (dcl).");
   }
 
-  while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS)
+  while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS || next_token == PAREN_OPEN)
   {
-    if (next_token == PARENS)
+    if (next_token == PAREN_OPEN)
+    {
+      get_next_token();
+      // TODO: Handle the function parameters.
+
+      if (next_token != PAREN_CLOSE)
+      {
+        puts("ERROR: missing ).");
+      }
+    }
+    else if (next_token == PARENS)
     {
       strcat(out, " function returning");
     }
