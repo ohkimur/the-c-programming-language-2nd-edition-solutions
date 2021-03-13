@@ -245,15 +245,17 @@ void dir_dcl(void)
     {
       strcat(out, " function expecting");
       attr_dcl();
+      strcat(out, " and returning");
 
       if (next_token != PAREN_CLOSE)
       {
         puts("ERROR: missing ).");
-        
-        return;
-      }
 
-      strcat(out, " and returning");
+        if (next_token == '\n')
+        {
+          return;
+        }
+      }
     }
     else if (next_token == PARENS)
     {
@@ -270,7 +272,7 @@ void dir_dcl(void)
 
 void attr_dcl(void)
 {
-  while (get_next_token() != ')' && next_token != '\n')
+  while (get_next_token() != PAREN_CLOSE && next_token != '\n')
   {
     if (next_token == ',')
     {
