@@ -16,6 +16,7 @@ int is_valid_data_type(const char *str);
 
 void dcl(void);
 void dir_dcl(void);
+void attr_dcl(void);
 
 enum boolean
 {
@@ -242,12 +243,17 @@ void dir_dcl(void)
   {
     if (next_token == PAREN_OPEN)
     {
-      get_next_token();
-      // TODO: Handle the function parameters.
+      strcat(out, " function expecting");
+      attr_dcl();
 
       if (next_token != PAREN_CLOSE)
       {
-        puts("ERROR: missing ).");
+        // puts("ERROR: missing ).");
+        continue;
+      }
+      else
+      {
+        strcat(out, " and returning");
       }
     }
     else if (next_token == PARENS)
@@ -259,6 +265,42 @@ void dir_dcl(void)
       strcat(out, " array[");
       strcat(out, token);
       strcat(out, "] of");
+    }
+  }
+}
+
+void attr_dcl(void)
+{
+  while (get_next_token() != ')' && next_token != '\n')
+  {
+    if (next_token == ',')
+    {
+      strcat(out, ",");
+    }
+    else if (next_token == NAME)
+    {
+      if (is_valid_data_type(token))
+      {
+        char attr_data_type[MAX_TOKEN_LEN] = "";
+        strcat(attr_data_type, " ");
+        strcat(attr_data_type, token);
+
+        get_next_token();
+        if (next_token == NAME)
+        {
+          strcat(out, attr_data_type);
+          strcat(out, " ");
+          strcat(out, token);
+        }
+      }
+      else
+      {
+        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
+      }
+    }
+    else
+    {
+      printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
     }
   }
 }
