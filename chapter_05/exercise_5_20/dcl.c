@@ -227,7 +227,7 @@ void dir_dcl(void)
 
     if (next_token != PAREN_CLOSE)
     {
-      return;
+      puts("ERROR: missing ).");
     }
   }
   else if (next_token == NAME)
@@ -236,7 +236,7 @@ void dir_dcl(void)
   }
   else
   {
-    return;
+    puts("ERROR: expected name or (dcl).");
   }
 
   while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS || next_token == PAREN_OPEN)
@@ -248,6 +248,8 @@ void dir_dcl(void)
 
       if (next_token != PAREN_CLOSE)
       {
+        puts("ERROR: missing ).");
+        
         return;
       }
 
@@ -268,7 +270,7 @@ void dir_dcl(void)
 
 void attr_dcl(void)
 {
-  while (get_next_token() != PAREN_CLOSE && next_token != '\n')
+  while (get_next_token() != ')' && next_token != '\n')
   {
     if (next_token == ',')
     {
@@ -290,12 +292,12 @@ void attr_dcl(void)
       }
       else
       {
-        return;
+        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
       }
     }
     else
     {
-      return;
+      printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
     }
   }
 }
