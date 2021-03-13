@@ -77,7 +77,7 @@ int main(void)
     {
       error = TRUE;
       printf("Syntax error: Invalid data type '%s' on line %zu.\n", token, line_nr);
-      
+
       do
       {
         get_next_token();
@@ -303,6 +303,8 @@ void attr_dcl(void)
     }
     else if (next_token == NAME)
     {
+      // TODO: Check type against void.
+      // TODO: Check type qualifiers like const and volatile.
       if (is_valid_data_type(token))
       {
         strcat(out, " ");
@@ -313,6 +315,11 @@ void attr_dcl(void)
         {
           strcat(out, " ");
           strcat(out, token);
+        }
+        else
+        {
+          error = TRUE;
+          printf("Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
         }
       }
       else
