@@ -303,6 +303,7 @@ void attr_dcl(void)
     }
     else if (next_token == NAME)
     {
+      // TODO: Check against void arg list.
       // TODO: Check type against void.
       // TODO: Check type qualifiers like const and volatile.
       if (is_valid_data_type(token))
