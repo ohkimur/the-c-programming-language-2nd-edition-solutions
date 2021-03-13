@@ -18,15 +18,16 @@ int b
 
 long f ( ) 
 void * comp()
-// long name_0 [  
+long name_0 [  
   int t_0
 void name_1 (  
   int t_2
-// void name_1 bad
-// void name_2 )
+void name_1 bad
+void name_2 )
 float m
 custom_type c_t_name
 
-// float fn_0(    void )
-// float fn_1(    int a,      float a)
-// void fn(int a, float b,       char long_name    )
+float fn_0(    int a, char name 9) 
+float fn_0(    int a)
+float fn_1(    int a,      float a)
+void fn(int a, float b,       char long_name    )
