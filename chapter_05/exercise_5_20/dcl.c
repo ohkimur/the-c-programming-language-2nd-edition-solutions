@@ -316,6 +316,12 @@ void attr_dcl(void)
           strcat(out, " ");
           strcat(out, token);
         }
+        else if (next_token == PAREN_CLOSE)
+        {
+          error = TRUE;
+          printf("Syntax error: missing variable name on line %zu.\n", line_nr);
+          return;
+        }
         else
         {
           error = TRUE;
