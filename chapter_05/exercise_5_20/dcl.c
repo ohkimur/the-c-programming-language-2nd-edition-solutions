@@ -54,6 +54,7 @@ char *data_types[] = {
     "long",
     "float",
     "double",
+    "custom_type",
 };
 
 int main(void)
@@ -66,8 +67,25 @@ int main(void)
       continue;
     }
 
-    strcpy(data_type, token);
     out[0] = '\0';
+
+    if (is_valid_data_type(token))
+    {
+      strcpy(data_type, token);
+    }
+    else
+    {
+      error = TRUE;
+      printf("Syntax error: Invalid data type '%s' on line %zu.\n", token, line_nr);
+      
+      do
+      {
+        get_next_token();
+      } while (next_token != '\n' && next_token != EOF);
+
+      ++line_nr;
+      continue;
+    }
 
     dcl();
 
@@ -75,11 +93,11 @@ int main(void)
     {
       if (next_token == NAME)
       {
-        printf("ERROR: Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
+        printf("Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
       }
       else
       {
-        printf("ERROR: Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
+        printf("Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
       }
 
       do
@@ -230,7 +248,7 @@ void dir_dcl(void)
     if (next_token != PAREN_CLOSE)
     {
       error = TRUE;
-      printf("ERROR: missing ')' on line %zu.\n", line_nr);
+      printf("Syntax error: missing ')' on line %zu.\n", line_nr);
     }
   }
   else if (next_token == NAME)
@@ -240,7 +258,7 @@ void dir_dcl(void)
   else
   {
     error = TRUE;
-    printf("ERROR: expected name or (dcl) on line %zu.\n", line_nr);
+    printf("Syntax error: expected name or (dcl) on line %zu.\n", line_nr);
   }
 
   while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS || next_token == PAREN_OPEN)
@@ -254,7 +272,7 @@ void dir_dcl(void)
       if (next_token != PAREN_CLOSE)
       {
         error = TRUE;
-        printf("ERROR: missing ')' on line %zu.\n", line_nr);
+        printf("Syntax error: missing ')' on line %zu.\n", line_nr);
 
         if (next_token == '\n')
         {
@@ -300,13 +318,13 @@ void attr_dcl(void)
       else
       {
         error = TRUE;
-        printf("ERROR: Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
+        printf("Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
       }
     }
     else
     {
       error = TRUE;
-      printf("ERROR: Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
+      printf("Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
     }
   }
 }

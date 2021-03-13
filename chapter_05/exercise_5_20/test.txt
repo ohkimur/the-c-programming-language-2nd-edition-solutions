@@ -25,7 +25,8 @@ void name_1 (
 void name_1 bad
 void name_2 )
 float m
-custom_type c_t_name
+custom_type c_t_name_0
+invalid_type c_t_name_1
 
 float fn_test(    int a, char name ( *
 float fn_0(    int a)
