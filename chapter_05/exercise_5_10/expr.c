@@ -77,19 +77,19 @@ int main(int argc, char *argv[])
     switch (error)
     {
     case 1:
-      printf("ERROR: Arguments should be numbers or one of the following mathematical operations: '+', '-', '*', '/'\n");
+      printf("Error: arguments should be numbers or one of the following mathematical operations: '+', '-', '*', '/'\n");
       break;
 
     case 2:
-      printf("ERROR: Too many or too few arguments.\n");
+      printf("Error: too many or too few arguments.\n");
       break;
 
     case 3:
-      printf("ERROR: Invalid operation. Use one of the following mathematical operations: '+', '-', '*', '/'\n");
+      printf("Error: invalid operation. use one of the following mathematical operations: '+', '-', '*', '/'\n");
       break;
 
     case 4:
-      printf("ERROR: Division by zero (NaN).\n");
+      printf("Error: division by zero (NaN).\n");
       break;
 
     default:
@@ -111,7 +111,7 @@ float pop(void)
     return stack[stack_pointer--];
   }
 
-  printf("ERROR: The stack is empty.\n");
+  printf("Error: the stack is empty.\n");
   return 0;
 }
 
@@ -123,6 +123,6 @@ void push(float element)
   }
   else
   {
-    printf("ERROR: The stack is full.\n");
+    printf("Error: the stack is full.\n");
   }
 }

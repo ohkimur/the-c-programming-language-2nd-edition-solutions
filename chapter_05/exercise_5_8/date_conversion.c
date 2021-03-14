@@ -14,13 +14,13 @@ int main(void)
   int month_invalid = day_of_year(2020, 13, 1);
   if (month_invalid == -1)
   {
-    printf("WARNING: Invalid month detected.\n");
+    printf("Warning: invalid month detected.\n");
   }
 
   int day_invalid = day_of_year(202, 12, 32);
   if (day_invalid == -2)
   {
-    printf("WARNING: Invalid day detected.\n");
+    printf("Warning: invalid day detected.\n");
   }
 
   int month;
@@ -45,14 +45,14 @@ int day_of_year(int year, int month, int day)
   // Additional checks for month.
   if (month > 12)
   {
-    printf("ERROR: A year has 12 months, so please choose a number betweeen 1 and 12.\n");
+    printf("Error: a year has 12 months, so please choose a number betweeen 1 and 12.\n");
     return -1;
   }
 
   // Additional checks for day.
   if (day > daytab[leap][month])
   {
-    printf("ERROR: The %d month has a maximum of %d days.\n", month, daytab[leap][month]);
+    printf("Error: the %d month has a maximum of %d days.\n", month, daytab[leap][month]);
     return -2;
   }
 
@@ -75,7 +75,7 @@ void month_day(int year, int yearday, int *pmonth, int *pda)
     // Reset the provided month and day.
     *pmonth = 0;
     *pda = 0;
-    printf("ERROR: Year %d has %d days.\n", year, leap ? 366 : 365);
+    printf("Error: year %d has %d days.\n", year, leap ? 366 : 365);
 
     return;
   }
