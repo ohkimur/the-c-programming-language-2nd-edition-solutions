@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
     if (!is_tab_stop_arg_list_valid(argc, argv))
     {
-        puts("ERROR: Invalid tab stop list.\n");
+        puts("Error: invalid tab stop list.\n");
         return EXIT_FAILURE;
     }
 
