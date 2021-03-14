@@ -51,11 +51,11 @@ int main(void)
     {
       if (next_token == NAME)
       {
-        printf("ERROR: Syntax error: '%s' unexpected.\n", token);
+        printf("Syntax error: '%s' unexpected.\n", token);
       }
       else
       {
-        printf("ERROR: Syntax error: '%c' unexpected.\n", next_token);
+        printf("Syntax error: '%c' unexpected.\n", next_token);
       }
 
       do
@@ -189,7 +189,7 @@ void dir_dcl(void)
 
     if (next_token != PAREN_CLOSE)
     {
-      puts("ERROR: missing )");
+      puts("Syntax error: missing ')'.");
     }
   }
   else if (next_token == NAME)
@@ -198,7 +198,7 @@ void dir_dcl(void)
   }
   else
   {
-    puts("ERROR: expected name or (dcl)");
+    puts("Syntax error: expected name or (dcl).");
   }
 
   while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS)
