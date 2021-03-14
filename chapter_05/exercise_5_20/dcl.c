@@ -12,6 +12,7 @@ void skip_comments();
 void get_name(char *dest, const size_t max_len);
 int get_next_token(void);
 
+int is_valid_qualifier(const char *str);
 int is_valid_data_type(const char *str);
 
 void dcl(void);
@@ -210,6 +211,15 @@ int get_next_token(void)
   return next_token = c;
 }
 
+int is_valid_qualifier(const char *str)
+{
+  if (strcmp(str, "const") == 0 || strcmp(str, "volatile") == 0)
+  {
+    return TRUE;
+  }
+  return FALSE;
+}
+
 int is_valid_data_type(const char *str)
 {
   size_t nr_of_types = sizeof(data_types) / sizeof(data_types[0]);
@@ -305,7 +315,13 @@ void attr_dcl(void)
     {
       // TODO: Check against void arg list.
       // TODO: Check type against void.
-      // TODO: Check type qualifiers like const and volatile.
+      if (is_valid_qualifier(token))
+      {
+        strcat(out, " ");
+        strcat(out, token);
+        get_next_token();
+      }
+
       if (is_valid_data_type(token))
       {
         strcat(out, " ");
