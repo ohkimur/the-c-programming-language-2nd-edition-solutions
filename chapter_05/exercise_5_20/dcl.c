@@ -77,7 +77,7 @@ int main(void)
     else
     {
       error = TRUE;
-      printf("Syntax error: Invalid data type '%s' on line %zu.\n", token, line_nr);
+      printf("Error: invalid data type '%s' on line %zu.\n", token, line_nr);
 
       do
       {
@@ -313,8 +313,6 @@ void attr_dcl(void)
     }
     else if (next_token == NAME)
     {
-      // TODO: Check against void arg list.
-      // TODO: Check type against void.
       if (is_valid_qualifier(token))
       {
         strcat(out, " ");
@@ -324,17 +322,33 @@ void attr_dcl(void)
 
       if (is_valid_data_type(token))
       {
+        enum boolean is_void_type = FALSE;
+        if (strcmp(token, "void") == 0)
+        {
+          is_void_type = TRUE;
+        }
+
         strcat(out, " ");
         strcat(out, token);
 
         get_next_token();
         if (next_token == NAME)
         {
+          if (is_void_type)
+          {
+            printf("Error: variable '%s' has incomplete type 'void' on line %zu.\n", token, line_nr);
+          }
+
           strcat(out, " ");
           strcat(out, token);
         }
         else if (next_token == PAREN_CLOSE)
         {
+          if (is_void_type)
+          {
+            return;
+          }
+
           error = TRUE;
           printf("Syntax error: missing variable name on line %zu.\n", line_nr);
           return;
