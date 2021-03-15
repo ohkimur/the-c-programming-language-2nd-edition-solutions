@@ -1,8 +1,8 @@
-x * int             //  ->  int *x
-argv * * char       //  ->  char **argv
-daytab * [] int     //  ->  int (*daytab)[]
-daytab [] * int     //  ->  int *daytab[]
-comp () * void      //  ->  void *comp()
-comp * () void      //  ->  void (*comp)()
-x () * [] * () char //  ->  char (*(*x())[])()
-x [] * () * [] char //  ->  char (*(*x[])())[]
+x * int
+argv * * char
+daytab * [] int
+daytab [] * int
+comp () * void
+comp * () void
+x () * [] * () char
+x [] * () * [] char
