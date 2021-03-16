@@ -65,7 +65,6 @@ int main(void)
   {
     if (isalpha(word[0]))
     {
-      puts(word);
       if ((n = bin_search(word, keytab, NR_OF_KEYS)) >= 0)
       {
         keytab[n].count++;
