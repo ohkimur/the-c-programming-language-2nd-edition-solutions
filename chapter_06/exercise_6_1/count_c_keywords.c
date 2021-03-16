@@ -12,7 +12,7 @@ struct key
   int count;
 };
 
-int get_word(char *word, int lim);
+int get_word(char *word, int max_word_len);
 int bin_search(char *word, struct key tab[], int n);
 
 struct key keytab[] = {
@@ -56,41 +56,33 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-int get_word(char *word, int lim)
+int get_word(char *word, int max_word_len)
 {
-  int c;
-  char *w = word;
-
-  while (isspace(c = getc(stdin)))
-    ;
+  int c = getc(stdin);
+  size_t i = 0;
 
   if (c != EOF)
   {
-    *w++ = c;
+    word[i++] = c;
   }
 
   if (!isalpha(c))
   {
-    *w = '\0';
+    word[i] = '\0';
     return c;
   }
 
-  for (; --lim > 0; w++)
+  while ((isalnum(c = getc(stdin)) || c == '_') && i < max_word_len)
   {
-    if (!isalnum(*w = getc(stdin)))
-    {
-      ungetc(*w, stdin);
-      break;
-    }
+    word[i++] = c;
   }
+  word[i] = '\0';
 
-  *w = '\0';
   return word[0];
 }
 
 int bin_search(char *word, struct key tab[], int n)
 {
-
   int low = 0;
   int high = n - 1;
   int mid;
