@@ -12,6 +12,7 @@ struct key
   int count;
 };
 
+void skip_blanks();
 int get_word(char *word, int max_word_len);
 int bin_search(char *word, struct key tab[], int n);
 
@@ -56,13 +57,20 @@ int main(void)
   return EXIT_SUCCESS;
 }
 
-int get_word(char *word, int max_word_len)
+void skip_blanks()
 {
   int c;
-  size_t i = 0;
-
   while (isblank(c = getc(stdin)))
     ;
+  ungetc(c, stdin);
+}
+
+int get_word(char *word, int max_word_len)
+{
+  skip_blanks();
+
+  int c = getc(stdin);
+  size_t i = 0;
 
   if (c != EOF)
   {
