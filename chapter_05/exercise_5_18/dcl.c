@@ -86,7 +86,6 @@ void skip_comments()
   if (c == '/')
   {
     c = getc(stdin);
-
     if (c == '/')
     {
       while ((c = getc(stdin)) != '\n' && c != EOF)
