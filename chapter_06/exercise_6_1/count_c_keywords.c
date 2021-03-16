@@ -14,7 +14,7 @@ struct key
 
 void skip_blanks();
 void skip_comments();
-void skip_character_constant();
+void skip_string_between(char start, char end);
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
@@ -116,12 +116,12 @@ void skip_comments()
   ungetc(c, stdin);
 }
 
-void skip_character_constant()
+void skip_string_between(char start, char end)
 {
   int c = getc(stdin);
-  if (c == '\'')
+  if (c == start)
   {
-    while ((c = getc(stdin)) != '\'' && c != EOF)
+    while ((c = getc(stdin)) != end && c != EOF)
       ;
 
     if (c == EOF)
@@ -137,23 +137,8 @@ void skip_character_constant()
 
 void skip_string_constant()
 {
-  skip_character_constant();
-
-  int c = getc(stdin);
-  if (c == '"')
-  {
-    while ((c = getc(stdin)) != '"' && c != EOF)
-      ;
-
-    if (c == EOF)
-    {
-      ungetc(c, stdin);
-    }
-  }
-  else
-  {
-    ungetc(c, stdin);
-  }
+  skip_string_between('\'', '\'');
+  skip_string_between('"', '"');
 }
 
 int get_word(char *word, int max_word_len)
