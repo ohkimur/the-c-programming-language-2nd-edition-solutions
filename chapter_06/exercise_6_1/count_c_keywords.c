@@ -197,3 +197,5 @@ int bin_search(char *word, struct key tab[], int n)
 
   return -1;
 }
+
+// NOTE: run: ./count_c_keywords < count_c_keywords.c
