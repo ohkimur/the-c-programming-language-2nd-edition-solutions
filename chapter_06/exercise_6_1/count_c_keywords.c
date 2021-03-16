@@ -118,6 +118,8 @@ void skip_comments()
 
 void skip_string_constant()
 {
+  // TODO: Improve this skip function. The while keyword is not correctly counted.
+  
   int c = getc(stdin);
   if (c == '"')
   {
