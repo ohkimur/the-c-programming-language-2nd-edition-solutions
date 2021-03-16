@@ -58,8 +58,11 @@ int main(void)
 
 int get_word(char *word, int max_word_len)
 {
-  int c = getc(stdin);
+  int c;
   size_t i = 0;
+
+  while (isblank(c = getc(stdin)))
+    ;
 
   if (c != EOF)
   {
