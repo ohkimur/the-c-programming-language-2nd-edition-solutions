@@ -14,6 +14,7 @@ struct key
 
 void skip_blanks();
 void skip_comments();
+void skip_character_constant();
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
@@ -95,7 +96,6 @@ void skip_comments()
   if (c == '/')
   {
     c = getc(stdin);
-
     if (c == '/')
     {
       while ((c = getc(stdin)) != '\n' && c != EOF)
@@ -116,10 +116,29 @@ void skip_comments()
   ungetc(c, stdin);
 }
 
+void skip_character_constant()
+{
+  int c = getc(stdin);
+  if (c == '\'')
+  {
+    while ((c = getc(stdin)) != '\'' && c != EOF)
+      ;
+
+    if (c == EOF)
+    {
+      ungetc(c, stdin);
+    }
+  }
+  else
+  {
+    ungetc(c, stdin);
+  }
+}
+
 void skip_string_constant()
 {
-  // TODO: Improve this skip function. The while keyword is not correctly counted.
-  
+  skip_character_constant();
+
   int c = getc(stdin);
   if (c == '"')
   {
