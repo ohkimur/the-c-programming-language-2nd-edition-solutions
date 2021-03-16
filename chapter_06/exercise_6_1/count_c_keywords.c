@@ -43,6 +43,7 @@ struct key keytab[] = {
     {"return", 0},
     {"short", 0},
     {"signed", 0},
+    {"size_t", 0},
     {"sizeof", 0},
     {"static", 0},
     {"struct", 0},
@@ -64,6 +65,7 @@ int main(void)
   {
     if (isalpha(word[0]))
     {
+      puts(word);
       if ((n = bin_search(word, keytab, NR_OF_KEYS)) >= 0)
       {
         keytab[n].count++;
@@ -108,7 +110,6 @@ void skip_comments()
       c = getc(stdin);
       if (c == '/')
       {
-        ungetc('\n', stdin);
         return;
       }
     }
