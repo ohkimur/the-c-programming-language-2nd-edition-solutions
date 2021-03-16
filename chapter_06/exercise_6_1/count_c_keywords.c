@@ -13,6 +13,9 @@ struct key
 };
 
 void skip_blanks();
+void skip_comments();
+void skip_string_constant();
+
 int get_word(char *word, int max_word_len);
 int bin_search(char *word, struct key tab[], int n);
 
@@ -86,9 +89,57 @@ void skip_blanks()
   ungetc(c, stdin);
 }
 
+void skip_comments()
+{
+  int c = getc(stdin);
+  if (c == '/')
+  {
+    c = getc(stdin);
+
+    if (c == '/')
+    {
+      while ((c = getc(stdin)) != '\n' && c != EOF)
+        ;
+    }
+    else if (c == '*')
+    {
+      while ((c = getc(stdin)) != '*' && c != EOF)
+        ;
+      c = getc(stdin);
+      if (c == '/')
+      {
+        ungetc('\n', stdin);
+        return;
+      }
+    }
+  }
+  ungetc(c, stdin);
+}
+
+void skip_string_constant()
+{
+  int c = getc(stdin);
+  if (c == '"')
+  {
+    while ((c = getc(stdin)) != '"' && c != EOF)
+      ;
+
+    if (c == EOF)
+    {
+      ungetc(c, stdin);
+    }
+  }
+  else
+  {
+    ungetc(c, stdin);
+  }
+}
+
 int get_word(char *word, int max_word_len)
 {
   skip_blanks();
+  skip_comments();
+  skip_string_constant();
 
   int c = getc(stdin);
   size_t i = 0;
