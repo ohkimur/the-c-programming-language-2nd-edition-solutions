@@ -75,7 +75,7 @@ int main(void)
 void skip_blanks()
 {
   int c;
-  while ((c = getc(stdin)) == ' ' || c == '\t')
+  while (isblank(c = getc(stdin)))
     ;
   ungetc(c, stdin);
 }
