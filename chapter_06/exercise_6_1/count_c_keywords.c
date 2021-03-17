@@ -123,13 +123,9 @@ void skip_string_between(char start, char end)
   {
     while ((c = getc(stdin)) != end && c != EOF)
       ;
-
-    if (c == EOF)
-    {
-      ungetc(c, stdin);
-    }
   }
-  else
+
+  if (c != start && c != end)
   {
     ungetc(c, stdin);
   }
