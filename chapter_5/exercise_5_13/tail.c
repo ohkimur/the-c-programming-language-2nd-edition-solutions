@@ -6,6 +6,7 @@
 #define MAX_NR_OF_LINES 5000
 #define DEFAULT_NR_OF_LINES_TO_PRINT 10
 
+#define MAX_LINE_LEN 1000
 #define ALLOC_SIZE 10000
 
 static char alloc_buf[ALLOC_SIZE];
@@ -13,6 +14,8 @@ static char *alloc_p = alloc_buf;
 
 char *alloc(size_t size);
 void afree(char *ptr);
+
+size_t getln(char line[], size_t max_line);
 
 int is_str_uint(char *str);
 int is_arg_list_valid(int argc, char *argv[]);
@@ -76,12 +79,11 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
 {
   size_t line_length;
   size_t nr_of_lines = 0;
-  size_t bufsize = 0;
 
-  char *current_line = NULL;
+  char *current_line = alloc(MAX_LINE_LEN);
   char *current_line_copy = NULL;
 
-  while ((line_length = getline(&current_line, &bufsize, stdin)) != -1)
+  while ((line_length = getln(current_line, MAX_LINE_LEN)))
   {
     if (nr_of_lines >= max_nr_of_lines || (current_line_copy = alloc(line_length)) == NULL)
     {
@@ -114,6 +116,27 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines_to_print, const size
     puts(line_ptr[i]);
     afree(line_ptr[i]);
   }
+}
+
+size_t getln(char line[], size_t max_line)
+{
+  int c;
+  size_t i;
+
+  for (i = 0; i < max_line - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
+  {
+    line[i] = c;
+  }
+
+  if (c == '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
+
+  line[i] = '\0';
+
+  return i;
 }
 
 char *alloc(size_t size)
