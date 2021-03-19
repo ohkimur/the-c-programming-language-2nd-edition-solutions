@@ -15,7 +15,7 @@ static char *alloc_p = alloc_buf;
 char *alloc(size_t size);
 void afree(char *ptr);
 
-size_t getln(char line[], size_t max_line);
+size_t get_line(char line[], size_t max_line);
 
 int is_str_uint(char *str);
 int is_arg_list_valid(int argc, char *argv[]);
@@ -83,7 +83,7 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
   char *current_line = alloc(MAX_LINE_LEN);
   char *current_line_copy = NULL;
 
-  while ((line_length = getln(current_line, MAX_LINE_LEN)))
+  while ((line_length = get_line(current_line, MAX_LINE_LEN)))
   {
     if (nr_of_lines >= max_nr_of_lines || (current_line_copy = alloc(line_length)) == NULL)
     {
@@ -118,7 +118,7 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines_to_print, const size
   }
 }
 
-size_t getln(char line[], size_t max_line)
+size_t get_line(char line[], size_t max_line)
 {
   int c;
   size_t i;
