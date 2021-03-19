@@ -3,7 +3,7 @@
 
 #define MAXLEN 1000
 
-int getln(char line[], int lim);
+int get_line(char line[], int lim);
 int strindex(char source[], char pattern[]);
 
 int main(void)
@@ -11,7 +11,7 @@ int main(void)
   char line[MAXLEN];
   char pattern[MAXLEN] = "example";
 
-  getln(line, MAXLEN);
+  get_line(line, MAXLEN);
   printf("%s\n", line);
 
   printf("Pattern found at index %d\n", strindex(line, pattern));
@@ -19,7 +19,7 @@ int main(void)
   return 0;
 }
 
-int getln(char line[], int lim)
+int get_line(char line[], int lim)
 {
   int i = 0, c;
 

@@ -20,7 +20,7 @@ enum boolean
   TRUE
 };
 
-int getln(char line[], int limit);
+int get_line(char line[], int limit);
 int getop(char[]);
 
 void push(double f);
@@ -44,7 +44,7 @@ int main(void)
   int varindex = 0;
   double var_buff[VARNUM];
 
-  while (getln(line, MAXLEN) != 0)
+  while (get_line(line, MAXLEN) != 0)
   {
     line_i = 0;
     while ((type = getop(s)) != '\0')
@@ -225,7 +225,7 @@ void clear(void)
   } while (sp--);
 }
 
-int getln(char line[], int limit)
+int get_line(char line[], int limit)
 {
   int c, i;
 

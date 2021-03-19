@@ -2,7 +2,7 @@
 
 #define MAXLINE 1000
 
-int getln(char line[], int limit);
+int get_line(char line[], int limit);
 void remove_trailing_blanks(char line[], int length);
 
 int main(void)
@@ -10,7 +10,7 @@ int main(void)
   int len;
   char line[MAXLINE];
 
-  while ((len = getln(line, MAXLINE)) > 0)
+  while ((len = get_line(line, MAXLINE)) > 0)
   {
     remove_trailing_blanks(line, len);
     printf("%s", line);
@@ -19,7 +19,7 @@ int main(void)
   return 0;
 }
 
-int getln(char line[], int limit)
+int get_line(char line[], int limit)
 {
   int c, i;
 

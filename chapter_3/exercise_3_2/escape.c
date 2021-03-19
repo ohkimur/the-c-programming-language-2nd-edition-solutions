@@ -2,7 +2,7 @@
 
 #define MAXLEN 1000
 
-int getln(char line[], unsigned int limit);
+int get_line(char line[], unsigned int limit);
 void escape(char dest[], char src[]);
 void unescape(char dest[], char src[]);
 
@@ -11,7 +11,7 @@ int main(void)
   char src[MAXLEN];
   char dest[MAXLEN];
 
-  getln(src, MAXLEN);
+  get_line(src, MAXLEN);
   printf("%s", src);
 
   escape(dest, src);
@@ -23,7 +23,7 @@ int main(void)
   return 0;
 }
 
-int getln(char line[], unsigned int limit)
+int get_line(char line[], unsigned int limit)
 {
   int i, c;
   for (i = 0; i < limit - 1 && (c = getchar()) != EOF && c != '\n'; ++i)

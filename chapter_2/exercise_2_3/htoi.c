@@ -5,21 +5,21 @@
 
 #define MAXLINE 100
 
-int getln(char line[], int lim);
+int get_line(char line[], int lim);
 int htoi(char hex[]);
 
 int main(void)
 {
   char hex[MAXLINE];
 
-  getln(hex, MAXLINE);
+  get_line(hex, MAXLINE);
 
   printf("%d", htoi(hex));
 
   return 0;
 }
 
-int getln(char line[], int lim)
+int get_line(char line[], int lim)
 {
   char c;
   int i = 0;

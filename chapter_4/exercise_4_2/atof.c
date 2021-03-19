@@ -3,14 +3,14 @@
 
 #define MAXLEN 500
 
-int getln(char line[], int lim);
+int get_line(char line[], int lim);
 double atof(char s[]);
 
 int main(void)
 {
   char line[MAXLEN];
 
-  getln(line, MAXLEN);
+  get_line(line, MAXLEN);
   printf("%s", line);
 
   printf("%f", atof(line));
@@ -18,7 +18,7 @@ int main(void)
   return 0;
 }
 
-int getln(char line[], int lim)
+int get_line(char line[], int lim)
 {
   int i = 0, c;
 
