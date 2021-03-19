@@ -3,7 +3,7 @@
 
 #define MAXLEN 500
 
-int get_line(char line[], int lim);
+int get_line(char line[], unsigned int max_line_len);
 double atof(char s[]);
 
 int main(void)
@@ -18,11 +18,11 @@ int main(void)
   return 0;
 }
 
-int get_line(char line[], int lim)
+int get_line(char line[], unsigned int max_line_len)
 {
   int i = 0, c;
 
-  while (i < lim - 1 && (c = getchar()) != '\n')
+  while (i < max_line_len - 1 && (c = getchar()) != '\n')
   {
     line[i] = c;
     ++i;

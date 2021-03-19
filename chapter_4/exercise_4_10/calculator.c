@@ -20,7 +20,7 @@ enum boolean
   TRUE
 };
 
-int get_line(char line[], int limit);
+int get_line(char line[], unsigned int max_line_len);
 int getop(char[]);
 
 void push(double f);
@@ -225,11 +225,11 @@ void clear(void)
   } while (sp--);
 }
 
-int get_line(char line[], int limit)
+int get_line(char line[], unsigned int max_line_len)
 {
   int c, i;
 
-  for (i = 0; i < limit - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+  for (i = 0; i < max_line_len - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
   {
     line[i] = c;
   }
