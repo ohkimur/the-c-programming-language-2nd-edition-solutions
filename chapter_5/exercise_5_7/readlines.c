@@ -8,7 +8,7 @@
 
 char *lineptr[MAXLINES]; // pointers to text lines
 
-int getln(char line[], int maxline);
+int get_line(char line[], int maxline);
 
 int readlines(char *lineptr[], int nlines, char *stored_lines);
 void writelines(char *lineptr[], int nlines);
@@ -44,7 +44,7 @@ int readlines(char *lineptr[], int maxlines, char *stored_lines)
   char line[MAXLEN];
 
   nlines = 0;
-  while ((len = getln(line, MAXLEN)) > 0)
+  while ((len = get_line(line, MAXLEN)) > 0)
   {
     // Checking if the current # of lines exceeds the max # of lines that can be stored
     // Also checking if the max # of chars from the stored_lines buffer is not exceeded
@@ -72,7 +72,7 @@ void writelines(char *lineptr[], int nlines)
   }
 }
 
-int getln(char line[], int maxline)
+int get_line(char line[], int maxline)
 {
   int c, i;
 

@@ -1,18 +1,18 @@
 #include <stdio.h>
 
-void getln(char *s);
+void get_line(char *s);
 
 int main(void)
 {
   char string[150] = "";
 
-  getln(string);
+  get_line(string);
   puts(string);
 
   return 0;
 }
 
-void getln(char *s)
+void get_line(char *s)
 {
   while ((*s = getchar()) != EOF && (*s != '\n'))
   {

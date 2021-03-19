@@ -4,7 +4,7 @@
 #define TRUE (1 == 1)
 #define FALSE !TRUE
 
-int getln(char line[], int limit);
+int get_line(char line[], int limit);
 void fold_line(char line[], char fold_str[], int n_break);
 
 int main(void)
@@ -12,7 +12,7 @@ int main(void)
   char line[MAXLINE];
   char fold_str[MAXLINE];
 
-  getln(line, MAXLINE);
+  get_line(line, MAXLINE);
 
   fold_line(line, fold_str, 30);
 
@@ -21,7 +21,7 @@ int main(void)
   return 0;
 }
 
-int getln(char line[], int limit)
+int get_line(char line[], int limit)
 {
   int c, i = 0;
 
