@@ -199,7 +199,7 @@ char *substr(const char *s, size_t start, size_t end)
   }
 
   const size_t len = end - start;
-  char *dest = (char *)malloc(sizeof(char) * (len + 1));
+  char *dest = alloc(len + 1);
 
   for (size_t i = start; i < end && s[i] != '\0'; ++i)
   {
@@ -336,8 +336,8 @@ int fieldscmp(const char *s1, const char *s2)
 
     int comp_result = comp(field_s1, field_s2);
 
-    free(field_s1);
-    free(field_s2);
+    afree(field_s1);
+    afree(field_s2);
 
     if (comp_result == 0)
     {
