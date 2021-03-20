@@ -75,6 +75,27 @@ int is_arg_list_valid(int argc, char *argv[])
   return 1;
 }
 
+size_t get_line(char line[], size_t max_line_len)
+{
+  int c;
+  size_t i;
+
+  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
+  {
+    line[i] = c;
+  }
+
+  if (c == '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
+
+  line[i] = '\0';
+
+  return i;
+}
+
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
 {
   size_t line_length;
@@ -116,27 +137,6 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines_to_print, const size
     puts(line_ptr[i]);
     afree(line_ptr[i]);
   }
-}
-
-size_t get_line(char line[], size_t max_line_len)
-{
-  int c;
-  size_t i;
-
-  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
-  {
-    line[i] = c;
-  }
-
-  if (c == '\n')
-  {
-    line[i] = c;
-    ++i;
-  }
-
-  line[i] = '\0';
-
-  return i;
 }
 
 char *alloc(size_t size)
