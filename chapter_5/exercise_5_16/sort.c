@@ -5,6 +5,17 @@
 
 #define MAX_NR_OF_LINES 5000
 
+#define MAX_LINE_LEN 1000
+#define ALLOC_SIZE 10000
+
+static char alloc_buf[ALLOC_SIZE];
+static char *alloc_p = alloc_buf;
+
+char *alloc(size_t size);
+void afree(char *ptr);
+
+size_t get_line(char line[], size_t max_line_len);
+
 int parse_arg_list(int argc, char *argv[]);
 
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines);
@@ -87,18 +98,38 @@ int parse_arg_list(int argc, char *argv[])
   return 1;
 }
 
+size_t get_line(char line[], size_t max_line_len)
+{
+  int c;
+  size_t i;
+
+  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
+  {
+    line[i] = c;
+  }
+
+  if (c == '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
+
+  line[i] = '\0';
+
+  return i;
+}
+
 size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
 {
   size_t line_length;
   size_t nr_of_lines = 0;
-  size_t bufsize = 0;
 
-  char *current_line = NULL;
+  char *current_line = alloc(MAX_LINE_LEN);
   char *current_line_copy = NULL;
 
-  while ((line_length = getline(&current_line, &bufsize, stdin)) != -1)
+  while ((line_length = get_line(current_line, MAX_LINE_LEN)))
   {
-    if (nr_of_lines >= max_nr_of_lines || (current_line_copy = (char *)malloc(line_length * sizeof(char))) == NULL)
+    if (nr_of_lines >= max_nr_of_lines || (current_line_copy = alloc(line_length)) == NULL)
     {
       return -1;
     }
@@ -110,7 +141,7 @@ size_t read_lines(char *line_ptr[], const size_t max_nr_of_lines)
     }
   }
 
-  free(current_line);
+  afree(current_line);
 
   return nr_of_lines;
 }
@@ -120,7 +151,7 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines)
   for (size_t i = 0; i < nr_of_lines; ++i)
   {
     puts(line_ptr[i]);
-    free(line_ptr[i]);
+    afree(line_ptr[i]);
   }
 }
 
@@ -201,6 +232,25 @@ void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *)
   swap(v, start, last);
   quick_sort(v, start, last - 1, comp);
   quick_sort(v, last + 1, end, comp);
+}
+
+char *alloc(size_t size)
+{
+  if (alloc_buf + ALLOC_SIZE - alloc_p >= size)
+  {
+    alloc_p += size;
+    return alloc_p - size;
+  }
+
+  return NULL;
+}
+
+void afree(char *ptr)
+{
+  if (ptr >= alloc_buf && ptr < alloc_buf + ALLOC_SIZE)
+  {
+    alloc_p = ptr;
+  }
 }
 
 // NOTE: run: ./sort -df < file_in.txt
