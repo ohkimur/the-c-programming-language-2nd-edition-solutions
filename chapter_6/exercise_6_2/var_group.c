@@ -3,8 +3,67 @@
 #include <string.h>
 #include <ctype.h>
 
+void skip_blanks();
+void skip_comments();
+void skip_string_between(char start, char end);
+void skip_string_constant();
+
 int main(void)
 {
   // TODO: Start from here.
   return EXIT_SUCCESS;
+}
+
+void skip_blanks()
+{
+  int c;
+  while (isblank(c = getc(stdin)))
+    ;
+  ungetc(c, stdin);
+}
+
+void skip_comments()
+{
+  int c = getc(stdin);
+  if (c == '/')
+  {
+    c = getc(stdin);
+    if (c == '/')
+    {
+      while ((c = getc(stdin)) != '\n' && c != EOF)
+        ;
+    }
+    else if (c == '*')
+    {
+      while ((c = getc(stdin)) != '*' && c != EOF)
+        ;
+      c = getc(stdin);
+      if (c == '/')
+      {
+        return;
+      }
+    }
+  }
+  ungetc(c, stdin);
+}
+
+void skip_string_between(char start, char end)
+{
+  int c = getc(stdin);
+  if (c == start)
+  {
+    while ((c = getc(stdin)) != end && c != EOF)
+      ;
+  }
+
+  if (c != start && c != end)
+  {
+    ungetc(c, stdin);
+  }
+}
+
+void skip_string_constant()
+{
+  skip_string_between('\'', '\'');
+  skip_string_between('"', '"');
 }
