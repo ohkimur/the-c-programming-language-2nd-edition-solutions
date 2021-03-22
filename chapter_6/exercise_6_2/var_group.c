@@ -8,6 +8,8 @@ void skip_comments();
 void skip_string_between(char start, char end);
 void skip_string_constant();
 
+int get_word(char *word, int max_word_len);
+
 int main(void)
 {
   // TODO: Start from here.
@@ -66,4 +68,33 @@ void skip_string_constant()
 {
   skip_string_between('\'', '\'');
   skip_string_between('"', '"');
+}
+
+int get_word(char *word, int max_word_len)
+{
+  skip_blanks();
+  skip_comments();
+  skip_string_constant();
+
+  int c = getc(stdin);
+  size_t i = 0;
+
+  if (c != EOF)
+  {
+    word[i++] = c;
+  }
+
+  if (!isalpha(c))
+  {
+    word[i] = '\0';
+    return c;
+  }
+
+  while ((isalnum(c = getc(stdin)) || c == '_') && i < max_word_len)
+  {
+    word[i++] = c;
+  }
+  word[i] = '\0';
+
+  return word[0];
 }
