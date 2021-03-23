@@ -16,6 +16,9 @@ struct tree_node
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
 
+// There is a strdup available with POSIX, but it's not part of ISO C.
+char *str_dup(char *src);
+
 void skip_blanks();
 void skip_comments();
 void skip_string_between(char start, char end);
@@ -39,6 +42,16 @@ int main(void)
   print_tree(root);
 
   return EXIT_SUCCESS;
+}
+
+char *str_dup(char *src)
+{
+  char *dest = (char *)malloc(strlen(src) + 1);
+  if (dest != NULL)
+  {
+    strcpy(dest, src);
+  }
+  return dest;
 }
 
 void skip_blanks()
@@ -131,7 +144,7 @@ struct tree_node *add_to_tree(struct tree_node *node_p, char *word)
   if (node_p == NULL)
   {
     node_p = (struct tree_node *)malloc(sizeof(struct tree_node));
-    node_p->word = strdup(word);
+    node_p->word = str_dup(word);
     node_p->count = 1;
     node_p->left = node_p->right = NULL;
   }
