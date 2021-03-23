@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define MAX_WORD_LEN 100
+#define MAX_NR_OF_GROUPS 100
 
 struct tree_node
 {
@@ -25,6 +26,7 @@ void skip_string_between(char start, char end);
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
+int bin_search(char *word, struct tree_node arr[], int arr_len);
 
 int main(void)
 {
@@ -172,4 +174,32 @@ void print_tree(struct tree_node *node_p)
     printf("%4d %s\n", node_p->count, node_p->word);
     print_tree(node_p->right);
   }
+}
+
+int bin_search(char *word, struct tree_node tab[], int arr_len)
+{
+  int low = 0;
+  int high = arr_len - 1;
+  int mid;
+
+  while (low <= high)
+  {
+    mid = (low + high) / 2;
+
+    int cond = strcmp(word, tab[mid].word);
+    if (cond < 0)
+    {
+      high = mid - 1;
+    }
+    else if (cond > 0)
+    {
+      low = mid + 1;
+    }
+    else
+    {
+      return mid;
+    }
+  }
+
+  return -1;
 }
