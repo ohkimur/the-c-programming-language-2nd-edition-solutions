@@ -26,7 +26,6 @@ void skip_string_between(char start, char end);
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
-struct tree_node *bin_search(char *word, struct tree_node arr[], int arr_len);
 
 int main(void)
 {
@@ -174,32 +173,4 @@ void print_tree(struct tree_node *node_p)
     printf("%4d %s\n", node_p->count, node_p->word);
     print_tree(node_p->right);
   }
-}
-
-struct tree_node *bin_search(char *word, struct tree_node arr[], int arr_len)
-{
-  struct tree_node *low = &arr[0];
-  struct tree_node *high = &arr[arr_len];
-  struct tree_node *mid;
-
-  while (low < high)
-  {
-    mid = low + (high - low) / 2;
-
-    int cond = strcmp(word, mid->word);
-    if (cond < 0)
-    {
-      high = mid;
-    }
-    else if (cond > 0)
-    {
-      low = mid + 1;
-    }
-    else
-    {
-      return mid;
-    }
-  }
-
-  return NULL;
 }
