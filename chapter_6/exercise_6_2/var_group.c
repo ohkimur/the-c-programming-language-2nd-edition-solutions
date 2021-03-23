@@ -182,7 +182,7 @@ struct tree_node *bin_search(char *word, struct tree_node arr[], int arr_len)
   struct tree_node *high = &arr[arr_len];
   struct tree_node *mid;
 
-  while (low <= high)
+  while (low < high)
   {
     mid = low + (high - low) / 2;
 
