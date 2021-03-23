@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define MAX_WORD_LEN
+#define MAX_WORD_LEN 100
 
 struct tree_node
 {
@@ -12,6 +12,9 @@ struct tree_node
   struct tree_node *left;
   struct tree_node *right;
 };
+
+struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
+void print_tree(struct tree_node *node_p);
 
 void skip_blanks();
 void skip_comments();
@@ -22,7 +25,19 @@ int get_word(char *word, int max_word_len);
 
 int main(void)
 {
-  // TODO: Start from here.
+  struct tree_node *root = NULL;
+  char word[MAX_WORD_LEN];
+
+  while (get_word(word, MAX_WORD_LEN) != EOF)
+  {
+    if (isalpha(word[0]))
+    {
+      root = add_to_tree(root, word);
+    }
+  }
+
+  print_tree(root);
+
   return EXIT_SUCCESS;
 }
 
@@ -107,4 +122,41 @@ int get_word(char *word, int max_word_len)
   word[i] = '\0';
 
   return word[0];
+}
+
+struct tree_node *add_to_tree(struct tree_node *node_p, char *word)
+{
+  int cond;
+
+  if (node_p == NULL)
+  {
+    node_p = (struct tree_node *)malloc(sizeof(struct tree_node));
+    node_p->word = strdup(word);
+    node_p->count = 1;
+    node_p->left = node_p->right = NULL;
+  }
+  else if ((cond = strcmp(word, node_p->word)) == 0)
+  {
+    node_p->count++;
+  }
+  else if (cond < 0)
+  {
+    node_p->left = add_to_tree(node_p->left, word);
+  }
+  else if (cond > 0)
+  {
+    node_p->right = add_to_tree(node_p->right, word);
+  }
+
+  return node_p;
+}
+
+void print_tree(struct tree_node *node_p)
+{
+  if (node_p != NULL)
+  {
+    print_tree(node_p->left);
+    printf("%4d %s\n", node_p->count, node_p->word);
+    print_tree(node_p->right);
+  }
 }
