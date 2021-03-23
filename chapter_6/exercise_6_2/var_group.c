@@ -26,7 +26,7 @@ void skip_string_between(char start, char end);
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
-int bin_search(char *word, struct tree_node arr[], int arr_len);
+struct tree_node *bin_search(char *word, struct tree_node arr[], int arr_len);
 
 int main(void)
 {
@@ -176,20 +176,20 @@ void print_tree(struct tree_node *node_p)
   }
 }
 
-int bin_search(char *word, struct tree_node tab[], int arr_len)
+struct tree_node *bin_search(char *word, struct tree_node arr[], int arr_len)
 {
-  int low = 0;
-  int high = arr_len - 1;
-  int mid;
+  struct tree_node *low = &arr[0];
+  struct tree_node *high = &arr[arr_len];
+  struct tree_node *mid;
 
   while (low <= high)
   {
-    mid = (low + high) / 2;
+    mid = low + (high - low) / 2;
 
-    int cond = strcmp(word, tab[mid].word);
+    int cond = strcmp(word, mid->word);
     if (cond < 0)
     {
-      high = mid - 1;
+      high = mid;
     }
     else if (cond > 0)
     {
@@ -201,5 +201,5 @@ int bin_search(char *word, struct tree_node tab[], int arr_len)
     }
   }
 
-  return -1;
+  return NULL;
 }
