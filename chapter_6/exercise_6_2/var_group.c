@@ -4,7 +4,6 @@
 #include <ctype.h>
 
 #define MAX_WORD_LEN 100
-#define MAX_NR_OF_GROUPS 100
 
 struct tree_node
 {
@@ -14,8 +13,17 @@ struct tree_node
   struct tree_node *right;
 };
 
+struct list_node
+{
+  struct tree_node *var_group;
+  struct list_node *next;
+};
+
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
+
+struct list_node *add_to_list(struct list_node *list_node_p, struct tree_node *tree_node_p);
+void print_list(struct list_node *node_p);
 
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
@@ -172,5 +180,24 @@ void print_tree(struct tree_node *node_p)
     print_tree(node_p->left);
     printf("%4d %s\n", node_p->count, node_p->word);
     print_tree(node_p->right);
+  }
+}
+
+struct list_node *add_to_list(struct list_node *list_node_p, struct tree_node *tree_node_p)
+{
+  // TODO: Implement the addition of a tree to the list.
+  // NOTE: It might be the case that constructing each tree node here would help. This will also imply
+  // that comparision should happen here too.
+  // NOTE2: Also it might be possible to only manipulate the add_to_tree function to obtain the right
+  // functionality.
+  return NULL;
+}
+
+void print_list(struct list_node *node_p)
+{
+  if (node_p != NULL)
+  {
+    print_tree(node_p->var_group);
+    print_list(node_p->next);
   }
 }
