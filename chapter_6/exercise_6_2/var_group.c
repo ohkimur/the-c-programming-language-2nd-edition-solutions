@@ -22,7 +22,7 @@ struct list_node
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
 
-struct list_node *add_to_list(struct list_node *list_node_p, struct tree_node *tree_node_p);
+struct list_node *add_to_list(struct list_node *list_node_p, char *word);
 void print_list(struct list_node *node_p);
 
 // There is a strdup available with POSIX, but it's not part of ISO C.
@@ -37,18 +37,21 @@ int get_word(char *word, int max_word_len);
 
 int main(void)
 {
-  struct tree_node *root = NULL;
+  // struct tree_node *root = NULL;
+  struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
 
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
     if (isalpha(word[0]))
     {
-      root = add_to_tree(root, word);
+      // root = add_to_tree(root, word);
+      list_root = add_to_list(list_root, word);
     }
   }
 
-  print_tree(root);
+  // print_tree(root);
+  print_list(list_root);
 
   return EXIT_SUCCESS;
 }
@@ -183,14 +186,25 @@ void print_tree(struct tree_node *node_p)
   }
 }
 
-struct list_node *add_to_list(struct list_node *list_node_p, struct tree_node *tree_node_p)
+struct list_node *add_to_list(struct list_node *list_node_p, char *word)
 {
   // TODO: Implement the addition of a tree to the list.
   // NOTE: It might be the case that constructing each tree node here would help. This will also imply
   // that comparision should happen here too.
   // NOTE2: Also it might be possible to only manipulate the add_to_tree function to obtain the right
   // functionality.
-  return NULL;
+
+  if (list_node_p == NULL)
+  {
+    list_node_p = (struct list_node *)malloc(sizeof(struct list_node));
+    list_node_p->var_group = add_to_tree(list_node_p->var_group, word);
+  }
+  else
+  {
+    list_node_p->next = add_to_list(list_node_p->next, word);
+  }
+
+  return list_node_p;
 }
 
 void print_list(struct list_node *node_p)
@@ -198,6 +212,7 @@ void print_list(struct list_node *node_p)
   if (node_p != NULL)
   {
     print_tree(node_p->var_group);
+    putchar('\n');
     print_list(node_p->next);
   }
 }
