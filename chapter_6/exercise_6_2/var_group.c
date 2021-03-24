@@ -188,15 +188,14 @@ void print_tree(struct tree_node *node_p)
 
 struct list_node *add_to_list(struct list_node *list_node_p, char *word)
 {
-  // TODO: Implement the addition of a tree to the list.
-  // NOTE: It might be the case that constructing each tree node here would help. This will also imply
-  // that comparision should happen here too.
-  // NOTE2: Also it might be possible to only manipulate the add_to_tree function to obtain the right
-  // functionality.
-
+  // TODO: Make the string comparison based on an external parameter.
   if (list_node_p == NULL)
   {
     list_node_p = (struct list_node *)malloc(sizeof(struct list_node));
+    list_node_p->var_group = add_to_tree(list_node_p->var_group, word);
+  }
+  else if (strncmp(list_node_p->var_group->word, word, 4) == 0)
+  {
     list_node_p->var_group = add_to_tree(list_node_p->var_group, word);
   }
   else
