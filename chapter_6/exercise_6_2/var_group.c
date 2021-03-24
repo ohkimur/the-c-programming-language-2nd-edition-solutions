@@ -134,7 +134,7 @@ int get_word(char *word, int max_word_len)
     word[i++] = c;
   }
 
-  if (!isalpha(c))
+  if (!isalpha(c) && c != '_')
   {
     word[i] = '\0';
     return c;
