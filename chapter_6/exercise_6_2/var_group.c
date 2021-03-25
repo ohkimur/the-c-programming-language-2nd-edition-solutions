@@ -35,6 +35,16 @@ void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
 
+char *data_types[] = {
+    "char",
+    "short",
+    "int",
+    "long",
+    "float",
+    "double",
+    "custom_type",
+};
+
 int main(void)
 {
   struct list_node *list_root = NULL;
