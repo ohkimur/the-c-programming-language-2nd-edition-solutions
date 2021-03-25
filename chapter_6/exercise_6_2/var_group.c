@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define MAX_WORD_LEN 100
+#define NR_OF_TYPES sizeof(data_types) / sizeof(data_types[0])
 
 struct tree_node
 {
@@ -34,33 +35,31 @@ void skip_string_between(char start, char end);
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
+int bin_search(char *word, char *arr[], int arr_len);
 
 char *data_types[] = {
     "char",
-    "short",
+    "custom_type",
+    "double",
+    "float",
     "int",
     "long",
-    "float",
-    "double",
-    "custom_type",
+    "short",
 };
 
 int main(void)
 {
+  int n;
   struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
 
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
-    // TODO: Please make this code more easy to read.
-    if (isalpha(word[0]) || word[0] == '_')
+    if ((n = bin_search(word, data_types, NR_OF_TYPES)) >= 0)
     {
-      if (strcmp(word, "int") == 0)
+      if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
       {
-        if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
-        {
-          list_root = add_to_list(list_root, word);
-        }
+        list_root = add_to_list(list_root, word);
       }
     }
   }
@@ -161,6 +160,34 @@ int get_word(char *word, int max_word_len)
   word[i] = '\0';
 
   return word[0];
+}
+
+int bin_search(char *word, char *arr[], int arr_len)
+{
+  int low = 0;
+  int high = arr_len - 1;
+  int mid;
+
+  while (low <= high)
+  {
+    mid = (low + high) / 2;
+
+    int cond = strcmp(word, arr[mid]);
+    if (cond < 0)
+    {
+      high = mid - 1;
+    }
+    else if (cond > 0)
+    {
+      low = mid + 1;
+    }
+    else
+    {
+      return mid;
+    }
+  }
+
+  return -1;
 }
 
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word)
