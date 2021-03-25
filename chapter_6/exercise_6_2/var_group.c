@@ -37,20 +37,24 @@ int get_word(char *word, int max_word_len);
 
 int main(void)
 {
-  // struct tree_node *root = NULL;
   struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
 
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
-    if (isalpha(word[0]))
+    // TODO: Please make this code more easy to read.
+    if (isalpha(word[0]) || word[0] == '_')
     {
-      // root = add_to_tree(root, word);
-      list_root = add_to_list(list_root, word);
+      if (strcmp(word, "int") == 0)
+      {
+        if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
+        {
+          list_root = add_to_list(list_root, word);
+        }
+      }
     }
   }
 
-  // print_tree(root);
   print_list(list_root);
 
   return EXIT_SUCCESS;
