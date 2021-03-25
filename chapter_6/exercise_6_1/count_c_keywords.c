@@ -18,7 +18,7 @@ void skip_string_between(char start, char end);
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
-int bin_search(char *word, struct key tab[], int tab_len);
+int bin_search(char *word, struct key arr[], int arr_len);
 
 struct key keytab[] = {
     {"auto", 0},
@@ -166,17 +166,17 @@ int get_word(char *word, int max_word_len)
   return word[0];
 }
 
-int bin_search(char *word, struct key tab[], int tab_len)
+int bin_search(char *word, struct key arr[], int arr_len)
 {
   int low = 0;
-  int high = tab_len - 1;
+  int high = arr_len - 1;
   int mid;
 
   while (low <= high)
   {
     mid = (low + high) / 2;
 
-    int cond = strcmp(word, tab[mid].word);
+    int cond = strcmp(word, arr[mid].word);
     if (cond < 0)
     {
       high = mid - 1;
