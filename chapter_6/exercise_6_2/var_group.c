@@ -39,12 +39,12 @@ int bin_search(char *word, char *arr[], int arr_len);
 
 char *data_types[] = {
     "char",
-    "custom_type",
     "double",
     "float",
     "int",
     "long",
     "short",
+    "void",
 };
 
 int main(void)
@@ -59,7 +59,7 @@ int main(void)
     {
       if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
       {
-      // TODO: Make sure that only variable names are added to the list.
+        // TODO: Make sure that only variable names are added to the list.
         list_root = add_to_list(list_root, word);
       }
     }
