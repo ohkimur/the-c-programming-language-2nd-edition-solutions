@@ -26,6 +26,8 @@ void print_tree(struct tree_node *node_p);
 struct list_node *add_to_list(struct list_node *list_node_p, char *word);
 void print_list(struct list_node *node_p);
 
+int parse_arg_list(int argc, char *argv[]);
+
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
 
@@ -47,8 +49,16 @@ char *data_types[] = {
     "void",
 };
 
-int main(void)
+int var_name_str_cmp_len = 6;
+
+int main(int argc, char *argv[])
 {
+  if (!parse_arg_list(argc, argv))
+  {
+    puts("Error: invalid arguments.");
+    return EXIT_FAILURE;
+  }
+
   int n;
   struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
@@ -68,6 +78,21 @@ int main(void)
   print_list(list_root);
 
   return EXIT_SUCCESS;
+}
+
+int parse_arg_list(int argc, char *argv[])
+{
+  if (argc > 2)
+  {
+    return 0;
+  }
+
+  if (argc == 2)
+  {
+    var_name_str_cmp_len = atoi(argv[1]);
+  }
+
+  return 1;
 }
 
 char *str_dup(char *src)
@@ -236,7 +261,7 @@ struct list_node *add_to_list(struct list_node *list_node_p, char *word)
     list_node_p = (struct list_node *)malloc(sizeof(struct list_node));
     list_node_p->var_group = add_to_tree(list_node_p->var_group, word);
   }
-  else if (strncmp(list_node_p->var_group->word, word, 4) == 0)
+  else if (strncmp(list_node_p->var_group->word, word, var_name_str_cmp_len) == 0)
   {
     list_node_p->var_group = add_to_tree(list_node_p->var_group, word);
   }
