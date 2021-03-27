@@ -89,7 +89,17 @@ int parse_arg_list(int argc, char *argv[])
 
   if (argc == 2)
   {
+    if (!isdigit(argv[1][0]))
+    {
+      return 0;
+    }
+
     var_name_str_cmp_len = atoi(argv[1]);
+
+    if (var_name_str_cmp_len < 0)
+    {
+      return 0;
+    }
   }
 
   return 1;
