@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define MAX_WORD_LEN 100
+#define NR_OF_LINKING_WORDS sizeof(linking_words) / sizeof(linking_words[0])
 
 enum boolean
 {
@@ -37,6 +38,23 @@ char *str_dup(char *src);
 void skip_blanks();
 
 int get_word(char *word, int max_word_len);
+int bin_search(char *word, char *arr[], int arr_len);
+
+char *linking_words[] = {
+    "and",
+    "as",
+    "but",
+    "for",
+    "like",
+    "nor",
+    "or",
+    "so",
+    "the",
+    "then",
+    "to",
+    "too",
+    "yet",
+};
 
 int main(void)
 {
@@ -52,7 +70,10 @@ int main(void)
     }
     else if (isalpha(word[0]))
     {
-      tree_root = add_to_tree(tree_root, word, line_number);
+      if (bin_search(word, linking_words, NR_OF_LINKING_WORDS) == -1)
+      {
+        tree_root = add_to_tree(tree_root, word, line_number);
+      }
     }
   }
 
@@ -105,6 +126,34 @@ int get_word(char *word, int max_word_len)
   word[i] = '\0';
 
   return word[0];
+}
+
+int bin_search(char *word, char *arr[], int arr_len)
+{
+  int low = 0;
+  int high = arr_len - 1;
+  int mid;
+
+  while (low <= high)
+  {
+    mid = (low + high) / 2;
+
+    int cond = strcmp(word, arr[mid]);
+    if (cond < 0)
+    {
+      high = mid - 1;
+    }
+    else if (cond > 0)
+    {
+      low = mid + 1;
+    }
+    else
+    {
+      return mid;
+    }
+  }
+
+  return -1;
 }
 
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word, size_t line_number)
