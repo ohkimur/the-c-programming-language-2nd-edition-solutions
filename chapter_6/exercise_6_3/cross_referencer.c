@@ -13,7 +13,7 @@ enum boolean
 
 struct list_node
 {
-  size_t number;
+  size_t line_number;
   struct list_node *next;
 };
 
@@ -25,7 +25,7 @@ struct tree_node
   struct tree_node *right;
 };
 
-struct list_node *add_to_list(struct list_node *list_node_p, size_t number);
+struct list_node *add_to_list(struct list_node *list_node_p, size_t line_number);
 void print_list(struct list_node *node_p);
 
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word, size_t line_number);
@@ -146,17 +146,17 @@ void print_tree(struct tree_node *node_p)
   }
 }
 
-struct list_node *add_to_list(struct list_node *list_node_p, size_t number)
+struct list_node *add_to_list(struct list_node *list_node_p, size_t line_number)
 {
   if (list_node_p == NULL)
   {
     list_node_p = (struct list_node *)malloc(sizeof(struct list_node));
-    list_node_p->number = number;
+    list_node_p->line_number = line_number;
     list_node_p->next = NULL;
   }
   else
   {
-    list_node_p->next = add_to_list(list_node_p->next, number);
+    list_node_p->next = add_to_list(list_node_p->next, line_number);
   }
 
   return list_node_p;
@@ -170,11 +170,11 @@ void print_list(struct list_node *node_p)
     if (first)
     {
       first = FALSE;
-      printf("%zu", node_p->number);
+      printf("%zu", node_p->line_number);
     }
     else
     {
-      printf(", %zu", node_p->number);
+      printf(", %zu", node_p->line_number);
     }
 
     print_list(node_p->next);
