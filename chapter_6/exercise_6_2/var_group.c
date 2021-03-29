@@ -292,3 +292,5 @@ void print_list(struct list_node *node_p)
     print_list(node_p->next);
   }
 }
+
+// NOTE: run: ./var_group  < var_group.test.c
