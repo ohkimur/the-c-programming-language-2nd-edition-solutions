@@ -63,7 +63,12 @@ int main(int argc, char *argv[])
   struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
 
-  int var_name1, var_name2, var_name3, var_name4, var_name5;
+  int test1_var_name1, test1_var_name2, test1_var_name3, test1_var_name4, test1_var_name5;
+  int test2_var_name1;
+  int test2_var_name2;
+  int test2_var_name3;
+  int test2_var_name4;
+  int test2_var_name5;
 
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
@@ -71,9 +76,9 @@ int main(int argc, char *argv[])
     {
       do
       {
+        // NOTE: This approach takes into consideration both variable names and function names.
         if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
         {
-          // TODO: Make sure that only variable names are added to the list.
           list_root = add_to_list(list_root, word);
         }
       } while (get_word(word, MAX_WORD_LEN) == ',');
