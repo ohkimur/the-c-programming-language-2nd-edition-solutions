@@ -29,9 +29,6 @@ void print_list(struct list_node *node_p);
 char *str_dup(char *src);
 
 void skip_blanks();
-void skip_comments();
-void skip_string_between(char start, char end);
-void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
 
