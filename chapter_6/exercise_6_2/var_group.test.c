@@ -63,6 +63,13 @@ int main(int argc, char *argv[])
   struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
 
+  int test1_var_name1, test1_var_name2, test1_var_name3, test1_var_name4, test1_var_name5;
+  int test2_var_name1;
+  int test2_var_name2;
+  int test2_var_name3;
+  int test2_var_name4;
+  int test2_var_name5;
+
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
     if ((n = bin_search(word, data_types, NR_OF_TYPES)) >= 0)
