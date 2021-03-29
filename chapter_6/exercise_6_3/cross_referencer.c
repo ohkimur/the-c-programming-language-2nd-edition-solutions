@@ -52,8 +52,7 @@ int main(void)
     {
       ++line_number;
     }
-
-    if (isalpha(word[0]))
+    else if (isalpha(word[0]))
     {
       tree_root = add_to_tree(tree_root, word);
     }
