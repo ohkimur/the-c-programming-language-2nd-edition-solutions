@@ -63,15 +63,21 @@ int main(int argc, char *argv[])
   struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
 
+  int var_name1, var_name2, var_name3, var_name4, var_name5;
+
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
     if ((n = bin_search(word, data_types, NR_OF_TYPES)) >= 0)
     {
-      if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
+      int c;
+      do
       {
-        // TODO: Make sure that only variable names are added to the list.
-        list_root = add_to_list(list_root, word);
-      }
+        if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
+        {
+          // TODO: Make sure that only variable names are added to the list.
+          list_root = add_to_list(list_root, word);
+        }
+      } while ((c = get_word(word, MAX_WORD_LEN)) == ',');
     }
   }
 
@@ -193,6 +199,7 @@ int get_word(char *word, int max_word_len)
   {
     word[i++] = c;
   }
+  ungetc(c, stdin);
   word[i] = '\0';
 
   return word[0];
