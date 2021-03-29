@@ -9,7 +9,6 @@
 struct tree_node
 {
   char *word;
-  int count;
   struct tree_node *left;
   struct tree_node *right;
 };
@@ -69,7 +68,7 @@ int main(int argc, char *argv[])
     {
       do
       {
-        // NOTE: This approach takes into consideration both variable names and function names.
+        // NOTE: This approach takes into consideration both variable and function names.
         if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
         {
           list_root = add_to_list(list_root, word);
@@ -238,20 +237,18 @@ struct tree_node *add_to_tree(struct tree_node *node_p, char *word)
   {
     node_p = (struct tree_node *)malloc(sizeof(struct tree_node));
     node_p->word = str_dup(word);
-    node_p->count = 1;
     node_p->left = node_p->right = NULL;
   }
-  else if ((cond = strcmp(word, node_p->word)) == 0)
+  else if ((cond = strcmp(word, node_p->word)) != 0)
   {
-    node_p->count++;
-  }
-  else if (cond < 0)
-  {
-    node_p->left = add_to_tree(node_p->left, word);
-  }
-  else if (cond > 0)
-  {
-    node_p->right = add_to_tree(node_p->right, word);
+    if (cond < 0)
+    {
+      node_p->left = add_to_tree(node_p->left, word);
+    }
+    else if (cond > 0)
+    {
+      node_p->right = add_to_tree(node_p->right, word);
+    }
   }
 
   return node_p;
@@ -262,7 +259,7 @@ void print_tree(struct tree_node *node_p)
   if (node_p != NULL)
   {
     print_tree(node_p->left);
-    printf("%4d %s\n", node_p->count, node_p->word);
+    puts(node_p->word);
     print_tree(node_p->right);
   }
 }
