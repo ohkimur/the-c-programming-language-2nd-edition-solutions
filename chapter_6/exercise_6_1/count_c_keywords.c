@@ -161,6 +161,7 @@ int get_word(char *word, int max_word_len)
   {
     word[i++] = c;
   }
+  ungetc(c, stdin);
   word[i] = '\0';
 
   return word[0];
