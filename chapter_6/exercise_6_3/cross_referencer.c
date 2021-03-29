@@ -43,13 +43,12 @@ size_t line_number = 1;
 
 int main(void)
 {
-  int c;
   struct tree_node *tree_root = NULL;
   char word[MAX_WORD_LEN];
 
-  while ((c = get_word(word, MAX_WORD_LEN)) != EOF)
+  while (get_word(word, MAX_WORD_LEN) != EOF)
   {
-    if (c == '\n')
+    if (word[0] == '\n')
     {
       ++line_number;
     }
