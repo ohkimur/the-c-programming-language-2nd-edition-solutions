@@ -25,8 +25,6 @@ void print_tree(struct tree_node *node_p);
 struct list_node *add_to_list(struct list_node *list_node_p, char *word);
 void print_list(struct list_node *node_p);
 
-int parse_arg_list(int argc, char *argv[]);
-
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
 
@@ -36,75 +34,23 @@ void skip_string_between(char start, char end);
 void skip_string_constant();
 
 int get_word(char *word, int max_word_len);
-int bin_search(char *word, char *arr[], int arr_len);
 
-char *data_types[] = {
-    "char",
-    "double",
-    "float",
-    "int",
-    "long",
-    "short",
-    "void",
-};
-
-int var_name_str_cmp_len = 6;
-
-int main(int argc, char *argv[])
+int main(void)
 {
-  if (!parse_arg_list(argc, argv))
-  {
-    puts("Error: invalid arguments.");
-    return EXIT_FAILURE;
-  }
-
-  int n;
   struct list_node *list_root = NULL;
   char word[MAX_WORD_LEN];
 
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
-    if ((n = bin_search(word, data_types, NR_OF_TYPES)) >= 0)
+    if (isalpha(word[0]))
     {
-      do
-      {
-        // NOTE: This approach takes into consideration both variable and function names.
-        if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
-        {
-          list_root = add_to_list(list_root, word);
-        }
-      } while (get_word(word, MAX_WORD_LEN) == ',');
+      list_root = add_to_list(list_root, word);
     }
   }
 
   print_list(list_root);
 
   return EXIT_SUCCESS;
-}
-
-int parse_arg_list(int argc, char *argv[])
-{
-  if (argc > 2)
-  {
-    return 0;
-  }
-
-  if (argc == 2)
-  {
-    if (!isdigit(argv[1][0]))
-    {
-      return 0;
-    }
-
-    var_name_str_cmp_len = atoi(argv[1]);
-
-    if (var_name_str_cmp_len < 0)
-    {
-      return 0;
-    }
-  }
-
-  return 1;
 }
 
 char *str_dup(char *src)
@@ -201,34 +147,6 @@ int get_word(char *word, int max_word_len)
   return word[0];
 }
 
-int bin_search(char *word, char *arr[], int arr_len)
-{
-  int low = 0;
-  int high = arr_len - 1;
-  int mid;
-
-  while (low <= high)
-  {
-    mid = (low + high) / 2;
-
-    int cond = strcmp(word, arr[mid]);
-    if (cond < 0)
-    {
-      high = mid - 1;
-    }
-    else if (cond > 0)
-    {
-      low = mid + 1;
-    }
-    else
-    {
-      return mid;
-    }
-  }
-
-  return -1;
-}
-
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word)
 {
   int cond;
@@ -271,7 +189,7 @@ struct list_node *add_to_list(struct list_node *list_node_p, char *word)
     list_node_p = (struct list_node *)malloc(sizeof(struct list_node));
     list_node_p->var_group = add_to_tree(list_node_p->var_group, word);
   }
-  else if (strncmp(list_node_p->var_group->word, word, var_name_str_cmp_len) == 0)
+  else if (strcmp(list_node_p->var_group->word, word) == 0)
   {
     list_node_p->var_group = add_to_tree(list_node_p->var_group, word);
   }
