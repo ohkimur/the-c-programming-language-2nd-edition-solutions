@@ -185,4 +185,4 @@ void print_list(struct list_node *node_p)
   }
 }
 
-// NOTE: run: ./cross_referencer < cross_referencer.c
+// NOTE: run: ./cross_referencer < test.txt
