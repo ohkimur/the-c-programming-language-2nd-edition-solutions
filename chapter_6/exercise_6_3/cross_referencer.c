@@ -41,6 +41,19 @@ int get_word(char *word, int max_word_len);
 int bin_search(char *word, char *arr[], int arr_len);
 
 char *linking_words[] = {
+    "And",
+    "As",
+    "But",
+    "For",
+    "Like",
+    "Nor",
+    "Or",
+    "So",
+    "The",
+    "Then",
+    "To",
+    "Too",
+    "Yet",
     "and",
     "as",
     "but",
