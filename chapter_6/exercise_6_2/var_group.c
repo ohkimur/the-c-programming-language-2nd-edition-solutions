@@ -276,7 +276,6 @@ void print_tree(struct tree_node *node_p)
 
 struct list_node *add_to_list(struct list_node *list_node_p, char *word)
 {
-  // TODO: Make the string comparison based on an external parameter.
   if (list_node_p == NULL)
   {
     list_node_p = (struct list_node *)malloc(sizeof(struct list_node));
