@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
   {
     if ((n = bin_search(word, data_types, NR_OF_TYPES)) >= 0)
     {
-      int c;
       do
       {
         if (get_word(word, MAX_WORD_LEN) != EOF && (isalpha(word[0]) || word[0] == '_'))
@@ -77,7 +76,7 @@ int main(int argc, char *argv[])
           // TODO: Make sure that only variable names are added to the list.
           list_root = add_to_list(list_root, word);
         }
-      } while ((c = get_word(word, MAX_WORD_LEN)) == ',');
+      } while (get_word(word, MAX_WORD_LEN) == ',');
     }
   }
 
