@@ -47,7 +47,7 @@ int main(void)
 
   quick_sort((void **)list, 0, nr_of_nodes - 1, (int (*)(void *, void *))tree_node_cmp);
 
-  for (size_t i = 0; i < MAX_NR_OF_NODES && list[i] != NULL; ++i)
+  for (size_t i = 0; i < nr_of_nodes; ++i)
   {
     printf("%4d %s\n", list[i]->count, list[i]->word);
   }
