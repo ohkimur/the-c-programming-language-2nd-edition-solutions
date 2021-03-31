@@ -16,7 +16,7 @@ struct tree_node
 
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
-size_t copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p);
+void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p);
 
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
@@ -27,6 +27,8 @@ int get_word(char *word, int max_word_len);
 int tree_node_cmp(const struct tree_node *node_p_1, const struct tree_node *node_p_2);
 void swap(void *v[], size_t i, size_t j);
 void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
+
+size_t nr_of_nodes = 0;
 
 int main(void)
 {
@@ -42,7 +44,7 @@ int main(void)
   }
 
   struct tree_node *list[MAX_NR_OF_NODES] = {NULL};
-  size_t nr_of_nodes = copy_tree_to_array(list, tree_root);
+  copy_tree_to_array(list, tree_root);
 
   quick_sort((void **)list, 0, nr_of_nodes - 1, (int (*)(void *, void *))tree_node_cmp);
 
@@ -182,22 +184,17 @@ void print_tree(struct tree_node *node_p)
   }
 }
 
-size_t copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
+void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
 {
-  // TODO: Using this approach the index will not be reset when a new copy will
-  // be performed.
-  static size_t index = 0;
   if (tree_node_p != NULL)
   {
     copy_tree_to_array(arr, tree_node_p->left);
-    if (index < MAX_NR_OF_NODES)
+    if (nr_of_nodes < MAX_NR_OF_NODES)
     {
-      arr[index++] = tree_node_p;
+      arr[nr_of_nodes++] = tree_node_p;
     }
     copy_tree_to_array(arr, tree_node_p->right);
   }
-
-  return index;
 }
 
 // NOTE: run: ./words_frequency < test.txt
