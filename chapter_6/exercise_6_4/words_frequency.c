@@ -17,7 +17,7 @@ struct tree_node
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
 
-void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p);
+size_t copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p);
 
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
@@ -25,6 +25,9 @@ char *str_dup(char *src);
 void skip_blanks();
 
 int get_word(char *word, int max_word_len);
+int tree_node_cmp(const struct tree_node *node_p_1, const struct tree_node *node_p_2);
+void swap(void *v[], size_t i, size_t j);
+void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
 
 int main(void)
 {
@@ -40,7 +43,9 @@ int main(void)
   }
 
   struct tree_node *list[MAX_NR_OF_NODES] = {NULL};
-  copy_tree_to_array(list, tree_root);
+  size_t nr_of_nodes = copy_tree_to_array(list, tree_root);
+
+  quick_sort((void **)list, 0, nr_of_nodes - 1, (int (*)(void *, void *))tree_node_cmp);
 
   for (size_t i = 0; i < MAX_NR_OF_NODES && list[i] != NULL; ++i)
   {
@@ -96,6 +101,51 @@ int get_word(char *word, int max_word_len)
   return word[0];
 }
 
+int tree_node_cmp(const struct tree_node *node_p_1, const struct tree_node *node_p_2)
+{
+  if (node_p_1->count < node_p_2->count)
+  {
+    return -1;
+  }
+  else if (node_p_1->count > node_p_2->count)
+  {
+    return 1;
+  }
+
+  return 0;
+}
+
+void swap(void *v[], size_t i, size_t j)
+{
+  void *temp;
+  temp = v[i];
+  v[i] = v[j];
+  v[j] = temp;
+}
+
+void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
+{
+  if ((long)start >= (long)end)
+  {
+    return;
+  }
+
+  swap(v, start, (start + end) / 2);
+
+  size_t last = start;
+  for (size_t i = start + 1; i <= end; ++i)
+  {
+    if ((*comp)(v[i], v[start]) < 0)
+    {
+      swap(v, ++last, i);
+    }
+  }
+
+  swap(v, start, last);
+  quick_sort(v, start, last - 1, comp);
+  quick_sort(v, last + 1, end, comp);
+}
+
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word)
 {
   int cond;
@@ -133,7 +183,7 @@ void print_tree(struct tree_node *node_p)
   }
 }
 
-void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
+size_t copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
 {
   // TODO: Using this approach the index will not be reset when a new copy will
   // be performed.
@@ -147,4 +197,6 @@ void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
     }
     copy_tree_to_array(arr, tree_node_p->right);
   }
+
+  return index;
 }
