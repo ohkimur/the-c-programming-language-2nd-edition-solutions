@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define MAX_WORD_LEN 100
+#define MAX_NR_OF_NODES 1000
 
 struct tree_node
 {
@@ -15,6 +16,8 @@ struct tree_node
 
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
+
+void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p);
 
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
@@ -36,7 +39,13 @@ int main(void)
     }
   }
 
-  print_tree(tree_root);
+  struct tree_node *list[MAX_NR_OF_NODES] = {NULL};
+  copy_tree_to_array(list, tree_root);
+
+  for (size_t i = 0; i < MAX_NR_OF_NODES && list[i] != NULL; ++i)
+  {
+    printf("%4d %s\n", list[i]->count, list[i]->word);
+  }
 
   return EXIT_SUCCESS;
 }
@@ -121,5 +130,21 @@ void print_tree(struct tree_node *node_p)
     print_tree(node_p->left);
     printf("%4d %s\n", node_p->count, node_p->word);
     print_tree(node_p->right);
+  }
+}
+
+void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
+{
+  // TODO: Using this approach the index will not be reset when a new copy will
+  // be performed.
+  static size_t index = 0;
+  if (tree_node_p != NULL)
+  {
+    copy_tree_to_array(arr, tree_node_p->left);
+    if (index < MAX_NR_OF_NODES)
+    {
+      arr[index++] = tree_node_p;
+    }
+    copy_tree_to_array(arr, tree_node_p->right);
   }
 }
