@@ -197,4 +197,4 @@ void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
   }
 }
 
-// NOTE: run: ./words_frequency < test.txt
+// NOTE: run: ./words_frequency < words_frequency.c
