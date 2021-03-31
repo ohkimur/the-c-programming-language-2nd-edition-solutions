@@ -43,14 +43,14 @@ int main(void)
     }
   }
 
-  struct tree_node *list[MAX_NR_OF_NODES] = {NULL};
-  copy_tree_to_array(list, tree_root);
+  struct tree_node *tree_node_list[MAX_NR_OF_NODES] = {NULL};
+  copy_tree_to_array(tree_node_list, tree_root);
 
-  quick_sort((void **)list, 0, nr_of_nodes - 1, (int (*)(void *, void *))tree_node_cmp);
+  quick_sort((void **)tree_node_list, 0, nr_of_nodes - 1, (int (*)(void *, void *))tree_node_cmp);
 
   for (size_t i = 0; i < nr_of_nodes; ++i)
   {
-    printf("%4d %s\n", list[i]->count, list[i]->word);
+    printf("%4d %s\n", tree_node_list[i]->count, tree_node_list[i]->word);
   }
 
   return EXIT_SUCCESS;
