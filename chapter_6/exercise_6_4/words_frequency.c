@@ -102,11 +102,11 @@ int get_word(char *word, int max_word_len)
 
 int tree_node_cmp(const struct tree_node *node_p_1, const struct tree_node *node_p_2)
 {
-  if (node_p_1->count < node_p_2->count)
+  if (node_p_1->count > node_p_2->count)
   {
     return -1;
   }
-  else if (node_p_1->count > node_p_2->count)
+  else if (node_p_1->count < node_p_2->count)
   {
     return 1;
   }
