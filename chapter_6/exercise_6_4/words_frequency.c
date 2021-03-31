@@ -16,7 +16,6 @@ struct tree_node
 
 struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
-
 size_t copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p);
 
 // There is a strdup available with POSIX, but it's not part of ISO C.
@@ -200,3 +199,5 @@ size_t copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p
 
   return index;
 }
+
+// NOTE: run: ./words_frequency < test.txt
