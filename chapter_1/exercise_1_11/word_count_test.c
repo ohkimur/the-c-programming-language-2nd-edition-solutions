@@ -3,8 +3,6 @@
 #define IN 1
 #define OUT 0
 
-// Count lines, words and characters in input
-
 int main(void)
 {
   char nl;
