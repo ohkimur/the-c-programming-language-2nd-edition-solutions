@@ -5,8 +5,6 @@
 #define TRUE (1 == 1)
 #define FALSE !TRUE
 
-// /*sajfj\dsaf*/
-
 int getstr(char str[], int limit);
 void remove_comments(char str[], char no_com_str[]);
 
