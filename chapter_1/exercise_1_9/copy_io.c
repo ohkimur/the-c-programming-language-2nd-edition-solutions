@@ -6,23 +6,6 @@ int main(void)
   char last_c;
   while ((c = getchar()) != EOF)
   {
-    // Solution 1
-    // if(c != ' ')
-    // {
-    //   putchar(c);
-    // }
-    // else if(last_c != ' ')
-    // {
-    //   putchar(c);
-    // }
-
-    // Solution 2
-    // if(!(c == ' ' && last_c == ' '))
-    // {
-    //   putchar(c);
-    // }
-
-    // Solution 3
     if (c != ' ' || last_c != ' ')
     {
       putchar(c);
