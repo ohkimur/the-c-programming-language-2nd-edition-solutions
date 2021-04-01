@@ -4,33 +4,19 @@
 #include <ctype.h>
 
 #define MAX_WORD_LEN 100
-#define NR_OF_LINKING_WORDS sizeof(linking_words) / sizeof(linking_words[0])
-
-enum boolean
-{
-  FALSE,
-  TRUE
-};
-
-struct list_node
-{
-  size_t line_number;
-  struct list_node *next;
-};
+#define MAX_NR_OF_NODES 1000
 
 struct tree_node
 {
   char *word;
-  struct list_node *line_numbers;
+  int count;
   struct tree_node *left;
   struct tree_node *right;
 };
 
-struct list_node *add_to_list(struct list_node *list_node_p, size_t line_number);
-void print_list(struct list_node *node_p);
-
-struct tree_node *add_to_tree(struct tree_node *node_p, char *word, size_t line_number);
+struct tree_node *add_to_tree(struct tree_node *node_p, char *word);
 void print_tree(struct tree_node *node_p);
+void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p);
 
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
@@ -38,59 +24,34 @@ char *str_dup(char *src);
 void skip_blanks();
 
 int get_word(char *word, int max_word_len);
-int bin_search(char *word, char *arr[], int arr_len);
+int tree_node_cmp(const struct tree_node *node_p_1, const struct tree_node *node_p_2);
+void swap(void *v[], size_t i, size_t j);
+void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *));
 
-char *linking_words[] = {
-    "And",
-    "As",
-    "But",
-    "For",
-    "Like",
-    "Nor",
-    "Or",
-    "So",
-    "The",
-    "Then",
-    "To",
-    "Too",
-    "Yet",
-    "and",
-    "as",
-    "but",
-    "for",
-    "like",
-    "nor",
-    "or",
-    "so",
-    "the",
-    "then",
-    "to",
-    "too",
-    "yet",
-};
+size_t nr_of_nodes = 0;
 
 int main(void)
 {
-  size_t line_number = 1;
-  char word[MAX_WORD_LEN];
   struct tree_node *tree_root = NULL;
+  char word[MAX_WORD_LEN];
 
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
-    if (word[0] == '\n')
+    if (isalpha(word[0]))
     {
-      ++line_number;
-    }
-    else if (isalpha(word[0]))
-    {
-      if (bin_search(word, linking_words, NR_OF_LINKING_WORDS) == -1)
-      {
-        tree_root = add_to_tree(tree_root, word, line_number);
-      }
+      tree_root = add_to_tree(tree_root, word);
     }
   }
 
-  print_tree(tree_root);
+  struct tree_node *tree_node_list[MAX_NR_OF_NODES] = {NULL};
+  copy_tree_to_array(tree_node_list, tree_root);
+
+  quick_sort((void **)tree_node_list, 0, nr_of_nodes - 1, (int (*)(void *, void *))tree_node_cmp);
+
+  for (size_t i = 0; i < nr_of_nodes; ++i)
+  {
+    printf("%4d %s\n", tree_node_list[i]->count, tree_node_list[i]->word);
+  }
 
   return EXIT_SUCCESS;
 }
@@ -141,56 +102,73 @@ int get_word(char *word, int max_word_len)
   return word[0];
 }
 
-int bin_search(char *word, char *arr[], int arr_len)
+int tree_node_cmp(const struct tree_node *node_p_1, const struct tree_node *node_p_2)
 {
-  int low = 0;
-  int high = arr_len - 1;
-  int mid;
-
-  while (low <= high)
+  if (node_p_1->count > node_p_2->count)
   {
-    mid = (low + high) / 2;
+    return -1;
+  }
+  else if (node_p_1->count < node_p_2->count)
+  {
+    return 1;
+  }
 
-    int cond = strcmp(word, arr[mid]);
-    if (cond < 0)
+  return 0;
+}
+
+void swap(void *v[], size_t i, size_t j)
+{
+  void *temp;
+  temp = v[i];
+  v[i] = v[j];
+  v[j] = temp;
+}
+
+void quick_sort(void *v[], size_t start, size_t end, int (*comp)(void *, void *))
+{
+  if ((long)start >= (long)end)
+  {
+    return;
+  }
+
+  swap(v, start, (start + end) / 2);
+
+  size_t last = start;
+  for (size_t i = start + 1; i <= end; ++i)
+  {
+    if ((*comp)(v[i], v[start]) < 0)
     {
-      high = mid - 1;
-    }
-    else if (cond > 0)
-    {
-      low = mid + 1;
-    }
-    else
-    {
-      return mid;
+      swap(v, ++last, i);
     }
   }
 
-  return -1;
+  swap(v, start, last);
+  quick_sort(v, start, last - 1, comp);
+  quick_sort(v, last + 1, end, comp);
 }
 
-struct tree_node *add_to_tree(struct tree_node *node_p, char *word, size_t line_number)
+struct tree_node *add_to_tree(struct tree_node *node_p, char *word)
 {
   int cond;
 
   if (node_p == NULL)
   {
     node_p = (struct tree_node *)malloc(sizeof(struct tree_node));
-    node_p->line_numbers = add_to_list(node_p->line_numbers, line_number);
     node_p->word = str_dup(word);
+    node_p->count = 1;
     node_p->left = node_p->right = NULL;
   }
   else if ((cond = strcmp(word, node_p->word)) == 0)
   {
-    node_p->line_numbers = add_to_list(node_p->line_numbers, line_number);
+    node_p->count++;
   }
   else if (cond < 0)
   {
-    node_p->left = add_to_tree(node_p->left, word, line_number);
+    node_p->left = add_to_tree(node_p->left, word);
   }
   else if (cond > 0)
   {
-    node_p->right = add_to_tree(node_p->right, word, line_number);
+    node_p->right = add_to_tree(node_p->right, word);
   }
 
   return node_p;
@@ -201,48 +179,22 @@ void print_tree(struct tree_node *node_p)
   if (node_p != NULL)
   {
     print_tree(node_p->left);
-    printf("%s: ", node_p->word);
-    print_list(node_p->line_numbers);
-    putchar('\n');
+    printf("%4d %s\n", node_p->count, node_p->word);
     print_tree(node_p->right);
   }
 }
 
-struct list_node *add_to_list(struct list_node *list_node_p, size_t line_number)
+void copy_tree_to_array(struct tree_node *arr[], struct tree_node *tree_node_p)
 {
-  if (list_node_p == NULL)
+  if (tree_node_p != NULL)
   {
-    list_node_p = (struct list_node *)malloc(sizeof(struct list_node));
-    list_node_p->line_number = line_number;
-    list_node_p->next = NULL;
+    copy_tree_to_array(arr, tree_node_p->left);
+    if (nr_of_nodes < MAX_NR_OF_NODES)
+    {
+      arr[nr_of_nodes++] = tree_node_p;
+    }
+    copy_tree_to_array(arr, tree_node_p->right);
   }
-  else
-  {
-    list_node_p->next = add_to_list(list_node_p->next, line_number);
-  }
-
-  return list_node_p;
 }
 
-void print_list(struct list_node *node_p)
-{
-  static enum boolean first = TRUE;
-  if (node_p != NULL)
-  {
-    if (first)
-    {
-      first = FALSE;
-      printf("%zu", node_p->line_number);
-    }
-    else
-    {
-      printf(", %zu", node_p->line_number);
-    }
-
-    print_list(node_p->next);
-  }
-  else
-  {
-    first = TRUE;
-  }
-}
+// NOTE: run: ./words_frequency < words_frequency.c
