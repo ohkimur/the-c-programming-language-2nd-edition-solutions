@@ -1,15 +1,23 @@
 #include <stdio.h>
 
-#define MAXSTR 1000
+#define MAXSTR 10000
 
 #define TRUE (1 == 1)
 #define FALSE !TRUE
 
-int get_str(char str[], int limit);
+// This is a test comment.
+
+int get_str(char str[], int limit); // This is another test comment.
 void remove_comments(char str[], char no_com_str[]);
 
 int main(void)
 {
+  /**
+   * This is multiline
+   * block
+   * comment.
+  */
+
   char str[MAXSTR];
   char no_com_str[MAXSTR];
 
@@ -94,3 +102,5 @@ void remove_comments(char str[], char no_com_str[])
 
   no_com_str[j] = '\0';
 }
+
+// NOTE: run: ./c_remove_comments < c_remove_comments.c
