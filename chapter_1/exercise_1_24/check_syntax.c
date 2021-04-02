@@ -5,9 +5,6 @@
 #define IN 1
 #define OUT 0
 
-#define TRUE (1 == 1)
-#define FALSE !TRUE
-
 int getstr(char str[], int limit);
 void check_syntax(char str[]);
 
@@ -42,8 +39,6 @@ int getstr(char str[], int limit)
 
 void check_syntax(char str[])
 {
-  int line_nr = 1;
-
   int parentheses = 0;
   int brackets = 0;
   int braces = 0;
@@ -57,11 +52,6 @@ void check_syntax(char str[])
   int i = 0;
   while (str[i] != '\0')
   {
-    if (str[i] == '\n')
-    {
-      ++line_nr;
-    }
-
     if (!line_comment && !block_comment && !single_quotes && !double_quotes)
     {
       if (str[i] == '(')
