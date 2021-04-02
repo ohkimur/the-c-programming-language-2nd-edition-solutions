@@ -8,29 +8,24 @@
 #define TRUE (1 == 1)
 #define FALSE !TRUE
 
-int getstr(char str[], int limit);
+int get_str(char str[], int limit);
 void check_syntax(char str[]);
 
 int main(void)
 {
   char str[MAXSTR];
 
-  getstr(str, MAXSTR);
+  get_str(str, MAXSTR);
   check_syntax(str);
 
   return 0;
 }
 
-int getstr(char str[], int limit)
+int get_str(char str[], int limit)
 {
   int c, i = 0;
 
   while (i < limit - 1 && (c = getchar()) != EOF)
-  {
-    str[i++] = c;
-  }
-
-  if (c == '\n')
   {
     str[i++] = c;
   }
