@@ -38,7 +38,6 @@ int get_str(char str[], int limit)
   {
     str[i++] = c;
   }
-
   str[i] = '\0';
 
   return i;
