@@ -1,12 +1,6 @@
 #include <stdio.h>
 
 #define MAXSTR 10000
-<<<<<<< HEAD
-
-#define IN 1
-#define OUT 0
-=======
->>>>>>> 1939b8810f81782ffbfe004a5b17f05e4cc5e32f
 
 #define TRUE (1 == 1)
 #define FALSE !TRUE
