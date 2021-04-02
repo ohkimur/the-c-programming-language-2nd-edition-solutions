@@ -2,8 +2,8 @@
 
 #define MAXSTR 10000
 
-#define IN 1
-#define OUT 0
+#define TRUE (1 == 1)
+#define FALSE !TRUE
 
 int getstr(char str[], int limit);
 void check_syntax(char str[]);
@@ -43,11 +43,11 @@ void check_syntax(char str[])
   int brackets = 0;
   int braces = 0;
 
-  int single_quotes = OUT;
-  int double_quotes = OUT;
+  int single_quotes = FALSE;
+  int double_quotes = FALSE;
 
-  int block_comment = OUT;
-  int line_comment = OUT;
+  int block_comment = FALSE;
+  int line_comment = FALSE;
 
   int i = 0;
   while (str[i] != '\0')
@@ -86,20 +86,20 @@ void check_syntax(char str[])
     {
       if (str[i] == '\'' && !single_quotes && !double_quotes)
       {
-        single_quotes = IN;
+        single_quotes = TRUE;
       }
       else if (single_quotes && str[i] == '\'' && (str[i - 1] != '\\' || str[i - 2] == '\\'))
       {
-        single_quotes = OUT;
+        single_quotes = FALSE;
       }
 
       if (str[i] == '"' && !single_quotes && !double_quotes)
       {
-        double_quotes = IN;
+        double_quotes = TRUE;
       }
       else if (double_quotes && str[i] == '"' && (str[i - 1] != '\\' || str[i - 2] == '\\'))
       {
-        double_quotes = OUT;
+        double_quotes = FALSE;
       }
     }
 
@@ -107,20 +107,20 @@ void check_syntax(char str[])
     {
       if (str[i] == '/' && str[i + 1] == '*' && !line_comment)
       {
-        block_comment = IN;
+        block_comment = TRUE;
       }
       else if (str[i] == '*' && str[i + 1] == '/')
       {
-        block_comment = OUT;
+        block_comment = FALSE;
       }
 
       if (str[i] == '/' && str[i + 1] == '/' && !block_comment)
       {
-        line_comment = IN;
+        line_comment = TRUE;
       }
       else if (str[i] == '\n')
       {
-        line_comment = OUT;
+        line_comment = FALSE;
       }
     }
 
