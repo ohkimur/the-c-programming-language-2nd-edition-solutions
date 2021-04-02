@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #define MAXLINE 1000
+
 #define TRUE (1 == 1)
 #define FALSE !TRUE
 
