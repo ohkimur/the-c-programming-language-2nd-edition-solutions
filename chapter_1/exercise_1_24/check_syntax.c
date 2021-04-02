@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAXSTR 1000
+#define MAXSTR 10000
 
 #define IN 1
 #define OUT 0
