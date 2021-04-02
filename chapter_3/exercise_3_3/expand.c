@@ -1,58 +1,61 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define MAXLEN 1000
+#define MAXLEN 10000
 
-int getstr(char line[], int limit);
+int get_str(char str[], int limit);
 void expand(char src[], char dest[]);
 
 int main(void)
 {
-  char line[MAXLEN];
-  char expanded_ln[MAXLEN];
+  char str[MAXLEN];
+  char expanded_str[MAXLEN];
 
-  getstr(line, MAXLEN);
-  printf("%s", line);
-
-  expand(line, expanded_ln);
-  printf("%s", expanded_ln);
+  get_str(str, MAXLEN);
+  expand(str, expanded_str);
+  printf("%s", expanded_str);
 
   return 0;
 }
 
-int getstr(char line[], int limit)
+int get_str(char str[], int limit)
 {
-  int i = 0, c;
-  while ((i < limit - 1) && (c = getchar()) != EOF)
-  {
-    line[i] = c;
-    ++i;
-  }
+  int c, i = 0;
 
-  if (c == '\n')
+  while (i < limit - 1 && (c = getchar()) != EOF)
   {
-    line[i++] = c;
+    str[i++] = c;
   }
-
-  line[i] = '\0';
+  str[i] = '\0';
 
   return i;
 }
 
 void expand(char src[], char dest[])
 {
+  /**
+   * a-z
+   * a-b-c
+   * 0-9
+   * 1-5
+   * a-zA-Z
+   * 0-9a-zA-Z
+   * -a-z
+   * a-z-
+   * -a-z-
+   */
   int i, j = 0;
-  for (i = 0; src[i] != EOF; ++i)
+  for (i = 0; i < MAXLEN - 1 && j < MAXLEN - 1 && src[i] != EOF; ++i)
   {
-    if (src[i + 1] == '-' && src[i] < src[i + 2])
+    if (isalnum(src[i]) && src[i + 1] == '-' && src[i] < src[i + 2])
     {
       int k;
       for (k = 0; k <= (src[i + 2] - src[i]); ++k)
       {
         int temp = src[i] + k;
-        if ((dest[j - 1] != temp && isdigit(temp)) || isalpha(temp))
+        if (isdigit(temp) || isalpha(temp))
         {
-          dest[j++] = src[i] + k;
+          dest[j++] = temp;
         }
       }
 
@@ -64,13 +67,5 @@ void expand(char src[], char dest[])
     }
   }
 
-  if (src[i] == '\n')
-  {
-    dest[j++] = src[i];
-  }
-
   dest[j] = '\0';
 }
-
-// NOTE: To simply test if a char is a digit or an alpha we can use isdigit() and
-// isalpha() wich are located in <ctype.h>
