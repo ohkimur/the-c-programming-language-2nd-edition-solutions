@@ -1,9 +1,6 @@
 #include <stdio.h>
 
-#define MAXSTR 1000
-
-#define IN 1
-#define OUT 0
+#define MAXSTR 10000
 
 #define TRUE (1 == 1)
 #define FALSE !TRUE
@@ -42,87 +39,89 @@ int getstr(char str[], int limit)
 
 void check_syntax(char str[])
 {
-  int line_nr = 1;
-
   int parentheses = 0;
   int brackets = 0;
   int braces = 0;
 
-  int single_quotes = 0;
-  int double_quotes = 0;
+  int single_quotes = FALSE;
+  int double_quotes = FALSE;
 
-  int block_comment = OUT;
-  int line_comment = OUT;
+  int block_comment = FALSE;
+  int line_comment = FALSE;
 
   int i = 0;
   while (str[i] != '\0')
   {
-    if (str[i] == '\n')
+    if (!line_comment && !block_comment && !single_quotes && !double_quotes)
     {
-      ++line_nr;
+      if (str[i] == '(')
+      {
+        ++parentheses;
+      }
+      else if (str[i] == ')')
+      {
+        --parentheses;
+      }
+
+      if (str[i] == '[')
+      {
+        ++brackets;
+      }
+      else if (str[i] == ']')
+      {
+        --brackets;
+      }
+
+      if (str[i] == '{')
+      {
+        ++braces;
+      }
+      else if (str[i] == '}')
+      {
+        --braces;
+      }
     }
 
-    if (str[i] == '(')
+    if (!line_comment && !block_comment)
     {
-      ++parentheses;
-    }
-    else if (str[i] == ')')
-    {
-      --parentheses;
+      if (str[i] == '\'' && !single_quotes && !double_quotes)
+      {
+        single_quotes = TRUE;
+      }
+      else if (single_quotes && str[i] == '\'' && (str[i - 1] != '\\' || str[i - 2] == '\\'))
+      {
+        single_quotes = FALSE;
+      }
+
+      if (str[i] == '"' && !single_quotes && !double_quotes)
+      {
+        double_quotes = TRUE;
+      }
+      else if (double_quotes && str[i] == '"' && (str[i - 1] != '\\' || str[i - 2] == '\\'))
+      {
+        double_quotes = FALSE;
+      }
     }
 
-    if (str[i] == '[')
+    if (!single_quotes && !double_quotes)
     {
-      ++brackets;
-    }
-    else if (str[i] == ']')
-    {
-      --brackets;
-    }
+      if (str[i] == '/' && str[i + 1] == '*' && !line_comment)
+      {
+        block_comment = TRUE;
+      }
+      else if (str[i] == '*' && str[i + 1] == '/')
+      {
+        block_comment = FALSE;
+      }
 
-    if (str[i] == '{')
-    {
-      ++braces;
-    }
-    else if (str[i] == '}')
-    {
-      --braces;
-    }
-
-    if (str[i] == '\'' && str[i - 1] != '\\' && !single_quotes && !double_quotes)
-    {
-      single_quotes = IN;
-    }
-    else if (str[i] == '\'' && str[i - 1] != '\\')
-    {
-      single_quotes = OUT;
-    }
-
-    if (str[i] == '"' && str[i - 1] != '\\' && !double_quotes && !single_quotes)
-    {
-      double_quotes = IN;
-    }
-    else if (str[i] == '"' && str[i - 1] != '\\')
-    {
-      double_quotes = OUT;
-    }
-
-    if (str[i] == '/' && str[i + 1] == '*' && !block_comment)
-    {
-      block_comment = IN;
-    }
-    else if (str[i] == '*' && str[i + 1] == '/')
-    {
-      block_comment = OUT;
-    }
-
-    if (str[i] == '/' && str[i + 1] == '/' && !line_comment)
-    {
-      line_comment = IN;
-    }
-    else if (str[i] == '\n')
-    {
-      line_comment = OUT;
+      if (str[i] == '/' && str[i + 1] == '/' && !block_comment)
+      {
+        line_comment = TRUE;
+      }
+      else if (str[i] == '\n')
+      {
+        line_comment = FALSE;
+      }
     }
 
     ++i;
