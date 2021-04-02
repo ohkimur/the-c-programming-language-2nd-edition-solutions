@@ -36,6 +36,8 @@ void expand(char src[], char dest[])
   /**
    * a-z
    * a-b-c
+   * a-c-h-v
+   * a-c-b-v
    * 0-9
    * 1-5
    * a-zA-Z
@@ -49,23 +51,25 @@ void expand(char src[], char dest[])
   {
     if (isalnum(src[i]) && src[i + 1] == '-' && src[i] < src[i + 2])
     {
-      int k;
-      for (k = 0; k <= (src[i + 2] - src[i]); ++k)
+      do
       {
-        int temp = src[i] + k;
-        if (isdigit(temp) || isalpha(temp))
+        int k;
+        for (k = 0; k <= (src[i + 2] - src[i]); ++k)
         {
-          dest[j++] = temp;
+          int temp = src[i] + k;
+          if (dest[j - 1] != temp && (isdigit(temp) || isalpha(temp)))
+          {
+            dest[j++] = temp;
+          }
         }
-      }
 
-      i += 2;
+        i += 2;
+      } while (isalnum(src[i]) && src[i + 1] == '-' && src[i] < src[i + 2]);
     }
     else
     {
       dest[j++] = src[i];
     }
   }
-
   dest[j] = '\0';
 }
