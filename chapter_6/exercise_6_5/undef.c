@@ -73,8 +73,6 @@ struct list_node *lookup(char *s)
 struct list_node *install(char *name, char *definition)
 {
   struct list_node *node_p;
-  size_t hash_value;
-
   if ((node_p = lookup(name)) == NULL)
   {
     node_p = (struct list_node *)malloc(sizeof(*node_p));
@@ -82,7 +80,7 @@ struct list_node *install(char *name, char *definition)
     {
       return NULL;
     }
-    hash_value = hash(name);
+    size_t hash_value = hash(name);
     node_p->next = hash_table[hash_value];
     hash_table[hash_value] = node_p;
   }
