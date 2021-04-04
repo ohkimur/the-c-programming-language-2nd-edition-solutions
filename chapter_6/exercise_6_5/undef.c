@@ -19,7 +19,7 @@ struct list_node *install(char *name, char *definition);
 
 static struct list_node *hash_table[HASH_SIZE];
 
-int main()
+int main(void)
 {
   install("TEST", "test");
 
