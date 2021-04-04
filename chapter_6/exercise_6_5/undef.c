@@ -21,6 +21,18 @@ static struct list_node *hash_table[HASH_SIZE];
 
 int main()
 {
+  install("TEST", "test");
+
+  struct list_node *node_p = lookup("TEST");
+  if (node_p == NULL)
+  {
+    puts("Error: hash value not found.");
+  }
+  else
+  {
+    printf("%s %s\n", node_p->name, node_p->definition);
+  }
+
   return EXIT_SUCCESS;
 }
 
