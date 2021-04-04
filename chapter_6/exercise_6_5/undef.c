@@ -12,7 +12,9 @@ struct list_node
   struct list_node *next;
 };
 
+// There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
+
 size_t hash(char *s);
 struct list_node *lookup(char *s);
 struct list_node *install(char *name, char *definition);
