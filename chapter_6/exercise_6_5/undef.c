@@ -125,7 +125,8 @@ enum boolean undef(char *name)
 {
   struct list_node *node_p;
   struct list_node *prev_node_p;
-  for (node_p = hash_table[hash(name)], prev_node_p = NULL;
+  size_t hash_value = hash(name);
+  for (node_p = hash_table[hash_value], prev_node_p = NULL;
        node_p != NULL;
        prev_node_p = node_p, node_p = node_p->next)
   {
@@ -136,7 +137,7 @@ enum boolean undef(char *name)
 
       if (prev_node_p == NULL)
       {
-        hash_table[hash(name)] = node_p->next;
+        hash_table[hash_value] = node_p->next;
       }
       else
       {
