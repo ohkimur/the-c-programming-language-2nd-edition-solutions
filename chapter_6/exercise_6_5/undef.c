@@ -5,6 +5,12 @@
 
 #define HASH_SIZE 101
 
+enum boolean
+{
+  FALSE,
+  TRUE
+};
+
 struct list_node
 {
   char *name;
