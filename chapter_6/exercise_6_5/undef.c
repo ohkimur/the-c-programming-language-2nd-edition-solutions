@@ -39,22 +39,6 @@ int main(void)
   install("mY1a", "test");
   install("uuoT", "test");
 
-  // Print values all values in hash tables
-  for (size_t i = 0; i < HASH_SIZE; ++i)
-  {
-    struct list_node *node_p = hash_table[i];
-    if (node_p != NULL)
-    {
-      printf("%zu: ", i);
-      do
-      {
-        printf("%s %s\t", node_p->name, node_p->definition);
-        node_p = node_p->next;
-      } while (node_p != NULL);
-    }
-  }
-  putchar('\n');
-
   struct list_node *node_p = lookup("TEST");
   if (node_p == NULL)
   {
@@ -63,7 +47,7 @@ int main(void)
   else
   {
     printf("%s %s\n", node_p->name, node_p->definition);
-    if (undef("TEST") && lookup("TEST") == NULL)
+    if (undef("UPXD") && lookup("UPXD") == NULL)
     {
       printf("'%s' was undefined successfully.\n", "TEST");
     }
