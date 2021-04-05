@@ -32,6 +32,29 @@ int main(void)
 {
   install("TEST", "test");
 
+  // Install other collision values for the same hash as for "TEST" -> 51.
+  install("TSHe", "test");
+  install("UPXD", "test");
+  install("9iww", "test");
+  install("mY1a", "test");
+  install("uuoT", "test");
+
+  // Print values all values in hash tables
+  for (size_t i = 0; i < HASH_SIZE; ++i)
+  {
+    struct list_node *node_p = hash_table[i];
+    if (node_p != NULL)
+    {
+      printf("%zu: ", i);
+      do
+      {
+        printf("%s %s\t", node_p->name, node_p->definition);
+        node_p = node_p->next;
+      } while (node_p != NULL);
+    }
+  }
+  putchar('\n');
+
   struct list_node *node_p = lookup("TEST");
   if (node_p == NULL)
   {
@@ -40,22 +63,13 @@ int main(void)
   else
   {
     printf("%s %s\n", node_p->name, node_p->definition);
-    if (!undef("TEST"))
+    if (undef("TEST") && lookup("TEST") == NULL)
     {
-      printf("Error: failed to undefine %s.\n", "TEST");
+      printf("'%s' was undefined successfully.\n", "TEST");
     }
     else
     {
-      printf("%s was undefined successfully.\n", "TEST");
-    }
-
-    if (lookup("TEST") != NULL)
-    {
-      printf("%s %s\n", node_p->name, node_p->definition);
-    }
-    else
-    {
-      puts("Success!");
+      printf("Error: failed to undefine '%s'.\n", "TEST");
     }
   }
 
