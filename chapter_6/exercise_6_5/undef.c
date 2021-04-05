@@ -24,6 +24,7 @@ char *str_dup(char *src);
 size_t hash(char *s);
 struct list_node *lookup(char *s);
 struct list_node *install(char *name, char *definition);
+enum boolean undef(char *name);
 
 static struct list_node *hash_table[HASH_SIZE];
 
@@ -39,6 +40,23 @@ int main(void)
   else
   {
     printf("%s %s\n", node_p->name, node_p->definition);
+    if (!undef("TEST"))
+    {
+      printf("Error: failed to undefine %s.\n", "TEST");
+    }
+    else
+    {
+      printf("%s was undefined successfully.\n", "TEST");
+    }
+
+    if (lookup("TEST") != NULL)
+    {
+      printf("%s %s\n", node_p->name, node_p->definition);
+    }
+    else
+    {
+      puts("Success!");
+    }
   }
 
   return EXIT_SUCCESS;
@@ -94,7 +112,7 @@ struct list_node *install(char *name, char *definition)
   }
   else
   {
-    free((void *)node_p->definition);
+    free(node_p->definition);
   }
 
   if ((node_p->definition = str_dup(definition)) == NULL)
@@ -103,4 +121,34 @@ struct list_node *install(char *name, char *definition)
   }
 
   return node_p;
+}
+
+enum boolean undef(char *name)
+{
+  struct list_node *node_p;
+  struct list_node *prev_node_p;
+  for (node_p = hash_table[hash(name)], prev_node_p = NULL;
+       node_p != NULL;
+       prev_node_p = node_p, node_p = node_p->next)
+  {
+    if (strcmp(name, node_p->name) == 0)
+    {
+      free(node_p->name);
+      free(node_p->definition);
+
+      if (prev_node_p == NULL)
+      {
+        hash_table[hash(name)] = node_p->next;
+      }
+      else
+      {
+        prev_node_p->next = node_p->next;
+      }
+
+      free(node_p);
+      return TRUE;
+    }
+  }
+
+  return FALSE;
 }
