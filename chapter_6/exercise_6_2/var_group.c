@@ -293,4 +293,4 @@ void print_list(struct list_node *node_p)
   }
 }
 
-// NOTE: run: ./var_group 5 < var_group.test.c
+// NOTE: run: ./var_group 5 < test.txt
