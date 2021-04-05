@@ -21,8 +21,8 @@ struct list_node
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
 
-size_t hash(char *s);
-struct list_node *lookup(char *s);
+size_t hash(char *str);
+struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
@@ -70,23 +70,23 @@ char *str_dup(char *src)
   return dest;
 }
 
-size_t hash(char *s)
+size_t hash(char *str)
 {
   size_t hash_value = 0;
-  while (*s != '\0')
+  while (*str != '\0')
   {
-    hash_value = *s + 31 * hash_value;
-    ++s;
+    hash_value = *str + 31 * hash_value;
+    ++str;
   }
   return hash_value % HASH_SIZE;
 }
 
-struct list_node *lookup(char *s)
+struct list_node *lookup(char *str)
 {
   struct list_node *node_p;
-  for (node_p = hash_table[hash(s)]; node_p != NULL; node_p = node_p->next)
+  for (node_p = hash_table[hash(str)]; node_p != NULL; node_p = node_p->next)
   {
-    if (strcmp(s, node_p->name) == 0)
+    if (strcmp(str, node_p->name) == 0)
     {
       return node_p;
     }
