@@ -33,11 +33,11 @@ int main(void)
   install("TEST", "test");
 
   // Install other collision values for the same hash as for "TEST" -> 51.
-  install("TSHe", "test");
-  install("UPXD", "test");
-  install("9iww", "test");
-  install("mY1a", "test");
-  install("uuoT", "test");
+  install("TSHe", "test1");
+  install("UPXD", "test2");
+  install("9iww", "test3");
+  install("mY1a", "test4");
+  install("uuoT", "test5");
 
   struct list_node *node_p = lookup("TEST");
   if (node_p == NULL)
@@ -46,8 +46,8 @@ int main(void)
   }
   else
   {
-    printf("%s %s\n", node_p->name, node_p->definition);
-    if (undef("UPXD") && lookup("UPXD") == NULL)
+    printf("%s: %s\n", node_p->name, node_p->definition);
+    if (undef("TEST") && lookup("TEST") == NULL)
     {
       printf("'%s' was undefined successfully.\n", "TEST");
     }
