@@ -32,13 +32,6 @@ int main(void)
 {
   install("TEST", "test");
 
-  // Install other collision values for the same hash as for "TEST" -> 51.
-  install("TSHe", "test1");
-  install("UPXD", "test2");
-  install("9iww", "test3");
-  install("mY1a", "test4");
-  install("uuoT", "test5");
-
   struct list_node *node_p = lookup("TEST");
   if (node_p == NULL)
   {
