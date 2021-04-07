@@ -5,6 +5,8 @@
 #define TRUE (1 == 1)
 #define FALSE !TRUE
 
+#define OFFSET 10
+
 int get_line(char line[], int max_line_len);
 void fold_line(char line[], char fold_str[], int n_break);
 
@@ -46,7 +48,6 @@ void fold_line(char line[], char fold_str[], int n_break)
   int i, j, m;
   int column = 0;
   int split = FALSE;
-  int offset = 10;
 
   for (i = 0, j = 0; line[i] != '\0'; ++i, ++j)
   {
@@ -62,7 +63,7 @@ void fold_line(char line[], char fold_str[], int n_break)
     if (column == n_break)
     {
       split = TRUE;
-      for (m = j; m >= j - offset && split; m--)
+      for (m = j; m >= j - OFFSET && split; m--)
       {
         if (fold_str[m] == ' ' || fold_str[m] == '\t')
         {
