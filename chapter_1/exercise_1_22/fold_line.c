@@ -48,6 +48,7 @@ void fold_line(char line[], char fold_str[], int n_break)
   int i, j, m;
   int column = 0;
   int split = FALSE;
+  int last_blank = 0;
 
   for (i = 0, j = 0; line[i] != '\0'; ++i, ++j)
   {
@@ -60,27 +61,33 @@ void fold_line(char line[], char fold_str[], int n_break)
 
     column++;
 
-    if (column == n_break)
+    if (column == n_break - 10)
     {
       split = TRUE;
-      for (m = j; m >= j - OFFSET && split; ++m)
+    }
+
+    if (split && (fold_str[j] == ' ' || fold_str[j] == '\t'))
+    {
+      last_blank = j;
+    }
+
+    if (column == n_break)
+    {
+      if (last_blank)
       {
-        if (fold_str[m] == ' ' || fold_str[m] == '\t')
-        {
-          fold_str[m] = '\n';
-          column = j - m;
-
-          split = FALSE;
-        }
+        fold_str[last_blank] = '\n';
+        column = j - last_blank;
+        last_blank = 0;
       }
-
-      if (split)
+      else
       {
         fold_str[j++] = '-';
         fold_str[j] = '\n';
 
         column = 0;
       }
+
+      split = FALSE;
     }
   }
 
