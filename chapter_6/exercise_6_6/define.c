@@ -30,26 +30,7 @@ static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
 {
-  install("TEST", "test");
-
-  struct list_node *node_p = lookup("TEST");
-  if (node_p == NULL)
-  {
-    puts("Error: hash value not found.");
-  }
-  else
-  {
-    printf("%s: %s\n", node_p->name, node_p->definition);
-    if (undef("TEST") && lookup("TEST") == NULL)
-    {
-      printf("'%s' was undefined successfully.\n", "TEST");
-    }
-    else
-    {
-      printf("Error: failed to undefine '%s'.\n", "TEST");
-    }
-  }
-
+  // TODO: Add the main logic here.
   return EXIT_SUCCESS;
 }
 
