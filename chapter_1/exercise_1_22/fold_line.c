@@ -5,6 +5,7 @@
 #define TRUE (1 == 1)
 #define FALSE !TRUE
 
+#define BREAKING_POINT 40
 #define OFFSET 10
 
 int get_line(char line[], int max_line_len);
@@ -17,7 +18,7 @@ int main(void)
 
   while ((get_line(line, MAXLINE)) > 0)
   {
-    fold_line(line, fold_str, 40);
+    fold_line(line, fold_str, BREAKING_POINT);
     printf("%s", fold_str);
   }
 
