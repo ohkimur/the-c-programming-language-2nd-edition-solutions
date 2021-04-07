@@ -63,7 +63,7 @@ void fold_line(char line[], char fold_str[], int n_break)
     if (column == n_break)
     {
       split = TRUE;
-      for (m = j; m >= j - OFFSET && split; m--)
+      for (m = j; m >= j - OFFSET && split; ++m)
       {
         if (fold_str[m] == ' ' || fold_str[m] == '\t')
         {
