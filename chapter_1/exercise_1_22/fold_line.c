@@ -48,7 +48,7 @@ void fold_line(char line[], char fold_str[], int n_break)
   int split = FALSE;
   int offset = 10;
 
-  for (i = 0, j = 0; line[i] != '\0'; i++, j++)
+  for (i = 0, j = 0; line[i] != '\0'; ++i, ++j)
   {
     fold_str[j] = line[i];
 
