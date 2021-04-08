@@ -46,7 +46,7 @@ int get_line(char line[], int max_line_len)
 
 void fold_line(char line[], char fold_str[], int n_break)
 {
-  int i, j, m;
+  int i, j;
   int column = 0;
   int split = FALSE;
   int last_blank = 0;
