@@ -62,7 +62,7 @@ void fold_line(char line[], char fold_str[], int n_break)
 
     column++;
 
-    if (column == n_break - 10)
+    if (column == n_break - OFFSET)
     {
       split = TRUE;
     }
