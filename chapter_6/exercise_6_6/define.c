@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define HASH_SIZE 101
+#define MAX_WORD_LEN 100
 
 enum boolean
 {
@@ -26,12 +27,118 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
+void skip_blanks();
+void skip_comments();
+void skip_string_between(char start, char end);
+void skip_string_constant();
+int get_word(char *word, int max_word_len);
+
 static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
 {
-  // TODO: Add the main logic here.
+  int c;
+  char word[MAX_WORD_LEN];
+  while ((c = get_word(word, MAX_WORD_LEN)) != EOF)
+  {
+    if (c == '#')
+    {
+      get_word(word, MAX_WORD_LEN);
+      if (strcmp(word, "define") == 0)
+      {
+        get_word(word, MAX_WORD_LEN);
+        puts(word);
+        get_word(word, MAX_WORD_LEN);
+        puts(word);
+      }
+    }
+  }
+
   return EXIT_SUCCESS;
+}
+
+void skip_blanks()
+{
+  int c;
+  while (isblank(c = getc(stdin)))
+    ;
+  ungetc(c, stdin);
+}
+
+void skip_comments()
+{
+  int c = getc(stdin);
+  if (c == '/')
+  {
+    c = getc(stdin);
+    if (c == '/')
+    {
+      while ((c = getc(stdin)) != '\n' && c != EOF)
+        ;
+    }
+    else if (c == '*')
+    {
+      while ((c = getc(stdin)) != '*' && c != EOF)
+        ;
+      c = getc(stdin);
+      if (c == '/')
+      {
+        return;
+      }
+    }
+  }
+  ungetc(c, stdin);
+}
+
+void skip_string_between(char start, char end)
+{
+  int c = getc(stdin);
+  if (c == start)
+  {
+    while ((c = getc(stdin)) != end && c != EOF)
+      ;
+  }
+
+  if (c != start && c != end)
+  {
+    ungetc(c, stdin);
+  }
+}
+
+void skip_string_constant()
+{
+  skip_string_between('\'', '\'');
+  skip_string_between('"', '"');
+}
+
+int get_word(char *word, int max_word_len)
+{
+  skip_blanks();
+  skip_comments();
+  skip_string_constant();
+
+  int c = getc(stdin);
+  size_t i = 0;
+
+  if (c != EOF)
+  {
+    word[i++] = c;
+  }
+
+  if (!isalpha(c) && c != '_')
+  {
+    word[i] = '\0';
+    return c;
+  }
+
+  while ((isalnum(c = getc(stdin)) || c == '_') && i < max_word_len)
+  {
+    word[i++] = c;
+  }
+  ungetc(c, stdin);
+  word[i] = '\0';
+
+  return word[0];
 }
 
 char *str_dup(char *src)
