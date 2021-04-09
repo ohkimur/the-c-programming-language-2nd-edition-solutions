@@ -41,11 +41,15 @@ enum boolean undef(char *name);
 
 void skip_blanks();
 void skip_comments();
+void skip_string_between(char start, char end);
+void skip_string_constant();
 
 void get_name(char *dest, const size_t max_len);
 int get_next_token(void);
 
 int next_token;
+
+char *test = "#define MAX";
 
 char token[MAX_TOKEN_LEN];
 char name[MAX_TOKEN_LEN];
@@ -96,12 +100,32 @@ void skip_comments()
       c = getc(stdin);
       if (c == '/')
       {
-        ungetc('\n', stdin);
         return;
       }
     }
   }
   ungetc(c, stdin);
+}
+
+void skip_string_between(char start, char end)
+{
+  int c = getc(stdin);
+  if (c == start)
+  {
+    while ((c = getc(stdin)) != end && c != EOF)
+      ;
+  }
+
+  if (c != start && c != end)
+  {
+    ungetc(c, stdin);
+  }
+}
+
+void skip_string_constant()
+{
+  skip_string_between('\'', '\'');
+  skip_string_between('"', '"');
 }
 
 void get_name(char *dest, const size_t max_len)
@@ -120,7 +144,7 @@ int get_next_token(void)
 {
   skip_blanks();
   skip_comments();
-  skip_blanks();
+  skip_string_constant();
 
   int c = getc(stdin);
   if (c == '(')
