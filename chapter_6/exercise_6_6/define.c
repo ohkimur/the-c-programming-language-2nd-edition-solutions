@@ -100,6 +100,7 @@ void skip_comments()
       c = getc(stdin);
       if (c == '/')
       {
+        ungetc('\n', stdin);
         return;
       }
     }
