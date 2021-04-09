@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 #define HASH_SIZE 101
-#define MAX_WORD_LEN 100
+#define MAX_TOKEN_LEN 100
 
 enum boolean
 {
@@ -19,6 +19,18 @@ struct list_node
   struct list_node *next;
 };
 
+enum token_type
+{
+  NAME,
+  PARENS,
+  BRACKETS,
+  PAREN_OPEN = '(',
+  PAREN_CLOSE = ')',
+  BRACKET_OPEN = '[',
+  BRACKET_CLOSE = ']',
+  ATTR_SEPARATOR = ','
+};
+
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
 
@@ -29,27 +41,28 @@ enum boolean undef(char *name);
 
 void skip_blanks();
 void skip_comments();
-void skip_string_between(char start, char end);
-void skip_string_constant();
-int get_word(char *word, int max_word_len);
+
+void get_name(char *dest, const size_t max_len);
+int get_next_token(void);
+
+int next_token;
+
+char token[MAX_TOKEN_LEN];
+char name[MAX_TOKEN_LEN];
 
 static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
 {
-  int c;
-  char word[MAX_WORD_LEN];
-  while ((c = get_word(word, MAX_WORD_LEN)) != EOF)
+  while (get_next_token() != EOF)
   {
-    if (c == '#')
+    if (next_token == '#')
     {
-      get_word(word, MAX_WORD_LEN);
-      if (strcmp(word, "define") == 0)
+      get_next_token();
+      if (strcmp(token, "define") == 0)
       {
-        get_word(word, MAX_WORD_LEN);
-        puts(word);
-        get_word(word, MAX_WORD_LEN);
-        puts(word);
+        get_next_token();
+        puts(token);
       }
     }
   }
@@ -83,6 +96,7 @@ void skip_comments()
       c = getc(stdin);
       if (c == '/')
       {
+        ungetc('\n', stdin);
         return;
       }
     }
@@ -90,55 +104,62 @@ void skip_comments()
   ungetc(c, stdin);
 }
 
-void skip_string_between(char start, char end)
+void get_name(char *dest, const size_t max_len)
 {
-  int c = getc(stdin);
-  if (c == start)
+  int c;
+  size_t i = 0;
+  while ((isalnum(c = getc(stdin)) || c == '_') && i < max_len)
   {
-    while ((c = getc(stdin)) != end && c != EOF)
-      ;
+    dest[i++] = c;
   }
-
-  if (c != start && c != end)
-  {
-    ungetc(c, stdin);
-  }
+  dest[i] = '\0';
+  ungetc(c, stdin);
 }
 
-void skip_string_constant()
-{
-  skip_string_between('\'', '\'');
-  skip_string_between('"', '"');
-}
-
-int get_word(char *word, int max_word_len)
+int get_next_token(void)
 {
   skip_blanks();
   skip_comments();
-  skip_string_constant();
+  skip_blanks();
 
   int c = getc(stdin);
-  size_t i = 0;
-
-  if (c != EOF)
+  if (c == '(')
   {
-    word[i++] = c;
+    skip_blanks();
+
+    c = getc(stdin);
+    if (c == ')')
+    {
+      strcpy(token, "()");
+      return next_token = PARENS;
+    }
+    ungetc(c, stdin);
+
+    return next_token = PAREN_OPEN;
+  }
+  else if (c == '[')
+  {
+    skip_blanks();
+    get_name(token, MAX_TOKEN_LEN);
+    skip_blanks();
+
+    c = getc(stdin);
+    if (c == ']')
+    {
+      return next_token = BRACKETS;
+    }
+    ungetc(c, stdin);
+
+    return next_token = BRACKET_OPEN;
+  }
+  else if (isalpha(c))
+  {
+    ungetc(c, stdin);
+    get_name(token, MAX_TOKEN_LEN);
+    return next_token = NAME;
   }
 
-  if (!isalpha(c) && c != '_')
-  {
-    word[i] = '\0';
-    return c;
-  }
-
-  while ((isalnum(c = getc(stdin)) || c == '_') && i < max_word_len)
-  {
-    word[i++] = c;
-  }
-  ungetc(c, stdin);
-  word[i] = '\0';
-
-  return word[0];
+  return next_token = c;
 }
 
 char *str_dup(char *src)
