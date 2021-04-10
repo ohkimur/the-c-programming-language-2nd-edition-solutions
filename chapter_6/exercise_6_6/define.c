@@ -19,18 +19,6 @@ struct list_node
   struct list_node *next;
 };
 
-enum token_type
-{
-  NAME,
-  PARENS,
-  BRACKETS,
-  PAREN_OPEN = '(',
-  PAREN_CLOSE = ')',
-  BRACKET_OPEN = '[',
-  BRACKET_CLOSE = ']',
-  ATTR_SEPARATOR = ','
-};
-
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
 
@@ -39,152 +27,17 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
-void skip_blanks();
-void skip_comments();
-void skip_string_between(char start, char end);
-void skip_string_constant();
-
-void get_name(char *dest, const size_t max_len);
-int get_next_token(void);
-
-int next_token;
-
 char *test = "#define MAX";
-
-char token[MAX_TOKEN_LEN];
-char name[MAX_TOKEN_LEN];
 
 static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
 {
-  while (get_next_token() != EOF)
-  {
-    if (next_token == '#')
-    {
-      get_next_token();
-      if (strcmp(token, "define") == 0)
-      {
-        get_next_token();
-        puts(token);
-      }
-    }
-  }
+  // TODO: A different approach has to be taken here. It might be wise to consider
+  // reading one line at a time, so that when necessary the macros within the
+  // line can be replaced.
 
   return EXIT_SUCCESS;
-}
-
-void skip_blanks()
-{
-  int c;
-  while (isblank(c = getc(stdin)))
-    ;
-  ungetc(c, stdin);
-}
-
-void skip_comments()
-{
-  int c = getc(stdin);
-  if (c == '/')
-  {
-    c = getc(stdin);
-    if (c == '/')
-    {
-      while ((c = getc(stdin)) != '\n' && c != EOF)
-        ;
-    }
-    else if (c == '*')
-    {
-      while ((c = getc(stdin)) != '*' && c != EOF)
-        ;
-      c = getc(stdin);
-      if (c == '/')
-      {
-        ungetc('\n', stdin);
-        return;
-      }
-    }
-  }
-  ungetc(c, stdin);
-}
-
-void skip_string_between(char start, char end)
-{
-  int c = getc(stdin);
-  if (c == start)
-  {
-    while ((c = getc(stdin)) != end && c != EOF)
-      ;
-  }
-
-  if (c != start && c != end)
-  {
-    ungetc(c, stdin);
-  }
-}
-
-void skip_string_constant()
-{
-  skip_string_between('\'', '\'');
-  skip_string_between('"', '"');
-}
-
-void get_name(char *dest, const size_t max_len)
-{
-  int c;
-  size_t i = 0;
-  while ((isalnum(c = getc(stdin)) || c == '_') && i < max_len)
-  {
-    dest[i++] = c;
-  }
-  dest[i] = '\0';
-  ungetc(c, stdin);
-}
-
-int get_next_token(void)
-{
-  skip_blanks();
-  skip_comments();
-  skip_string_constant();
-
-  int c = getc(stdin);
-  if (c == '(')
-  {
-    skip_blanks();
-
-    c = getc(stdin);
-    if (c == ')')
-    {
-      strcpy(token, "()");
-      return next_token = PARENS;
-    }
-    ungetc(c, stdin);
-
-    return next_token = PAREN_OPEN;
-  }
-  else if (c == '[')
-  {
-    skip_blanks();
-    get_name(token, MAX_TOKEN_LEN);
-    skip_blanks();
-
-    c = getc(stdin);
-    if (c == ']')
-    {
-      return next_token = BRACKETS;
-    }
-    ungetc(c, stdin);
-
-    return next_token = BRACKET_OPEN;
-  }
-  else if (isalpha(c))
-  {
-    ungetc(c, stdin);
-    get_name(token, MAX_TOKEN_LEN);
-    return next_token = NAME;
-  }
-
-  return next_token = c;
 }
 
 char *str_dup(char *src)
