@@ -37,6 +37,9 @@ int main(void)
   // reading one line at a time, so that when necessary the macros within the
   // line can be replaced.
 
+  // NOTE: It might be easier to research about string replace functionality, so
+  // that the installed macros can be replaced with their values in the code.
+
   return EXIT_SUCCESS;
 }
 
