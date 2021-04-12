@@ -28,6 +28,7 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
+void consume_blanks(FILE *stream);
 int get_word(char *word, int max_word_len);
 int get_number_str(char *number_str, int max_str_len);
 
@@ -38,7 +39,7 @@ static struct list_node *hash_table[HASH_SIZE];
 int main(void)
 {
   char word[MAX_WORD_LEN];
-  char name[MAX_WORD_LEN];
+  char definition[MAX_WORD_LEN];
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
     if (isalpha(word[0]))
@@ -59,30 +60,52 @@ int main(void)
       {
         putc(word[0], stdout);
 
-        get_word(word, MAX_WORD_LEN);
+        if (get_word(word, MAX_WORD_LEN) == EOF)
+        {
+          break;
+        }
+        else if (!isalpha(word[0]))
+        {
+          printf("Error: invalid preprocessor directive.\n");
+        }
+
         if (strcmp(word, "define") == 0)
         {
           printf("%s", word);
-          while (get_word(word, MAX_WORD_LEN) != EOF && isblank(word[0]))
+          consume_blanks(stdin);
+
+          if (get_word(word, MAX_WORD_LEN) == EOF)
           {
-            putc(word[0], stdout);
+            break;
           }
-          strcpy(name, word);
+          else if (!isalpha(word[0]))
+          {
+            printf("Error: invalid name.\n");
+          }
+          strcpy(definition, word);
 
           printf("%s", word);
-          while (get_word(word, MAX_WORD_LEN) != EOF && isblank(word[0]))
+          consume_blanks(stdin);
+
+          if (get_word(word, MAX_WORD_LEN) == EOF)
           {
-            putc(word[0], stdout);
+            break;
+          }
+          else
+          {
+            if (isdigit(word[0]))
+            {
+              ungetc(word[0], stdin);
+              get_number_str(word, MAX_WORD_LEN);
+            }
+            else if (!isalpha(word[0]))
+            {
+              printf("Error: invalid define declaration.\n");
+            }
           }
 
-          if (!isalpha(word[0]))
-          {
-            ungetc(word[0], stdin);
-            get_number_str(word, MAX_WORD_LEN);
-            printf("%s", word);
-          }
-
-          install(name, word);
+          printf("%s", word);
+          install(definition, word);
         }
         else
         {
@@ -189,6 +212,16 @@ enum boolean undef(char *name)
   }
 
   return FALSE;
+}
+
+void consume_blanks(FILE *stream)
+{
+  int c;
+  while ((c = getc(stream)) && isblank(c))
+  {
+    putc(c, stdout);
+  }
+  ungetc(c, stdin);
 }
 
 int get_word(char *word, int max_word_len)
