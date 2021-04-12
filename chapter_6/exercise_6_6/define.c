@@ -38,6 +38,9 @@ static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
 {
+  enum boolean inside_str_literal = FALSE;
+  enum boolean inside_char_literal = FALSE;
+
   char word[MAX_WORD_LEN];
   char definition[MAX_WORD_LEN];
   while (get_word(word, MAX_WORD_LEN) != EOF)
@@ -56,7 +59,7 @@ int main(void)
     }
     else
     {
-      if (word[0] == '#')
+      if (word[0] == '#' && !inside_str_literal && !inside_char_literal)
       {
         putc(word[0], stdout);
 
@@ -114,6 +117,24 @@ int main(void)
       }
       else
       {
+        if (word[0] == '"' && !inside_str_literal)
+        {
+          inside_str_literal = TRUE;
+        }
+        else
+        {
+          inside_str_literal = FALSE;
+        }
+
+        if (word[0] == '\'' && !inside_char_literal)
+        {
+          inside_char_literal = TRUE;
+        }
+        else
+        {
+          inside_char_literal = FALSE;
+        }
+
         putc(word[0], stdout);
       }
     }
