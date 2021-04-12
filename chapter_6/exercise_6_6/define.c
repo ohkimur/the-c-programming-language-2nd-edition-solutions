@@ -37,15 +37,70 @@ static struct list_node *hash_table[HASH_SIZE];
 int main(void)
 {
   char word[MAX_WORD_LEN];
+  char name[MAX_WORD_LEN];
   while (get_word(word, MAX_WORD_LEN) != EOF)
   {
     if (isalpha(word[0]))
     {
-      printf("%s", word);
+      struct list_node *node_p;
+      if ((node_p = lookup(word)) != NULL)
+      {
+        printf("%s", node_p->definition);
+      }
+      else
+      {
+        printf("%s", word);
+      }
     }
     else
     {
-      putchar(word[0]);
+      if (word[0] == '#')
+      {
+        putc(word[0], stdout);
+        while (get_word(word, MAX_WORD_LEN) != EOF && isblank(word[0]))
+        {
+          putc(word[0], stdout);
+        }
+
+        if (strcmp(word, "define") == 0)
+        {
+          printf("%s", word);
+          while (get_word(word, MAX_WORD_LEN) != EOF && isblank(word[0]))
+          {
+            putc(word[0], stdout);
+          }
+          strcpy(name, word);
+
+          printf("%s", word);
+          while (get_word(word, MAX_WORD_LEN) != EOF && isblank(word[0]))
+          {
+            putc(word[0], stdout);
+          }
+
+          if (!isalpha(word[0]))
+          {
+            int c;
+            size_t i = 1;
+            while (isdigit(c = getc(stdin)))
+            {
+              word[i++] = c;
+            }
+            word[i] = '\0';
+            printf("%s", word);
+            putc(c, stdout);
+          }
+
+          install(name, word);
+        }
+        else
+        {
+          printf("%s", word);
+        }
+      }
+      else
+      {
+        putc(word[0], stdout);
+      }
     }
   }
 
