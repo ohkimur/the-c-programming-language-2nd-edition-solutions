@@ -44,11 +44,43 @@ int main(void)
 
   char line[MAX_LINE_LEN];
 
+  char name[100];
+  char token[100];
+
   while (get_line(line, MAX_LINE_LEN))
   {
-    if (strstr(line, "#define"))
+    char *define_str;
+    if ((define_str = strstr(line, "#define")) != NULL && *(define_str - 1) != '"' && *(define_str + 1) != '"')
     {
-      printf("%s", line);
+      define_str += 7;
+      while (isblank(*define_str))
+      {
+        ++define_str;
+      }
+
+      size_t i = 0;
+      while (isalnum(*define_str) || *define_str == '_')
+      {
+        name[i++] = *define_str++;
+      }
+      name[i] = '\0';
+
+      while (isblank(*define_str))
+      {
+        ++define_str;
+      }
+
+      i = 0;
+      while (!isblank(*define_str))
+      {
+        token[i++] = *define_str++;
+      }
+      token[i] = '\0';
+
+      printf("%s\n", name);
+      printf("%s", token);
+      printf("%s\n", line);
+      install(name, token);
     }
   }
 
