@@ -46,7 +46,10 @@ int main(void)
 
   while (get_line(line, MAX_LINE_LEN))
   {
-    printf("%s", line);
+    if (strstr(line, "#define"))
+    {
+      printf("%s", line);
+    }
   }
 
   return EXIT_SUCCESS;
