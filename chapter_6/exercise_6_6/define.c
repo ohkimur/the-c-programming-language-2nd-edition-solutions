@@ -29,6 +29,7 @@ struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
 int get_word(char *word, int max_word_len);
+int get_number_str(char *number_str, int max_str_len);
 
 char *test = "#define MAX";
 
@@ -76,15 +77,9 @@ int main(void)
 
           if (!isalpha(word[0]))
           {
-            int c;
-            size_t i = 1;
-            while (isdigit(c = getc(stdin)))
-            {
-              word[i++] = c;
-            }
-            word[i] = '\0';
+            ungetc(word[0], stdin);
+            get_number_str(word, MAX_WORD_LEN);
             printf("%s", word);
-            putc(c, stdout);
           }
 
           install(name, word);
@@ -220,4 +215,30 @@ int get_word(char *word, int max_word_len)
   word[i] = '\0';
 
   return word[0];
+}
+
+int get_number_str(char *number_str, int max_str_len)
+{
+  int c = getc(stdin);
+  size_t i = 0;
+
+  if (c != EOF)
+  {
+    number_str[i++] = c;
+  }
+
+  if (!isdigit(c))
+  {
+    number_str[i] = '\0';
+    return c;
+  }
+
+  while (isdigit(c = getc(stdin)) && i < max_str_len)
+  {
+    number_str[i++] = c;
+  }
+  ungetc(c, stdin);
+  number_str[i] = '\0';
+
+  return number_str[0];
 }
