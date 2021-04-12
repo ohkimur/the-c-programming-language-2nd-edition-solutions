@@ -27,62 +27,14 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
-size_t get_line(char line[], size_t max_line_len);
-
 char *test = "#define MAX";
 
 static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
 {
-  // TODO: A different approach has to be taken here. It might be wise to consider
-  // reading one line at a time, so that when necessary the macros within the
-  // line can be replaced.
-
-  // NOTE: It might be easier to research about string replace functionality, so
-  // that the installed macros can be replaced with their values in the code.
-
-  char line[MAX_LINE_LEN];
-
-  char name[100];
-  char token[100];
-
-  while (get_line(line, MAX_LINE_LEN))
-  {
-    char *define_str;
-    if ((define_str = strstr(line, "#define")) != NULL && *(define_str - 1) != '"' && *(define_str + 1) != '"')
-    {
-      define_str += 7;
-      while (isblank(*define_str))
-      {
-        ++define_str;
-      }
-
-      size_t i = 0;
-      while (isalnum(*define_str) || *define_str == '_')
-      {
-        name[i++] = *define_str++;
-      }
-      name[i] = '\0';
-
-      while (isblank(*define_str))
-      {
-        ++define_str;
-      }
-
-      i = 0;
-      while (!isblank(*define_str))
-      {
-        token[i++] = *define_str++;
-      }
-      token[i] = '\0';
-
-      printf("%s\n", name);
-      printf("%s", token);
-      printf("%s\n", line);
-      install(name, token);
-    }
-  }
+  // NOTE: The best approach might be using something like get_next_token.
+  // However, in that case the space has to be considered a token.
 
   return EXIT_SUCCESS;
 }
@@ -177,25 +129,4 @@ enum boolean undef(char *name)
   }
 
   return FALSE;
-}
-
-size_t get_line(char line[], size_t max_line_len)
-{
-  int c;
-  size_t i;
-
-  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
-  {
-    line[i] = c;
-  }
-
-  if (c == '\n')
-  {
-    line[i] = c;
-    ++i;
-  }
-
-  line[i] = '\0';
-
-  return i;
 }
