@@ -28,7 +28,7 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
-void consume_blanks(FILE *stream);
+void consume_blanks(void);
 int get_word(char *word, int max_word_len);
 int get_number_str(char *number_str, int max_str_len);
 
@@ -76,7 +76,7 @@ int main(void)
         if (strcmp(word, "define") == 0)
         {
           printf("%s", word);
-          consume_blanks(stdin);
+          consume_blanks();
 
           if (get_word(word, MAX_WORD_LEN) == EOF)
           {
@@ -90,7 +90,7 @@ int main(void)
           strcpy(definition, word);
 
           printf("%s", word);
-          consume_blanks(stdin);
+          consume_blanks();
 
           if (get_word(word, MAX_WORD_LEN) == EOF)
           {
@@ -230,10 +230,10 @@ enum boolean undef(char *name)
   return FALSE;
 }
 
-void consume_blanks(FILE *stream)
+void consume_blanks(void)
 {
   int c;
-  while ((c = getc(stream)) && isblank(c))
+  while ((c = getc(stdin)) && isblank(c))
   {
     putc(c, stdout);
   }
