@@ -57,11 +57,8 @@ int main(void)
       if (word[0] == '#')
       {
         putc(word[0], stdout);
-        while (get_word(word, MAX_WORD_LEN) != EOF && isblank(word[0]))
-        {
-          putc(word[0], stdout);
-        }
 
+        get_word(word, MAX_WORD_LEN);
         if (strcmp(word, "define") == 0)
         {
           printf("%s", word);
