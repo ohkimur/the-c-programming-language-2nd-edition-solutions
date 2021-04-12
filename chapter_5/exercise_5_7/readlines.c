@@ -6,26 +6,26 @@
 #define MAXLEN 1000
 #define MAXSTORE 10000 // max # of chars from all lines to be stored
 
-char *lineptr[MAXLINES]; // pointers to text lines
+char *line_ptr[MAXLINES]; // pointers to text lines
 
 size_t get_line(char line[], size_t max_line_len);
 
-int readlines(char *lineptr[], int nlines, char *stored_lines);
-void writelines(char *lineptr[], int nlines);
+int readlines(char *line_ptr[], int max_nr_of_lines, char *stored_lines);
+void writelines(char *line_ptr[], int nr_of_lines);
 
 void swap(char *v[], int i, int j);
-void quick_sort(char *lineptr[], int left, int right);
+void quick_sort(char *line_ptr[], int left, int right);
 
 int main()
 {
-  int nlines;                  // # of input lines read
+  int nr_of_lines;             // # of input lines read
   char stored_lines[MAXSTORE]; // # of chars to be stored for all lines
 
-  if ((nlines = readlines(lineptr, MAXLINES, stored_lines)) >= 0)
+  if ((nr_of_lines = readlines(line_ptr, MAXLINES, stored_lines)) >= 0)
   {
-    quick_sort(lineptr, 0, nlines - 1);
+    quick_sort(line_ptr, 0, nr_of_lines - 1);
     printf("-----\n");
-    writelines(lineptr, nlines);
+    writelines(line_ptr, nr_of_lines);
     return 0;
   }
   else
@@ -35,20 +35,20 @@ int main()
   }
 }
 
-int readlines(char *lineptr[], int maxlines, char *stored_lines)
+int readlines(char *line_ptr[], int max_nr_of_lines, char *stored_lines)
 {
   int len;
-  int nlines;
+  int nr_of_lines;
 
   char *p = stored_lines + strlen(stored_lines); // Init p with the first empty position from stored_lines
   char line[MAXLEN];
 
-  nlines = 0;
+  nr_of_lines = 0;
   while ((len = get_line(line, MAXLEN)) > 0)
   {
     // Checking if the current # of lines exceeds the max # of lines that can be stored
     // Also checking if the max # of chars from the stored_lines buffer is not exceeded
-    if (nlines >= maxlines || (strlen(stored_lines) + len) > MAXSTORE)
+    if (nr_of_lines >= max_nr_of_lines || (strlen(stored_lines) + len) > MAXSTORE)
     {
       return -1;
     }
@@ -56,19 +56,19 @@ int readlines(char *lineptr[], int maxlines, char *stored_lines)
     {
       line[len - 1] = '\0'; // Delete newline
       strcpy(p, line);
-      lineptr[nlines++] = p;
+      line_ptr[nr_of_lines++] = p;
       p += len; // Move p to the next empty position
     }
   }
 
-  return nlines;
+  return nr_of_lines;
 }
 
-void writelines(char *lineptr[], int nlines)
+void writelines(char *line_ptr[], int nr_of_lines)
 {
-  while (nlines-- > 0)
+  while (nr_of_lines-- > 0)
   {
-    printf("%s\n", *lineptr++);
+    printf("%s\n", *line_ptr++);
   }
 }
 
