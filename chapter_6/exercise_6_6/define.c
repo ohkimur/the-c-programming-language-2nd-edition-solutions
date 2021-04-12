@@ -59,6 +59,9 @@ int main(void)
     }
     else
     {
+      // TODO: A better approach might be to replace the following code with a
+      // separate function that only gets the definition. After getting the
+      // definition the preprocessor directive can be printed if necessary.
       if (word[0] == '#' && !inside_str_literal && !inside_char_literal)
       {
         putc(word[0], stdout);
