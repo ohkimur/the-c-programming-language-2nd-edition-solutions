@@ -70,6 +70,7 @@ int main(void)
         else if (!isalpha(word[0]))
         {
           printf("Error: invalid preprocessor directive.\n");
+          break;
         }
 
         if (strcmp(word, "define") == 0)
@@ -84,6 +85,7 @@ int main(void)
           else if (!isalpha(word[0]))
           {
             printf("Error: invalid name.\n");
+            break;
           }
           strcpy(definition, word);
 
@@ -104,6 +106,7 @@ int main(void)
             else if (!isalpha(word[0]))
             {
               printf("Error: invalid define declaration.\n");
+              break;
             }
           }
 
@@ -117,22 +120,14 @@ int main(void)
       }
       else
       {
-        if (word[0] == '"' && !inside_str_literal)
+        if (word[0] == '"')
         {
-          inside_str_literal = TRUE;
-        }
-        else
-        {
-          inside_str_literal = FALSE;
+          inside_str_literal = !inside_str_literal;
         }
 
-        if (word[0] == '\'' && !inside_char_literal)
+        if (word[0] == '\'')
         {
-          inside_char_literal = TRUE;
-        }
-        else
-        {
-          inside_char_literal = FALSE;
+          inside_char_literal = !inside_char_literal;
         }
 
         putc(word[0], stdout);
