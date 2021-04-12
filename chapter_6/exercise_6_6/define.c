@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 #define HASH_SIZE 101
-#define MAX_TOKEN_LEN 100
+#define MAX_LINE_LEN 1000
 
 enum boolean
 {
@@ -27,6 +27,8 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
+size_t get_line(char line[], size_t max_line_len);
+
 char *test = "#define MAX";
 
 static struct list_node *hash_table[HASH_SIZE];
@@ -39,6 +41,13 @@ int main(void)
 
   // NOTE: It might be easier to research about string replace functionality, so
   // that the installed macros can be replaced with their values in the code.
+
+  char line[MAX_LINE_LEN];
+
+  while (get_line(line, MAX_LINE_LEN))
+  {
+    printf("%s", line);
+  }
 
   return EXIT_SUCCESS;
 }
@@ -133,4 +142,25 @@ enum boolean undef(char *name)
   }
 
   return FALSE;
+}
+
+size_t get_line(char line[], size_t max_line_len)
+{
+  int c;
+  size_t i;
+
+  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
+  {
+    line[i] = c;
+  }
+
+  if (c == '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
+
+  line[i] = '\0';
+
+  return i;
 }
