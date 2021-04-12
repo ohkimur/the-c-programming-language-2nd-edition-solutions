@@ -8,7 +8,7 @@
 
 char *lineptr[MAXLINES]; // pointers to text lines
 
-int get_line(char line[], int maxline);
+size_t get_line(char line[], size_t max_line_len);
 
 int readlines(char *lineptr[], int nlines, char *stored_lines);
 void writelines(char *lineptr[], int nlines);
@@ -72,11 +72,12 @@ void writelines(char *lineptr[], int nlines)
   }
 }
 
-int get_line(char line[], int maxline)
+size_t get_line(char line[], size_t max_line_len)
 {
-  int c, i;
+  int c;
+  size_t i;
 
-  for (i = 0; i < maxline - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
   {
     line[i] = c;
   }
