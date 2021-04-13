@@ -209,6 +209,21 @@ void consume_blanks(void)
   ungetc(c, stdin);
 }
 
+void consume_word(char *word, char *error_str)
+{
+  int c;
+  if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
+  {
+    ungetc(c, stdin);
+    return;
+  }
+  else if (!isalpha(c))
+  {
+    puts(error_str);
+  }
+  printf("%s", word);
+}
+
 void consume_preproc(void)
 {
   int c = getc(stdin);
@@ -217,17 +232,7 @@ void consume_preproc(void)
     putc(c, stdout);
 
     char word[MAX_WORD_LEN];
-
-    if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
-    {
-      ungetc(c, stdin);
-      return;
-    }
-    else if (!isalpha(c))
-    {
-      printf("Error: expected preprocessor directive.\n");
-    }
-    printf("%s", word);
+    consume_word(word, "Error: expected preprocessor directive.");
 
     enum directive_type directive = NONE;
     if (strcmp(word, "define") == 0)
@@ -242,16 +247,7 @@ void consume_preproc(void)
     if (directive)
     {
       consume_blanks();
-      if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
-      {
-        ungetc(c, stdin);
-        return;
-      }
-      else if (!isalpha(c))
-      {
-        printf("Error: invalid name.\n");
-      }
-      printf("%s", word);
+      consume_word(word, "Error: invalid name.");
     }
 
     if (directive == DEFINE)
