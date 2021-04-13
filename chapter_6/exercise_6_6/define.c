@@ -33,9 +33,6 @@ int get_word(char *word, int max_word_len);
 void consume_blanks(void);
 void consume_preproc(void);
 
-char *test = "#define MAX";
-char *test2 = "test[MAX]";
-
 static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
@@ -249,6 +246,24 @@ void consume_preproc(void)
       putc(c, stdout);
 
       install(word, definition);
+    }
+    else if (strcmp(word, "undef") == 0)
+    {
+      printf("%s", word);
+      consume_blanks();
+
+      if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
+      {
+        ungetc(c, stdin);
+        return;
+      }
+      else if (!isalpha(c))
+      {
+        printf("Error: invalid name.\n");
+      }
+
+      printf("%s", word);
+      undef(word);
     }
     else
     {
