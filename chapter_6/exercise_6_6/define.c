@@ -68,7 +68,7 @@ int main(void)
     }
     else
     {
-      // TODO: Consume against comments and string literals.
+      // TODO: Consume comments and string literals.
       if (c == '#')
       {
         ungetc(c, stdin);
