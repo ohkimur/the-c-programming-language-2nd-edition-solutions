@@ -13,6 +13,13 @@ enum boolean
   TRUE
 };
 
+enum directive_type
+{
+  NONE = 0,
+  DEFINE = 1,
+  UNDEF = 1
+};
+
 struct list_node
 {
   char *name;
@@ -206,6 +213,7 @@ void consume_preproc(void)
     putc(c, stdout);
 
     char word[MAX_WORD_LEN];
+
     if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
     {
       ungetc(c, stdin);
@@ -215,12 +223,21 @@ void consume_preproc(void)
     {
       printf("Error: expected preprocessor directive.\n");
     }
+    printf("%s", word);
 
+    enum directive_type directive = NONE;
     if (strcmp(word, "define") == 0)
     {
-      printf("%s", word);
-      consume_blanks();
+      directive = DEFINE;
+    }
+    else if (strcmp(word, "undef") == 0)
+    {
+      directive = UNDEF;
+    }
 
+    if (directive)
+    {
+      consume_blanks();
       if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
       {
         ungetc(c, stdin);
@@ -230,12 +247,15 @@ void consume_preproc(void)
       {
         printf("Error: invalid name.\n");
       }
-
       printf("%s", word);
-      consume_blanks();
+    }
 
+    if (directive == DEFINE)
+    {
       size_t i = 0;
       char definition[MAX_WORD_LEN];
+
+      consume_blanks();
       while (!isblank(c = getc(stdin)) && c != '\n' && i < MAX_WORD_LEN)
       {
         definition[i++] = c;
@@ -247,27 +267,9 @@ void consume_preproc(void)
 
       install(word, definition);
     }
-    else if (strcmp(word, "undef") == 0)
+    else if (directive == UNDEF)
     {
-      printf("%s", word);
-      consume_blanks();
-
-      if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
-      {
-        ungetc(c, stdin);
-        return;
-      }
-      else if (!isalpha(c))
-      {
-        printf("Error: invalid name.\n");
-      }
-
-      printf("%s", word);
       undef(word);
-    }
-    else
-    {
-      printf("%s", word);
     }
   }
   else
