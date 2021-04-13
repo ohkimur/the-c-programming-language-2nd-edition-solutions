@@ -28,9 +28,7 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
-void consume_blanks(void);
 int get_word(char *word, int max_word_len);
-int get_number_str(char *number_str, int max_str_len);
 
 char *test = "#define MAX";
 
@@ -38,14 +36,11 @@ static struct list_node *hash_table[HASH_SIZE];
 
 int main(void)
 {
-  enum boolean inside_str_literal = FALSE;
-  enum boolean inside_char_literal = FALSE;
-
+  int c;
   char word[MAX_WORD_LEN];
-  char definition[MAX_WORD_LEN];
-  while (get_word(word, MAX_WORD_LEN) != EOF)
+  while ((c = get_word(word, MAX_WORD_LEN)) != EOF)
   {
-    if (isalpha(word[0]))
+    if (isalpha(c))
     {
       struct list_node *node_p;
       if ((node_p = lookup(word)) != NULL)
@@ -59,82 +54,7 @@ int main(void)
     }
     else
     {
-      // TODO: A better approach might be to replace the following code with a
-      // separate function that only gets the definition. After getting the
-      // definition the preprocessor directive can be printed if necessary.
-      if (word[0] == '#' && !inside_str_literal && !inside_char_literal)
-      {
-        putc(word[0], stdout);
-
-        if (get_word(word, MAX_WORD_LEN) == EOF)
-        {
-          break;
-        }
-        else if (!isalpha(word[0]))
-        {
-          printf("Error: invalid preprocessor directive.\n");
-          break;
-        }
-
-        if (strcmp(word, "define") == 0)
-        {
-          printf("%s", word);
-          consume_blanks();
-
-          if (get_word(word, MAX_WORD_LEN) == EOF)
-          {
-            break;
-          }
-          else if (!isalpha(word[0]))
-          {
-            printf("Error: invalid name.\n");
-            break;
-          }
-          strcpy(definition, word);
-
-          printf("%s", word);
-          consume_blanks();
-
-          if (get_word(word, MAX_WORD_LEN) == EOF)
-          {
-            break;
-          }
-          else
-          {
-            if (isdigit(word[0]))
-            {
-              ungetc(word[0], stdin);
-              get_number_str(word, MAX_WORD_LEN);
-            }
-            else if (!isalpha(word[0]))
-            {
-              printf("Error: invalid define declaration.\n");
-              break;
-            }
-          }
-
-          printf("%s", word);
-          install(definition, word);
-        }
-        else
-        {
-          printf("%s", word);
-        }
-      }
-      else
-      {
-        if (word[0] == '"')
-        {
-          inside_str_literal = !inside_str_literal;
-        }
-
-        if (word[0] == '\'')
-        {
-          inside_char_literal = !inside_char_literal;
-        }
-
-        putc(word[0], stdout);
-      }
+      putc(c, stdout);
     }
   }
 
@@ -233,16 +153,6 @@ enum boolean undef(char *name)
   return FALSE;
 }
 
-void consume_blanks(void)
-{
-  int c;
-  while ((c = getc(stdin)) && isblank(c))
-  {
-    putc(c, stdout);
-  }
-  ungetc(c, stdin);
-}
-
 int get_word(char *word, int max_word_len)
 {
   int c = getc(stdin);
@@ -267,30 +177,4 @@ int get_word(char *word, int max_word_len)
   word[i] = '\0';
 
   return word[0];
-}
-
-int get_number_str(char *number_str, int max_str_len)
-{
-  int c = getc(stdin);
-  size_t i = 0;
-
-  if (c != EOF)
-  {
-    number_str[i++] = c;
-  }
-
-  if (!isdigit(c))
-  {
-    number_str[i] = '\0';
-    return c;
-  }
-
-  while (isdigit(c = getc(stdin)) && i < max_str_len)
-  {
-    number_str[i++] = c;
-  }
-  ungetc(c, stdin);
-  number_str[i] = '\0';
-
-  return number_str[0];
 }
