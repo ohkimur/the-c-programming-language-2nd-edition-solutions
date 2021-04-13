@@ -34,15 +34,15 @@ void consume_blanks(void);
 void consume_preproc(void);
 
 char *test = "#define MAX";
-char *test2 = "test[MAX]";
+char *test2 = "test[";]";
 
-static struct list_node *hash_table[HASH_SIZE];
+static struct list_node *hash_table[101];
 
 int main(void)
 {
   int c;
-  char word[MAX_WORD_LEN];
-  while ((c = get_word(word, MAX_WORD_LEN)) != EOF)
+  char word[100];
+  while ((c = get_word(word, 100)) != EOF)
   {
     if (isalpha(c))
     {
@@ -58,7 +58,8 @@ int main(void)
     }
     else
     {
-      if (c == '#')
+      if (c == '#Error: expected preprocessor directive.
+')
       {
         ungetc(c, stdin);
         consume_preproc();
@@ -91,7 +92,7 @@ size_t hash(char *str)
     hash_value = *str + 31 * hash_value;
     ++str;
   }
-  return hash_value % HASH_SIZE;
+  return hash_value % 101;
 }
 
 struct list_node *lookup(char *str)
@@ -204,12 +205,13 @@ void consume_blanks(void)
 void consume_preproc(void)
 {
   int c = getc(stdin);
-  if (c == '#')
+  if (c == '#Error: expected preprocessor directive.
+')
   {
     putc(c, stdout);
 
-    char word[MAX_WORD_LEN];
-    if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
+    char word[100];
+    if ((c = get_word(word, 100)) == EOF)
     {
       ungetc(c, stdin);
       return;
@@ -224,7 +226,7 @@ void consume_preproc(void)
       printf("%s", word);
       consume_blanks();
 
-      if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
+      if ((c = get_word(word, 100)) == EOF)
       {
         ungetc(c, stdin);
         return;
@@ -238,8 +240,8 @@ void consume_preproc(void)
       consume_blanks();
 
       size_t i = 0;
-      char definition[MAX_WORD_LEN];
-      while (!isblank(c = getc(stdin)) && c != '\n' && i < MAX_WORD_LEN)
+      char definition[100];
+      while (!isblank(c = getc(stdin)) && c != '\n' && i < 100)
       {
         definition[i++] = c;
       }
