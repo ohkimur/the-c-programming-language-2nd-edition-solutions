@@ -7,6 +7,10 @@
 #define MAX_LINE_LEN 1000
 #define MAX_WORD_LEN 100
 
+#define TEST 10
+#define TEST1 TEST
+char *test = "TEST1";
+
 enum boolean
 {
   FALSE,
@@ -50,8 +54,8 @@ int main(void)
   {
     if (isalpha(c))
     {
-      struct list_node *node_p;
-      if ((node_p = lookup(word)) != NULL)
+      struct list_node *node_p = lookup(word);
+      if (node_p != NULL)
       {
         printf("%s", node_p->definition);
       }
@@ -265,7 +269,15 @@ void consume_preproc(void)
       printf("%s", definition);
       putc(c, stdout);
 
-      install(word, definition);
+      struct list_node *node_p = lookup(definition);
+      if (node_p != NULL)
+      {
+        install(word, node_p->definition);
+      }
+      else
+      {
+        install(word, definition);
+      }
     }
     else if (directive == UNDEF)
     {

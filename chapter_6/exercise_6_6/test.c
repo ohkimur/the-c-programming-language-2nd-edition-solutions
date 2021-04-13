@@ -7,10 +7,21 @@
 #define MAX_LINE_LEN 1000
 #define MAX_WORD_LEN 100
 
+#define TEST 10
+#define TEST1 TEST
+char *test = "10";
+
 enum boolean
 {
   FALSE,
   TRUE
+};
+
+enum directive_type
+{
+  NONE = 0,
+  DEFINE = 1,
+  UNDEF = 1
 };
 
 struct list_node
@@ -33,9 +44,6 @@ int get_word(char *word, int max_word_len);
 void consume_blanks(void);
 void consume_preproc(void);
 
-char *test = "#define MAX";
-char *test2 = "test[";]";
-
 static struct list_node *hash_table[101];
 
 int main(void)
@@ -46,8 +54,8 @@ int main(void)
   {
     if (isalpha(c))
     {
-      struct list_node *node_p;
-      if ((node_p = lookup(word)) != NULL)
+      struct list_node *node_p = lookup(word);
+      if (node_p != NULL)
       {
         printf("%s", node_p->definition);
       }
@@ -211,6 +219,7 @@ void consume_preproc(void)
     putc(c, stdout);
 
     char word[100];
+
     if ((c = get_word(word, 100)) == EOF)
     {
       ungetc(c, stdin);
@@ -220,12 +229,21 @@ void consume_preproc(void)
     {
       printf("Error: expected preprocessor directive.\n");
     }
+    printf("%s", word);
 
+    enum directive_type directive = NONE;
     if (strcmp(word, "define") == 0)
     {
-      printf("%s", word);
-      consume_blanks();
+      directive = DEFINE;
+    }
+    else if (strcmp(word, "undef") == 0)
+    {
+      directive = UNDEF;
+    }
 
+    if (directive)
+    {
+      consume_blanks();
       if ((c = get_word(word, 100)) == EOF)
       {
         ungetc(c, stdin);
@@ -235,12 +253,15 @@ void consume_preproc(void)
       {
         printf("Error: invalid name.\n");
       }
-
       printf("%s", word);
-      consume_blanks();
+    }
 
+    if (directive == DEFINE)
+    {
       size_t i = 0;
       char definition[100];
+
+      consume_blanks();
       while (!isblank(c = getc(stdin)) && c != '\n' && i < 100)
       {
         definition[i++] = c;
@@ -250,11 +271,19 @@ void consume_preproc(void)
       printf("%s", definition);
       putc(c, stdout);
 
-      install(word, definition);
+      struct list_node *node_p = lookup(definition);
+      if (node_p != NULL)
+      {
+        install(word, node_p->definition);
+      }
+      else
+      {
+        install(word, definition);
+      }
     }
-    else
+    else if (directive == UNDEF)
     {
-      printf("%s", word);
+      undef(word);
     }
   }
   else
