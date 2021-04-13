@@ -29,8 +29,10 @@ struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
 int get_word(char *word, int max_word_len);
+void consume_blanks(void);
 
 char *test = "#define MAX";
+char *test2 = "test[MAX]";
 
 static struct list_node *hash_table[HASH_SIZE];
 
@@ -54,7 +56,58 @@ int main(void)
     }
     else
     {
-      putc(c, stdout);
+      if (c == '#')
+      {
+        putc(c, stdout);
+
+        if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
+        {
+          break;
+        }
+        else if (!isalpha(c))
+        {
+          printf("Error: expected preprocessor directive.\n");
+        }
+
+        if (strcmp(word, "define") == 0)
+        {
+          printf("%s", word);
+          consume_blanks();
+
+          if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
+          {
+            break;
+          }
+          else if (!isalpha(c))
+          {
+            printf("Error: invalid name.\n");
+          }
+
+          printf("%s", word);
+          consume_blanks();
+
+          size_t i = 0;
+          char definition[MAX_WORD_LEN];
+          while (!isblank(c = getc(stdin)) && c != '\n' && i < MAX_WORD_LEN)
+          {
+            definition[i++] = c;
+          }
+          definition[i] = '\0';
+
+          printf("%s", definition);
+          putc(c, stdout);
+
+          install(word, definition);
+        }
+        else
+        {
+          printf("%s", word);
+        }
+      }
+      else
+      {
+        putc(c, stdout);
+      }
     }
   }
 
@@ -177,4 +230,14 @@ int get_word(char *word, int max_word_len)
   word[i] = '\0';
 
   return word[0];
+}
+
+void consume_blanks(void)
+{
+  int c;
+  while (isblank(c = getc(stdin)))
+  {
+    putc(c, stdout);
+  }
+  ungetc(c, stdin);
 }
