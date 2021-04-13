@@ -39,8 +39,10 @@ struct list_node *lookup(char *str);
 struct list_node *install(char *name, char *definition);
 enum boolean undef(char *name);
 
-int get_word(char *word, int max_word_len);
+int get_word(char *word, size_t max_word_len);
+size_t get_alnum_str(char *str, size_t max_str_len);
 
+void consume_word(char *word, char *error_str);
 void consume_blanks(void);
 void consume_preproc(void);
 
@@ -173,7 +175,7 @@ enum boolean undef(char *name)
   return FALSE;
 }
 
-int get_word(char *word, int max_word_len)
+int get_word(char *word, size_t max_word_len)
 {
   int c = getc(stdin);
   size_t i = 0;
@@ -199,14 +201,17 @@ int get_word(char *word, int max_word_len)
   return word[0];
 }
 
-void consume_blanks(void)
+size_t get_alnum_str(char *str, size_t max_str_len)
 {
+  size_t i = 0;
   int c;
-  while (isblank(c = getc(stdin)))
+  while (isalnum(c = getc(stdin)) && i < max_str_len)
   {
-    putc(c, stdout);
+    str[i++] = c;
   }
+  str[i] = '\0';
   ungetc(c, stdin);
+  return i;
 }
 
 void consume_word(char *word, char *error_str)
@@ -222,6 +227,16 @@ void consume_word(char *word, char *error_str)
     puts(error_str);
   }
   printf("%s", word);
+}
+
+void consume_blanks(void)
+{
+  int c;
+  while (isblank(c = getc(stdin)))
+  {
+    putc(c, stdout);
+  }
+  ungetc(c, stdin);
 }
 
 void consume_preproc(void)
@@ -252,18 +267,10 @@ void consume_preproc(void)
 
     if (directive == DEFINE)
     {
-      size_t i = 0;
-      char definition[MAX_WORD_LEN];
-
       consume_blanks();
-      while (!isblank(c = getc(stdin)) && c != '\n' && i < MAX_WORD_LEN)
-      {
-        definition[i++] = c;
-      }
-      definition[i] = '\0';
-
+      char definition[MAX_WORD_LEN];
+      get_alnum_str(definition, MAX_WORD_LEN);
       printf("%s", definition);
-      putc(c, stdout);
 
       struct list_node *node_p = lookup(definition);
       if (node_p != NULL)
