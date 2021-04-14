@@ -7,25 +7,6 @@
 #define MAX_LINE_LEN 1000
 #define MAX_WORD_LEN 100
 
-#define TEST 10
-#define TEST1 TEST
-#define TEST2 "THIS IS IT"
-#define TEST3 "f \nasd"
-#define TEST4 '/'
-#define TEST5 '\n'
-
-enum test
-{
-  A = TEST,
-  B = TEST1,
-  C = HASH_SIZE
-};
-
-char *a = TEST2;
-char *b = TEST3;
-char c = TEST4;
-char d = TEST5;
-
 enum boolean
 {
   FALSE,
@@ -408,3 +389,5 @@ void consume_preproc(void)
     ungetc(c, stdin);
   }
 }
+
+// NOTE: run: ./define < define.c
