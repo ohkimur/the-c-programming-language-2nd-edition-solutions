@@ -69,7 +69,7 @@ int main(void)
     }
     else
     {
-      // TODO: Consume comments and string literals.
+      // TODO: Consume string and char literals.
       if (c == '/')
       {
         ungetc(c, stdin);
