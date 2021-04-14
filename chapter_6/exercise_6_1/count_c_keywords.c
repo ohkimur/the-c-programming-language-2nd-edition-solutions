@@ -141,12 +141,12 @@ void skip_chars_between(char start, char end)
   ungetc(c, stdin);
 }
 
-void skip_char_literal()
+void skip_char_literal(void)
 {
   skip_chars_between('\'', '\'');
 }
 
-void skip_string_literal()
+void skip_string_literal(void)
 {
   skip_chars_between('"', '"');
 }
