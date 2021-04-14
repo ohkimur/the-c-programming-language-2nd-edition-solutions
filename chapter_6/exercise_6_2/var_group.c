@@ -32,8 +32,9 @@ char *str_dup(char *src);
 
 void skip_blanks();
 void skip_comments();
-void skip_string_between(char start, char end);
-void skip_string_constant();
+void skip_chars_between(char start, char end);
+void skip_char_literal(void);
+void skip_string_literal(void);
 
 int get_word(char *word, int max_word_len);
 int bin_search(char *word, char *arr[], int arr_len);
@@ -151,32 +152,45 @@ void skip_comments()
   ungetc(c, stdin);
 }
 
-void skip_string_between(char start, char end)
+void skip_chars_between(char start, char end)
 {
   int c = getc(stdin);
   if (c == start)
   {
-    while ((c = getc(stdin)) != end && c != EOF)
-      ;
+    while ((c = getc(stdin)) != EOF)
+    {
+      if (c == '\\')
+      {
+        if ((c = getc(stdin)) == EOF)
+        {
+          break;
+        }
+      }
+      else if (c == end)
+      {
+        return;
+      }
+    }
   }
-
-  if (c != start && c != end)
-  {
-    ungetc(c, stdin);
-  }
+  ungetc(c, stdin);
 }
 
-void skip_string_constant()
+void skip_char_literal(void)
 {
-  skip_string_between('\'', '\'');
-  skip_string_between('"', '"');
+  skip_chars_between('\'', '\'');
+}
+
+void skip_string_literal(void)
+{
+  skip_chars_between('"', '"');
 }
 
 int get_word(char *word, int max_word_len)
 {
   skip_blanks();
   skip_comments();
-  skip_string_constant();
+  skip_char_literal();
+  skip_string_literal();
 
   int c = getc(stdin);
   size_t i = 0;
