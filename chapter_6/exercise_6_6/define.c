@@ -44,6 +44,7 @@ size_t get_alnum_str(char *str, size_t max_str_len);
 
 void consume_word(char *word, char *error_str);
 void consume_blanks(void);
+void consume_comments(void);
 void consume_preproc(void);
 
 static struct list_node *hash_table[HASH_SIZE];
@@ -69,7 +70,12 @@ int main(void)
     else
     {
       // TODO: Consume comments and string literals.
-      if (c == '#')
+      if (c == '/')
+      {
+        ungetc(c, stdin);
+        consume_comments();
+      }
+      else if (c == '#')
       {
         ungetc(c, stdin);
         consume_preproc();
@@ -236,6 +242,50 @@ void consume_blanks(void)
   while (isblank(c = getc(stdin)))
   {
     putc(c, stdout);
+  }
+  ungetc(c, stdin);
+}
+
+void consume_comments(void)
+{
+  int c = getc(stdin);
+  if (c == '/')
+  {
+    putc(c, stdout);
+
+    c = getc(stdin);
+    if (c == '/')
+    {
+      putc(c, stdout);
+      while ((c = getc(stdin)) != '\n' && c != EOF)
+      {
+        putc(c, stdout);
+      }
+    }
+    else if (c == '*')
+    {
+      putc(c, stdout);
+      while ((c = getc(stdin)) != EOF)
+      {
+        putc(c, stdout);
+        if (c == '*')
+        {
+          c = getc(stdin);
+          putc(c, stdout);
+          if (c == '/')
+          {
+            break;
+          }
+        }
+      }
+
+      c = getc(stdin);
+      if (c == '/')
+      {
+        putc(c, stdout);
+        return;
+      }
+    }
   }
   ungetc(c, stdin);
 }
