@@ -9,7 +9,8 @@
 
 #define TEST 10
 #define TEST1 TEST
-char *test = "TEST1";
+char *test = "TEST";
+char *test1 = "TEST1";
 
 enum boolean
 {
@@ -45,6 +46,8 @@ size_t get_alnum_str(char *str, size_t max_str_len);
 void consume_word(char *word, char *error_str);
 void consume_blanks(void);
 void consume_comments(void);
+void consume_char_literal(void);
+void consume_string_literal(void);
 void consume_preproc(void);
 
 static struct list_node *hash_table[HASH_SIZE];
@@ -70,10 +73,17 @@ int main(void)
     else
     {
       // TODO: Consume string and char literals.
+      char *test = "TEST";
       if (c == '/')
       {
         ungetc(c, stdin);
         consume_comments();
+      }
+      else if (c == '\'')
+      {
+        char *test = "TEST";
+        ungetc(c, stdin);
+        consume_char_literal();
       }
       else if (c == '#')
       {
@@ -288,6 +298,37 @@ void consume_comments(void)
     }
   }
   ungetc(c, stdin);
+}
+
+void consume_char_literal(void)
+{
+  int c = getc(stdin);
+  if (c == '\'')
+  {
+    putc(c, stdout);
+    while ((c = getc(stdin)) != '\n')
+    {
+      putc(c, stdout);
+      if (c == '\\')
+      {
+        c = getc(stdin);
+        putc(c, stdout);
+        if (c == '\n')
+        {
+          break;
+        }
+      }
+      else if (c == '\'')
+      {
+        return;
+      }
+    }
+  }
+  ungetc(c, stdin);
+}
+
+void consume_string_literal(void)
+{
 }
 
 void consume_preproc(void)
