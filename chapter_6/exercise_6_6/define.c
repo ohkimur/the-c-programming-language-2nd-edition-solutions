@@ -9,8 +9,22 @@
 
 #define TEST 10
 #define TEST1 TEST
-char *test = "TEST";
-char *test1 = "TEST1";
+#define TEST2 "THIS IS IT"
+#define TEST3 "f \nasd"
+#define TEST4 '/'
+#define TEST5 '\n'
+
+enum test
+{
+  A = TEST,
+  B = TEST1,
+  C = HASH_SIZE
+};
+
+char *a = TEST2;
+char *b = TEST3;
+char c = TEST4;
+char d = TEST5;
 
 enum boolean
 {
@@ -46,6 +60,7 @@ size_t get_alnum_str(char *str, size_t max_str_len);
 void consume_word(char *word, char *error_str);
 void consume_blanks(void);
 void consume_comments(void);
+void consume_chars_between(char start, char end);
 void consume_char_literal(void);
 void consume_string_literal(void);
 void consume_preproc(void);
@@ -72,8 +87,7 @@ int main(void)
     }
     else
     {
-      // TODO: Consume string and char literals.
-      char *test = "TEST";
+
       if (c == '/')
       {
         ungetc(c, stdin);
@@ -81,9 +95,13 @@ int main(void)
       }
       else if (c == '\'')
       {
-        char *test = "TEST";
         ungetc(c, stdin);
         consume_char_literal();
+      }
+      else if (c == '"')
+      {
+        ungetc(c, stdin);
+        consume_string_literal();
       }
       else if (c == '#')
       {
@@ -300,13 +318,13 @@ void consume_comments(void)
   ungetc(c, stdin);
 }
 
-void consume_char_literal(void)
+void consume_chars_between(char start, char end)
 {
   int c = getc(stdin);
-  if (c == '\'')
+  if (c == start)
   {
     putc(c, stdout);
-    while ((c = getc(stdin)) != '\n')
+    while ((c = getc(stdin)) != EOF)
     {
       putc(c, stdout);
       if (c == '\\')
@@ -318,7 +336,7 @@ void consume_char_literal(void)
           break;
         }
       }
-      else if (c == '\'')
+      else if (c == end)
       {
         return;
       }
@@ -327,8 +345,14 @@ void consume_char_literal(void)
   ungetc(c, stdin);
 }
 
+void consume_char_literal(void)
+{
+  consume_chars_between('\'', '\'');
+}
+
 void consume_string_literal(void)
 {
+  consume_chars_between('"', '"');
 }
 
 void consume_preproc(void)
