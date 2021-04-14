@@ -331,7 +331,7 @@ void consume_chars_between(char start, char end)
       {
         c = getc(stdin);
         putc(c, stdout);
-        if (c == '\n')
+        if (c == EOF)
         {
           break;
         }
