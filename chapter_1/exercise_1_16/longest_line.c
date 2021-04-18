@@ -62,5 +62,3 @@ void copy(char from[], char to[])
     ++i;
   }
 }
-
-// NOTE: The getline name is a reserved word, because it's available in stdio.h.
