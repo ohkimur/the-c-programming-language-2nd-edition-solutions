@@ -42,7 +42,4 @@ int main(void)
   return 0;
 }
 
-// NOTE: In a similar fashion with detab, in UNIX like systems you can run:
-// ./entab < file_in.txt > file_out.txt which will take the input from the
-// file_in.txt it will process it through entab and than it will put the content
-// to file_out.txt
+// NOTE: run: ./entab < file_in.txt > file_out.txt
