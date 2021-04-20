@@ -20,7 +20,18 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  printf("%s\n", lower ? "lower" : "upper");
+  int c;
+  while ((c = getc(stdin)) != EOF)
+  {
+    if (lower)
+    {
+      putc(tolower(c), stdout);
+    }
+    else
+    {
+      putc(toupper(c), stdout);
+    }
+  }
 
   return EXIT_SUCCESS;
 }
@@ -30,13 +41,13 @@ boolean parse_arg_list(int argc, char *argv[])
   if (strcmp(argv[0], "lower") == 0)
   {
     lower = TRUE;
-    return FALSE;
+    return TRUE;
   }
   else if (strcmp(argv[0], "upper") == 0)
   {
     lower = FALSE;
-    return FALSE;
+    return TRUE;
   }
 
-  return TRUE;
+  return FALSE;
 }
