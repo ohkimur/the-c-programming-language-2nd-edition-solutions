@@ -21,13 +21,16 @@ int main(int argc, char *argv[])
   }
 
   int c;
-  while ((c = getc(stdin)) != EOF)
+  if (lower)
   {
-    if (lower)
+    while ((c = getc(stdin)) != EOF)
     {
       putc(tolower(c), stdout);
     }
-    else
+  }
+  else
+  {
+    while ((c = getc(stdin)) != EOF)
     {
       putc(toupper(c), stdout);
     }
