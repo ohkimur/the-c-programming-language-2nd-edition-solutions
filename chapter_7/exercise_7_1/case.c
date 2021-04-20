@@ -54,3 +54,5 @@ boolean parse_arg_list(int argc, char *argv[])
 
   return FALSE;
 }
+
+// NOTE: run: ( exec -a upper ./case < case.c )
