@@ -56,3 +56,4 @@ boolean parse_arg_list(int argc, char *argv[])
 }
 
 // NOTE: run: ( exec -a upper ./case < case.c )
+// It is possible to change argv[0] by using the exec command.
