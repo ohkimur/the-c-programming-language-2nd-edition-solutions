@@ -9,8 +9,9 @@ typedef enum
   true
 } boolean;
 
-boolean lower = true;
 boolean parse_arg_list(int argc, char *argv[]);
+
+boolean lower = true;
 
 int main(int argc, char *argv[])
 {
