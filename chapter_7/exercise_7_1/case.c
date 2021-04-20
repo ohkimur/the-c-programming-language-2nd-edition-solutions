@@ -3,13 +3,13 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef enum __BOOL
+typedef enum
 {
-  FALSE,
-  TRUE
+  false,
+  true
 } boolean;
 
-boolean lower = TRUE;
+boolean lower = true;
 boolean parse_arg_list(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
@@ -43,16 +43,16 @@ boolean parse_arg_list(int argc, char *argv[])
 {
   if (strcmp(argv[0], "lower") == 0)
   {
-    lower = TRUE;
-    return TRUE;
+    lower = true;
+    return true;
   }
   else if (strcmp(argv[0], "upper") == 0)
   {
-    lower = FALSE;
-    return TRUE;
+    lower = false;
+    return true;
   }
 
-  return FALSE;
+  return false;
 }
 
 // NOTE: run: ( exec -a upper ./case < case.c )
