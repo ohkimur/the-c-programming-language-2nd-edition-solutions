@@ -3,11 +3,25 @@
 #include <string.h>
 #include <ctype.h>
 
+typedef enum
+{
+  false,
+  true
+} boolean;
+
+boolean parse_arg_list(int argc, char *argv[]);
 int is_ascii(int c);
+
+boolean octal = true;
 
 int main(int argc, char *argv[])
 {
-  // Before changing the world, do this.
+  if (!parse_arg_list(argc, argv))
+  {
+    puts("Error: invalid arguments.");
+    return EXIT_FAILURE;
+  }
+
   int c;
   while ((c = getc(stdin)) != EOF)
   {
@@ -17,11 +31,37 @@ int main(int argc, char *argv[])
     }
     else
     {
-      putc('#', stdout);
+      if (octal)
+      {
+        printf("\\%o", c);
+      }
+      else
+      {
+        printf("\\%x", c);
+      }
     }
   }
 
   return EXIT_SUCCESS;
+}
+
+boolean parse_arg_list(int argc, char *argv[])
+{
+  if (argc == 2)
+  {
+    if (strcmp(argv[1], "-o") == 0)
+    {
+      octal = true;
+      return true;
+    }
+    else if (strcmp(argv[1], "-x") == 0)
+    {
+      octal = false;
+      return true;
+    }
+  }
+
+  return false;
 }
 
 int is_ascii(int c)
