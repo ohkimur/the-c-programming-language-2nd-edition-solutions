@@ -9,10 +9,12 @@ typedef enum
   true
 } boolean;
 
-boolean parse_arg_list(int argc, char *argv[]);
-void consume_input(int (*char_transform)(int));
+typedef int (*convert_fn_t)(int);
 
-int (*char_transform)(int);
+boolean parse_arg_list(int argc, char *argv[]);
+void consume_input(convert_fn_t convert);
+
+convert_fn_t convert;
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +24,7 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  consume_input(char_transform);
+  consume_input(convert);
 
   return EXIT_SUCCESS;
 }
@@ -31,24 +33,24 @@ boolean parse_arg_list(int argc, char *argv[])
 {
   if (strcmp(argv[0], "lower") == 0)
   {
-    char_transform = tolower;
+    convert = tolower;
     return true;
   }
   else if (strcmp(argv[0], "upper") == 0)
   {
-    char_transform = toupper;
+    convert = toupper;
     return true;
   }
 
   return false;
 }
 
-void consume_input(int (*char_transform)(int))
+void consume_input(convert_fn_t convert)
 {
   int c;
   while ((c = getc(stdin)) != EOF)
   {
-    putc(char_transform(c), stdout);
+    putc(convert(c), stdout);
   }
 }
 
