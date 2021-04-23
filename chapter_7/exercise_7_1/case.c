@@ -12,7 +12,7 @@ typedef enum
 boolean parse_arg_list(int argc, char *argv[]);
 void consume_input(int (*char_transform)(int));
 
-boolean lower = true;
+int (*char_transform)(int);
 
 int main(int argc, char *argv[])
 {
@@ -22,14 +22,7 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  if (lower)
-  {
-    consume_input(tolower);
-  }
-  else
-  {
-    consume_input(toupper);
-  }
+  consume_input(char_transform);
 
   return EXIT_SUCCESS;
 }
@@ -38,12 +31,12 @@ boolean parse_arg_list(int argc, char *argv[])
 {
   if (strcmp(argv[0], "lower") == 0)
   {
-    lower = true;
+    char_transform = tolower;
     return true;
   }
   else if (strcmp(argv[0], "upper") == 0)
   {
-    lower = false;
+    char_transform = toupper;
     return true;
   }
 
