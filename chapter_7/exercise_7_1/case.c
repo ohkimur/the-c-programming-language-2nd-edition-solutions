@@ -10,6 +10,7 @@ typedef enum
 } boolean;
 
 boolean parse_arg_list(int argc, char *argv[]);
+void consume_input(int (*char_transform)(int));
 
 boolean lower = true;
 
@@ -21,20 +22,13 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  int c;
   if (lower)
   {
-    while ((c = getc(stdin)) != EOF)
-    {
-      putc(tolower(c), stdout);
-    }
+    consume_input(tolower);
   }
   else
   {
-    while ((c = getc(stdin)) != EOF)
-    {
-      putc(toupper(c), stdout);
-    }
+    consume_input(toupper);
   }
 
   return EXIT_SUCCESS;
@@ -54,6 +48,15 @@ boolean parse_arg_list(int argc, char *argv[])
   }
 
   return false;
+}
+
+void consume_input(int (*char_transform)(int))
+{
+  int c;
+  while ((c = getc(stdin)) != EOF)
+  {
+    putc(char_transform(c), stdout);
+  }
 }
 
 // NOTE: run: ( exec -a upper ./case < case.c )
