@@ -40,6 +40,8 @@ int main(int argc, char *argv[])
         printf("\\%x", c);
       }
     }
+
+    // TODO: Break the lines that are too long.
   }
 
   return EXIT_SUCCESS;
