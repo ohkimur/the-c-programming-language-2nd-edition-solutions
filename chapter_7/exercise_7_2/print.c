@@ -41,7 +41,9 @@ int main(int argc, char *argv[])
       }
     }
 
-    // TODO: Break the lines that are too long.
+    // TODO: Break the lines that are too long. You can remember the last blank
+    // and after hitting the break point you unget characters back to the last
+    // blank. Replace the last blank with \n.
   }
 
   return EXIT_SUCCESS;
