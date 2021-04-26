@@ -93,3 +93,5 @@ int is_ascii(int c)
 
   return 1;
 }
+
+// NOTE: run: ./print -x < test.txt
