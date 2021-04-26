@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#define MAX_LINE_LEN 80
+
 typedef enum
 {
   false,
@@ -23,8 +25,11 @@ int main(int argc, char *argv[])
   }
 
   int c;
+  size_t col_pos = 1;
   while ((c = getc(stdin)) != EOF)
   {
+    ++col_pos;
+
     if (is_ascii(c))
     {
       putc(c, stdout);
@@ -41,7 +46,16 @@ int main(int argc, char *argv[])
       }
     }
 
-    // TODO: Break the lines that are too long.
+    if (c == '\n')
+    {
+      col_pos = 1;
+    }
+
+    if (col_pos >= MAX_LINE_LEN)
+    {
+      putc('\n', stdout);
+      col_pos = 1;
+    }
   }
 
   return EXIT_SUCCESS;
