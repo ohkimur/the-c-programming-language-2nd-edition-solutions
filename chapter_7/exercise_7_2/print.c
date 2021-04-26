@@ -37,16 +37,14 @@ int main(int argc, char *argv[])
     }
     else
     {
-      int nr_of_chars = 0;
       if (octal)
       {
-        nr_of_chars = printf("\\%o", c);
+        col_pos += printf("\\%o", c);
       }
       else
       {
-        nr_of_chars = printf("\\%x", c);
+        col_pos += printf("\\%x", c);
       }
-      col_pos += nr_of_chars;
     }
 
     if (c == '\n')
