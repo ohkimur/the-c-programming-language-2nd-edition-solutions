@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #define MAX_LINE_LEN 80
+#define OFFSET 10
 
 typedef enum
 {
@@ -36,14 +37,16 @@ int main(int argc, char *argv[])
     }
     else
     {
+      int nr_of_chars = 0;
       if (octal)
       {
-        printf("\\%o", c);
+        nr_of_chars = printf("\\%o", c);
       }
       else
       {
-        printf("\\%x", c);
+        nr_of_chars = printf("\\%x", c);
       }
+      col_pos += nr_of_chars;
     }
 
     if (c == '\n')
@@ -51,7 +54,7 @@ int main(int argc, char *argv[])
       col_pos = 1;
     }
 
-    if (col_pos >= MAX_LINE_LEN)
+    if (col_pos >= MAX_LINE_LEN - OFFSET)
     {
       if (isblank(c))
       {
