@@ -29,27 +29,26 @@ int main(int argc, char *argv[])
   size_t col_pos = 1;
   while ((c = getc(stdin)) != EOF)
   {
-    ++col_pos;
-
     if (is_ascii(c))
     {
+      if (c == '\n')
+      {
+        c = ' ';
+      }
+
       putc(c, stdout);
+      ++col_pos;
     }
     else
     {
       if (octal)
       {
-        col_pos += printf("\\%o", c);
+        col_pos += printf("\\%o", c) - 1;
       }
       else
       {
-        col_pos += printf("\\%x", c);
+        col_pos += printf("\\%x", c) - 1;
       }
-    }
-
-    if (c == '\n')
-    {
-      col_pos = 1;
     }
 
     if (col_pos >= MAX_LINE_LEN - OFFSET)
@@ -61,6 +60,7 @@ int main(int argc, char *argv[])
       }
     }
   }
+  putc('\n', stdout);
 
   return EXIT_SUCCESS;
 }
