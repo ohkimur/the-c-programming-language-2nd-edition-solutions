@@ -53,8 +53,11 @@ int main(int argc, char *argv[])
 
     if (col_pos >= MAX_LINE_LEN)
     {
-      putc('\n', stdout);
-      col_pos = 1;
+      if (isblank(c))
+      {
+        col_pos = 1;
+        putc('\n', stdout);
+      }
     }
   }
 
