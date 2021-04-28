@@ -7,7 +7,8 @@ void minprintf(const char *format, ...);
 int main(int argc, char *argv[])
 {
   int a;
-  minprintf("This is a test. Let's print %d, %i, %o, %x, %X, %u, %c, %e, %E, %g, %G, %f, %p, and %s.\n", 2, 3, 8, 16, 16, -1, 97, 0.0025f, 0.0023f, 0.0025f, 0.0023f, 3.14159f, &a, "hello, world");
+  minprintf("Let's print %d, %i, %o, %x, %X, %u, %c, %e, %E, %g, %G, %f, %p, and %s.\n",
+            2, 3, 8, 16, 16, -1, 97, 0.0025f, 0.0023f, 0.0025f, 0.0023f, 3.14159f, &a, "hello, world");
   return EXIT_SUCCESS;
 }
 
