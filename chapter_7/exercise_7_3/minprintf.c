@@ -6,7 +6,7 @@ void minprintf(const char *fmt, ...);
 
 int main(int argc, char *argv[])
 {
-  minprintf("This is a test. Let's print %d, %i, %o, %x, %X, %f, and %s.\n", 2, 3, 8, 16, 16, 3.14159, "hello, world");
+  minprintf("This is a test. Let's print %d, %i, %o, %x, %X, %u, %f, and %s.\n", 2, 3, 8, 16, 16, -1, 3.14159, "hello, world");
   return EXIT_SUCCESS;
 }
 
@@ -37,6 +37,10 @@ void minprintf(const char *fmt, ...)
     case 'x':
     case 'X':
       printf("%x", va_arg(ap, int));
+      break;
+
+    case 'u':
+      printf("%u", va_arg(ap, int));
       break;
 
     case 'f':
