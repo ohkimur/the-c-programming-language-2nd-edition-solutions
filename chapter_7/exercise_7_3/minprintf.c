@@ -13,9 +13,6 @@ int main(int argc, char *argv[])
 void minprintf(const char *fmt, ...)
 {
   va_list ap;
-  char *sval;
-  int ival;
-  double dval;
 
   va_start(ap, fmt);
   for (; *fmt; ++fmt)
@@ -29,20 +26,15 @@ void minprintf(const char *fmt, ...)
     switch (*++fmt)
     {
     case 'd':
-      ival = va_arg(ap, int);
-      printf("%d", ival);
+      printf("%d", va_arg(ap, int));
       break;
 
     case 'f':
-      dval = va_arg(ap, double);
-      printf("%f", dval);
+      printf("%f", va_arg(ap, double));
       break;
 
     case 's':
-      for (sval = va_arg(ap, char *); *sval; ++sval)
-      {
-        putc(*sval, stdout);
-      }
+      printf("%s", va_arg(ap, char *));
       break;
 
     default:
