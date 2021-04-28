@@ -15,35 +15,32 @@ void minprintf(const char *fmt, ...)
   va_list ap;
 
   va_start(ap, fmt);
-  while (*fmt)
+  for (; *fmt != '\0'; ++fmt)
   {
-    if (*fmt == '%')
-    {
-      switch (*++fmt)
-      {
-      case 'd':
-        printf("%d", va_arg(ap, int));
-        break;
-
-      case 'f':
-        printf("%f", va_arg(ap, double));
-        break;
-
-      case 's':
-        printf("%s", va_arg(ap, char *));
-        break;
-
-      default:
-        putc(*fmt, stdout);
-        break;
-      }
-    }
-    else
+    if (*fmt != '%')
     {
       putc(*fmt, stdout);
+      continue;
     }
 
-    ++fmt;
+    switch (*++fmt)
+    {
+    case 'd':
+      printf("%d", va_arg(ap, int));
+      break;
+
+    case 'f':
+      printf("%f", va_arg(ap, double));
+      break;
+
+    case 's':
+      printf("%s", va_arg(ap, char *));
+      break;
+
+    default:
+      putc(*fmt, stdout);
+      break;
+    }
   }
   va_end(ap);
 }
