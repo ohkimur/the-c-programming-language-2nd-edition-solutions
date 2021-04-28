@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-void minprintf(const char *fmt, ...);
+void minprintf(const char *format, ...);
 
 int main(int argc, char *argv[])
 {
@@ -10,20 +10,20 @@ int main(int argc, char *argv[])
   return EXIT_SUCCESS;
 }
 
-void minprintf(const char *fmt, ...)
+void minprintf(const char *format, ...)
 {
   va_list ap;
 
-  va_start(ap, fmt);
-  for (; *fmt != '\0'; ++fmt)
+  va_start(ap, format);
+  for (; *format != '\0'; ++format)
   {
-    if (*fmt != '%')
+    if (*format != '%')
     {
-      putc(*fmt, stdout);
+      putc(*format, stdout);
       continue;
     }
 
-    switch (*++fmt)
+    switch (*++format)
     {
     case 'd':
     case 'i':
@@ -66,7 +66,7 @@ void minprintf(const char *fmt, ...)
       break;
 
     default:
-      putc(*fmt, stdout);
+      putc(*format, stdout);
       break;
     }
   }
