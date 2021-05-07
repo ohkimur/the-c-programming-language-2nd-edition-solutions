@@ -6,11 +6,17 @@ void minscanf(const char *format, ...);
 
 int main(int argc, char *argv[])
 {
-  int a = 0;
-  int b = 0;
+  int decimal;
+  int integer;
+  int octal;
+  int unsigned_decimal;
+  int hexadecimal_integer;
+  char character;
+  char str[100];
+  float float_point_number;
 
-  minscanf("%d %d", &a, &b);
-  printf("a: %d, b: %d\n", a, b);
+  minscanf("%d %i %o %u %x %c %s %f", &decimal, &integer, &octal, &unsigned_decimal, &hexadecimal_integer, &character, str, &float_point_number);
+  printf("decimal: %d\ninteger: %i\noctal: %o\nunsigned_decimal: %u\nhexadecimal_integer: %x\ncharacter: %c\nstr: %s\nfloat_point_number: %f\n", decimal, integer, octal, unsigned_decimal, hexadecimal_integer, character, str, float_point_number);
 
   return EXIT_SUCCESS;
 }
