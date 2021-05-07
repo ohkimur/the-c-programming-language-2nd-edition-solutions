@@ -90,3 +90,5 @@ void minscanf(const char *format, ...)
   }
   va_end(arg_p);
 }
+
+// NOTE: run: ./minscanf <<< "1 2 3 4 5r hello 2.3"
