@@ -15,8 +15,23 @@ int main(int argc, char *argv[])
   char str[100];
   float float_point_number;
 
-  minscanf("%d %i %o %u %x %c %s %f", &decimal, &integer, &octal, &unsigned_decimal, &hexadecimal_integer, &character, str, &float_point_number);
-  printf("decimal: %d\ninteger: %i\noctal: %o\nunsigned_decimal: %u\nhexadecimal_integer: %x\ncharacter: %c\nstr: %s\nfloat_point_number: %f\n", decimal, integer, octal, unsigned_decimal, hexadecimal_integer, character, str, float_point_number);
+  minscanf("%d", &decimal);
+  minscanf("%i", &integer);
+  minscanf("%o", &octal);
+  minscanf("%u", &unsigned_decimal);
+  minscanf("%x", &hexadecimal_integer);
+  minscanf("%c", &character);
+  minscanf("%s", str);
+  minscanf("%f", &float_point_number);
+
+  printf("decimal: %d\n", decimal);
+  printf("integer: %i\n", integer);
+  printf("octal: %o\n", octal);
+  printf("unsigned_decimal: %u\n", unsigned_decimal);
+  printf("hexadecimal_integer: %x\n", hexadecimal_integer);
+  printf("character: %c\n", character);
+  printf("str: %s\n", str);
+  printf("float_point_number: %f\n", float_point_number);
 
   return EXIT_SUCCESS;
 }
