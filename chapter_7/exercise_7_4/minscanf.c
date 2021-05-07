@@ -92,3 +92,4 @@ void minscanf(const char *format, ...)
 }
 
 // NOTE: run: ./minscanf <<< "1 2 3 4 5r hello 2.3"
+// In Unix like systems:< file or directory, << here doc, <<< here string
