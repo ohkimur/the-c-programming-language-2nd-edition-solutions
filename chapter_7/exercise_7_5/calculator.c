@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
   double op2;
   char s[MAXOP];
 
+  // TODO: Modify getop to read numbers from input and pass them directly to the caller. Keep the
+  // type return, that will be useful if it's necessary to scale the program.
   while ((type = getop(s)) != EOF)
   {
     switch (type)
