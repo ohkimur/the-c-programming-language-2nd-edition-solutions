@@ -3,76 +3,83 @@
 #include <ctype.h>
 
 #define STACK_MAX_SIZE 100
+#define MAX_LINE_LEN 1000
 
 void push(double);
 double pop(void);
+
+size_t get_line(char line[], size_t max_line_len);
 
 int sp = 0;
 double stack[STACK_MAX_SIZE];
 
 int main(int argc, char *argv[])
 {
-  double op2;
+  char type;
+  double number;
+  char line[MAX_LINE_LEN];
 
-  // TODO: Modify getop to read numbers from input and pass them directly to the caller. Keep the
-  // type return, that will be useful if it's necessary to scale the program.
-  // while ((type = getop(&op2)) != EOF)
-  // {
-  //   switch (type)
-  //   {
-  //   case NUMBER:
-  //     push(op2);
-  //     break;
+  while (get_line(line, MAX_LINE_LEN) > 0)
+  {
+    if (sscanf(line, "%lf", &number) == 1)
+    {
+      push(number);
+    }
+    else if (sscanf(line, "%c", &type) == 1)
+    {
+      switch (type)
+      {
+      case '+':
+        push(pop() + pop());
+        break;
 
-  //   case '+':
-  //     push(pop() + pop());
-  //     break;
+      case '-':
+        number = pop();
+        push(pop() - number);
+        break;
 
-  //   case '-':
-  //     op2 = pop();
-  //     push(pop() - op2);
-  //     break;
+      case '*':
+        push(pop() * pop());
+        break;
 
-  //   case '*':
-  //     push(pop() * pop());
-  //     break;
+      case '/':
+        number = pop();
 
-  //   case '/':
-  //     op2 = pop();
+        if (number != 0.0)
+        {
+          push(pop() / number);
+        }
+        else
+        {
+          printf("Error: zero divisor\n");
+        }
 
-  //     if (op2 != 0.0)
-  //     {
-  //       push(pop() / op2);
-  //     }
-  //     else
-  //     {
-  //       printf("error: zero divisor\n");
-  //     }
+        break;
 
-  //     break;
+      case '%':
+        number = pop();
 
-  //   case '%':
-  //     op2 = pop();
+        if (number != 0.0)
+        {
+          push((int)pop() % (int)number);
+        }
+        else
+        {
+          printf("Error: zero divisor\n");
+        }
+        break;
 
-  //     if (op2 != 0.0)
-  //     {
-  //       push((int)pop() % (int)op2);
-  //     }
-  //     else
-  //     {
-  //       printf("error: zero divisor\n");
-  //     }
-  //     break;
+      case '\n':
+        printf("result: %.8g\n", pop());
+        break;
 
-  //   case '\n':
-  //     printf("result: %.8g\n", pop());
-  //     break;
+      default:
+        printf("Error: unknown command.\n");
+        break;
+      }
+    }
+  }
 
-  //   default:
-  //     printf("error: unknown command %s\n", s);
-  //     break;
-  //   }
-  // }
   return EXIT_SUCCESS;
 }
 
@@ -84,7 +91,7 @@ void push(double f)
   }
   else
   {
-    printf("error: stack full, can't push %g\n", f);
+    printf("Error: stack full, can't push %g\n", f);
   }
 }
 
@@ -96,7 +103,28 @@ double pop(void)
   }
   else
   {
-    printf("error: stack empty\n");
+    printf("Error: stack empty\n");
     return 0.0;
   }
+}
+
+size_t get_line(char line[], size_t max_line_len)
+{
+  int c;
+  size_t i;
+
+  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
+  {
+    line[i] = c;
+  }
+
+  if (c == '\n')
+  {
+    line[i] = c;
+    ++i;
+  }
+
+  line[i] = '\0';
+
+  return i;
 }
