@@ -8,8 +8,6 @@
 void push(double);
 double pop(void);
 
-size_t get_line(char line[], size_t max_line_len);
-
 int sp = 0;
 double stack[STACK_MAX_SIZE];
 
@@ -19,7 +17,7 @@ int main(int argc, char *argv[])
   double number;
   char line[MAX_LINE_LEN];
 
-  while (get_line(line, MAX_LINE_LEN) > 0)
+  while (scanf("%s", line) != EOF)
   {
     if (sscanf(line, "%lf", &number) == 1)
     {
@@ -106,25 +104,4 @@ double pop(void)
     printf("Error: stack empty\n");
     return 0.0;
   }
-}
-
-size_t get_line(char line[], size_t max_line_len)
-{
-  int c;
-  size_t i;
-
-  for (i = 0; i < max_line_len - 1 && (c = getc(stdin)) != EOF && c != '\n'; ++i)
-  {
-    line[i] = c;
-  }
-
-  if (c == '\n')
-  {
-    line[i] = c;
-    ++i;
-  }
-
-  line[i] = '\0';
-
-  return i;
 }
