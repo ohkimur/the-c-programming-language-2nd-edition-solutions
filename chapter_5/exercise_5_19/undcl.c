@@ -71,7 +71,7 @@ int main(void)
       }
       else
       {
-        printf("Syntax error: Invalid input at %s.\n", token);
+        printf("Syntax Error: Invalid input at %s.\n", token);
       }
     }
     puts(out);

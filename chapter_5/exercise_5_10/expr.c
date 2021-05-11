@@ -13,7 +13,7 @@ void push(float element);
 
 int main(int argc, char *argv[])
 {
-  char error = 0;
+  char Error = 0;
 
   for (size_t i = 1; i < argc; ++i)
   {
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
         case '/':
           if (number2 == 0)
           {
-            error = 4;
+            Error = 4;
           }
           else
           {
@@ -57,24 +57,24 @@ int main(int argc, char *argv[])
           break;
 
         default:
-          error = 3;
+          Error = 3;
           break;
         }
       }
       else
       {
-        error = 2;
+        Error = 2;
       }
     }
     else
     {
-      error = 1;
+      Error = 1;
     }
   }
 
-  if (error)
+  if (Error)
   {
-    switch (error)
+    switch (Error)
     {
     case 1:
       printf("Error: arguments should be numbers or one of the following mathematical operations: '+', '-', '*', '/'\n");

@@ -38,7 +38,7 @@ enum boolean undef(char *name);
 int get_word(char *word, size_t max_word_len);
 size_t get_alnum_str(char *str, size_t max_str_len);
 
-void consume_word(char *word, char *error_str);
+void consume_word(char *word, char *Error_str);
 void consume_blanks(void);
 void consume_comments(void);
 void consume_chars_between(char start, char end);
@@ -230,7 +230,7 @@ size_t get_alnum_str(char *str, size_t max_str_len)
   return i;
 }
 
-void consume_word(char *word, char *error_str)
+void consume_word(char *word, char *Error_str)
 {
   int c;
   if ((c = get_word(word, MAX_WORD_LEN)) == EOF)
@@ -240,7 +240,7 @@ void consume_word(char *word, char *error_str)
   }
   else if (!isalpha(c))
   {
-    puts(error_str);
+    puts(Error_str);
   }
   printf("%s", word);
 }

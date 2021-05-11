@@ -38,7 +38,7 @@ enum token_type
 };
 
 size_t line_nr = 0;
-enum boolean error = FALSE;
+enum boolean Error = FALSE;
 
 int next_token;
 
@@ -76,7 +76,7 @@ int main(void)
     }
     else
     {
-      error = TRUE;
+      Error = TRUE;
       printf("Error: invalid data type '%s' on line %zu.\n", token, line_nr);
 
       do
@@ -94,11 +94,11 @@ int main(void)
     {
       if (next_token == NAME)
       {
-        printf("Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
+        printf("Syntax Error: '%s' unexpected on line %zu.\n", token, line_nr);
       }
       else
       {
-        printf("Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
+        printf("Syntax Error: '%c' unexpected on line %zu.\n", next_token, line_nr);
       }
 
       do
@@ -106,12 +106,12 @@ int main(void)
         get_next_token();
       } while (next_token != '\n' && next_token != EOF);
     }
-    else if (!error)
+    else if (!Error)
     {
       printf("%s:%s %s\n", name, out, data_type);
     }
 
-    error = FALSE;
+    Error = FALSE;
     ++line_nr;
   }
 
@@ -256,8 +256,8 @@ void dir_dcl(void)
 
     if (next_token != PAREN_CLOSE)
     {
-      error = TRUE;
-      printf("Syntax error: missing ')' on line %zu.\n", line_nr);
+      Error = TRUE;
+      printf("Syntax Error: missing ')' on line %zu.\n", line_nr);
     }
   }
   else if (next_token == NAME)
@@ -266,8 +266,8 @@ void dir_dcl(void)
   }
   else
   {
-    error = TRUE;
-    printf("Syntax error: expected name or (dcl) on line %zu.\n", line_nr);
+    Error = TRUE;
+    printf("Syntax Error: expected name or (dcl) on line %zu.\n", line_nr);
   }
 
   while ((next_token = get_next_token()) == PARENS || next_token == BRACKETS || next_token == PAREN_OPEN)
@@ -280,8 +280,8 @@ void dir_dcl(void)
 
       if (next_token != PAREN_CLOSE)
       {
-        error = TRUE;
-        printf("Syntax error: missing ')' on line %zu.\n", line_nr);
+        Error = TRUE;
+        printf("Syntax Error: missing ')' on line %zu.\n", line_nr);
 
         if (next_token == '\n')
         {
@@ -348,26 +348,26 @@ void attr_dcl(void)
             return;
           }
 
-          error = TRUE;
-          printf("Syntax error: missing variable name on line %zu.\n", line_nr);
+          Error = TRUE;
+          printf("Syntax Error: missing variable name on line %zu.\n", line_nr);
           return;
         }
         else
         {
-          error = TRUE;
-          printf("Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
+          Error = TRUE;
+          printf("Syntax Error: '%c' unexpected on line %zu.\n", next_token, line_nr);
         }
       }
       else
       {
-        error = TRUE;
-        printf("Syntax error: '%s' unexpected on line %zu.\n", token, line_nr);
+        Error = TRUE;
+        printf("Syntax Error: '%s' unexpected on line %zu.\n", token, line_nr);
       }
     }
     else
     {
-      error = TRUE;
-      printf("Syntax error: '%c' unexpected on line %zu.\n", next_token, line_nr);
+      Error = TRUE;
+      printf("Syntax Error: '%c' unexpected on line %zu.\n", next_token, line_nr);
     }
   }
 }
