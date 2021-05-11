@@ -9,7 +9,7 @@
 
 void push(double);
 double pop(void);
-int getop(char s[]);
+int getop(double *number);
 
 int sp = 0;
 double stack[STACK_MAX_SIZE];
@@ -22,12 +22,12 @@ int main(int argc, char *argv[])
 
   // TODO: Modify getop to read numbers from input and pass them directly to the caller. Keep the
   // type return, that will be useful if it's necessary to scale the program.
-  while ((type = getop(s)) != EOF)
+  while ((type = getop(&op2)) != EOF)
   {
     switch (type)
     {
     case NUMBER:
-      push(atof(s));
+      push(op2);
       break;
 
     case '+':
@@ -107,7 +107,7 @@ double pop(void)
   }
 }
 
-int getop(char s[])
+int getop(double *number)
 {
   int i = 0, c;
 
