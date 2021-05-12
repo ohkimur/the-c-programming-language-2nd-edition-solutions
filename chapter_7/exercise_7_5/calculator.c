@@ -3,7 +3,7 @@
 #include <ctype.h>
 
 #define STACK_MAX_SIZE 100
-#define MAX_LINE_LEN 1000
+#define MAX_STR_LEN 1000
 
 void push(double);
 double pop(void);
@@ -13,27 +13,27 @@ double stack[STACK_MAX_SIZE];
 
 int main(int argc, char *argv[])
 {
-  char type;
-  double number;
-  char line[MAX_LINE_LEN];
+  char c;
+  double op2;
+  char str[MAX_STR_LEN];
 
-  while (scanf("%s", line) != EOF)
+  while (scanf("%s", str) != EOF)
   {
-    if (sscanf(line, "%lf", &number) == 1)
+    if (sscanf(str, "%lf", &op2) == 1)
     {
-      push(number);
+      push(op2);
     }
-    else if (sscanf(line, "%c", &type) == 1)
+    else if (sscanf(str, "%c", &c) == 1)
     {
-      switch (type)
+      switch (c)
       {
       case '+':
         push(pop() + pop());
         break;
 
       case '-':
-        number = pop();
-        push(pop() - number);
+        op2 = pop();
+        push(pop() - op2);
         break;
 
       case '*':
@@ -41,34 +41,31 @@ int main(int argc, char *argv[])
         break;
 
       case '/':
-        number = pop();
+        op2 = pop();
 
-        if (number != 0.0)
+        if (op2 != 0.0)
         {
-          push(pop() / number);
+          push(pop() / op2);
         }
         else
         {
-          printf("Error: zero divisor\n");
+          printf("Error: zero divisor.\n");
         }
 
         break;
 
       case '%':
-        number = pop();
+        op2 = pop();
 
-        if (number != 0.0)
+        if (op2 != 0.0)
         {
-          push((int)pop() % (int)number);
+          push((int)pop() % (int)op2);
         }
         else
         {
-          printf("Error: zero divisor\n");
+          printf("Error: zero divisor.\n");
         }
-        break;
 
-      case '\n':
-        printf("result: %.8g\n", pop());
         break;
 
       default:
@@ -77,6 +74,8 @@ int main(int argc, char *argv[])
       }
     }
   }
+
+  printf("result: %.8g\n", pop());
 
   return EXIT_SUCCESS;
 }
