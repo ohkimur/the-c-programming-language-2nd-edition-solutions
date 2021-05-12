@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
     switch (Error)
     {
     case 1:
-      printf("Error: arguments should be numbers or one of the following mathematical operations: '+', '-', '*', '/'\n");
+      printf("Error: arguments should be numbers or one of the following mathematical operations: '+', '-', '*', '/'.\n");
       break;
 
     case 2:
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
       break;
 
     case 3:
-      printf("Error: invalid operation. use one of the following mathematical operations: '+', '-', '*', '/'\n");
+      printf("Error: invalid operation. use one of the following mathematical operations: '+', '-', '*', '/'.\n");
       break;
 
     case 4:

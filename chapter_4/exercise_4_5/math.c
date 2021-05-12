@@ -54,7 +54,7 @@ int main(void)
       }
       else
       {
-        printf("Error: zero divisor\n");
+        printf("Error: zero divisor.\n");
       }
 
       break;
@@ -68,7 +68,7 @@ int main(void)
       }
       else
       {
-        printf("Error: zero divisor\n");
+        printf("Error: zero divisor.\n");
       }
       break;
 
@@ -106,7 +106,7 @@ int main(void)
       break;
 
     default:
-      printf("Error: unknown command %s\n", s);
+      printf("Error: unknown command %s.\n", s);
       break;
     }
   }
@@ -125,7 +125,7 @@ void push(double f)
   }
   else
   {
-    printf("Error: stack full\n");
+    printf("Error: stack full.\n");
   }
 }
 
@@ -137,7 +137,7 @@ double pop(void)
   }
   else
   {
-    printf("Error: stack empty\n");
+    printf("Error: stack empty.\n");
   }
 
   return 0.0;
@@ -151,7 +151,7 @@ void view_head(void)
   }
   else
   {
-    printf("Error: stack empty\n");
+    printf("Error: stack empty.\n");
   }
 }
 

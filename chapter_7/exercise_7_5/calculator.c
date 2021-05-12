@@ -88,7 +88,7 @@ void push(double f)
   }
   else
   {
-    printf("Error: stack full, can't push %g\n", f);
+    printf("Error: stack full, can't push %g.\n", f);
   }
 }
 
@@ -100,7 +100,7 @@ double pop(void)
   }
   else
   {
-    printf("Error: stack empty\n");
+    printf("Error: stack empty.\n");
     return 0.0;
   }
 }
