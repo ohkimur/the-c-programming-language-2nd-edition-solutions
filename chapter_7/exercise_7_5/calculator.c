@@ -51,7 +51,6 @@ int main(int argc, char *argv[])
         {
           printf("Error: zero divisor.\n");
         }
-
         break;
 
       case '%':
@@ -65,7 +64,6 @@ int main(int argc, char *argv[])
         {
           printf("Error: zero divisor.\n");
         }
-
         break;
 
       default:
@@ -104,3 +102,5 @@ double pop(void)
     return 0.0;
   }
 }
+
+// NOTE: run: ./calculator <<< "2 3 4 2 - + +"
