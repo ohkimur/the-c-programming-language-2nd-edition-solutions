@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
 int parse_arg_list(int argc, char *argv[])
 {
-  if (argc < 3 || argc > 3)
+  if (argc != 3)
   {
     return 0;
   }
