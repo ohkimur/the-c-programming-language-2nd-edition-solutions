@@ -59,3 +59,5 @@ int parse_arg_list(int argc, char *argv[])
 
   return 1;
 }
+
+// NOTE: run: ./compare file_1.txt file_2.txt
