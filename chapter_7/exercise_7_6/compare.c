@@ -37,8 +37,8 @@ int main(int argc, char *argv[])
   {
     if (strcmp(line_1, line_2) != 0)
     {
-      puts(line_1);
-      puts(line_2);
+      printf("%s", line_1);
+      printf("%s", line_2);
     }
   }
 
