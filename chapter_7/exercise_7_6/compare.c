@@ -34,17 +34,20 @@ int main(int argc, char *argv[])
   char line_1[MAX_LINE_LEN];
   char line_2[MAX_LINE_LEN];
 
+  size_t line_number = 1;
   while (fgets(line_1, MAX_LINE_LEN, file_1) != NULL && fgets(line_2, MAX_LINE_LEN, file_2) != NULL)
   {
     if (strcmp(line_1, line_2) != 0)
     {
-      printf("%s", line_1);
+      printf("%s [%zu]: %s", argv[1], line_number, line_1);
       fclose(file_1);
 
-      printf("%s", line_2);
+      printf("%s [%zu]: %s", argv[2], line_number, line_2);
       fclose(file_2);
       break;
     }
+
+    ++line_number;
   }
 
   exit(EXIT_SUCCESS);
