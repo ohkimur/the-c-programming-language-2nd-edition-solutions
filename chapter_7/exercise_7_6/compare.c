@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MAX_LINE_LEN 1000
 
 int parse_arg_list(int argc, char *argv[]);
 
@@ -26,6 +29,17 @@ int main(int argc, char *argv[])
   {
     fprintf(stderr, "%s: can't open %s.\n", program_name, argv[2]);
     exit(EXIT_FAILURE);
+  }
+
+  char line_1[MAX_LINE_LEN];
+  char line_2[MAX_LINE_LEN];
+  while (fgets(line_1, MAX_LINE_LEN, file_1) != NULL && fgets(line_2, MAX_LINE_LEN, file_2) != NULL)
+  {
+    if (strcmp(line_1, line_2) != 0)
+    {
+      puts(line_1);
+      puts(line_2);
+    }
   }
 
   exit(EXIT_SUCCESS);
