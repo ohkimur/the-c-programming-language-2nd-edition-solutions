@@ -104,3 +104,5 @@ void find_pattern(char *pattern, FILE *file_p)
     ++line_number;
   }
 }
+
+// NOTE: run: ./find -n "Some people" file_1.txt file_2.txt
