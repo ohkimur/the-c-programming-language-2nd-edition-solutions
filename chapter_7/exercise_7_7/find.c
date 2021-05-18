@@ -4,10 +4,16 @@
 
 #define MAX_LINE_LEN 1000
 
-int parse_arg_list(int argc, char *argv[]);
+typedef enum
+{
+  false,
+  true
+} boolean;
 
-int except = 0;
-int number = 0;
+boolean parse_arg_list(int argc, char *argv[]);
+
+boolean except = false;
+boolean number = false;
 
 int main(int argc, char *argv[])
 {
@@ -34,7 +40,7 @@ int main(int argc, char *argv[])
   exit(EXIT_SUCCESS);
 }
 
-int parse_arg_list(int argc, char *argv[])
+boolean parse_arg_list(int argc, char *argv[])
 {
   const char *program_name = argv[0];
 
@@ -46,11 +52,11 @@ int parse_arg_list(int argc, char *argv[])
       switch (c)
       {
       case 'x':
-        except = 1;
+        except = true;
         break;
 
       case 'n':
-        number = 1;
+        number = true;
         break;
 
       default:
@@ -64,8 +70,8 @@ int parse_arg_list(int argc, char *argv[])
   if (argc != 1)
   {
     printf("Usage: find -x -n pattern.\n");
-    return 0;
+    return false;
   }
 
-  return 1;
+  return true;
 }
