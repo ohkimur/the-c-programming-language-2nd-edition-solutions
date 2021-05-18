@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
   while (fgets(line, MAX_LINE_LEN, stdin) != NULL)
   {
     ++line_number;
-    if ((strstr(line, *argv) != NULL) != except)
+    if ((strstr(line, argv[argc - 1]) != NULL) != except)
     {
       if (number)
       {
