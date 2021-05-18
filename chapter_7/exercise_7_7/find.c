@@ -23,10 +23,9 @@ int main(int argc, char *argv[])
   }
 
   char line[MAX_LINE_LEN];
-  size_t line_number = 0;
+  size_t line_number = 1;
   while (fgets(line, MAX_LINE_LEN, stdin) != NULL)
   {
-    ++line_number;
     if ((strstr(line, argv[argc - 1]) != NULL) != except)
     {
       if (number)
@@ -35,6 +34,7 @@ int main(int argc, char *argv[])
       }
       printf("%s", line);
     }
+    ++line_number;
   }
 
   exit(EXIT_SUCCESS);
