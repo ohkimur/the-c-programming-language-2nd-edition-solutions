@@ -61,16 +61,10 @@ boolean parse_arg_list(int argc, char *argv[])
 
       default:
         fprintf(stderr, "%s: illegal option %c.\n", program_name, c);
-        argc = 0;
+        return false;
         break;
       }
     }
-  }
-
-  if (argc != 1)
-  {
-    printf("Usage: find -x -n pattern.\n");
-    return false;
   }
 
   return true;
