@@ -8,7 +8,6 @@ int parse_arg_list(int argc, char *argv[]);
 
 int except = 0;
 int number = 0;
-int found = 0;
 
 int main(int argc, char *argv[])
 {
@@ -29,7 +28,6 @@ int main(int argc, char *argv[])
         printf("%ld: ", line_number);
       }
       printf("%s", line);
-      ++found;
     }
   }
 
@@ -58,7 +56,6 @@ int parse_arg_list(int argc, char *argv[])
       default:
         fprintf(stderr, "%s: illegal option %c.\n", program_name, c);
         argc = 0;
-        found = -1;
         break;
       }
     }
