@@ -11,6 +11,7 @@ typedef enum
 } boolean;
 
 boolean parse_arg_list(int argc, char *argv[]);
+void find_pattern(char *pattern, FILE *file_p);
 
 boolean except = false;
 boolean number = false;
@@ -24,20 +25,7 @@ int main(int argc, char *argv[])
     exit(EXIT_FAILURE);
   }
 
-  char line[MAX_LINE_LEN];
-  size_t line_number = 1;
-  while (fgets(line, MAX_LINE_LEN, stdin) != NULL)
-  {
-    if ((strstr(line, argv[pattern_arg_pos]) != NULL) != except)
-    {
-      if (number)
-      {
-        printf("%ld: ", line_number);
-      }
-      printf("%s", line);
-    }
-    ++line_number;
-  }
+  find_pattern(argv[pattern_arg_pos], stdin);
 
   exit(EXIT_SUCCESS);
 }
@@ -72,4 +60,22 @@ boolean parse_arg_list(int argc, char *argv[])
   }
 
   return true;
+}
+
+void find_pattern(char *pattern, FILE *file_p)
+{
+  size_t line_number = 1;
+  char line[MAX_LINE_LEN];
+  while (fgets(line, MAX_LINE_LEN, stdin) != NULL)
+  {
+    if ((strstr(line, pattern) != NULL) != except)
+    {
+      if (number)
+      {
+        printf("%ld: ", line_number);
+      }
+      printf("%s", line);
+    }
+    ++line_number;
+  }
 }
