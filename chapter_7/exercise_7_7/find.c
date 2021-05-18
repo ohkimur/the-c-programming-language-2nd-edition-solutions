@@ -15,6 +15,8 @@ boolean parse_arg_list(int argc, char *argv[]);
 boolean except = false;
 boolean number = false;
 
+int pattern_arg_pos = 1;
+
 int main(int argc, char *argv[])
 {
   if (!parse_arg_list(argc, argv))
@@ -26,7 +28,7 @@ int main(int argc, char *argv[])
   size_t line_number = 1;
   while (fgets(line, MAX_LINE_LEN, stdin) != NULL)
   {
-    if ((strstr(line, argv[argc - 1]) != NULL) != except)
+    if ((strstr(line, argv[pattern_arg_pos]) != NULL) != except)
     {
       if (number)
       {
@@ -65,6 +67,8 @@ boolean parse_arg_list(int argc, char *argv[])
         break;
       }
     }
+
+    ++pattern_arg_pos;
   }
 
   return true;
