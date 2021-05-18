@@ -25,7 +25,32 @@ int main(int argc, char *argv[])
     exit(EXIT_FAILURE);
   }
 
-  find_pattern(argv[pattern_arg_pos], stdin);
+  const char *program_name = argv[0];
+
+  if (argc - pattern_arg_pos > 1)
+  {
+    for (int file_arg_pos = pattern_arg_pos + 1; file_arg_pos < argc; file_arg_pos++)
+    {
+      FILE *file_p;
+      if ((file_p = fopen(argv[file_arg_pos], "r")) == NULL)
+      {
+        fprintf(stderr, "%s: can't open %s.\n", program_name, argv[file_arg_pos]);
+        exit(EXIT_FAILURE);
+      }
+      printf("%s\n", argv[file_arg_pos]);
+      find_pattern(argv[pattern_arg_pos], file_p);
+      fclose(file_p);
+
+      if (file_arg_pos < argc - 1)
+      {
+        putc('\n', stdout);
+      }
+    }
+  }
+  else
+  {
+    find_pattern(argv[pattern_arg_pos], stdin);
+  }
 
   exit(EXIT_SUCCESS);
 }
@@ -66,7 +91,7 @@ void find_pattern(char *pattern, FILE *file_p)
 {
   size_t line_number = 1;
   char line[MAX_LINE_LEN];
-  while (fgets(line, MAX_LINE_LEN, stdin) != NULL)
+  while (fgets(line, MAX_LINE_LEN, file_p) != NULL)
   {
     if ((strstr(line, pattern) != NULL) != except)
     {
