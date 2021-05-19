@@ -59,6 +59,12 @@ boolean parse_arg_list(int argc, char *argv[])
 {
   const char *program_name = argv[0];
 
+  if (argc < 3)
+  {
+    fprintf(stderr, "Usage: %s [-xn]... PATTERN [FILE]...\n", program_name);
+    return false;
+  }
+
   while (--argc > 0 && (*++argv)[0] == '-')
   {
     int c;
