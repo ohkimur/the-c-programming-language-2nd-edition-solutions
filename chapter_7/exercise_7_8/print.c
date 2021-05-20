@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAX_LINE_LEN 1000
+#define LINES_PER_PAGE 5
 
 typedef enum
 {
@@ -11,6 +12,9 @@ typedef enum
 } boolean;
 
 boolean parse_arg_list(int argc, char *argv[]);
+void print_file(char *file_name);
+
+char *program_name;
 
 int main(int argc, char *argv[])
 {
@@ -19,22 +23,13 @@ int main(int argc, char *argv[])
     exit(EXIT_FAILURE);
   }
 
-  char line[MAX_LINE_LEN];
-
   while (--argc > 0)
   {
-    FILE *file_p;
-    if ((file_p = fopen(*++argv, "r")) == NULL)
-    {
-      fprintf(stderr, "print: can't open %s.\n", *argv);
-      exit(EXIT_FAILURE);
-    }
+    print_file(*++argv);
 
-    printf("%s\n", *argv);
-
-    while (fgets(line, MAX_LINE_LEN, file_p) != NULL)
+    if (argc != 1)
     {
-      printf("%s", line);
+      putc('\n', stdout);
     }
   }
 
@@ -52,4 +47,28 @@ boolean parse_arg_list(int argc, char *argv[])
   }
 
   return true;
+}
+
+void print_file(char *file_name)
+{
+  FILE *file_p;
+  if ((file_p = fopen(file_name, "r")) == NULL)
+  {
+    fprintf(stderr, "%s: can't open %s.\n", program_name, file_name);
+    exit(EXIT_FAILURE);
+  }
+
+  size_t line_number = 1;
+  char line[MAX_LINE_LEN];
+  while (fgets(line, MAX_LINE_LEN, file_p) != NULL)
+  {
+    if ((line_number - 1) % LINES_PER_PAGE == 0)
+    {
+      printf("[%s]: page #%zu\n", file_name, line_number / LINES_PER_PAGE + 1);
+    }
+
+    printf("%zu: %s", line_number, line);
+
+    ++line_number;
+  }
 }
