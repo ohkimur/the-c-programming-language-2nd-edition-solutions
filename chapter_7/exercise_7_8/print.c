@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define MAX_LINE_LEN 1000
-#define LINES_PER_PAGE 5
+#define LINES_PER_PAGE 10
 
 typedef enum
 {
@@ -64,11 +64,10 @@ void print_file(char *file_name)
   {
     if ((line_number - 1) % LINES_PER_PAGE == 0)
     {
-      printf("[%s]: page #%zu\n", file_name, line_number / LINES_PER_PAGE + 1);
+      printf("[%s]: page %zu\n", file_name, line_number / LINES_PER_PAGE + 1);
     }
 
     printf("%zu: %s", line_number, line);
-
     ++line_number;
   }
 }
