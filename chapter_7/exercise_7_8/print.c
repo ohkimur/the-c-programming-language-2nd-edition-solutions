@@ -71,3 +71,5 @@ void print_file(char *file_name)
     ++line_number;
   }
 }
+
+// NOTE: run: ./print ../exercise_7_7/file_1.txt ../exercise_7_7/file_2.txt ./print.c
