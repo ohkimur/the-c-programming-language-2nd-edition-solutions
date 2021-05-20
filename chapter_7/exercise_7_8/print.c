@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_LINE_LEN 1000
+
 typedef enum
 {
   false,
@@ -15,6 +17,25 @@ int main(int argc, char *argv[])
   if (!parse_arg_list(argc, argv))
   {
     exit(EXIT_FAILURE);
+  }
+
+  char line[MAX_LINE_LEN];
+
+  while (--argc > 0)
+  {
+    FILE *file_p;
+    if ((file_p = fopen(*++argv, "r")) == NULL)
+    {
+      fprintf(stderr, "print: can't open %s.\n", *argv);
+      exit(EXIT_FAILURE);
+    }
+
+    printf("%s\n", *argv);
+
+    while (fgets(line, MAX_LINE_LEN, file_p) != NULL)
+    {
+      printf("%s", line);
+    }
   }
 
   exit(EXIT_SUCCESS);
