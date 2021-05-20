@@ -22,5 +22,13 @@ int main(int argc, char *argv[])
 
 boolean parse_arg_list(int argc, char *argv[])
 {
+  const char *program_name = argv[0];
+
+  if (argc < 2)
+  {
+    fprintf(stderr, "Usage: %s [FILE]...\n", program_name);
+    return false;
+  }
+
   return true;
 }
