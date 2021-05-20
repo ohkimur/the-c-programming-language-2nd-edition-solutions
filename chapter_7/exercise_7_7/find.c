@@ -13,6 +13,8 @@ typedef enum
 boolean parse_arg_list(int argc, char *argv[]);
 void find_pattern(char *pattern, FILE *file_p);
 
+char *program_name;
+
 boolean except = false;
 boolean number = false;
 
@@ -24,8 +26,6 @@ int main(int argc, char *argv[])
   {
     exit(EXIT_FAILURE);
   }
-
-  const char *program_name = argv[0];
 
   if (argc - pattern_arg_pos > 1)
   {
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
 boolean parse_arg_list(int argc, char *argv[])
 {
-  const char *program_name = argv[0];
+  program_name = argv[0];
 
   if (argc < 3)
   {
