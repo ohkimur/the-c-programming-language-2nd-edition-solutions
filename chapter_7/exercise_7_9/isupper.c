@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    puts("This is lowercase.");
+    puts("This letter is lowercase.");
   }
 
   exit(EXIT_SUCCESS);
@@ -20,10 +20,5 @@ int main(int argc, char *argv[])
 
 int is_upper(int c)
 {
-  if (c >= 'A' && c <= 'Z')
-  {
-    return 1;
-  }
-
-  return 0;
+  return (c >= 'A' && c <= 'Z');
 }
