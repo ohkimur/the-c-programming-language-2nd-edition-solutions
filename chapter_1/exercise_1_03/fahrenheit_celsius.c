@@ -29,5 +29,5 @@ int main(void)
 }
 
 // NOTE: If all operands from an operation are integers than a integer operation
-// is performed. If at least one operand is a floating point number than a
+// is performed. If at least one operand is a floating point number then a
 // floating point operation will be performed.
