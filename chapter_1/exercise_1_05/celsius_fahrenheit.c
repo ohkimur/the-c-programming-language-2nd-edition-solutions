@@ -27,5 +27,5 @@ int main(void)
 
 // NOTE: Sometimes the for loop can be more explicit and more readable than while
 // because it's more compact. The initialization and the incrementation of the
-// counter variable is done in header of the for loop. However, the while loop
+// counter variable is done through the for loop params. However, the while loop
 // can be, sometimes, more customizable.
