@@ -82,5 +82,5 @@ void str_reverse(char str1[], int index, int size)
 }
 
 // NOTE: It is simple to convert an integer variable to any base just by taking
-// the remainder of the number divided by base and than dividing the initial
+// the remainder of the number divided by base and then dividing the initial
 // number by base. The result need to be reversed to be correct.

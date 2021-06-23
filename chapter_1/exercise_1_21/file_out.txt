@@ -44,5 +44,5 @@ int main(void)
 
 // NOTE: In a similar fashion with detab, in UNIX like systems you can run:
 // ./entab < file_in.txt > file_out.txt which will take the input from the
-// file_in.txt it will process it through entab and than it will put the content
+// file_in.txt it will process it through entab and then it will put the content
 // to file_out.txt
