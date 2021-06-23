@@ -38,12 +38,12 @@ int strcmp_ptr(char *s, char *t, size_t n)
     ++t;
   }
 
-  // If the s string contains more characters than t, than the t char will
-  // become '\0' before s char. If this happen than the s char will be >0 and
+  // If the s string contains more characters than t, then the t char will
+  // become '\0' before s char. If this happen then the s char will be >0 and
   // t char will be 0, so the final result will be >0.
 
-  // If the t string contains more character than s, than the s char will
-  // become '\0' before t char. If this happen than the s char will be <0 and
+  // If the t string contains more character than s, then the s char will
+  // become '\0' before t char. If this happen then the s char will be <0 and
   // t char will be 0, so the final result will be <0.
 
   return *s - *t;
