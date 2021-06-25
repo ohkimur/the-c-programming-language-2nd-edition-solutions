@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    for (int file_index = 0; file_index < argc; ++file_index)
+    for (int file_index = 1; file_index < argc; ++file_index)
     {
       int file_descriptor;
       if ((file_descriptor = open(argv[file_index], O_RDONLY, 0)) == -1)
