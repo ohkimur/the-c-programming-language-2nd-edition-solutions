@@ -36,8 +36,8 @@ int _flush_buffer(FILE *);
 #define ferror(p) ((p->flag & _ERR) != 0)
 #define fileno(p) ((p->file_descriptor)
 
-#define getc(p) (--p->couter >= 0) ? (unsigned char) *(p)->next_char_pos_p++ : _fill_buffer(p))
-#define putc(x, p) (--p->counter >= 0) ? *p->next_char_pos_p++ = x : _flush_buffer(x,p))
+#define getc(p) ((--p->counter >= 0) ? (unsigned char) *(p)->next_char_pos_p++ : _fill_buffer(p))
+#define putc(x, p) ((--p->counter >= 0) ? *p->next_char_pos_p++ = x : _flush_buffer(x,p))
 
 #define getchar() getc(stdin)
 #define putchar(x) putc(x, stdout)
