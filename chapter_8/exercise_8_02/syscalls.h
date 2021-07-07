@@ -12,7 +12,7 @@ struct _io_buffer_file
   int file_descriptor;
 };
 
-typedef struct _io_buffer FILE;
+typedef struct _io_buffer_file FILE;
 
 extern FILE _io_buffer[MAX_NR_OF_OPEN_FILES];
 
