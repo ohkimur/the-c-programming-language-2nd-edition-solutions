@@ -11,6 +11,12 @@ FILE _io_buffer[MAX_NR_OF_OPEN_FILES] = {
 
 long int lseek(int fd, long int offset, int whence);
 
+int _fill_buffer(FILE *file_p)
+{
+  // TODO: Implement this function.
+  return 0;
+}
+
 FILE *file_open(char *name, char *mode)
 {
   int file_descriptor;
@@ -69,7 +75,7 @@ int main(void)
   file_open("main.c", "r");
 
   // TODO: To make this work implement _fill_buffer.
-  putc('a', stdout);
+  getc(stdin);
 
   return 0;
 }
