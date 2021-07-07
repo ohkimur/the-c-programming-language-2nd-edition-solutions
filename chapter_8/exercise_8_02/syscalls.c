@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <fcntl.h>
 #include "syscalls.h"
 
@@ -9,6 +8,8 @@ FILE _io_buffer[MAX_NR_OF_OPEN_FILES] = {
     {0, (char *)0, (char *)0, _WRITE, 1},         // stdout
     {0, (char *)0, (char *)0, _WRITE | _UNBUF, 2} // stderr
 };
+
+long int lseek(int fd, long int offset, int whence);
 
 FILE *file_open(char *name, char *mode)
 {

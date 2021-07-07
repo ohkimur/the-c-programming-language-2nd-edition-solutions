@@ -1,4 +1,4 @@
-// #define NULL 0
+#define NULL 0
 #define EOF (-1)
 #define BUFFER_SIZE 1024
 #define MAX_NR_OF_OPEN_FILES 20
