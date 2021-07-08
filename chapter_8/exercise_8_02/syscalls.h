@@ -1,7 +1,11 @@
 #define NULL 0
+
 #define EOF (-1)
 #define BUFFER_SIZE 1024
 #define MAX_NR_OF_OPEN_FILES 20
+
+#define EXIT_FAILURE 1
+#define EXIT_SUCCESS 0
 
 struct _io_buffer_file
 {
@@ -36,8 +40,8 @@ int _flush_buffer(FILE *);
 #define ferror(p) ((p->flag & _ERR) != 0)
 #define fileno(p) ((p->file_descriptor)
 
-#define getc(p) ((--p->counter >= 0) ? (unsigned char) *(p)->next_char_pos_p++ : _fill_buffer(p))
-#define putc(x, p) ((--p->counter >= 0) ? *p->next_char_pos_p++ = x : _flush_buffer(x,p))
+#define getc(p) ((--p->counter >= 0) ? (unsigned char)*(p)->next_char_pos_p++ : _fill_buffer(p))
+#define putc(x, p) ((--p->counter >= 0) ? *p->next_char_pos_p++ = x : _flush_buffer(x, p))
 
 #define getchar() getc(stdin)
 #define putchar(x) putc(x, stdout)

@@ -111,9 +111,9 @@ int main(void)
 {
   FILE *file_p;
 
-  if ((file_p = file_open("syscalls.c", "r")) == NULL)
+  if ((file_p = file_open("syscals.c", "r")) == NULL)
   {
-    return 1;
+    return EXIT_FAILURE;
   }
   else
   {
@@ -124,5 +124,5 @@ int main(void)
     }
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }
