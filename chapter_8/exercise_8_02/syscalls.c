@@ -4,9 +4,9 @@
 #define PERMISSIONS 0666 // RW for owners, group, others
 
 FILE _io_buffer[MAX_NR_OF_OPEN_FILES] = {
-    {0, (char *)0, (char *)0, _READ, 0},          // stdin
-    {0, (char *)0, (char *)0, _WRITE, 1},         // stdout
-    {0, (char *)0, (char *)0, _WRITE | _UNBUF, 2} // stderr
+    {0, (char *)0, (char *)0, {1, 0, 0, 0, 0}, 0}, // stdin
+    {0, (char *)0, (char *)0, {0, 1, 0, 0, 0}, 1}, // stdout
+    {0, (char *)0, (char *)0, {0, 1, 1, 0, 0}, 2}  // stderr
 };
 
 void *malloc(long unsigned int size);
@@ -18,12 +18,12 @@ int _fill_buffer(FILE *file_p)
 {
   int buffer_size;
 
-  if ((file_p->flag & (_READ | _EOF | _ERR)) != _READ)
+  if (file_p->flag._READ == 0 || file_p->flag._EOF == 1 || file_p->flag._ERR == 1)
   {
     return EOF;
   }
 
-  buffer_size = (file_p->flag & _UNBUF) ? 1 : BUFFER_SIZE;
+  buffer_size = (file_p->flag._UNBUF == 1) ? 1 : BUFFER_SIZE;
 
   if (file_p->base == NULL)
   {
@@ -40,11 +40,11 @@ int _fill_buffer(FILE *file_p)
   {
     if (file_p->counter == -1)
     {
-      file_p->flag |= _EOF;
+      file_p->flag._EOF = 1;
     }
     else
     {
-      file_p->flag |= _ERR;
+      file_p->flag._ERR = 1;
     }
 
     file_p->counter = 0;
@@ -66,7 +66,7 @@ FILE *file_open(char *name, char *mode)
 
   for (file_p = _io_buffer; file_p < _io_buffer + MAX_NR_OF_OPEN_FILES; ++file_p)
   {
-    if ((file_p->flag & (_READ | _WRITE)) == 0)
+    if (file_p->flag._READ == 0 || file_p->flag._WRITE == 0)
     {
       break; // found free slot
     }
@@ -102,7 +102,10 @@ FILE *file_open(char *name, char *mode)
   file_p->file_descriptor = file_descriptor;
   file_p->counter = 0;
   file_p->base = NULL;
-  file_p->flag = (*mode == 'r') ? _READ : _WRITE;
+  file_p->flag._EOF = 0;
+  file_p->flag._ERR = 0;
+  file_p->flag._READ = (*mode == 'r') ? 1 : 0;
+  file_p->flag._WRITE = (*mode == 'r') ? 0 : 1;
 
   return file_p;
 }

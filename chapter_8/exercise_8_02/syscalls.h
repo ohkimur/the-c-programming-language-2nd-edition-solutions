@@ -12,7 +12,14 @@ struct _io_buffer_file
   int counter;
   char *next_char_pos_p;
   char *base;
-  int flag;
+  struct
+  {
+    int _READ : 1;
+    int _WRITE : 1;
+    int _UNBUF : 1;
+    int _EOF : 1;
+    int _ERR : 1;
+  } flag;
   int file_descriptor;
 };
 
@@ -20,21 +27,12 @@ typedef struct _io_buffer_file FILE;
 
 extern FILE _io_buffer[MAX_NR_OF_OPEN_FILES];
 
+int _fill_buffer(FILE *);
+int _flush_buffer(FILE *);
+
 #define stdin (&_io_buffer[0])
 #define stdout (&_io_buffer[1])
 #define stderr (&_io_buffer[2])
-
-enum _flags
-{
-  _READ = 01,
-  _WRITE = 02,
-  _UNBUF = 04,
-  _EOF = 010,
-  _ERR = 020
-};
-
-int _fill_buffer(FILE *);
-int _flush_buffer(FILE *);
 
 #define feof(p) ((p->flag & _EOF) != 0)
 #define ferror(p) ((p->flag & _ERR) != 0)
