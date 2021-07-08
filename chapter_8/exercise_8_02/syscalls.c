@@ -111,8 +111,9 @@ int main(void)
 {
   FILE *file_p;
 
-  if ((file_p = file_open("syscals.c", "r")) == NULL)
+  if ((file_p = file_open("syscalls.c", "r")) == NULL)
   {
+    write(1, "Error: could not open the file.\n", 33);
     return EXIT_FAILURE;
   }
   else
