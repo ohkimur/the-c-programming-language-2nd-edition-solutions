@@ -54,6 +54,12 @@ int _fill_buffer(FILE *file_p)
   return (unsigned char)*file_p->next_char_pos_p++;
 }
 
+int _flush_buffer(FILE *file_p)
+{
+  // TODO: Implement this.
+  return 0;
+}
+
 FILE *file_open(char *name, char *mode)
 {
   int file_descriptor;
