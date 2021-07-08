@@ -9,12 +9,49 @@ FILE _io_buffer[MAX_NR_OF_OPEN_FILES] = {
     {0, (char *)0, (char *)0, _WRITE | _UNBUF, 2} // stderr
 };
 
-long int lseek(int fd, long int offset, int whence);
+void *malloc(long unsigned int size);
+long int lseek(int file_descriptor, long int offset, int whence);
+long int read(int file_descriptor, void *buffer, long unsigned int nr_of_bytes);
+long int write(int file_descriptor, void *buffer, long unsigned int nr_of_bytes);
 
 int _fill_buffer(FILE *file_p)
 {
-  // TODO: Implement this function.
-  return 0;
+  int buffer_size;
+
+  if ((file_p->flag & (_READ | _EOF | _ERR)) != _READ)
+  {
+    return EOF;
+  }
+
+  buffer_size = (file_p->flag & _UNBUF) ? 1 : BUFFER_SIZE;
+
+  if (file_p->base == NULL)
+  {
+    if ((file_p->base = (char *)malloc(buffer_size)) == NULL)
+    {
+      return EOF;
+    }
+  }
+
+  file_p->next_char_pos_p = file_p->base;
+  file_p->counter = read(file_p->file_descriptor, file_p->next_char_pos_p, buffer_size);
+
+  if (--file_p->counter < 0)
+  {
+    if (file_p->counter == -1)
+    {
+      file_p->flag |= _EOF;
+    }
+    else
+    {
+      file_p->flag |= _ERR;
+    }
+
+    file_p->counter = 0;
+    return EOF;
+  }
+
+  return (unsigned char)*file_p->next_char_pos_p++;
 }
 
 FILE *file_open(char *name, char *mode)
@@ -72,10 +109,20 @@ FILE *file_open(char *name, char *mode)
 
 int main(void)
 {
-  file_open("main.c", "r");
+  FILE *file_p;
 
-  // TODO: To make this work implement _fill_buffer.
-  getc(stdin);
+  if ((file_p = file_open("syscalls.c", "r")) == NULL)
+  {
+    return 1;
+  }
+  else
+  {
+    char c;
+    while ((c = getc(file_p)) != EOF)
+    {
+      write(1, &c, 1);
+    }
+  }
 
   return 0;
 }
