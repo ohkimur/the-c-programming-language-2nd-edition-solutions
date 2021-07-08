@@ -130,3 +130,5 @@ int main(void)
 
   return EXIT_SUCCESS;
 }
+
+// NOTE: Using bit fields leads to a more verbose syntax. However, it's more readable.
