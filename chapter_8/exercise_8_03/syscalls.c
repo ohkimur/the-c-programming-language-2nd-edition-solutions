@@ -54,7 +54,7 @@ int _fill_buffer(FILE *file_p)
   return (unsigned char)*file_p->next_char_pos_p++;
 }
 
-int _flush_buffer(FILE *file_p)
+int _flush_buffer(int c, FILE *file_p)
 {
   // TODO: Implement this.
   return 0;
