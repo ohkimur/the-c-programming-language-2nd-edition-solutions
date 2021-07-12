@@ -193,19 +193,19 @@ int main(void)
     return EXIT_FAILURE;
   }
 
-  if ((file_out_p = file_open("out.txt", "r")) == NULL)
+  if ((file_out_p = file_open("out.txt", "w")) == NULL)
   {
     write(1, "Error: could not open the file.\n", 33);
     return EXIT_FAILURE;
   }
 
-  file_close(file_out_p);
-
   char c;
   while ((c = getc(file_in_p)) != EOF)
   {
-    write(1, &c, 1);
+    // TODO: Fix this.
+    putc('f', file_out_p);
   }
+  file_close(file_out_p);
 
   return EXIT_SUCCESS;
 }
