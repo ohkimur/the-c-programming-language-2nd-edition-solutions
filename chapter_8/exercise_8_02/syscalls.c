@@ -66,7 +66,7 @@ FILE *file_open(char *name, char *mode)
 
   for (file_p = _io_buffer; file_p < _io_buffer + MAX_NR_OF_OPEN_FILES; ++file_p)
   {
-    if (file_p->flag._READ == 0 || file_p->flag._WRITE == 0)
+    if (file_p->flag._READ == 0 && file_p->flag._WRITE == 0)
     {
       break; // found free slot
     }
