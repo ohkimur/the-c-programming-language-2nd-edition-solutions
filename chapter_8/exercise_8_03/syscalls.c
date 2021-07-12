@@ -9,10 +9,12 @@ FILE _io_buffer[MAX_NR_OF_OPEN_FILES] = {
     {0, (char *)0, (char *)0, {0, 1, 1, 0, 0}, 2}  // stderr
 };
 
+void free(void *ptr);
 void *malloc(long unsigned int size);
 long int lseek(int file_descriptor, long int offset, int whence);
 long int read(int file_descriptor, void *buffer, long unsigned int nr_of_bytes);
 long int write(int file_descriptor, void *buffer, long unsigned int nr_of_bytes);
+int close(int file_descriptor);
 
 int _fill_buffer(FILE *file_p)
 {
@@ -164,27 +166,45 @@ FILE *file_open(char *name, char *mode)
   return file_p;
 }
 
-FILE *file_close(char *name)
+int file_close(FILE *file_p)
 {
+  if (file_flush(file_p) == EOF)
+  {
+    return EOF;
+  }
+
+  free(file_p->base);
+  file_p->next_char_pos_p = NULL;
+  file_p->base = NULL;
+  file_p->counter = 0;
+  close(file_p->file_descriptor);
+
   return NULL;
 }
 
 int main(void)
 {
-  FILE *file_p;
+  FILE *file_in_p;
+  FILE *file_out_p;
 
-  if ((file_p = file_open("syscalls.c", "r")) == NULL)
+  if ((file_in_p = file_open("syscalls.c", "r")) == NULL)
   {
     write(1, "Error: could not open the file.\n", 33);
     return EXIT_FAILURE;
   }
-  else
+
+  if ((file_out_p = file_open("out.txt", "r")) == NULL)
   {
-    char c;
-    while ((c = getc(file_p)) != EOF)
-    {
-      write(1, &c, 1);
-    }
+    write(1, "Error: could not open the file.\n", 33);
+    return EXIT_FAILURE;
+  }
+
+  file_close(file_out_p);
+
+  char c;
+  while ((c = getc(file_in_p)) != EOF)
+  {
+    write(1, &c, 1);
   }
 
   return EXIT_SUCCESS;
