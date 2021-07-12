@@ -56,8 +56,37 @@ int _fill_buffer(FILE *file_p)
 
 int _flush_buffer(int c, FILE *file_p)
 {
-  // TODO: Implement this.
-  return 0;
+  int buffer_size;
+
+  if (file_p->flag._READ == 0 || file_p->flag._EOF == 1 || file_p->flag._ERR == 1)
+  {
+    return EOF;
+  }
+
+  buffer_size = (file_p->flag._UNBUF == 1) ? 1 : BUFFER_SIZE;
+
+  if (file_p->base == NULL)
+  {
+    if ((file_p->base = (char *)malloc(buffer_size)) == NULL)
+    {
+      return EOF;
+    }
+  }
+  else
+  {
+    size_t nr_of_bytes = file_p->next_char_pos_p - file_p->base;
+    if ((write(file_p->file_descriptor, file_p->base, nr_of_bytes)) != nr_of_bytes)
+    {
+      file_p->flag._ERR = 1;
+      return EOF;
+    }
+  }
+
+  file_p->next_char_pos_p = file_p->base;
+  *file_p->next_char_pos_p++ = c;
+  file_p->counter = buffer_size - 1;
+
+  return c;
 }
 
 FILE *file_open(char *name, char *mode)

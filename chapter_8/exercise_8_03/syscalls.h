@@ -28,7 +28,7 @@ typedef struct _io_buffer_file FILE;
 extern FILE _io_buffer[MAX_NR_OF_OPEN_FILES];
 
 int _fill_buffer(FILE *);
-int _flush_buffer(int c, FILE *file_p)
+int _flush_buffer(int c, FILE *file_p);
 
 #define stdin (&_io_buffer[0])
 #define stdout (&_io_buffer[1])
