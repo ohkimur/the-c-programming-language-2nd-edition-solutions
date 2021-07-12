@@ -89,6 +89,25 @@ int _flush_buffer(int c, FILE *file_p)
   return c;
 }
 
+int file_flush(FILE *file_p)
+{
+  if (file_p->flag._WRITE == 0)
+  {
+    file_p->flag._ERR = 1;
+    return EOF;
+  }
+
+  if (_flush_buffer('0', file_p) == EOF)
+  {
+    return EOF;
+  }
+
+  file_p->next_char_pos_p = file_p->base;
+  file_p->counter = (file_p->flag._UNBUF == 1) ? 1 : BUFFER_SIZE;
+
+  return 0;
+}
+
 FILE *file_open(char *name, char *mode)
 {
   int file_descriptor;
@@ -143,6 +162,11 @@ FILE *file_open(char *name, char *mode)
   file_p->flag._WRITE = (*mode == 'r') ? 0 : 1;
 
   return file_p;
+}
+
+FILE *file_close(char *name)
+{
+  return NULL;
 }
 
 int main(void)
