@@ -60,7 +60,7 @@ int _flush_buffer(int c, FILE *file_p)
 {
   int buffer_size;
 
-  if (file_p->flag._READ == 0 || file_p->flag._EOF == 1 || file_p->flag._ERR == 1)
+  if (file_p->flag._WRITE == 0 || file_p->flag._ERR == 1)
   {
     return EOF;
   }
@@ -76,7 +76,7 @@ int _flush_buffer(int c, FILE *file_p)
   }
   else
   {
-    size_t nr_of_bytes = file_p->next_char_pos_p - file_p->base;
+    unsigned long nr_of_bytes = file_p->next_char_pos_p - file_p->base;
     if ((write(file_p->file_descriptor, file_p->base, nr_of_bytes)) != nr_of_bytes)
     {
       file_p->flag._ERR = 1;
@@ -187,11 +187,11 @@ int main(void)
   FILE *file_in_p;
   FILE *file_out_p;
 
-  if ((file_in_p = file_open("syscalls.c", "r")) == NULL)
-  {
-    write(1, "Error: could not open the file.\n", 33);
-    return EXIT_FAILURE;
-  }
+  // if ((file_in_p = file_open("syscalls.c", "r")) == NULL)
+  // {
+  //   write(1, "Error: could not open the file.\n", 33);
+  //   return EXIT_FAILURE;
+  // }
 
   if ((file_out_p = file_open("out.txt", "w")) == NULL)
   {
@@ -199,12 +199,12 @@ int main(void)
     return EXIT_FAILURE;
   }
 
-  char c;
-  while ((c = getc(file_in_p)) != EOF)
-  {
-    // TODO: Fix this.
-    putc('f', file_out_p);
-  }
+  // char c;
+  // while ((c = getc(file_in_p)) != EOF)
+  // {
+  //   // TODO: Fix this.
+  // }
+  putc('s', file_out_p);
   file_close(file_out_p);
 
   return EXIT_SUCCESS;
