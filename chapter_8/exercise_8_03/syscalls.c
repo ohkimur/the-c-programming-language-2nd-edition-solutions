@@ -187,11 +187,11 @@ int main(void)
   FILE *file_in_p;
   FILE *file_out_p;
 
-  // if ((file_in_p = file_open("syscalls.c", "r")) == NULL)
-  // {
-  //   write(1, "Error: could not open the file.\n", 33);
-  //   return EXIT_FAILURE;
-  // }
+  if ((file_in_p = file_open("syscalls.c", "r")) == NULL)
+  {
+    write(1, "Error: could not open the file.\n", 33);
+    return EXIT_FAILURE;
+  }
 
   if ((file_out_p = file_open("out.txt", "w")) == NULL)
   {
@@ -199,12 +199,12 @@ int main(void)
     return EXIT_FAILURE;
   }
 
-  // char c;
-  // while ((c = getc(file_in_p)) != EOF)
-  // {
-  //   // TODO: Fix this.
-  // }
-  putc('s', file_out_p);
+  char c;
+  while ((c = getc(file_in_p)) != EOF)
+  {
+    // TODO: Fix this.
+    putc(c, file_out_p);
+  }
   file_close(file_out_p);
 
   return EXIT_SUCCESS;
