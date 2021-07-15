@@ -202,7 +202,6 @@ int main(void)
   char c;
   while ((c = getc(file_in_p)) != EOF)
   {
-    // TODO: Fix this.
     putc(c, file_out_p);
   }
   file_close(file_out_p);
