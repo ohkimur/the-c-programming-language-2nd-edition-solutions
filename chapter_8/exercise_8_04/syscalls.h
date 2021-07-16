@@ -32,6 +32,7 @@ int _flush_buffer(int c, FILE *file_p);
 int file_flush(FILE *file_p);
 FILE *file_open(char *name, char *mode);
 int file_close(FILE *file_p);
+int file_seek(FILE *file_p, long offset, int origin);
 
 #define stdin (&_io_buffer[0])
 #define stdout (&_io_buffer[1])

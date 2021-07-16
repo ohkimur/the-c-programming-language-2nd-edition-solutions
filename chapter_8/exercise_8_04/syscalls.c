@@ -182,6 +182,37 @@ int file_close(FILE *file_p)
   return NULL;
 }
 
+int file_seek(FILE *file_p, long offset, int origin)
+{
+  if (file_p->flag._READ == 1)
+  {
+    if (offset == 1)
+    {
+      offset -= file_p->counter;
+    }
+
+    if (lseek(file_p->file_descriptor, offset, origin) == -1)
+    {
+      file_p->counter = 0;
+      return -1;
+    }
+  }
+  else if (file_p->flag._WRITE == 1)
+  {
+    if (file_flush(file_p) == EOF)
+    {
+      return -1;
+    }
+
+    if (lseek(file_p->file_descriptor, offset, origin) == -1)
+    {
+      return -1;
+    }
+  }
+
+  return 0;
+}
+
 int main(void)
 {
   FILE *file_in_p;
