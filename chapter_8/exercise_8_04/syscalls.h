@@ -4,6 +4,10 @@
 #define BUFFER_SIZE 1024
 #define MAX_NR_OF_OPEN_FILES 20
 
+#define SEEK_SET 0 // Set file offset to offset
+#define SEEK_CUR 1 // Set file offset to current plus offset
+#define SEEK_END 2 // Set file offset to EOF plus offset
+
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
 
@@ -32,6 +36,7 @@ int _flush_buffer(int c, FILE *file_p);
 int file_flush(FILE *file_p);
 FILE *file_open(char *name, char *mode);
 int file_close(FILE *file_p);
+int file_seek(FILE *file_p, long offset, int whence);
 
 #define stdin (&_io_buffer[0])
 #define stdout (&_io_buffer[1])

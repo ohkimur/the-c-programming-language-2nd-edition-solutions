@@ -182,6 +182,24 @@ int file_close(FILE *file_p)
   return NULL;
 }
 
+int file_seek(FILE *file_p, long offset, int whence)
+{
+  if (file_p->flag._UNBUF == 0)
+  {
+    if (file_p->flag._READ == 1)
+    {
+      file_p->counter = 0;
+      file_p->next_char_pos_p = file_p->base;
+    }
+    else if (file_p->flag._WRITE == 1)
+    {
+      file_flush(file_p);
+    }
+  }
+
+  return (lseek(file_p->file_descriptor, offset, whence) < 0);
+}
+
 int main(void)
 {
   FILE *file_in_p;
@@ -196,6 +214,11 @@ int main(void)
   if ((file_out_p = file_open("out.txt", "w")) == NULL)
   {
     write(1, "Error: could not open the file.\n", 33);
+    return EXIT_FAILURE;
+  }
+
+  if (file_seek(file_in_p, 5, SEEK_SET) == -1)
+  {
     return EXIT_FAILURE;
   }
 
