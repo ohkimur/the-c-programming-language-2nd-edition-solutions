@@ -74,7 +74,7 @@ void dir_walk(char *dir_name, void (*func)(char *))
       sprintf(name, "%s/%s", dir_name, dir_entry->d_name);
       (*func)(name);
     }
-
-    closedir(dir);
   }
+
+  closedir(dir);
 }
