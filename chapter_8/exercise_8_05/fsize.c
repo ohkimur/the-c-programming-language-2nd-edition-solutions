@@ -42,6 +42,26 @@ void fsize(char *name)
     dir_walk(name, fsize);
   }
 
+  /**
+   * dev_t st_dev;         [XSI] ID of device containing file
+   * ino_t st_ino;         [XSI] File serial number
+   * mode_t st_mode;       [XSI] Mode of file (see below)
+   * nlink_t st_nlink;     [XSI] Number of hard links
+   * uid_t st_uid;         [XSI] User ID of the file
+   * gid_t st_gid;         [XSI] Group ID of the file
+   * dev_t st_rdev;        [XSI] Device ID
+   * time_t st_atime;      [XSI] Time of last access
+   * long st_atimensec;    nsec of last access
+   * time_t st_mtime;      [XSI] Last data modification time
+   * long st_mtimensec;    last data modification nsec
+   * time_t st_ctime;      [XSI] Time of last status change
+   * long st_ctimensec;    nsec of last status change
+   * off_t st_size;        [XSI] File size, in bytes
+   * blkcnt_t st_blocks;   [XSI] Blocks allocated for file
+   * blksize_t st_blksize; [XSI] Optimal blocksize for I/O
+   */
+
+  printf("%s: %ld\n", name, (long)buffer.st_size);
   printf("%s: %ld\n", name, (long)buffer.st_size);
 }
 
