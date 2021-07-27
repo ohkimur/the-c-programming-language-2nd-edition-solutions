@@ -66,6 +66,7 @@ void fsize(char *name)
    */
 
   print_file_flags(buffer.st_mode);
+  print_file_user(buffer.st_uid);
   print_file_size(buffer.st_size);
   print_file_time(buffer.st_atime);
   printf("%s\n", name);
@@ -116,6 +117,20 @@ void print_file_flags(mode_t st_mode)
   printf("%c", (st_mode & S_IROTH) ? 'r' : '-');
   printf("%c", (st_mode & S_IWOTH) ? 'w' : '-');
   printf("%c ", (st_mode & S_IXOTH) ? 'x' : '-');
+}
+
+void print_file_user(uid_t st_uid)
+{
+  struct passwd *pwd;
+  pwd = getpwuid(st_uid);
+
+  if (pwd == NULL)
+  {
+    fprintf(stderr, "Error: cannot find user\n");
+    return;
+  }
+
+  printf("%s ", pwd->pw_name);
 }
 
 void print_file_size(size_t size)
