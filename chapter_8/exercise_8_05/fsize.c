@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <time.h>
 #include <pwd.h>
+#include <grp.h>
 
 #define MAX_PATH_LEN 1024
 
@@ -14,6 +15,7 @@ void dir_walk(char *dir_name, void (*func)(char *));
 
 void print_file_flags(mode_t st_mode);
 void print_file_user(uid_t st_uid);
+void print_file_group(gid_t st_gid);
 void print_file_size(size_t size);
 void print_file_time(time_t time);
 
@@ -65,8 +67,11 @@ void fsize(char *name)
    * blksize_t st_blksize  Optimal blocksize for I/O
    */
 
+  // Printed in similar way to ls -l
   print_file_flags(buffer.st_mode);
+  printf("%d ", buffer.st_nlink);
   print_file_user(buffer.st_uid);
+  print_file_group(buffer.st_gid);
   print_file_size(buffer.st_size);
   print_file_time(buffer.st_atime);
   printf("%s\n", name);
@@ -131,6 +136,20 @@ void print_file_user(uid_t st_uid)
   }
 
   printf("%s ", pwd->pw_name);
+}
+
+void print_file_group(gid_t st_gid)
+{
+  struct group *grp;
+  grp = getgrgid(st_gid);
+
+  if (grp == NULL)
+  {
+    fprintf(stderr, "Error: cannot find group\n");
+    return;
+  }
+
+  printf("%s ", grp->gr_name);
 }
 
 void print_file_size(size_t size)
