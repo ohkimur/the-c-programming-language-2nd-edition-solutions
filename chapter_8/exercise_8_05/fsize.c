@@ -67,7 +67,7 @@ void fsize(char *name)
    * blksize_t st_blksize  Optimal blocksize for I/O
    */
 
-  // Printed in a similar fashion to ls -l
+  // Printed in a similary fashion to ls -l
   print_file_flags(buffer.st_mode);
   printf("%d ", buffer.st_nlink);
   print_file_user(buffer.st_uid);
@@ -126,30 +126,30 @@ void print_file_flags(mode_t st_mode)
 
 void print_file_user(uid_t st_uid)
 {
-  struct passwd *pwd;
-  pwd = getpwuid(st_uid);
+  struct passwd *password;
+  password = getpwuid(st_uid);
 
-  if (pwd == NULL)
+  if (password == NULL)
   {
     fprintf(stderr, "Error: cannot find user\n");
     return;
   }
 
-  printf("%s ", pwd->pw_name);
+  printf("%s ", password->pw_name);
 }
 
 void print_file_group(gid_t st_gid)
 {
-  struct group *grp;
-  grp = getgrgid(st_gid);
+  struct group *group;
+  group = getgrgid(st_gid);
 
-  if (grp == NULL)
+  if (group == NULL)
   {
     fprintf(stderr, "Error: cannot find group\n");
     return;
   }
 
-  printf("%s ", grp->gr_name);
+  printf("%s ", group->gr_name);
 }
 
 void print_file_size(size_t size)
