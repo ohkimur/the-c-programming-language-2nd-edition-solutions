@@ -76,9 +76,6 @@ void fsize(char *name)
   // printf("%-4lld ", buffer.st_blocks);
   // printf("%d\n", buffer.st_blksize);
 
-  char time_str[32];
-  strftime(time_str, sizeof(time_str), "%d %b %H:%M", localtime(&buffer.st_atime));
-
   print_file_size(buffer.st_size);
   print_file_time(buffer.st_atime);
   printf("%s\n", name);
