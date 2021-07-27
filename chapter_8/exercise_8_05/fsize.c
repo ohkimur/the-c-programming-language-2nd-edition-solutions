@@ -67,7 +67,7 @@ void fsize(char *name)
    * blksize_t st_blksize  Optimal blocksize for I/O
    */
 
-  // Printed in similar way to ls -l
+  // Printed in a similar fashion to ls -l
   print_file_flags(buffer.st_mode);
   printf("%d ", buffer.st_nlink);
   print_file_user(buffer.st_uid);
