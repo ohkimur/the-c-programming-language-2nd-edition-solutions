@@ -11,6 +11,7 @@
 void fsize(char *name);
 void dir_walk(char *dir_name, void (*func)(char *));
 void print_file_size(size_t size);
+void print_file_time(time_t time);
 
 int main(int argc, char *argv[])
 {
@@ -79,6 +80,7 @@ void fsize(char *name)
   strftime(time_str, sizeof(time_str), "%d %b %H:%M", localtime(&buffer.st_atime));
 
   print_file_size(buffer.st_size);
+  print_file_time(buffer.st_atime);
   printf("%s\n", name);
 }
 
@@ -129,4 +131,11 @@ void print_file_size(size_t size)
   }
 
   printf("%6.1f%s ", (float)size + (float)rem / 1024.0, SIZES[div]);
+}
+
+void print_file_time(time_t time)
+{
+  char time_str[32];
+  strftime(time_str, sizeof(time_str), "%d %b %H:%M", localtime(&time));
+  printf("%s ", time_str);
 }
