@@ -5,11 +5,15 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <time.h>
+#include <pwd.h>
 
 #define MAX_PATH_LEN 1024
 
 void fsize(char *name);
 void dir_walk(char *dir_name, void (*func)(char *));
+
+void print_file_flags(mode_t st_mode);
+void print_file_user(uid_t st_uid);
 void print_file_size(size_t size);
 void print_file_time(time_t time);
 
@@ -61,21 +65,7 @@ void fsize(char *name)
    * blksize_t st_blksize  Optimal blocksize for I/O
    */
 
-  // printf("%-50s: ", name);
-  // printf("%-6lld ", buffer.st_size);
-  // printf("%d ", buffer.st_dev);
-  // printf("%llu ", buffer.st_ino);
-  // printf("%d ", buffer.st_mode);
-  // printf("%d ", buffer.st_nlink);
-  // printf("%d ", buffer.st_uid);
-  // printf("%d ", buffer.st_gid);
-  // printf("%d ", buffer.st_rdev);
-  // printf("%ld ", buffer.st_atime);
-  // printf("%ld ", buffer.st_mtime);
-  // printf("%ld ", buffer.st_ctime);
-  // printf("%-4lld ", buffer.st_blocks);
-  // printf("%d\n", buffer.st_blksize);
-
+  print_file_flags(buffer.st_mode);
   print_file_size(buffer.st_size);
   print_file_time(buffer.st_atime);
   printf("%s\n", name);
@@ -112,6 +102,20 @@ void dir_walk(char *dir_name, void (*func)(char *))
   }
 
   closedir(dir);
+}
+
+void print_file_flags(mode_t st_mode)
+{
+  printf("%c", ((st_mode & S_IFMT) == S_IFDIR) ? 'd' : '-');
+  printf("%c", (st_mode & S_IRUSR) ? 'r' : '-');
+  printf("%c", (st_mode & S_IWUSR) ? 'w' : '-');
+  printf("%c", (st_mode & S_IXUSR) ? 'x' : '-');
+  printf("%c", (st_mode & S_IRGRP) ? 'r' : '-');
+  printf("%c", (st_mode & S_IWGRP) ? 'w' : '-');
+  printf("%c", (st_mode & S_IXGRP) ? 'x' : '-');
+  printf("%c", (st_mode & S_IROTH) ? 'r' : '-');
+  printf("%c", (st_mode & S_IWOTH) ? 'w' : '-');
+  printf("%c ", (st_mode & S_IXOTH) ? 'x' : '-');
 }
 
 void print_file_size(size_t size)
