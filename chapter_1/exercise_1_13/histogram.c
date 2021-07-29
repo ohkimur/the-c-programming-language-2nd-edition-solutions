@@ -15,7 +15,7 @@ int main(void)
 
   // Initialize the histogram array with 0
   int i;
-  for (i = 0; i <= BUFFER; ++i)
+  for (i = 0; i < BUFFER; ++i)
   {
     histogram[i] = 0;
   }
