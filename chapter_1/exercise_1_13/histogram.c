@@ -10,7 +10,6 @@ int main(void)
   int histogram[BUFFER];
   int histogram_length = 0;
 
-  int new_word = FALSE;
   int max_word_count = 0;
 
   // Initialize the histogram array with 0
@@ -28,9 +27,8 @@ int main(void)
   {
     if (c == ' ' || c == '\t' || c == '\n')
     {
-      if (!new_word)
+      if (word_count_index > 0)
       {
-        new_word = TRUE;
         ++histogram[word_count_index - 1];
 
         if (histogram[word_count_index - 1] > max_word_count)
@@ -48,7 +46,6 @@ int main(void)
     }
     else
     {
-      new_word = FALSE;
       ++word_count_index;
     }
   }
