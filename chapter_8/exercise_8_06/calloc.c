@@ -1,4 +1,7 @@
 #include <stdlib.h>
+#include <unistd.h>
+
+#define MIN_NR_OF_UNITS 1024
 
 typedef long Aling;
 
@@ -17,12 +20,49 @@ typedef union header Header;
 static Header base;
 static Header *free_p = NULL;
 
-Header *morecore(size_t nr_of_units);
+void c_free(void *ap);
 void *c_malloc(size_t nr_of_bytes);
+Header *c_morecore(size_t nr_of_units);
 
 int main(int argc, char *argv[])
 {
   return EXIT_SUCCESS;
+}
+
+void c_free(void *ap)
+{
+  Header *p;
+  Header *bp = (Header *)ap - 1;
+
+  for (p = free_p; !(bp > p && bp < p->s.free_block_p); p = p->s.free_block_p)
+  {
+    if (p >= p->s.free_block_p && (bp > p || bp < p->s.free_block_p))
+    {
+      break;
+    }
+  }
+
+  if (bp + bp->s.size == p->s.free_block_p)
+  {
+    bp->s.size += p->s.free_block_p->s.size;
+    bp->s.free_block_p = p->s.free_block_p->s.free_block_p;
+  }
+  else
+  {
+    bp->s.free_block_p = p->s.free_block_p;
+  }
+
+  if (p + p->s.size == bp)
+  {
+    p->s.size += bp->s.size;
+    p->s.free_block_p = bp->s.free_block_p;
+  }
+  else
+  {
+    p->s.free_block_p = bp;
+  }
+
+  free_p = p;
 }
 
 void *c_malloc(size_t nr_of_bytes)
@@ -58,7 +98,7 @@ void *c_malloc(size_t nr_of_bytes)
 
     if (p == free_p)
     {
-      if ((p = morecore(nr_of_units)) == NULL)
+      if ((p = c_morecore(nr_of_units)) == NULL)
       {
         return NULL;
       }
@@ -66,4 +106,27 @@ void *c_malloc(size_t nr_of_bytes)
   }
 
   return NULL;
+}
+
+Header *c_morecore(size_t nr_of_units)
+{
+  char *cp;
+  Header *up;
+
+  if (nr_of_units < MIN_NR_OF_UNITS)
+  {
+    nr_of_units = MIN_NR_OF_UNITS;
+  }
+
+  cp = sbrk(nr_of_units * sizeof(Header));
+  if (cp == (char *)-1)
+  {
+    return NULL;
+  }
+
+  up = (Header *)cp;
+  up->s.size = nr_of_units;
+  free((void *)(up + 1));
+
+  return free_p;
 }
