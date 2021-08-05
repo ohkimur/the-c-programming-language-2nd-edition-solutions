@@ -22,6 +22,7 @@ static Header *free_p = NULL;
 
 void c_free(void *ap);
 void *c_malloc(size_t nr_of_bytes);
+void *c_calloc(size_t nr_of_blocks, size_t block_size);
 Header *c_morecore(size_t nr_of_units);
 
 int main(int argc, char *argv[])
@@ -104,6 +105,15 @@ void *c_malloc(size_t nr_of_bytes)
       }
     }
   }
+
+  return NULL;
+}
+
+void *c_calloc(size_t nr_of_blocks, size_t block_size)
+{
+  // TODO: Implement this function:
+  // - [] Alloc the number of blocks
+  // - [] Zero out the allocated memory
 
   return NULL;
 }
