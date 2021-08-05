@@ -27,6 +27,11 @@ Header *c_morecore(size_t nr_of_units);
 
 int main(int argc, char *argv[])
 {
+  // TODO: Test the following functions:
+  // - [] c_malloc
+  // - [] c_calloc
+  // - [] c_free
+
   return EXIT_SUCCESS;
 }
 
