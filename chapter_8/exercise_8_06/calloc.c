@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 #define MIN_NR_OF_UNITS 1024
@@ -31,6 +33,17 @@ int main(int argc, char *argv[])
   // - [] c_malloc
   // - [] c_calloc
   // - [] c_free
+
+  char *test_malloc_str_p;
+
+  if ((test_malloc_str_p = c_malloc(10 * sizeof(char))) == NULL)
+  {
+    printf("Error: malloc faild memory allocation.\n");
+    return EXIT_FAILURE;
+  }
+
+  strcpy(test_malloc_str_p, "This is fine");
+  printf("%s\n", test_malloc_str_p);
 
   return EXIT_SUCCESS;
 }
@@ -141,7 +154,7 @@ Header *c_morecore(size_t nr_of_units)
 
   up = (Header *)cp;
   up->s.size = nr_of_units;
-  free((void *)(up + 1));
+  c_free((void *)(up + 1));
 
   return free_p;
 }
