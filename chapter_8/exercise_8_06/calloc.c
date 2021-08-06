@@ -138,23 +138,23 @@ void *c_calloc(size_t nr_of_blocks, size_t block_size)
 
 Header *c_morecore(size_t nr_of_units)
 {
-  char *cp;
-  Header *up;
+  char *c_p;
+  Header *u_p;
 
   if (nr_of_units < MIN_NR_OF_UNITS)
   {
     nr_of_units = MIN_NR_OF_UNITS;
   }
 
-  cp = sbrk(nr_of_units * sizeof(Header));
-  if (cp == (char *)-1)
+  c_p = sbrk(nr_of_units * sizeof(Header));
+  if (c_p == (char *)-1)
   {
     return NULL;
   }
 
-  up = (Header *)cp;
-  up->s.size = nr_of_units;
-  c_free((void *)(up + 1));
+  u_p = (Header *)c_p;
+  u_p->s.size = nr_of_units;
+  c_free((void *)(u_p + 1));
 
   return free_p;
 }
