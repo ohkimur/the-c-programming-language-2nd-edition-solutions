@@ -29,11 +29,6 @@ Header *c_morecore(size_t nr_of_units);
 
 int main(int argc, char *argv[])
 {
-  // TODO: Test the following functions:
-  // - [] c_malloc
-  // - [] c_calloc
-  // - [] c_free
-
   char *test_malloc_str_p;
   if ((test_malloc_str_p = c_malloc(27 * sizeof(char))) == NULL)
   {
