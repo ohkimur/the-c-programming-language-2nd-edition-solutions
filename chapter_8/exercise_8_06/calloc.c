@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
   if ((test_malloc_str_p = c_malloc(10 * sizeof(char))) == NULL)
   {
-    printf("Error: malloc faild memory allocation.\n");
+    printf("Error: malloc faild to allocate the requrested memory.\n");
     return EXIT_FAILURE;
   }
 
