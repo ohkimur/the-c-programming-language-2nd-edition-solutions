@@ -34,6 +34,28 @@ int main(int argc, char *argv[])
   // - [] c_calloc
   // - [] c_free
 
+  char *test_malloc_str_p;
+  if ((test_malloc_str_p = c_malloc(27 * sizeof(char))) == NULL)
+  {
+    printf("Error: malloc faild to allocate the requrested memory.\n");
+    return EXIT_FAILURE;
+  }
+
+  strcpy(test_malloc_str_p, "Content from malloc here.");
+  printf("%s\n", test_malloc_str_p);
+  c_free(test_malloc_str_p);
+
+  char *test_calloc_str_p;
+  if ((test_calloc_str_p = c_calloc(27, sizeof(char))) == NULL)
+  {
+    printf("Error: calloc faild to allocate the requrested memory.\n");
+    return EXIT_FAILURE;
+  }
+
+  strcpy(test_calloc_str_p, "Content from calloc here.");
+  printf("%s\n", test_calloc_str_p);
+  c_free(test_calloc_str_p);
+
   return EXIT_SUCCESS;
 }
 
