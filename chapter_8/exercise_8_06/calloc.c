@@ -20,7 +20,7 @@ typedef union header Header;
 static Header base;
 static Header *free_p = NULL;
 
-void c_free(void *ap);
+void c_free(void *a_p);
 void *c_malloc(size_t nr_of_bytes);
 void *c_calloc(size_t nr_of_blocks, size_t block_size);
 Header *c_morecore(size_t nr_of_units);
@@ -35,37 +35,37 @@ int main(int argc, char *argv[])
   return EXIT_SUCCESS;
 }
 
-void c_free(void *ap)
+void c_free(void *a_p)
 {
   Header *p;
-  Header *bp = (Header *)ap - 1;
+  Header *b_p = (Header *)a_p - 1;
 
-  for (p = free_p; !(bp > p && bp < p->s.free_block_p); p = p->s.free_block_p)
+  for (p = free_p; !(b_p > p && b_p < p->s.free_block_p); p = p->s.free_block_p)
   {
-    if (p >= p->s.free_block_p && (bp > p || bp < p->s.free_block_p))
+    if (p >= p->s.free_block_p && (b_p > p || b_p < p->s.free_block_p))
     {
       break;
     }
   }
 
-  if (bp + bp->s.size == p->s.free_block_p)
+  if (b_p + b_p->s.size == p->s.free_block_p)
   {
-    bp->s.size += p->s.free_block_p->s.size;
-    bp->s.free_block_p = p->s.free_block_p->s.free_block_p;
+    b_p->s.size += p->s.free_block_p->s.size;
+    b_p->s.free_block_p = p->s.free_block_p->s.free_block_p;
   }
   else
   {
-    bp->s.free_block_p = p->s.free_block_p;
+    b_p->s.free_block_p = p->s.free_block_p;
   }
 
-  if (p + p->s.size == bp)
+  if (p + p->s.size == b_p)
   {
-    p->s.size += bp->s.size;
-    p->s.free_block_p = bp->s.free_block_p;
+    p->s.size += b_p->s.size;
+    p->s.free_block_p = b_p->s.free_block_p;
   }
   else
   {
-    p->s.free_block_p = bp;
+    p->s.free_block_p = b_p;
   }
 
   free_p = p;
