@@ -34,17 +34,6 @@ int main(int argc, char *argv[])
   // - [] c_calloc
   // - [] c_free
 
-  char *test_malloc_str_p;
-
-  if ((test_malloc_str_p = c_malloc(10 * sizeof(char))) == NULL)
-  {
-    printf("Error: malloc faild to allocate the requrested memory.\n");
-    return EXIT_FAILURE;
-  }
-
-  strcpy(test_malloc_str_p, "This is fine");
-  printf("%s\n", test_malloc_str_p);
-
   return EXIT_SUCCESS;
 }
 
@@ -129,11 +118,14 @@ void *c_malloc(size_t nr_of_bytes)
 
 void *c_calloc(size_t nr_of_blocks, size_t block_size)
 {
-  // TODO: Implement this function:
-  // - [] Alloc the number of blocks
-  // - [] Zero out the allocated memory
+  void *p = NULL;
+  if ((p = c_malloc(nr_of_blocks * block_size)) == NULL)
+  {
+    return NULL;
+  }
+  memset(p, 0, nr_of_blocks * block_size);
 
-  return NULL;
+  return p;
 }
 
 Header *c_morecore(size_t nr_of_units)
