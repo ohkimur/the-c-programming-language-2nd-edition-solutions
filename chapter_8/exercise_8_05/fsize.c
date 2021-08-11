@@ -69,7 +69,7 @@ void fsize(char *name)
 
   // Printed in a similary fashion to ls -l
   print_file_flags(buffer.st_mode);
-  printf("%hu ", buffer.st_nlink);
+  printf("%lu ", buffer.st_nlink);
   print_file_user(buffer.st_uid);
   print_file_group(buffer.st_gid);
   print_file_size(buffer.st_size);
