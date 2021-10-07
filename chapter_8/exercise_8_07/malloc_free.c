@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include <unistd.h>
 
 #define MIN_NR_OF_UNITS 1024
@@ -59,6 +60,12 @@ void c_free(void *a_p)
   Header *p;
   Header *b_p = (Header *)a_p - 1;
 
+  if (b_p->s.size == 0 || b_p->s.size == UINT_MAX - MIN_NR_OF_UNITS)
+  {
+    fprintf(stderr, "Error(free): invalid block size %zu\n", b_p->s.size);
+    return;
+  }
+
   for (p = free_p; !(b_p > p && b_p < p->s.free_block_p); p = p->s.free_block_p)
   {
     if (p >= p->s.free_block_p && (b_p > p || b_p < p->s.free_block_p))
@@ -95,8 +102,9 @@ void *c_malloc(size_t nr_of_bytes)
   Header *p;
   Header *prev_p;
 
-  if (nr_of_bytes == 0 || nr_of_bytes > MIN_NR_OF_UNITS * sizeof(Aling))
+  if (nr_of_bytes == 0 || nr_of_bytes >= UINT_MAX - MIN_NR_OF_UNITS)
   {
+    fprintf(stderr, "Error(malloc): invalid size %zu\n", nr_of_bytes);
     return NULL;
   }
 
