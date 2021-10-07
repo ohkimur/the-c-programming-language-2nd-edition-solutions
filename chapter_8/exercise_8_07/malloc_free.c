@@ -94,6 +94,12 @@ void *c_malloc(size_t nr_of_bytes)
 {
   Header *p;
   Header *prev_p;
+
+  if (nr_of_bytes == 0 || nr_of_bytes > MIN_NR_OF_UNITS * sizeof(Aling))
+  {
+    return NULL;
+  }
+
   size_t nr_of_units = (nr_of_bytes + sizeof(Header) - 1) / sizeof(Header);
 
   if ((prev_p = free_p) == NULL)
