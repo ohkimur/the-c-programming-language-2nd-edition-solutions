@@ -41,15 +41,19 @@ int get_line(char line[], int maxline)
   {
     line[i] = c;
   }
-
   if (c == '\n')
   {
     line[i] = c;
     ++i;
   }
-
+  
   line[i] = '\0';
-
+  
+  while(c != EOF && c != '\n')
+  {
+    ++i;
+    c = getchar();
+  }
   return i;
 }
 
