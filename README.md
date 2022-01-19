@@ -10,7 +10,7 @@ Each chapter of the book contains **exercises** that could be very helpful for a
 This repository contains the **solutions** to the exercises from each chapter of the book. These solutions are meant to be helpful for those who want to *learn* to program with the C language.
 
 ## Environment
-The source code is not tied up to an IDE, so any text editor will do the job. However, there are useful tasks and settings available for [Visual Studio Code](https://code.visualstudio.com). For a **better experience** using this editor, the C/C++ extension provide some very helpful features specific to the C programming language.
+The source code is not tied up to an IDE, so any text editor will do the job. However, there are useful tasks and settings available for [Visual Studio Code](https://code.visualstudio.com). For a **better experience** using this editor, the C/C++ extensions provide some very helpful features specific to the C programming language.
 
 ### Compilers
 To be able to write programs in C, a compiler is required. There are many options available for each operating system.
