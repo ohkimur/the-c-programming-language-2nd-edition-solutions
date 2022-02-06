@@ -44,7 +44,7 @@ void check_syntax(char str[])
   int line_comment = FALSE;
 
   int i = 0;
-  while (str[i] != '\0')
+  while (str[i] != '\0' && parentheses >= 0 && brackets >= 0 && braces >= 0)
   {
     if (!line_comment && !block_comment && !single_quotes && !double_quotes)
     {
