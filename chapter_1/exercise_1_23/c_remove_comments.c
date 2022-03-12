@@ -74,7 +74,7 @@ void remove_comments(char str[], char no_com_str[])
         i += 2;
       }
 
-      if (str[i] == '/' && str[i] == '/')
+      if (str[i] == '/' && str[i + 1] == '/')
       {
         line_comment = TRUE;
       }
