@@ -150,7 +150,7 @@ void unescape(char dest[], char src[])
         break;
 
       case 'v':
-        dest[j] = '\n';
+        dest[j] = '\v';
         break;
 
       case '\\':
