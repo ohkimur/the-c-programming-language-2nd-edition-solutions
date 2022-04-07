@@ -5,7 +5,7 @@ int strindex(char *s, char *t);
 int main(void)
 {
   char s[] = "this is first string";
-  char t[] = "this";                  /* the original is "first" */ 
+  char t[] = "this";                  
 
   printf("%d", strindex(s, t));
 
@@ -18,9 +18,8 @@ int strindex(char *s, char *t)
   char *second;
   int pos = 0;
 
-  while (*s != '\0')                  /* the original is "while (*s++ != '\0')", 
-                                      it skips the first element in the statement of "if (*s == *t)" */
-  {                                   /* ++pos is removed, it also skips the first position */
+  while (*s != '\0')                  
+  {
     if (*s == *t)
     {
       first = s;
@@ -32,8 +31,8 @@ int strindex(char *s, char *t)
           return pos;
       }
     }
-    pos++;                            /* add 1 if the condition above not ture */
-    s++;                              /* we can move to next character in next loop */
+    pos++;
+    s++;
   }
 
   return -1;
