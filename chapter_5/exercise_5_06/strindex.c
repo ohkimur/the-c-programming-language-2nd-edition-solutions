@@ -5,7 +5,7 @@ int strindex(char *s, char *t);
 int main(void)
 {
   char s[] = "this is first string";
-  char t[] = "first";
+  char t[] = "this";
 
   printf("%d", strindex(s, t));
 
@@ -18,10 +18,8 @@ int strindex(char *s, char *t)
   char *second;
   int pos = 0;
 
-  while (*s++ != '\0')
+  while (*s != '\0')
   {
-    ++pos;
-
     if (*s == *t)
     {
       first = s;
@@ -33,6 +31,8 @@ int strindex(char *s, char *t)
           return pos;
       }
     }
+    pos++;
+    s++;
   }
 
   return -1;
