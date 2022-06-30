@@ -17,7 +17,7 @@ enum directive_type
 {
   NONE = 0,
   DEFINE = 1,
-  UNDEF = 1
+  UNDEF = 2
 };
 
 struct list_node
