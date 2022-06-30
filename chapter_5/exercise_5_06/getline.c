@@ -1,23 +1,19 @@
 #include <stdio.h>
 
-void get_line(char *s);
 
-int main(void)
-{
-  char string[150] = "";
+char *getln(char *line);
 
-  get_line(string);
-  puts(string);
-
-  return 0;
+int main() {
+    char line[100];
+    
+    getln(line);
+    printf("%s", line);
+    
+    return 0;
 }
 
-void get_line(char *s)
-{
-  while ((*s = getchar()) != EOF && (*s != '\n'))
-  {
-    ++s;
-  }
-
-  *s = '\0';
+char *getln(char *line) {
+    while ((*line++ = getchar()) != 10);
+    *--line = 0;
+    return line;
 }
