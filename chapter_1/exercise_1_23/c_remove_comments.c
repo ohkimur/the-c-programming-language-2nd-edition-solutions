@@ -52,13 +52,16 @@ void remove_comments(char str[], char no_com_str[])
   int i = 0, j = 0;
   while (str[i] != '\0')
   {
-    if (!in_quote && str[i] == '"')
+    if (!block_comment)
+    {
+      if (!in_quote && str[i] == '"')
     {
       in_quote = TRUE;
     }
     else if (in_quote && str[i] == '"')
     {
       in_quote = FALSE;
+    }
     }
 
     if (!in_quote)
