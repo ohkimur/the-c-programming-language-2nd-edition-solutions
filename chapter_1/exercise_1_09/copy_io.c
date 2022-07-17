@@ -3,7 +3,7 @@
 int main(void)
 {
   char c;
-  char last_c;
+  char last_c = '\0';
   while ((c = getchar()) != EOF)
   {
     if (c != ' ' || last_c != ' ')
