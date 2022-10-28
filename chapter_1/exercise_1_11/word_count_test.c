@@ -23,7 +23,8 @@ int main(void)
     {
       ++nl;
     }
-    else if (c == ' ' || c == '\n' || c == '\t')
+
+    if (c == ' ' || c == '\n' || c == '\t')
     {
       state = OUT;
     }
