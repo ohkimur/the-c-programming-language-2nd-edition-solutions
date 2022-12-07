@@ -4,10 +4,17 @@
 
 int main(void)
 {
+  FILE *input;
+  char input_name[100];
+  printf("Enter the name of the input file : ");
+  scanf("%s", input_name);
+  printf("\nThe output :\n");
+  input = fopen(input_name, "r");
+  
   int c;
   unsigned int nr_of_spaces;
 
-  while ((c = getchar()) != EOF)
+  while ((c = getc(input)) != EOF)
   {
     if (c == '\t')
     {
@@ -24,10 +31,14 @@ int main(void)
       putchar(c);
     }
   }
+  fclose(input);
 
   return 0;
 }
 
-// NOTE: In UNIX like systems you can execute commands like this:
-// ./detab < file_in.txt > file_out.txt that takes the input from a
-// file and after the program processed its content puts it to another file.
+/* NOTE: The open the folder in which the input file is present
+         using 'cd' in terminal
+         Then type the name of the input file
+         The output will be printed on the screen.
+*/
+
