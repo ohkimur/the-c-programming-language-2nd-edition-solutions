@@ -80,7 +80,7 @@ void escape(char dest[], char src[])
 
     case '\v':
       dest[j++] = '\\';
-      dest[j] = 'n';
+      dest[j] = 'v';
       break;
 
     case '\\':
@@ -111,7 +111,7 @@ void escape(char dest[], char src[])
 
   if (src[i] == '\0')
   {
-    dest[i] = src[i];
+    dest[j] = src[i];
   }
 }
 
@@ -184,6 +184,6 @@ void unescape(char dest[], char src[])
 
   if (src[i] == '\0')
   {
-    dest[i] = src[i];
+    dest[j] = src[i];
   }
 }
