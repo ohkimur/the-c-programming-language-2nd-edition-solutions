@@ -23,9 +23,9 @@ int main(void)
   // specific index
   char c;
   int word_count_index = 0;
-  while ((c = getchar()) != EOF)
+  while (c = getchar())
   {
-    if (c == ' ' || c == '\t' || c == '\n')
+    if (c == ' ' || c == '\t' || c == '\n' || c == EOF)
     {
       if (word_count_index > 0)
       {
@@ -43,6 +43,7 @@ int main(void)
 
         word_count_index = 0;
       }
+      if (c == EOF) break;
     }
     else
     {
