@@ -43,7 +43,10 @@ int main(void)
 
         word_count_index = 0;
       }
-      if (c == EOF) break;
+      if (c == EOF) 
+      {
+        break;
+      }  
     }
     else
     {
