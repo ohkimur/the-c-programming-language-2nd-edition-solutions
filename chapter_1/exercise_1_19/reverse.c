@@ -31,6 +31,10 @@ int get_line(char line[], int max_line_len)
     ++i;
   }
 
+  // flush out input stream if exceeding MAXLINE limit
+  while (i >= max_line_len - 1 && (c = getchar()) != '\n')
+    ;
+
   if (c == '\n')
   {
     line[i] = '\n';
@@ -58,7 +62,7 @@ void reverse(char line[])
   int i_back = length(line);
   char temp;
 
-  i_back -= 2;
+  i_back = line[i_back - 1] == '\n'? i_back - 2: i_back - 1;
   while (i_back > i_front)
   {
     temp = line[i_front];
