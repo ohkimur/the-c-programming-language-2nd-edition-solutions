@@ -2,8 +2,9 @@
 
 int main(void)
 {
-  char c;
-  char last_c = '\0';
+  int c;
+  int last_c = '\0';
+
   while ((c = getchar()) != EOF)
   {
     if (c != ' ' || last_c != ' ')
