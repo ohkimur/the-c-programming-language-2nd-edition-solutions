@@ -267,14 +267,19 @@ int getop(char s[])
   if (c == '-')
   {
     int next = line[line_i++];
-    if (!isdigit(next) && next != '.')
+    if (next == '\n' || next == ' ' || next == '\t' || next == '\0')
+    {
+      --line_i;
+      return '-';
+    }
+    else if (!isdigit(next) && next != '.') // not a number
     {
       return next;
     }
-
-    s[i] = c;
-    c = next;
-    --line_i;
+    else
+    {
+      s[++i] = c = next;
+    }
   }
   else
   {
