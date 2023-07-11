@@ -201,13 +201,19 @@ int getop(char s[])
   if (c == '-')
   {
     int next = getch();
-    if (!isdigit(next) && next != '.')
+    if (next == '\n' || next == ' ' || next == '\t')
     {
-      return next;
+      ungetch(next);
+      return c; // return '-' as operator
     }
-
-    s[i] = c;
-    ungetch(c = next);
+    else if (!isdigit(next) && next != '.')
+    {
+      return next; // not a number
+    }
+    else // number like "-5", "-.6" etc, next is digit or '.'
+    {
+      s[++i] = c = next;
+    }
   }
   else
   {
