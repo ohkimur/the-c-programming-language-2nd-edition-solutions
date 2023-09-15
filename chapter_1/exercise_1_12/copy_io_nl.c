@@ -1,20 +1,19 @@
-#include <stdio.h>
-
-int main(void)
-{
-  char c;
-
-  while ((c = getchar()) != EOF)
-  {
-    if (c == ' ' || c == '\t' || c == '\n')
-    {
-      putchar('\n');
-    }
-    else
-    {
-      putchar(c);
-    }
-  }
-
-  return 0;
-}
+#include <stdio.h>                                                               
+                                                                                 
+int main()                                                                       
+{                                                                                
+        char c;                                                                  
+        char last_char = -1;                                                     
+        while ((c = getchar()) != EOF) {                                         
+                if(c==' ' || c=='\t' ||  c=='\n'){                               
+                        if(last_char!=' ' &&  last_char!='\t' && last_char!='\n'){
+                                putchar('\n');                                   
+                        }                                                        
+                        last_char=c;                                             
+                }                                                                
+                else {                                                           
+                        putchar(c);                                              
+                        last_char=c;                                             
+                }                                                                
+        }                                                                        
+}        
