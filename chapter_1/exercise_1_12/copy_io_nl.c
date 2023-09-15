@@ -9,11 +9,10 @@ int main()
                         if(last_char!=' ' &&  last_char!='\t' && last_char!='\n'){
                                 putchar('\n');                                   
                         }                                                        
-                        last_char=c;                                             
                 }                                                                
                 else {                                                           
                         putchar(c);                                              
-                        last_char=c;                                             
-                }                                                                
+                }       
+                last_char=c;
         }                                                                        
 }        
