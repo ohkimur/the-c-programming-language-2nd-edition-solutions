@@ -4,6 +4,7 @@ int main()
 {
   char c;
   char last_char = -1;
+
   while ((c = getchar()) != EOF) {
     if(c==' ' || c=='\t' ||  c=='\n'){
       if(last_char!=' ' &&  last_char!='\t' && last_char!='\n'){
@@ -15,4 +16,6 @@ int main()
     }
     last_char=c;
   }
+
+  return 0;
 }
