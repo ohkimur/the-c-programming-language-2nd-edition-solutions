@@ -39,7 +39,7 @@ void itob(int n, char s[], int b)
   {
     s[i++] = itoc(abs(n) % b);
     n /= b;
-  } while (n /= b);
+  } while (n);
 
   switch (b)
   {
