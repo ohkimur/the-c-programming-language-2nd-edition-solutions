@@ -2,20 +2,20 @@
 
 int main()
 {
-  int c, prev;
-  prev = EOF;
+  int character;
+  int previous_character = EOF;
 
-  while ((c = getchar()) != EOF) {
-    if (c == ' ' || c == '\t' || c == '\n') {
-      if (prev != ' ' && prev != '\t' && prev != '\n') {
+  while ((character = getchar()) != EOF) {
+    if (character == ' ' || character == '\t' || character == '\n') {
+      if (previous_character != ' ' && previous_character != '\t' && previous_character != '\n') {
         putchar('\n');
       }
     }
     else {
-      putchar(c);
+      putchar(character);
     }
 
-    prev = c;
+    previous_character = character;
   }
 
   return 0;
