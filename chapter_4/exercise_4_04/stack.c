@@ -215,10 +215,11 @@ int getop(char s[])
       s[++i] = c = next;
     }
   }
-  else
-  {
-    c = getch();
-  }
+//  else
+//  {
+//    c = getch();
+//  }
+// This else block caused '33 44+' to output 7 instead of 77
 
   if (isdigit(c))
   {
