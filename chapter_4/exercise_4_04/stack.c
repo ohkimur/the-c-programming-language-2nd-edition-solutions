@@ -158,10 +158,16 @@ void swap(void)
 
 void clear(void)
 {
-  do
+/*  do
   {
     stack[sp] = 0.0;
   } while (sp--);
+*/
+  // Replacing the above commented code with this one ensures messages of "stack empty" aren't displayed an extra time after c command is called in the program
+  while (sp > 0)
+  {
+    stack[--sp] = 0.0;
+  }
 }
 
 int bufp = 0;
@@ -215,10 +221,11 @@ int getop(char s[])
       s[++i] = c = next;
     }
   }
-  else
+  // Remove this else block so that a value like 1200 in the program won't be mistaken is 100. This block will skip the second digit that is read in the number parsing process
+/*  else
   {
     c = getch();
-  }
+  }*/
 
   if (isdigit(c))
   {
