@@ -95,23 +95,23 @@ int main(void)
       push(sin(pop()));
       break;
 
-    case 'e':
+    case 'E':
       push(exp(pop()));
       break;
 
-    case 'h':
+    case 'H':
       view_head();
       break;
 
-    case 'd':
+    case 'D':
       duplicate();
       break;
 
-    case 's':
+    case 'S':
       swap();
       break;
 
-    case 'c':
+    case 'C':
       clear();
       break;
 
@@ -244,7 +244,7 @@ int getop(char s[])
 
   s[1] = '\0';
 
-  if (isalpha(c))
+  if (isalpha(c) && !(c >= 'A' && c <= 'Z'))
   {
     var = c;
     return VARGET;
@@ -296,3 +296,7 @@ int getop(char s[])
 
   return NUMBER;
 }
+/* To prevent the variable checking in getop() from overlapping with the letter commands,
+make sure you set the commands to capital letters and explicitly tell the getop() to only
+check for variable-getting if the character is not capital
+e.g insteat of "if (isalpha(c))" you add "if (isalpha(c) && !(c >= 'A' && c >= 'Z'))"*/
