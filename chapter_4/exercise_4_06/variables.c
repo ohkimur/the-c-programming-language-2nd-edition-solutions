@@ -94,24 +94,24 @@ int main(void)
     case '~':
       push(sin(pop()));
       break;
-
-    case 'e':
+// Be sure to make the commands capitalized not to overlap them with variables, or vice versa according to personal preference
+    case 'E':
       push(exp(pop()));
       break;
 
-    case 'h':
+    case 'H':
       view_head();
       break;
 
-    case 'd':
+    case 'D':
       duplicate();
       break;
 
-    case 's':
+    case 'S':
       swap();
       break;
 
-    case 'c':
+    case 'C':
       clear();
       break;
 
@@ -121,7 +121,14 @@ int main(void)
       break;
 
     case VARGET:
-      push(var_buff[var - 'a']);
+      if (var - 'a' <= (varindex - 1)) // Check if the variable has been assigned previously
+      {
+        push(var_buff[var - 'a']);
+      }
+      else
+      {
+        printf("Error: undefined variable.\n");
+      }
       break;
 
     case '\n':
@@ -244,7 +251,7 @@ int getop(char s[])
 
   s[1] = '\0';
 
-  if (isalpha(c))
+  if (isalpha(c) && !isupper(c))
   {
     var = c;
     return VARGET;
