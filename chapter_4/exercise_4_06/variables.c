@@ -94,7 +94,6 @@ int main(void)
     case '~':
       push(sin(pop()));
       break;
-// Be sure to make the commands capitalized not to overlap them with variables, or vice versa according to personal preference
     case 'E':
       push(exp(pop()));
       break;
