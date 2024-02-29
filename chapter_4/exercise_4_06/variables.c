@@ -251,7 +251,7 @@ int getop(char s[])
 
   s[1] = '\0';
 
-  if (isalpha(c) && !isupper(c))
+  if (islower(c))
   {
     var = c;
     return VARGET;
