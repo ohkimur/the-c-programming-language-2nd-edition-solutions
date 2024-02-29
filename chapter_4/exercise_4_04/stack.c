@@ -215,11 +215,6 @@ int getop(char s[])
       s[++i] = c = next;
     }
   }
-  // Remove this else block so that a value like 1200 in the program won't be mistaken is 100. This block will skip the second digit that is read in the number parsing process
-/*  else
-  {
-    c = getch();
-  }*/
 
   if (isdigit(c))
   {
