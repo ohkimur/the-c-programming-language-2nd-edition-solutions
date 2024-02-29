@@ -94,6 +94,7 @@ int main(void)
     case '~':
       push(sin(pop()));
       break;
+
     case 'E':
       push(exp(pop()));
       break;
