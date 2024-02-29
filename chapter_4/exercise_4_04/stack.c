@@ -158,12 +158,6 @@ void swap(void)
 
 void clear(void)
 {
-/*  do
-  {
-    stack[sp] = 0.0;
-  } while (sp--);
-*/
-  // Replacing the above commented code with this one ensures messages of "stack empty" aren't displayed an extra time after c command is called in the program
   while (sp > 0)
   {
     stack[--sp] = 0.0;
