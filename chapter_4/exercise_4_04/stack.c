@@ -215,10 +215,6 @@ int getop(char s[])
       s[++i] = c = next;
     }
   }
-  else
-  {
-    c = getch();
-  }
 
   if (isdigit(c))
   {
