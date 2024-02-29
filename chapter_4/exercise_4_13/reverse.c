@@ -27,7 +27,7 @@ void reverse(char str[])
 
     str[j++] = c;
   }
-  if (s[j] == '\0') // if whole reverse process is complete, reset the static variables to make this function reusable
+  if (str[j] == '\0') // if whole reverse process is complete, reset the static variables to make this function reusable
   {
         i = 0;
         j = 0;
