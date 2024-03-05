@@ -27,11 +27,13 @@ void reverse(char str[])
 
     str[j++] = c;
   }
-  if (str[j] == '\0') // if whole reverse process is complete, reset the static variables to make this function reusable
+
+  // if whole reverse process is complete, reset the static variables to make this function reusable
+  if (str[j] == '\0')
   {
-        i = 0;
-        j = 0;
-    }
+    i = 0;
+    j = 0;
+  }
 }
 
 // NOTE: As a simple observation when recursive functions are used, static
