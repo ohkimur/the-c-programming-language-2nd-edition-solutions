@@ -121,7 +121,15 @@ int main(void)
       break;
 
     case VARGET:
-      push(var_buff[var - 'a']);
+      // Check if the variable has been assigned previously
+      if (var - 'a' <= (varindex - 1))
+      {
+        push(var_buff[var - 'a']);
+      }
+      else
+      {
+        printf("Error: undefined variable.\n");
+      }
       break;
 
     case '\n':
