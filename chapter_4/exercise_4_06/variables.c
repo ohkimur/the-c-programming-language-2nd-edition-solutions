@@ -121,7 +121,8 @@ int main(void)
       break;
 
     case VARGET:
-      if (var - 'a' <= (varindex - 1)) // Check if the variable has been assigned previously
+      // Check if the variable has been assigned previously
+      if (var - 'a' <= (varindex - 1))
       {
         push(var_buff[var - 'a']);
       }
