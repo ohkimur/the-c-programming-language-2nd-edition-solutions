@@ -46,7 +46,7 @@ int getfloat(float *pn)
   while (isspace(c = getch()))
     ;
 
-  if (!isdigit(c) && c != EOF && c != '+' && c != '-')
+  if (!isdigit(c) && c != EOF && c != '+' && c != '-' && c != '.')
   {
     ungetch(c);
     return 0;
