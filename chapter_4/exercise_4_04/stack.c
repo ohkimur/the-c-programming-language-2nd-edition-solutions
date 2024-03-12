@@ -158,10 +158,10 @@ void swap(void)
 
 void clear(void)
 {
-  do
+  while (sp > 0)
   {
-    stack[sp] = 0.0;
-  } while (sp--);
+    stack[--sp] = 0.0;
+  }
 }
 
 int bufp = 0;
