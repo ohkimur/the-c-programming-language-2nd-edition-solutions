@@ -32,8 +32,8 @@ int strend(char *s, char *t)
   size_t t_length = strlen(t);
 
   // Move the s & t pointer to the end of the corresponding strings.
-  s += s_length;
-  t += t_length;
+  s += s_length - 1;
+  t += t_length - 1;
 
   // Check backwards if each character from string t occurs in the corresonding
   // location from the string s.
