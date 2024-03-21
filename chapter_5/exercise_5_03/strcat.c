@@ -18,10 +18,10 @@ int main(void)
 void strcat_ptr(char *s, char *t)
 {
   // Find the end of s
-  while ((*++s) != '\0')
-    ;
+  while (*s)
+      ++s;
 
   // copy t to the end of s
-  while ((*s++ = *t++) != '\0')
+  while (*s++ = *t++)
     ;
 }
