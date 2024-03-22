@@ -22,7 +22,7 @@ int getop(char *s)
   char c;
 
   // Skip blanks (spaces and tabs)
-  while ((*s = c = getchar()) != ' ' || c != '\t')
+  while ((*s = c = getchar()) == ' ' || c == '\t')
     ;
 
   *(s + 1) = '\0';
