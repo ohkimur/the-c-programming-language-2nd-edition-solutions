@@ -29,7 +29,7 @@ int main(void)
 // Return <0 if s<t, 0 if s==t, >0 if s>t *1
 int strcmp_ptr(char *s, char *t, size_t n)
 {
-  while ((*s == *t) != '\0' && --n)
+  while ((*s == *t) && --n)
   {
     if (*s == '\0')
       return 0;
@@ -39,12 +39,12 @@ int strcmp_ptr(char *s, char *t, size_t n)
   }
 
   // If the s string contains more characters than t, then the t char will
-  // become '\0' before s char. If this happen then the s char will be >0 and
-  // t char will be 0, so the final result will be >0.
+  // become '\0' before s char. If this happen then the s char will be its ascii value and
+  // t char will be 0, so the final result will be s_ascii_value - 0.
 
   // If the t string contains more character than s, then the s char will
-  // become '\0' before t char. If this happen then the s char will be <0 and
-  // t char will be 0, so the final result will be <0.
+  // become '\0' before t char. If this happen then the s char will be 0 and
+  // t char will be whatever ascii_value it's holding, so the final result will be 0 - t_ascii_value.
 
   return *s - *t;
 }
