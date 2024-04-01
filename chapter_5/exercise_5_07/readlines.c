@@ -48,7 +48,7 @@ int readlines(char *line_ptr[], int max_nr_of_lines, char *stored_lines)
   {
     // Checking if the current # of lines exceeds the max # of lines that can be stored
     // Also checking if the max # of chars from the stored_lines buffer is not exceeded
-    if (nr_of_lines >= max_nr_of_lines || (strlen(stored_lines) + len) > MAXSTORE)
+    if (nr_of_lines >= max_nr_of_lines || stored_lines + MAXSTORE - p < len)
     {
       return -1;
     }
