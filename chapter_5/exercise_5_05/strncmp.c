@@ -44,7 +44,7 @@ int strcmp_ptr(char *s, char *t, size_t n)
 
   // If the t string contains more character than s, then the s char will
   // become '\0' before t char. If this happen then the s char will be 0 and
-  // t char will be whatever ascii_value it's holding, so the final result will be 0 - t_ascii_value.
+  // t char will be whatever ascii_value is holding, so the final result will be 0 - t_ascii_value.
 
   return *s - *t;
 }
