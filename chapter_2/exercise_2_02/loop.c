@@ -22,14 +22,17 @@ int main(void)
     if (i >= (MAXLINE - 1))
     {
       loop = 0;
+      break;
     }
     else if (c == '\n')
     {
       loop = 0;
+      break;
     }
     else if (c == EOF)
     {
       loop = 0;
+      break;
     }
 
     s[i++] = c;
