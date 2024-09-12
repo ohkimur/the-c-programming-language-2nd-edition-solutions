@@ -19,22 +19,11 @@ int main(void)
   {
     char c = getchar();
 
-    if (i >= (MAXLINE - 1))
+    if (i >= (MAXLINE - 1) || c == '\n' || c == EOF)
     {
       loop = 0;
       break;
     }
-    else if (c == '\n')
-    {
-      loop = 0;
-      break;
-    }
-    else if (c == EOF)
-    {
-      loop = 0;
-      break;
-    }
-
     s[i++] = c;
   }
 
