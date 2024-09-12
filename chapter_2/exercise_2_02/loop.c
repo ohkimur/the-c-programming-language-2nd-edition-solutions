@@ -22,7 +22,6 @@ int main(void)
     if (i >= (MAXLINE - 1) || c == '\n' || c == EOF)
     {
       loop = 0;
-      break;
     }
     s[i++] = c;
   }
