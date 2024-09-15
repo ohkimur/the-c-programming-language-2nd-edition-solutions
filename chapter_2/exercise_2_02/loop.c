@@ -19,15 +19,7 @@ int main(void)
   {
     char c = getchar();
 
-    if (i >= (MAXLINE - 1))
-    {
-      loop = 0;
-    }
-    else if (c == '\n')
-    {
-      loop = 0;
-    }
-    else if (c == EOF)
+    if (i >= (MAXLINE - 1) || c == '\n' || c == EOF)
     {
       loop = 0;
     }
