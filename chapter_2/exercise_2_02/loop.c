@@ -23,6 +23,7 @@ int main(void)
     {
       loop = 0;
     }
+
     s[i++] = c;
   }
 
