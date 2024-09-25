@@ -2,23 +2,29 @@
 
 #define MAXLINE 1000
 #define LIMIT 80
+#define THRESHOLD 83
 
 int get_line(char line[], int max_line_len);
 
-int main(void)
-{
-  int len;
-  char line[MAXLINE];
+int main(void) {
+    int len, nextLen;
+    char first[THRESHOLD];
+    char continuous[THRESHOLD];
 
-  while ((len = get_line(line, MAXLINE)) > 0)
-  {
-    if (len > LIMIT)
-    {
-      printf("%s", line);
+    while ((len = get_line(first, THRESHOLD)) > 0) {
+        
+        if (len == THRESHOLD-1) {
+            printf("%s", first);
+            nextLen = THRESHOLD-1;
+            while (nextLen == THRESHOLD-1) {
+                nextLen = get_line(continuous, THRESHOLD);
+                printf("%s", continuous);
+            }
+        }
+        len = 0;
     }
-  }
 
-  return 0;
+    return 0;
 }
 
 int get_line(char line[], int max_line_len)
