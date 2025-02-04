@@ -168,7 +168,7 @@ FILE *file_open(char *name, char *mode)
 
 int file_close(FILE *file_p)
 {
-  if (file_flush(file_p) == EOF)
+  if (file_p->flag._WRITE == 1 && file_flush(file_p) == EOF)
   {
     return EOF;
   }
@@ -179,7 +179,7 @@ int file_close(FILE *file_p)
   file_p->counter = 0;
   close(file_p->file_descriptor);
 
-  return NULL;
+  return 0;
 }
 
 int file_seek(FILE *file_p, long offset, int whence)
@@ -227,6 +227,7 @@ int main(void)
   {
     putc(c, file_out_p);
   }
+  file_close(file_in_p);
   file_close(file_out_p);
 
   return EXIT_SUCCESS;
