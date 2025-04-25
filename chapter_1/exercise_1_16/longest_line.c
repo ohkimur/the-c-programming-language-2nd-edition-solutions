@@ -54,6 +54,10 @@ int get_line(char line[], int maxline)
     ++i;
     c = getchar();
   }
+  
+  if (c == '\n')
+    ++i;
+
   return i;
 }
 
