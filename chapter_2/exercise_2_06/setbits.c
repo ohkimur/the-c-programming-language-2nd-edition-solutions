@@ -28,8 +28,8 @@ unsigned int setbits(int x, int p, int n, int y)
 {
   ++p; // First position is 0
 
-  unsigned int mask1 = (~(~(~0 << n) << p) & x);
-  unsigned int mask2 = (~(~0 << n) & y) << p;
+  unsigned int mask1 = (~(~(~0 << n) << (p-n)) & x);
+  unsigned int mask2 = (~(~0 << n) & y) << (p-n);
 
   return mask1 | mask2;
 }
