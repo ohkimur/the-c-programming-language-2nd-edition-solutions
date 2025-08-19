@@ -1,31 +1,37 @@
 #include <stdio.h>
 
-#define TAB_LENGTH 8
+#define TABSIZE 8
 
-int main(void)
-{
-  int c;
-  unsigned int nr_of_spaces;
+int main() {
+    	int c, next, pos;
+	
+	pos = 0;
+	while((c = getchar()) != EOF) {
+		if(c == '\\') {
+			next = getchar();
+			if(next == 't') {
+				int spaces = TABSIZE - (pos % TABSIZE);
 
-  while ((c = getchar()) != EOF)
-  {
-    if (c == '\t')
-    {
-      nr_of_spaces = TAB_LENGTH;
-
-      while (nr_of_spaces)
-      {
-        putchar(' ');
-        --nr_of_spaces;
-      }
-    }
-    else
-    {
-      putchar(c);
-    }
-  }
-
-  return 0;
+				for(int i = 0; i < spaces; ++i)
+					putchar(' ');
+				pos += spaces;	
+			}
+			else {
+				putchar(c);
+				++pos;
+				putchar(next);
+				++pos;
+			}
+		}
+		else {
+			if(c == '\n')
+				pos = 0;
+			else
+				++pos;
+			putchar(c);
+		}
+	}
+	return 0;
 }
 
 // NOTE: In UNIX like systems you can execute commands like this:
