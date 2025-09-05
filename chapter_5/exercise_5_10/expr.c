@@ -108,7 +108,7 @@ float pop(void)
 {
   if (stack_pointer > 0)
   {
-    return stack[stack_pointer--];
+    return stack[--stack_pointer];
   }
 
   printf("Error: the stack is empty.\n");
@@ -119,7 +119,7 @@ void push(float element)
 {
   if (stack_pointer < STACK_SIZE)
   {
-    stack[++stack_pointer] = element;
+    stack[stack_pointer++] = element;
   }
   else
   {
