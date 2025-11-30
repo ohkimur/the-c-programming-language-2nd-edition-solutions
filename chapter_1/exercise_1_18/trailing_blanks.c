@@ -12,8 +12,12 @@ int main(void)
 
   while ((len = get_line(line, MAXLINE)) > 0)
   {
-    remove_trailing_blanks(line, len);
-    printf("%s", line);
+    len = remove_trailing_blanks(line, len);
+
+    if (len > 1 || line[0] != '\n')
+    {
+      printf("%s", line);
+    }
   }
 
   return 0;
