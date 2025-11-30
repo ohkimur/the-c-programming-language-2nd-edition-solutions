@@ -3,7 +3,7 @@
 #define MAXLINE 1000
 
 int get_line(char line[], int max_line_len);
-void remove_trailing_blanks(char line[], int length);
+int remove_trailing_blanks(char line[], int length);
 
 int main(void)
 {
@@ -39,13 +39,30 @@ int get_line(char line[], int max_line_len)
   return i;
 }
 
-void remove_trailing_blanks(char line[], int length)
+#define HAS_NEWLINE 1
+#define NO_NEWLINE 0
+
+int remove_trailing_blanks(char line[], int length)
 {
-  int i;
+  int i, has_newline;
 
-  for (i = length - 2; line[i] == ' ' || line[i] == '\t'; --i)
-    ;
+  has_newline = NO_NEWLINE;
 
-  line[i + 1] = '\n';
-  line[i + 2] = '\0';
+  for (i = length - 1; i >= 0 && (line[i] == '\n' || line[i] == ' ' || line[i] == '\t'); --i)
+  {
+    if (line[i] == '\n')
+    {
+      has_newline = HAS_NEWLINE;
+    }
+  }
+
+  if (has_newline == HAS_NEWLINE)
+  {
+    line[i + 1] = '\n';
+    line[i + 2] = '\0';
+    return i + 2;
+  }
+
+  line[i + 1] = '\0';
+  return i + 1;
 }
