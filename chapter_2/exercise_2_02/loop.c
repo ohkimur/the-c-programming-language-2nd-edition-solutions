@@ -18,12 +18,11 @@ int main(void)
         else if (c == EOF)
             break;
         else 
-            s[i] = c;
-
-        ++i;
+            s[i++] = c;
     }
+    s[i] = '\0';
 
-    printf("\n%s\n", s);
+    printf("%s\n", s);
 
 
   return 0;
