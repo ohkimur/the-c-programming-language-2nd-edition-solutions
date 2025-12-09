@@ -16,10 +16,10 @@ lint:
 	@echo "Lint passed!"
 
 format:
-	find . -name '*.c' -o -name '*.h' | xargs clang-format -i
+	find . \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 clang-format -i
 
 format-check:
-	find . -name '*.c' -o -name '*.h' | xargs clang-format --dry-run --Werror
+	find . \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 clang-format --dry-run --Werror
 
 check: format-check lint
 
