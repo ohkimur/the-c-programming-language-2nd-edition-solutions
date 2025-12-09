@@ -28,8 +28,8 @@ int parse_arg_list(int argc, char *argv[]);
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
 
-void skip_blanks();
-void skip_comments();
+void skip_blanks(void);
+void skip_comments(void);
 void skip_chars_between(char start, char end);
 void skip_char_literal(void);
 void skip_string_literal(void);
@@ -99,14 +99,14 @@ char *str_dup(char *src) {
     return dest;
 }
 
-void skip_blanks() {
+void skip_blanks(void) {
     int c;
     while (isblank(c = getc(stdin)))
         ;
     ungetc(c, stdin);
 }
 
-void skip_comments() {
+void skip_comments(void) {
     int c = getc(stdin);
     if (c == '/') {
         c = getc(stdin);
@@ -153,7 +153,7 @@ int get_word(char *word, int max_word_len) {
     skip_string_literal();
 
     int c = getc(stdin);
-    size_t i = 0;
+    int i = 0;
 
     if (c != EOF) {
         word[i++] = c;

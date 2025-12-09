@@ -14,7 +14,9 @@ void push(float element);
 int main(int argc, char *argv[]) {
     char Error = 0;
 
-    for (size_t i = 1; i < argc; ++i) {
+    // Using int instead of size_t for loop variable to match signed argc
+    // This prevents sign comparison warnings
+    for (int i = 1; i < argc; ++i) {
         float number = atof(argv[i]);
 
         if (number || strcmp(argv[i], "0") == 0) {

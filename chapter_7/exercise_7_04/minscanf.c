@@ -4,7 +4,7 @@
 
 void minscanf(const char *format, ...);
 
-int main(int argc, char *argv[]) {
+int main(void) {
     int decimal;
     int integer;
     int octal;

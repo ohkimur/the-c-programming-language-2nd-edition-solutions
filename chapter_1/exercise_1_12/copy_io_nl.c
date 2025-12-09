@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-int main() {
+// Using (void) instead of () explicitly declares that main takes no parameters
+// This is the preferred modern C style and avoids compiler warnings
+int main(void) {
     int character;
     int previous_character = EOF;
 

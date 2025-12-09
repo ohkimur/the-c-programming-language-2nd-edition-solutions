@@ -23,7 +23,10 @@ int main(void) {
 }
 
 int get_line(char line[], unsigned int limit) {
-    int i, c;
+    // Using unsigned int for i to match the unsigned limit parameter
+    // This prevents sign comparison warnings
+    unsigned int i;
+    int c;
     for (i = 0; i < limit - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
         line[i] = c;
     }

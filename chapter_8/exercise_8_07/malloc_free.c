@@ -26,7 +26,7 @@ void *c_malloc(size_t nr_of_bytes);
 void *c_calloc(size_t nr_of_blocks, size_t block_size);
 Header *c_morecore(size_t nr_of_units);
 
-int main(int argc, char *argv[]) {
+int main(void) {
     char *test_malloc_str_p;
     if ((test_malloc_str_p = c_malloc(27 * sizeof(char))) == NULL) {
         printf("Error: malloc faild to allocate the requrested memory.\n");
@@ -141,7 +141,12 @@ Header *c_morecore(size_t nr_of_units) {
         nr_of_units = MIN_NR_OF_UNITS;
     }
 
+    // NOTE: sbrk is deprecated on macOS but required for this exercise
+    // which demonstrates low-level memory allocation
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     c_p = sbrk(nr_of_units * sizeof(Header));
+#pragma GCC diagnostic pop
     if (c_p == (char *)-1) {
         return NULL;
     }

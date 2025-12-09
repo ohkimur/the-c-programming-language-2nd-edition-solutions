@@ -193,7 +193,10 @@ void clear(void) {
 }
 
 int get_line(char line[], unsigned int max_line_len) {
-    int c, i;
+    int c;
+    // Using unsigned int for i to match the unsigned max_line_len parameter
+    // This prevents sign comparison warnings
+    unsigned int i;
 
     for (i = 0; i < max_line_len - 1 && (c = getchar()) != EOF && c != '\n';
          ++i) {

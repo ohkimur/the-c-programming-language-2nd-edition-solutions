@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
 }
 
 boolean parse_arg_list(int argc, char *argv[]) {
+    (void)argc;
     if (strcmp(argv[0], "lower") == 0) {
         convert = tolower;
         return true;

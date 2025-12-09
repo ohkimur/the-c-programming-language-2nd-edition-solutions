@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     size_t custom_tab_stop = 0;
     size_t custom_line_pos_start = 0;
 
-    for (size_t i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
         if (argv[i][0] == '-') {
             custom_line_pos_start = atoi(argv[i] + 1);
             --initial_nr_of_custom_tab_stops;
@@ -93,7 +93,7 @@ int is_str_uint(char *str) {
 }
 
 int is_arg_list_valid(int argc, char *argv[]) {
-    for (size_t i = 1; i < argc; ++i) {
+    for (int i = 1; i < argc; ++i) {
         if (argv[i][0] == '-' || argv[i][0] == '+') {
             if (argc > 3 || !is_str_uint(argv[i] + 1)) {
                 return 0;

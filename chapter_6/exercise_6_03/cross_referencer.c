@@ -31,7 +31,7 @@ void print_tree(struct tree_node *node_p);
 // There is a strdup available with POSIX, but it's not part of ISO C.
 char *str_dup(char *src);
 
-void skip_blanks();
+void skip_blanks(void);
 
 int get_word(char *word, int max_word_len);
 int bin_search(char *word, char *arr[], int arr_len);
@@ -70,7 +70,7 @@ char *str_dup(char *src) {
     return dest;
 }
 
-void skip_blanks() {
+void skip_blanks(void) {
     int c;
     while (isblank(c = getc(stdin)))
         ;
@@ -81,7 +81,7 @@ int get_word(char *word, int max_word_len) {
     skip_blanks();
 
     int c = getc(stdin);
-    size_t i = 0;
+    int i = 0;
 
     if (c != EOF) {
         word[i++] = c;

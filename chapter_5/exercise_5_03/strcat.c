@@ -20,6 +20,8 @@ void strcat_ptr(char *s, char *t) {
         ++s;
 
     // copy t to the end of s
-    while (*s++ = *t++)
+    // Extra parentheses around assignment suppress compiler warning about
+    // using assignment as condition (this is intentional and safe here)
+    while ((*s++ = *t++))
         ;
 }

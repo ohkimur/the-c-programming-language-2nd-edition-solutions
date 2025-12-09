@@ -18,7 +18,10 @@ int main(void) {
 }
 
 int get_line(char line[], unsigned int max_line_len) {
-    int i = 0, c;
+    // Using unsigned int for i to match the unsigned max_line_len parameter
+    // This prevents sign comparison warnings
+    unsigned int i = 0;
+    int c;
 
     while (i < max_line_len - 1 && (c = getchar()) != '\n') {
         line[i] = c;

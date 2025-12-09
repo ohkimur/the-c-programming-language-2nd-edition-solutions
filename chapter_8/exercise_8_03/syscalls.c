@@ -65,8 +65,8 @@ int _flush_buffer(int c, FILE *file_p) {
             return EOF;
         }
     } else {
-        unsigned long nr_of_bytes = file_p->next_char_pos_p - file_p->base;
-        if ((write(file_p->file_descriptor, file_p->base, nr_of_bytes)) !=
+        long nr_of_bytes = file_p->next_char_pos_p - file_p->base;
+        if (write(file_p->file_descriptor, file_p->base, nr_of_bytes) !=
             nr_of_bytes) {
             file_p->flag._ERR = 1;
             return EOF;

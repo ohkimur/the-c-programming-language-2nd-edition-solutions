@@ -10,8 +10,10 @@
 unsigned int setbits(int x, int p, int n, int y);
 
 int main(void) {
-    unsigned int x = 0b11111111;
-    unsigned int y = 0b0110;
+    // Using hexadecimal instead of binary literals (0b...) for C89/C99 compatibility
+    // 0xFF = 0b11111111, 0x06 = 0b0110
+    unsigned int x = 0xFF;
+    unsigned int y = 0x06;
 
     printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(x));
     printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(setbits(x, 2, 4, y)));

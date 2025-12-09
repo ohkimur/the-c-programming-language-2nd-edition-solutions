@@ -6,8 +6,10 @@
 #define MAX_TOKEN_LEN 100
 #define MAX_OUT_LEN 1000
 
-void skip_blanks();
-void skip_comments();
+// Using (void) instead of () explicitly declares these functions take no parameters
+// This is the preferred modern C style and avoids compiler warnings
+void skip_blanks(void);
+void skip_comments(void);
 
 void get_name(char *dest, const size_t max_len);
 int get_next_token(void);
@@ -61,14 +63,14 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 
-void skip_blanks() {
+void skip_blanks(void) {
     int c;
     while (isblank(c = getc(stdin)))
         ;
     ungetc(c, stdin);
 }
 
-void skip_comments() {
+void skip_comments(void) {
     int c = getc(stdin);
     if (c == '/') {
         c = getc(stdin);

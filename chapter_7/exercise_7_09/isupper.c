@@ -6,7 +6,7 @@
 int is_upper_v1(int c);
 int is_upper_v2(int c);
 
-int main(int argc, char *argv[]) {
+int main(void) {
     if (is_upper_v1('c')) {
         puts("is_upper_v1: This letter is uppercase.");
     } else {

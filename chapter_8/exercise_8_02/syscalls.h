@@ -12,11 +12,13 @@ struct _io_buffer_file {
     char *next_char_pos_p;
     char *base;
     struct {
-        int _READ : 1;
-        int _WRITE : 1;
-        int _UNBUF : 1;
-        int _EOF : 1;
-        int _ERR : 1;
+        // Using unsigned int for bit-fields prevents warnings about
+        // implicit truncation when assigning 1 to a signed bit-field
+        unsigned int _READ : 1;
+        unsigned int _WRITE : 1;
+        unsigned int _UNBUF : 1;
+        unsigned int _EOF : 1;
+        unsigned int _ERR : 1;
     } flag;
     int file_descriptor;
 };

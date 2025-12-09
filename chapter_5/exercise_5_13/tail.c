@@ -39,7 +39,10 @@ int main(int argc, char *argv[]) {
     size_t total_nr_of_lines;
     char *line_ptr[MAX_NR_OF_LINES];
 
-    if ((total_nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1) {
+    // Cast -1 to (size_t)-1 to compare with unsigned size_t return value
+    // This prevents sign comparison warnings while maintaining error checking
+    if ((total_nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) !=
+        (size_t)-1) {
         write_lines(line_ptr, nr_of_lines_to_print, total_nr_of_lines);
     } else {
         puts("Error: input too large.\n");
@@ -123,7 +126,9 @@ void write_lines(char *line_ptr[], const size_t nr_of_lines_to_print,
 }
 
 char *alloc(size_t size) {
-    if (alloc_buf + ALLOC_SIZE - alloc_p >= size) {
+    // Cast pointer difference to size_t to match unsigned size parameter
+    // This prevents sign comparison warnings
+    if ((size_t)(alloc_buf + ALLOC_SIZE - alloc_p) >= size) {
         alloc_p += size;
         return alloc_p - size;
     }

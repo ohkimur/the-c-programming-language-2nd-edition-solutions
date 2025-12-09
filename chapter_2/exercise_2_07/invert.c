@@ -10,7 +10,9 @@
 unsigned int invert(int x, int p, int n);
 
 int main(void) {
-    unsigned int x = 0b11010111;
+    // Using hexadecimal instead of binary literals (0b...) for C89/C99 compatibility
+    // 0xD7 = 0b11010111
+    unsigned int x = 0xD7;
 
     printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(x));
     printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(invert(x, 1, 4)));

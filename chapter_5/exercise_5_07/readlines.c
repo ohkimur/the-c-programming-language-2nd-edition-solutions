@@ -16,7 +16,7 @@ void writelines(char *line_ptr[], int nr_of_lines);
 void swap(char *v[], int i, int j);
 void quick_sort(char *line_ptr[], int left, int right);
 
-int main() {
+int main(void) {
     int nr_of_lines;             // # of input lines read
     char stored_lines[MAXSTORE]; // # of chars to be stored for all lines
 

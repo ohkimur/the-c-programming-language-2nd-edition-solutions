@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
 }
 
 int parse_arg_list(int argc, char *argv[]) {
+    (void)argv;
     if (argc != 3) {
         return 0;
     }

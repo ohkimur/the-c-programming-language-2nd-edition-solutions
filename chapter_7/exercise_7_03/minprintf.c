@@ -4,7 +4,7 @@
 
 void minprintf(const char *format, ...);
 
-int main(int argc, char *argv[]) {
+int main(void) {
     int a;
     minprintf("Let's print %d, %i, %o, %x, %X, %u, %c, %e, %E, %g, %G, %f, %p, "
               "and %s.\n",

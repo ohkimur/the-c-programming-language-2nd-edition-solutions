@@ -11,7 +11,7 @@ double pop(void);
 int sp = 0;
 double stack[STACK_MAX_SIZE];
 
-int main(int argc, char *argv[]) {
+int main(void) {
     char c;
     double op2;
     char str[MAX_STR_LEN];

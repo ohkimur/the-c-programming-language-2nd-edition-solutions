@@ -11,11 +11,11 @@ struct key {
     int count;
 };
 
-void skip_blanks();
-void skip_comments();
+void skip_blanks(void);
+void skip_comments(void);
 void skip_chars_between(char start, char end);
-void skip_char_literal();
-void skip_string_literal();
+void skip_char_literal(void);
+void skip_string_literal(void);
 
 int get_word(char *word, int max_word_len);
 int bin_search(char *word, struct key arr[], int arr_len);
@@ -53,14 +53,14 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 
-void skip_blanks() {
+void skip_blanks(void) {
     int c;
     while (isblank(c = getc(stdin)))
         ;
     ungetc(c, stdin);
 }
 
-void skip_comments() {
+void skip_comments(void) {
     int c = getc(stdin);
     if (c == '/') {
         c = getc(stdin);
@@ -107,7 +107,7 @@ int get_word(char *word, int max_word_len) {
     skip_string_literal();
 
     int c = getc(stdin);
-    size_t i = 0;
+    int i = 0;
 
     if (c != EOF) {
         word[i++] = c;

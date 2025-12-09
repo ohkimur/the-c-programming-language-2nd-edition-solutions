@@ -5,7 +5,9 @@ void printbin(unsigned int x);
 unsigned int rightrot(unsigned int x, unsigned int n);
 
 int main(void) {
-    unsigned int x = 0b11110101;
+    // Using hexadecimal instead of binary literals (0b...) for C89/C99 compatibility
+    // 0xF5 = 0b11110101
+    unsigned int x = 0xF5;
 
     printbin(x);
     printbin(rightrot(x, 5));
@@ -29,7 +31,9 @@ void printbin(unsigned int x) {
 unsigned int rightrot(unsigned int x, unsigned int n) {
     unsigned int msb_1 = ~(~(unsigned)0 >> 1);
 
-    int i;
+    // Using unsigned int for i to match the unsigned n parameter
+    // This prevents sign comparison warnings
+    unsigned int i;
     for (i = 0; i < n; ++i) {
         if (x & 1) {
             x = (x >> 1) | msb_1;

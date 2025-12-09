@@ -5,7 +5,9 @@ void printbits(unsigned int x);
 int bitcount(unsigned int x);
 
 int main(void) {
-    unsigned int x = 0b011010;
+    // Using hexadecimal instead of binary literals (0b...) for C89/C99 compatibility
+    // 0x1A = 0b011010
+    unsigned int x = 0x1A;
 
     printbits(x);
     printf("x have %d bits of 1.\n", bitcount(x));

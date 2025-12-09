@@ -72,7 +72,7 @@ int is_str_uint(char *str) {
 }
 
 int is_tab_stop_arg_list_valid(int argc, char *argv[]) {
-    for (size_t i = 1; i < argc; ++i) {
+    for (int i = 1; i < argc; ++i) {
         if (!is_str_uint(argv[i]) ||
             (i > 1 && atoi(argv[i - 1]) > atoi(argv[i]))) {
             return 0;

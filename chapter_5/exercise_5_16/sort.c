@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     size_t nr_of_lines;
     char *line_ptr[MAX_NR_OF_LINES];
 
-    if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != -1) {
+    if ((nr_of_lines = read_lines(line_ptr, MAX_NR_OF_LINES)) != (size_t)-1) {
         quick_sort((void **)line_ptr, 0, nr_of_lines - 1,
                    (int (*)(void *, void *))comp);
         write_lines(line_ptr, nr_of_lines);
@@ -201,7 +201,7 @@ void quick_sort(void *v[], size_t start, size_t end,
 }
 
 char *alloc(size_t size) {
-    if (alloc_buf + ALLOC_SIZE - alloc_p >= size) {
+    if ((size_t)(alloc_buf + ALLOC_SIZE - alloc_p) >= size) {
         alloc_p += size;
         return alloc_p - size;
     }

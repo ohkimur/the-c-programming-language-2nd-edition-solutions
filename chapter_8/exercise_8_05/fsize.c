@@ -61,7 +61,9 @@ void fsize(char *name) {
 
     // Printed in a similary fashion to ls -l
     print_file_flags(buffer.st_mode);
-    printf("%lu ", buffer.st_nlink);
+    // Using %hu (unsigned short) instead of %lu because st_nlink is nlink_t
+    // which is typically unsigned short, not unsigned long
+    printf("%hu ", buffer.st_nlink);
     print_file_user(buffer.st_uid);
     print_file_group(buffer.st_gid);
     print_file_size(buffer.st_size);
