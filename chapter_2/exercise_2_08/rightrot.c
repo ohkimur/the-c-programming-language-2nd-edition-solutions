@@ -5,8 +5,8 @@ void printbin(unsigned int x);
 unsigned int rightrot(unsigned int x, unsigned int n);
 
 int main(void) {
-    // Using hexadecimal instead of binary literals (0b...) for C89/C99 compatibility
-    // 0xF5 = 0b11110101
+    // Using hexadecimal instead of binary literals (0b...) for C89/C99
+    // compatibility 0xF5 = 0b11110101
     unsigned int x = 0xF5;
 
     printbin(x);

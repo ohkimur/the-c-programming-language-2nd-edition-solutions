@@ -24,6 +24,10 @@ format-check:
 check: format-check lint
 
 clean:
-	rm -rf $(EXECS) $(DEBUG_FILES)
+	@for f in $(EXECS) $(DEBUG_FILES); do \
+		if [ -e "$$f" ] || [ -d "$$f" ]; then \
+			rm -rf "$$f" && echo "Removed: $$f"; \
+		fi; \
+	done
 
 .PHONY: all lint format format-check check clean

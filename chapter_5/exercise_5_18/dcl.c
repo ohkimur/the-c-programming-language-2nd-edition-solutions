@@ -6,8 +6,8 @@
 #define MAX_TOKEN_LEN 100
 #define MAX_OUT_LEN 1000
 
-// Using (void) instead of () explicitly declares these functions take no parameters
-// This is the preferred modern C style and avoids compiler warnings
+// Using (void) instead of () explicitly declares these functions take no
+// parameters This is the preferred modern C style and avoids compiler warnings
 void skip_blanks(void);
 void skip_comments(void);
 
