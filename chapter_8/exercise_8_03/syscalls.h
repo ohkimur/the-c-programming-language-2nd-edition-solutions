@@ -7,20 +7,18 @@
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
 
-struct _io_buffer_file
-{
-  int counter;
-  char *next_char_pos_p;
-  char *base;
-  struct
-  {
-    int _READ : 1;
-    int _WRITE : 1;
-    int _UNBUF : 1;
-    int _EOF : 1;
-    int _ERR : 1;
-  } flag;
-  int file_descriptor;
+struct _io_buffer_file {
+    int counter;
+    char *next_char_pos_p;
+    char *base;
+    struct {
+        int _READ : 1;
+        int _WRITE : 1;
+        int _UNBUF : 1;
+        int _EOF : 1;
+        int _ERR : 1;
+    } flag;
+    int file_descriptor;
 };
 
 typedef struct _io_buffer_file FILE;
@@ -41,8 +39,11 @@ int file_close(FILE *file_p);
 #define ferror(p) ((p->flag & _ERR) != 0)
 #define fileno(p) ((p->file_descriptor)
 
-#define getc(p) ((--p->counter >= 0) ? (unsigned char)*(p)->next_char_pos_p++ : _fill_buffer(p))
-#define putc(x, p) ((--p->counter >= 0) ? *p->next_char_pos_p++ = x : _flush_buffer(x, p))
+#define getc(p)                                                                \
+    ((--p->counter >= 0) ? (unsigned char)*(p)->next_char_pos_p++              \
+                         : _fill_buffer(p))
+#define putc(x, p)                                                             \
+    ((--p->counter >= 0) ? *p->next_char_pos_p++ = x : _flush_buffer(x, p))
 
 #define getchar() getc(stdin)
 #define putchar(x) putc(x, stdout)

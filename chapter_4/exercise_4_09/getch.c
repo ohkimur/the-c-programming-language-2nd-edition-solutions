@@ -5,39 +5,31 @@
 int getch(void);
 void ungetch(int c);
 
-int main(void)
-{
-  int c;
+int main(void) {
+    int c;
 
-  c = getch();
-  putchar(c);
+    c = getch();
+    putchar(c);
 
-  ungetch(EOF);
+    ungetch(EOF);
 
-  c = getch();
-  putchar(c);
+    c = getch();
+    putchar(c);
 
-  return 0;
+    return 0;
 }
 
 int bufp = 0;
 int buf[BUFFSIZE];
 
-int getch(void)
-{
-  return (bufp > 0) ? buf[--bufp] : getchar();
-}
+int getch(void) { return (bufp > 0) ? buf[--bufp] : getchar(); }
 
-void ungetch(int c)
-{
-  if (bufp >= BUFFSIZE)
-  {
-    printf("ungetch: too many characters\n");
-  }
-  else
-  {
-    buf[bufp++] = c;
-  }
+void ungetch(int c) {
+    if (bufp >= BUFFSIZE) {
+        printf("ungetch: too many characters\n");
+    } else {
+        buf[bufp++] = c;
+    }
 }
 
 // NOTE: The getch() function can't manage correctly the EOF character because

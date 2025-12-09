@@ -2,22 +2,19 @@
 
 void get_line(char *s);
 
-int main(void)
-{
-  char string[150] = "";
+int main(void) {
+    char string[150] = "";
 
-  get_line(string);
-  puts(string);
+    get_line(string);
+    puts(string);
 
-  return 0;
+    return 0;
 }
 
-void get_line(char *s)
-{
-  while ((*s = getchar()) != EOF && (*s != '\n'))
-  {
-    ++s;
-  }
+void get_line(char *s) {
+    while ((*s = getchar()) != EOF && (*s != '\n')) {
+        ++s;
+    }
 
-  *s = '\0';
+    *s = '\0';
 }

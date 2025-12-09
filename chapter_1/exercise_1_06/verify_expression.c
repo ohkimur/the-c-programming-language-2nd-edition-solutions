@@ -1,9 +1,8 @@
 #include <stdio.h>
 
-int main(void)
-{
-  printf("value of expression: %d", getchar() != EOF);
-  return 0;
+int main(void) {
+    printf("value of expression: %d", getchar() != EOF);
+    return 0;
 }
 
 // NOTE: The expression getchar() != EOF is equal with 1 only if input char
