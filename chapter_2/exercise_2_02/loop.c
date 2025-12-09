@@ -17,7 +17,7 @@ int main(void) {
             break;
         }
         
-        char c = getchar();
+        c = getchar();
 
         if (c == '\n'){
             break;
