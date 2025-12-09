@@ -61,9 +61,10 @@ void fsize(char *name) {
 
     // Printed in a similary fashion to ls -l
     print_file_flags(buffer.st_mode);
-    // Using %hu (unsigned short) instead of %lu because st_nlink is nlink_t
-    // which is typically unsigned short, not unsigned long
-    printf("%hu ", buffer.st_nlink);
+    // Cast to unsigned long and use %lu for portability: nlink_t varies by
+    // platform (unsigned short on macOS, unsigned long on Linux). The cast
+    // ensures consistent formatting across platforms.
+    printf("%lu ", (unsigned long)buffer.st_nlink);
     print_file_user(buffer.st_uid);
     print_file_group(buffer.st_gid);
     print_file_size(buffer.st_size);

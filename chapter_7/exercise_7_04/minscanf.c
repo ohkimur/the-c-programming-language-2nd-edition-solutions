@@ -7,9 +7,10 @@ void minscanf(const char *format, ...);
 int main(void) {
     int decimal;
     int integer;
-    int octal;
-    int unsigned_decimal;
-    int hexadecimal_integer;
+    // Use unsigned int for %o and %x to match the format specifier requirements
+    unsigned int octal;
+    unsigned int unsigned_decimal;
+    unsigned int hexadecimal_integer;
     char character;
     char str[100];
     float float_point_number;
@@ -54,7 +55,8 @@ void minscanf(const char *format, ...) {
             break;
 
         case 'o':
-            scanf("%o", va_arg(arg_p, int *));
+            // %o expects unsigned int *, not int * (octal values are unsigned)
+            scanf("%o", va_arg(arg_p, unsigned int *));
             break;
 
         case 'u':
@@ -62,7 +64,9 @@ void minscanf(const char *format, ...) {
             break;
 
         case 'x':
-            scanf("%x", va_arg(arg_p, int *));
+            // %x expects unsigned int *, not int * (hexadecimal values are
+            // unsigned)
+            scanf("%x", va_arg(arg_p, unsigned int *));
             break;
 
         case 'c':

@@ -23,7 +23,9 @@ int main(void) {
 unsigned int invert(int x, int p, int n) {
     ++p; // First position is 0
 
-    unsigned int mask1 = ~(~0 << n) << p;
+    // Use ~0U (unsigned) instead of ~0 (signed) to avoid undefined behavior
+    // when left-shifting. Left-shifting a negative signed value is undefined.
+    unsigned int mask1 = ~(~0U << n) << p;
     unsigned int mask2 = ~mask1 & x;
 
     return mask2 | ~x;

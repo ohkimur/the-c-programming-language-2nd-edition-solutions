@@ -24,8 +24,10 @@ int main(void) {
 unsigned int setbits(int x, int p, int n, int y) {
     ++p; // First position is 0
 
-    unsigned int mask1 = (~(~(~0 << n) << p) & x);
-    unsigned int mask2 = (~(~0 << n) & y) << p;
+    // Use ~0U (unsigned) instead of ~0 (signed) to avoid undefined behavior
+    // when left-shifting. Left-shifting a negative signed value is undefined.
+    unsigned int mask1 = (~(~(~0U << n) << p) & x);
+    unsigned int mask2 = (~(~0U << n) & y) << p;
 
     return mask1 | mask2;
 }
