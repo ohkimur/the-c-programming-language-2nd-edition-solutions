@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "[c]": {
+    "editor.formatOnSave": true
+  },
+  "C_Cpp.clang_format_style": "file",
+  "C_Cpp.clang_format_fallbackStyle": "LLVM"
+}
+
+
