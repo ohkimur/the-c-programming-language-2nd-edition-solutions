@@ -2,54 +2,78 @@
 
 ![C/C++ CI](https://github.com/gleesik/the-c-programming-language-2nd-edition-solutions/workflows/C/C++%20CI/badge.svg)
 
-## Introduction
-**The C Programming Language** is a very popular book and sometimes people refer to it as **K&R**. The authors *Brian W. Kernighan* and *Dennis M. Ritchie* did a very good job of explaining the core concepts of programming. The focus of the book is the C programming language, however, the approach is general, so it can be extrapolated to other programming languages.
+Solutions to exercises from **The C Programming Language** (2nd Edition) by Brian W. Kernighan and Dennis M. Ritchie, commonly known as **K&R**.
 
-Each chapter of the book contains **exercises** that could be very helpful for a better understanding of the C language. The exercises are designed so that anybody can solve them with the knowledge acquired up to that exercise.
+## Getting Started
 
-This repository contains the **solutions** to the exercises from each chapter of the book. These solutions are meant to be helpful for those who want to *learn* to program with the C language.
+### Prerequisites
 
-## Environment
-The source code is not tied up to an IDE, so any text editor will do the job. However, there are useful tasks and settings available for [Visual Studio Code](https://code.visualstudio.com). For a **better experience** using this editor, the [C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) provides some very helpful features specific to the C programming language.
+You need a C compiler:
 
-### Compilers
-To be able to write programs in C, a compiler is required. There are many options available for each operating system.
-
-#### macOS
-The [**Clang**](https://clang.llvm.org/get_started.html) compiler is a very nice choice when using macOS. It is available with **Xcode Command Line Tools**, which can be easily installed using the following command:
-
+**macOS:**
 ```shell
 xcode-select --install
 ```
 
-#### Linux
-The [**GCC**](https://gcc.gnu.org) compiler is a very popular way to build C programs and it is a good choice when using Linux. Each distro has its own set of **development tools** that comes with the GCC compiler out of the box. The development tools can be installed with the following commands:
-
-##### Ubuntu / Debian / Debian derivatives
+**Ubuntu / Debian:**
 ```shell
-sudo apt-get update
-sudo apt-get install build-essential
+sudo apt-get update && sudo apt-get install build-essential
 ```
 
-##### Arch Linux
+**Windows:**
+Use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) (recommended) or [MinGW](http://www.mingw.org).
+
+### Building
+
+Build all exercises:
 ```shell
-sudo pacman -Sy base-devel
+make
 ```
 
-##### Fedora
+Build a specific exercise:
 ```shell
-sudo yum update
-sudo yum groupinstall "Development Tools" "Legacy Software Development"
+cd chapter_1/exercise_1_01
+make hello_world
+./hello_world
 ```
 
-#### Windows
-Because Windows is not a Unix like operating system, [**Windows Subsystem for Linux**](https://docs.microsoft.com/en-us/windows/wsl)  (a.k.a. WSL) could be a very good approach when writing C programs. It provides a full Linux system that can make the programming experience much better. The official documentation has a pretty good explanation about how to [install WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+Clean up:
+```shell
+make clean
+```
 
-[**MinGW Compiler Collection**](http://www.mingw.org) is another good alternative to obtain access to the GCC compiler on a Windows system. The official documentation shows how it can be [installed](http://www.mingw.org/wiki/Getting_Started) step by step.
+## Repository Structure
 
-### Debuggers
-A debugger is a tool that can become very handy when trying to find out how a program works or why it doesn't. There are many times when the code will compile successfully because syntactically there are no problems. However, that doesn't mean there aren't logical problems. If that is the case it might be a very good idea to use a debugger.
+```
+chapter_N/
+  exercise_N_XX/
+    solution.c      # Solution source code
+    file_in.txt     # Input file (if needed)
+    file_out.txt    # Output file (if needed)
+```
 
-A very good option is [**LLDB**](https://lldb.llvm.org). It is the default debugger in Xcode on macOS and supports debugging C, Objective-C and C++. It converts debug information into Clang types so that it can leverage the Clang compiler infrastructure.
+## Contributing
 
-Another very popular option is [**GDB**](https://www.gnu.org/software/gdb). It supports the following languages (in alphabetical order): Ada, Assembly, C, C++, D, Fortran, Go, Objective-C, OpenCL, Modula-2, Pascal, Rust.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+Quick start:
+```shell
+make format   # Format your code
+make check    # Run all checks before submitting
+```
+
+## About the Book
+
+**The C Programming Language** is a classic programming book. The exercises are designed so that you can solve them with the knowledge acquired up to that point in the book.
+
+These solutions are meant to help those learning C. If you're working through the book, try solving the exercises yourself first!
+
+## Tools
+
+- **Editor:** Any text editor works. [VS Code](https://code.visualstudio.com) with the [C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) is recommended.
+- **Debugger:** [LLDB](https://lldb.llvm.org) (macOS) or [GDB](https://www.gnu.org/software/gdb) (Linux)
+- **Formatter:** [clang-format](https://clang.llvm.org/docs/ClangFormat.html)
+
+## License
+
+This project is open source. Feel free to use these solutions for learning!

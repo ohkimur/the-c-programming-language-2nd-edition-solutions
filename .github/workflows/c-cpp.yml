@@ -7,11 +7,16 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Build all .c files
+      - name: Check formatting
+        run: make format-check
+
+      - name: Lint
+        run: make lint
+
+      - name: Build
         run: make

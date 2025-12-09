@@ -4,8 +4,26 @@ SOURCES = $(call rwildcard, ., *.c, *.h)
 DEBUG_FILES = $(call rwildcard, ., *.dSYM)
 EXECS = $(SOURCES:%.c=%)
 LDLIBS = -lm
-CFLAGS = -Wall
+CFLAGS = -Wall -Wextra -Wpedantic
 
 all: $(EXECS)
+
+lint:
+	@echo "Linting with compiler warnings..."
+	@for f in $(filter %.c, $(SOURCES)); do \
+		$(CC) $(CFLAGS) -fsyntax-only $$f 2>&1 || exit 1; \
+	done
+	@echo "Lint passed!"
+
+format:
+	find . -name '*.c' -o -name '*.h' | xargs clang-format -i
+
+format-check:
+	find . -name '*.c' -o -name '*.h' | xargs clang-format --dry-run --Werror
+
+check: format-check lint
+
 clean:
 	rm -rf $(EXECS) $(DEBUG_FILES)
+
+.PHONY: all lint format format-check check clean
