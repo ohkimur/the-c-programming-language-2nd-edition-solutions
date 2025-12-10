@@ -15,19 +15,20 @@ Thanks for your interest in contributing! This guide will help you get started.
 
 You'll need:
 - A C compiler (GCC or Clang)
-- `clang-format` for code formatting
 - `make` for building
+- `clang-format` and `clang-tidy` for code quality checks
 
-### Installing clang-format
+### Installing Dependencies
 
 **macOS:**
 ```shell
-brew install clang-format
+brew install llvm
 ```
+> The Makefile automatically finds the tools from Homebrew's LLVM installation - no need to modify your PATH.
 
 **Ubuntu / Debian:**
 ```shell
-sudo apt-get install clang-format
+sudo apt-get install clang-format clang-tidy
 ```
 
 **Arch Linux:**
@@ -68,6 +69,25 @@ The CI will automatically check formatting and linting on your pull request.
 ## Code Style
 
 We use `clang-format` with minimal configuration (LLVM style, 4-space indentation). Just run `make format` and your code will be properly formatted.
+
+Additional rules enforced by `clang-tidy`:
+
+### One variable per declaration
+
+Declare each variable on its own line for better readability.
+
+```c
+// ✗ Avoid
+int x, y, z;
+float fahr, celsius;
+
+// ✓ Preferred
+int x;
+int y;
+int z;
+float fahr;
+float celsius;
+```
 
 ## What to Contribute
 

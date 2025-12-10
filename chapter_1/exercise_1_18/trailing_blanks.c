@@ -18,7 +18,8 @@ int main(void) {
 }
 
 int get_line(char line[], int max_line_len) {
-    int c, i;
+    int c;
+    int i;
 
     for (i = 0; i < max_line_len - 1 && (c = getchar()) != EOF && c != '\n';
          ++i) {

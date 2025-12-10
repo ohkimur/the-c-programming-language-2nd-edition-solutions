@@ -90,7 +90,8 @@ double pop(void) {
 }
 
 int getop(char s[]) {
-    int i = 0, c;
+    int i = 0;
+    int c;
     static int buf = EOF;
 
     while ((s[0] = c = getchar()) == ' ' || c == '\t')

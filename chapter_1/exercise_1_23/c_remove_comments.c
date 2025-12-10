@@ -30,7 +30,8 @@ int main(void) {
 }
 
 int get_str(char str[], int limit) {
-    int c, i = 0;
+    int c;
+    int i = 0;
 
     while (i < limit - 1 && (c = getchar()) != EOF) {
         str[i++] = c;
@@ -45,7 +46,8 @@ void remove_comments(char str[], char no_com_str[]) {
     int line_comment = FALSE;
     int block_comment = FALSE;
 
-    int i = 0, j = 0;
+    int i = 0;
+    int j = 0;
     while (str[i] != '\0') {
         if (!block_comment) {
             if (!in_quote && str[i] == '"') {

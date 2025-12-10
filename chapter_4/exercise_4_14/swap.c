@@ -9,7 +9,8 @@
     };
 
 int main(void) {
-    int x = 2, y = 3;
+    int x = 2;
+    int y = 3;
 
     printf("x: %d, y: %d\n", x, y);
 

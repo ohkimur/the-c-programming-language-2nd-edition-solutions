@@ -51,7 +51,8 @@ void ungetch(int c) {
 }
 
 int getint(int *pn) {
-    int c, sign;
+    int c;
+    int sign;
 
     while (isspace(c = getch()))
         ;

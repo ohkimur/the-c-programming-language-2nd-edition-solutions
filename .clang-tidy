@@ -1,21 +1,10 @@
 ---
+# Minimal checks for K&R C code style
+# Only enforce one variable per declaration for readability 
 Checks: >
   -*,
-  bugprone-*,
-  cert-*,
-  clang-analyzer-*,
-  cppcoreguidelines-*,
-  performance-*,
-  portability-*,
-  readability-*,
-  -readability-magic-numbers,
-  -readability-identifier-length,
-  -cppcoreguidelines-avoid-magic-numbers,
-  -bugprone-easily-swappable-parameters,
-  -readability-function-cognitive-complexity
+  readability-isolate-declaration
 
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*'
-AnalyzeTemporaryDtors: false
 FormatStyle: 'file'
-User: ''

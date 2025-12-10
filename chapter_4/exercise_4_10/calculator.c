@@ -214,7 +214,8 @@ int get_line(char line[], unsigned int max_line_len) {
 }
 
 int getop(char s[]) {
-    int i = 0, c;
+    int i = 0;
+    int c;
 
     while ((s[0] = c = line[line_i++]) == ' ' || c == '\t')
         ;

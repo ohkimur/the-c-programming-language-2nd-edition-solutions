@@ -47,7 +47,9 @@ void printVector(int v[], int n) {
 }
 
 int binsearch_kr(int x, int v[], int n) {
-    int low, mid, high;
+    int low;
+    int mid;
+    int high;
 
     low = 0;
     high = n - 1;
@@ -67,7 +69,9 @@ int binsearch_kr(int x, int v[], int n) {
 }
 
 int binsearch(int x, int v[], int n) {
-    int low, mid, high;
+    int low;
+    int mid;
+    int high;
 
     low = 0;
     high = n - 1;

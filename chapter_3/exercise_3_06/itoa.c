@@ -30,7 +30,8 @@ int ilen(int a) {
 }
 
 void int_to_array(int n, char s[], int padding) {
-    int i = 0, sign = n;
+    int i = 0;
+    int sign = n;
 
     do {
         s[i++] = abs(n % 10) + '0';

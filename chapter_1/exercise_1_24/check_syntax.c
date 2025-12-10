@@ -18,7 +18,8 @@ int main(void) {
 }
 
 int get_str(char str[], int limit) {
-    int c, i = 0;
+    int c;
+    int i = 0;
 
     while (i < limit - 1 && (c = getchar()) != EOF) {
         str[i++] = c;

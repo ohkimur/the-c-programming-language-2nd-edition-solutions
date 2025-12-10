@@ -41,7 +41,8 @@ int get_line(char line[], unsigned int limit) {
 }
 
 void escape(char dest[], char src[]) {
-    int i, j;
+    int i;
+    int j;
     for (i = j = 0; src[i] != '\0'; ++i, ++j) {
         switch (src[i]) {
         case '\a':
@@ -111,7 +112,8 @@ void escape(char dest[], char src[]) {
 }
 
 void unescape(char dest[], char src[]) {
-    int i, j;
+    int i;
+    int j;
     for (i = j = 0; src[i] != '\0'; ++i, ++j) {
         switch (src[i]) {
         case '\\':

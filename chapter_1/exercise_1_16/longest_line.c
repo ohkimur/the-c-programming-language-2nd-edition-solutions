@@ -30,7 +30,8 @@ int main(void) {
 }
 
 int get_line(char line[], int maxline) {
-    int c, i;
+    int c;
+    int i;
 
     for (i = 0; i < maxline - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
         line[i] = c;

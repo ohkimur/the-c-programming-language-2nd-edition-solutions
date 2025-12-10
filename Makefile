@@ -6,6 +6,11 @@ EXECS = $(SOURCES:%.c=%)
 LDLIBS = -lm
 CFLAGS = -Wall -Wextra -Wpedantic
 
+# Find clang tools: check PATH first, then Homebrew LLVM location
+LLVM_PREFIX := $(shell brew --prefix llvm 2>/dev/null)
+CLANG_FORMAT := $(or $(shell command -v clang-format 2>/dev/null),$(wildcard $(LLVM_PREFIX)/bin/clang-format))
+CLANG_TIDY := $(or $(shell command -v clang-tidy 2>/dev/null),$(wildcard $(LLVM_PREFIX)/bin/clang-tidy))
+
 all: install-hooks $(EXECS)
 
 lint:
@@ -13,13 +18,27 @@ lint:
 	@for f in $(filter %.c, $(SOURCES)); do \
 		$(CC) $(CFLAGS) -fsyntax-only $$f 2>&1 || exit 1; \
 	done
+ifneq ($(CLANG_TIDY),)
+	@echo "Running clang-tidy..."
+	@for f in $(filter %.c, $(SOURCES)); do \
+		$(CLANG_TIDY) $$f -- $(CFLAGS) 2>&1 || exit 1; \
+	done
+else
+	@echo "Skipping clang-tidy (not installed). Install with: brew install llvm"
+endif
 	@echo "Lint passed!"
 
 format:
-	find . \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 clang-format -i
+ifeq ($(CLANG_FORMAT),)
+	$(error clang-format not found. Install with: brew install llvm)
+endif
+	find . \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 $(CLANG_FORMAT) -i
 
 format-check:
-	find . \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 clang-format --dry-run --Werror
+ifeq ($(CLANG_FORMAT),)
+	$(error clang-format not found. Install with: brew install llvm)
+endif
+	find . \( -name '*.c' -o -name '*.h' \) -print0 | xargs -0 $(CLANG_FORMAT) --dry-run --Werror
 
 check: format-check lint
 

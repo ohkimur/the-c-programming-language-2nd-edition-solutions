@@ -24,7 +24,8 @@ int main(void) {
 }
 
 int get_line(char line[], int max_line_len) {
-    int c, i = 0;
+    int c;
+    int i = 0;
 
     while (i < max_line_len - 1 && (c = getchar()) != EOF && c != '\n') {
         line[i++] = c;
@@ -40,7 +41,8 @@ int get_line(char line[], int max_line_len) {
 }
 
 void fold_line(char line[], char fold_str[], int n_break) {
-    int i, j;
+    int i;
+    int j;
     int column = 0;
     int split = FALSE;
     int last_blank = 0;

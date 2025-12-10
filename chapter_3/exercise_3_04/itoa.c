@@ -19,7 +19,8 @@ int main(void) {
 }
 
 void int_to_array(int n, char s[]) {
-    int i, sign;
+    int i;
+    int sign;
 
     sign = n;
 

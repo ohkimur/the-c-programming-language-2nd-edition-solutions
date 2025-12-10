@@ -33,7 +33,8 @@ int get_line(char line[], int lim) {
 int htoi(char hex[]) {
     int result = 0;
 
-    int i = 0, len = strlen(hex);
+    int i = 0;
+    int len = strlen(hex);
 
     while (i < len) {
         if (hex[i] == '0' && (hex[i + 1] == 'x' || hex[i + 1] == 'X')) {

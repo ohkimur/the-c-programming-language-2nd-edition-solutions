@@ -19,7 +19,8 @@ int main(void) {
 }
 
 int get_line(char line[], int lim) {
-    int i = 0, c;
+    int i = 0;
+    int c;
 
     while (lim > 0 && (c = getchar()) != EOF && c != '\n') {
         line[i++] = c;
@@ -36,7 +37,9 @@ int get_line(char line[], int lim) {
 }
 
 int strindex(char source[], char pattern[]) {
-    int i, j, k;
+    int i;
+    int j;
+    int k;
 
     printf("line len: %lu\n", strlen(source));
 

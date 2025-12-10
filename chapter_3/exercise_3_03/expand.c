@@ -18,7 +18,8 @@ int main(void) {
 }
 
 int get_str(char str[], int limit) {
-    int c, i = 0;
+    int c;
+    int i = 0;
 
     while (i < limit - 1 && (c = getchar()) != EOF) {
         str[i++] = c;
@@ -42,7 +43,8 @@ void expand(char src[], char dest[]) {
      * a-z-
      * -a-z-
      */
-    int i, j = 0;
+    int i;
+    int j = 0;
     for (i = 0; i < MAXLEN - 1 && j < MAXLEN - 1 && src[i] != EOF; ++i) {
         if (isalnum(src[i]) && src[i + 1] == '-' && src[i] < src[i + 2]) {
             do {

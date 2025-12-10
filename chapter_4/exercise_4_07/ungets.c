@@ -26,7 +26,8 @@ int getch(void);
 void ungetch(int c);
 
 int getstr(char line[], int limit) {
-    int i = 0, c;
+    int i = 0;
+    int c;
 
     while (limit - 1 > 0 && (c = getch()) != EOF && c != '\n') {
         line[i++] = c;

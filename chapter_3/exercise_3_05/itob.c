@@ -29,7 +29,8 @@ char itoc(int a) {
 }
 
 void itob(int n, char s[], int b) {
-    int i = 0, sign = n;
+    int i = 0;
+    int sign = n;
 
     do {
         s[i++] = itoc(abs(n) % b);

@@ -5,8 +5,11 @@
 // floating point version
 
 int main(void) {
-    float fahr, celsius;
-    int lower, upper, step;
+    float fahr;
+    float celsius;
+    int lower;
+    int upper;
+    int step;
 
     lower = 0;
     upper = 300;

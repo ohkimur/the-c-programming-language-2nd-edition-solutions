@@ -32,7 +32,8 @@ void ungetch(int c) {
 }
 
 int getfloat(float *pn) {
-    int c, sign;
+    int c;
+    int sign;
 
     while (isspace(c = getch()))
         ;

@@ -38,8 +38,12 @@ int get_line(char line[], unsigned int max_line_len) {
 }
 
 double atof(char s[]) {
-    double val, power;
-    int i, sign, exp_sign = 1, exp_pwr = 0;
+    double val;
+    double power;
+    int i;
+    int sign;
+    int exp_sign = 1;
+    int exp_pwr = 0;
 
     for (i = 0; isspace(s[i]); ++i)
         ;
