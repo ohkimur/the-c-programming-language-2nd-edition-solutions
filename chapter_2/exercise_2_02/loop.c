@@ -4,6 +4,8 @@
 
 int main(void) {
     char s[MAXLINE];
+    int c;
+    int i = 0;
 
     // int i;
     // int c;
@@ -13,21 +15,26 @@ int main(void) {
     //   s[i] = c;
     // }
 
-    int i = 0;
-    int loop = 1;
-    while (loop) {
-        char c = getchar();
-
-        if (i >= (MAXLINE - 1) || c == '\n' || c == EOF) {
-            loop = 0;
+    while (1) {
+        if (i >= MAXLINE - 1) {
+            break;
         }
 
-        s[i++] = c;
+        c = getchar();
+
+        if (c == '\n') {
+            break;
+        } else if (c == EOF) {
+            printf("\n");
+            break;
+        } else {
+            s[i++] = c;
+        }
     }
 
     s[i] = '\0';
 
-    printf("%s", s);
+    printf("%s\n", s);
 
     return 0;
 }
