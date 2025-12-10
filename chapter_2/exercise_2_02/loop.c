@@ -4,9 +4,11 @@
 
 int main(void) {
     char s[MAXLINE];
-    int c, i = 0;
+    int c;
+    int i = 0;
 
-    // int i, c;
+    // int i;
+    //int c;
     // for (i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF); ++i)
     // {
     //   s[i] = c;
