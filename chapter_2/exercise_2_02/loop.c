@@ -4,29 +4,30 @@
 
 int main(void) {
     char s[MAXLINE];
-    int c, i = 0;
+    int c;
+    int i = 0;
 
-    // int i, c;
-    // for (i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF); ++i)
+    // int i;
+    // int c;
+    // for (i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF);
+    // ++i)
     // {
     //   s[i] = c;
     // }
-    
+
     while (1) {
-        if (i >= MAXLINE - 1){
+        if (i >= MAXLINE - 1) {
             break;
         }
-        
+
         c = getchar();
 
-        if (c == '\n'){
+        if (c == '\n') {
             break;
-        }
-        else if (c == EOF){
+        } else if (c == EOF) {
             printf("\n");
             break;
-        }
-        else 
+        } else
             s[i++] = c;
     }
 
