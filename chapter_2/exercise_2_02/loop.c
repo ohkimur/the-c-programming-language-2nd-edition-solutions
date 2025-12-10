@@ -2,39 +2,41 @@
 
 #define MAXLINE 1000
 
+/*
+ * K&R Exercise 2-2: Write a loop equivalent to:
+ *   for (i = 0; i < lim - 1 && (c = getchar()) != '\n' && c != EOF; ++i)
+ *       s[i] = c;
+ * without using && or ||.
+ *
+ * Note: Using * instead of && is unsafe because it doesn't short-circuit,
+ * causing getchar() to be called even when the buffer is full or EOF is
+ * reached.
+ */
+
 int main(void) {
     char s[MAXLINE];
-
-    // int i;
-    // int c;
-    // for (i = 0; (i < MAXLINE - 1) * ((c = getchar()) != '\n') * (c != EOF);
-    // ++i)
-    // {
-    //   s[i] = c;
-    // }
-
+    int c;
     int i = 0;
-    int loop = 1;
-    while (loop) {
-        char c = getchar();
 
-        if (i >= (MAXLINE - 1) || c == '\n' || c == EOF) {
-            loop = 0;
+    while (1) {
+        if (i >= MAXLINE - 1) {
+            break;
         }
 
-        s[i++] = c;
+        c = getchar();
+
+        if (c == '\n') {
+            break;
+        } else if (c == EOF) {
+            break;
+        } else {
+            s[i++] = c;
+        }
     }
 
     s[i] = '\0';
 
-    printf("%s", s);
+    printf("%s\n", s);
 
     return 0;
 }
-
-// NOTE: The multiplication operation could work in this case because each
-// expression is evaluated as a 1 or 0 (true or false), and a multiplication
-// between expressions can have the value 1 only if all the expressions are
-// true. However, the order of multiplication is not guaranteed to be sequenced
-// as with logical operations. So, this is could cause serious problems
-// depending on how the compiler deals with multiplication.
