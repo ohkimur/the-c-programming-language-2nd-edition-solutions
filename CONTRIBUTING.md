@@ -7,10 +7,9 @@ Thanks for your interest in contributing! This guide will help you get started.
 1. Fork and clone the repository
 2. Create a new branch: `git checkout -b my-fix`
 3. Make your changes
-4. Format your code: `make format`
-5. Test your changes: `make`
-6. Commit and push
-7. Open a pull request
+4. Build: `make` (this also installs git hooks automatically)
+5. Commit and push (the git commit hook will check formatting and lint)
+6. Open a pull request
 
 ## Requirements
 
@@ -50,11 +49,14 @@ sudo dnf install clang-tools-extra
 | `make format-check` | Check formatting (used by CI) |
 | `make lint` | Run linter checks |
 | `make check` | Run all checks (format + lint) |
+| `make install-hooks` | Install git pre-commit hook (runs automatically) |
 | `make clean` | Remove compiled files |
 
 ## Before Submitting
 
-Please run these commands before submitting a pull request:
+Git hooks are installed automatically when you run `make`, so formatting and linting checks will run before each commit.
+
+You can also run checks manually:
 
 ```shell
 make format   # Format your code

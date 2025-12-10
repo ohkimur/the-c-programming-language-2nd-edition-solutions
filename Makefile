@@ -6,7 +6,7 @@ EXECS = $(SOURCES:%.c=%)
 LDLIBS = -lm
 CFLAGS = -Wall -Wextra -Wpedantic
 
-all: $(EXECS)
+all: install-hooks $(EXECS)
 
 lint:
 	@echo "Linting with compiler warnings..."
@@ -23,6 +23,13 @@ format-check:
 
 check: format-check lint
 
+install-hooks:
+	@if [ -d .git ] && [ ! -f .git/hooks/pre-commit ]; then \
+		cp scripts/pre-commit .git/hooks/pre-commit; \
+		chmod +x .git/hooks/pre-commit; \
+		echo "Pre-commit hook installed."; \
+	fi
+
 clean:
 	@for f in $(EXECS) $(DEBUG_FILES); do \
 		if [ -e "$$f" ] || [ -d "$$f" ]; then \
@@ -30,4 +37,4 @@ clean:
 		fi; \
 	done
 
-.PHONY: all lint format format-check check clean
+.PHONY: all lint format format-check check install-hooks clean
