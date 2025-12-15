@@ -1,48 +1,47 @@
-#include <math.h>
+#include <limits.h>
 #include <stdio.h>
 
-void printbin(unsigned int x);
-unsigned int rightrot(unsigned int x, unsigned int n);
+/* Exercise 2.8: Write a function rightrot(x, n) that returns the value
+ * of the integer x rotated to the right by n bit positions.
+ */
 
-int main(void) {
-    // Using hexadecimal instead of binary literals (0b...) for C89/C99
-    // compatibility 0xF5 = 0b11110101
-    unsigned int x = 0xF5;
-
-    printbin(x);
-    printbin(rightrot(x, 5));
-
-    return 0;
-}
-
-void printbin(unsigned int x) {
-    unsigned int n = sizeof(unsigned int);
-
+void to_binary(unsigned short n) {
+    unsigned long i = 0;
+    int binary[32];
     printf("0b");
 
-    int i;
-    for (i = n * 8 - 1; i >= 0; --i) {
-        (x & (unsigned int)pow(2, i)) ? putchar('1') : putchar('0');
+    if (n == 0) {
+        printf("0\n");
+        return;
     }
 
-    putchar('\n');
+    while (i < sizeof(unsigned short) * CHAR_BIT) {
+        binary[i++] = n % 2;
+        n = n / 2;
+    }
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%d", binary[j]);
+    }
+    printf("\n");
 }
 
-unsigned int rightrot(unsigned int x, unsigned int n) {
-    unsigned int msb_1 = ~(~(unsigned)0 >> 1);
+unsigned short rightrot(unsigned short x, int n) {
+    unsigned w = sizeof(unsigned short) * CHAR_BIT;
+    n %= w;
 
-    // Using unsigned int for i to match the unsigned n parameter
-    // This prevents sign comparison warnings
-    unsigned int i;
-    for (i = 0; i < n; ++i) {
-        if (x & 1) {
-            x = (x >> 1) | msb_1;
-        } else {
-            x = (x >> 1);
-        }
-    }
+    return (x >> n) | (x << (w - n));
+}
 
-    return x;
+int main(void) {
+    unsigned short x;
+    x = 55;
+
+    printf("x = %d -->", x);
+    to_binary(x);
+
+    to_binary(rightrot(x, 3));
+
+    return 0;
 }
 
 // NOTE: The rightrot function rotate the entire unsigned int var and if we
