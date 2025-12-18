@@ -13,6 +13,7 @@ void push(float element);
 
 int main(int argc, char *argv[]) {
     char Error = 0;
+    int op_count = 0;
 
     // Using int instead of size_t for loop variable to match signed argc
     // This prevents sign comparison warnings
@@ -29,19 +30,23 @@ int main(int argc, char *argv[]) {
                 char op = *argv[i];
                 switch (op) {
                 case '+':
+                    op_count++; 
                     push(number1 + number2);
                     break;
 
                 case '-':
+                    op_count++;
                     push(number1 - number2);
                     break;
 
                 case '*': // This char might require to be escaped when passed
                           // as an argument.
+                    op_count++;
                     push(number1 * number2);
                     break;
 
                 case '/':
+                    op_count++;
                     if (number2 == 0) {
                         Error = 4;
                     } else {
@@ -87,8 +92,13 @@ int main(int argc, char *argv[]) {
 
         return EXIT_FAILURE;
     }
-
-    printf("result: %.3f", pop());
+    
+    if (op_count == 0 && argc > 2) {
+        printf("Error: Operator is missing!");
+        return EXIT_FAILURE;
+    } else {
+        printf("result: %.3f", pop());
+    }
 
     return EXIT_SUCCESS;
 }
