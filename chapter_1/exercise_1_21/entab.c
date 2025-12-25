@@ -8,21 +8,25 @@ int main(void) {
     unsigned int nr_of_spaces = 0;
 
     while ((c = getchar()) != EOF) {
-        ++line_pos;
-
         if (c == ' ') {
             ++nr_of_spaces;
+            ++line_pos;
 
             if (line_pos % TAB_LENGTH == 0 && nr_of_spaces > 1) {
                 putchar('\t');
                 nr_of_spaces = 0;
             }
+        } else if (c == '\t') {
+            nr_of_spaces = 0;
+            putchar(c);
+            line_pos += TAB_LENGTH - (line_pos % TAB_LENGTH);
         } else {
             while (nr_of_spaces) {
                 putchar(' ');
                 --nr_of_spaces;
             }
 
+            ++line_pos;
             if (c == '\n') {
                 line_pos = 0;
             }
