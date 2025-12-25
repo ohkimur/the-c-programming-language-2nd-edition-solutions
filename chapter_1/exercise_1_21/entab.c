@@ -17,6 +17,9 @@ int main(void) {
                 putchar('\t');
                 nr_of_spaces = 0;
             }
+        } else if (c == '\t') {
+            nr_of_spaces = 0;
+            putchar(c);
         } else {
             while (nr_of_spaces) {
                 putchar(' ');
